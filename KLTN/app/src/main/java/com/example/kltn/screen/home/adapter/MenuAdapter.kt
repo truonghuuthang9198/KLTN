@@ -33,7 +33,7 @@ class MenuAdapter internal constructor(var MenuModel: ArrayList<MenuModel>)
         return MenuViewHolder
     }
 
-    override fun getItemCount() = MenuModel.count()
+    override fun getItemCount() = MenuModel.size
 
     override fun onBindViewHolder(holder: MenuViewHolder, position: Int) {
         val current = MenuModel[position]

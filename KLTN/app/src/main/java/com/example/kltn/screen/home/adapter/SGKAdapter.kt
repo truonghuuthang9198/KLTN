@@ -37,7 +37,7 @@ class SGKAdapter internal constructor(var SGKModel: ArrayList<SGKModel>)
         return SGKViewHolder
     }
 
-    override fun getItemCount() = SGKModel.count()
+    override fun getItemCount() = SGKModel.size
 
     override fun onBindViewHolder(holder: SGKViewHolder, position: Int) {
         val current = SGKModel[position]

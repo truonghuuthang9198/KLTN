@@ -3,6 +3,7 @@ package com.example.kltn.screen.cart.adapter
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,7 +46,7 @@ class CartAdapter internal constructor(var context: Context,var CartModel: Array
         return CartViewHolder
     }
 
-    override fun getItemCount() = CartModel.count()
+    override fun getItemCount() = CartModel.size
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
 
         val current = CartModel[position]
@@ -87,9 +88,11 @@ class CartAdapter internal constructor(var context: Context,var CartModel: Array
     {
         var thanhtienitemt:Double = 0.0
         var tongtien:Double = 0.0
-        CartFragment.arrayListCart.forEach {
-            thanhtienitemt = (it.giaTien * it.soLuong)
-            tongtien+= thanhtienitemt
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            CartFragment.arrayListCart.forEach {
+                thanhtienitemt = (it.giaTien * it.soLuong)
+                tongtien+= thanhtienitemt
+            }
         }
         CartFragment.tongtien = tongtien
     }

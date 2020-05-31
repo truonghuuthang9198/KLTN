@@ -41,6 +41,7 @@ class ShowMoreDealFragment : Fragment() {
         btnFilter = view.findViewById(R.id.btn_filter)
 
         recyclerViewFilter = view.findViewById(R.id.recyclerview_filter)
+        recyclerViewFilter.visibility = View.GONE
         setupRecyclerviewFilter()
         btnFilter.setOnClickListener {
             if(check == 0)
@@ -51,6 +52,7 @@ class ShowMoreDealFragment : Fragment() {
             else
             {
                 recyclerViewFilter.visibility = View.GONE
+                check =0
             }
         }
         btnBack.setOnClickListener{
@@ -98,12 +100,12 @@ class ShowMoreDealFragment : Fragment() {
     private fun setupRecyclerviewFilter()
     {
         recyclerViewFilter.layoutManager = LinearLayoutManager(activity,
-            LinearLayoutManager.HORIZONTAL,false)
+            LinearLayoutManager.VERTICAL,false)
         val arrayList = ArrayList<FilterModel>()
-        arrayList.add(FilterModel("Bán Chạy Tuần",R.drawable.ic_check_black_24dp))
-        arrayList.add(FilterModel("Bán Chạy Tháng",R.drawable.ic_check_black_24dp))
-        arrayList.add(FilterModel("Bán Chạy Năm",R.drawable.ic_check_black_24dp))
-        filterAdapter = FilterAdapter(arrayList)
+        arrayList.add(FilterModel(0,"Bán Chạy Tuần",R.drawable.ic_check_black_24dp))
+        arrayList.add(FilterModel(1,"Bán Chạy Tháng",R.drawable.ic_check_black_24dp))
+        arrayList.add(FilterModel(2,"Bán Chạy Năm",R.drawable.ic_check_black_24dp))
+        filterAdapter = FilterAdapter(activity!!,arrayList)
         recyclerViewFilter.adapter = filterAdapter
     }
 

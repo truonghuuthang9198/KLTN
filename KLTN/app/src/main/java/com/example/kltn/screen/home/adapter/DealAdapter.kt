@@ -39,7 +39,7 @@ class DealAdapter internal constructor(var DealsModel: ArrayList<DealsModel>)
         return DealViewHolder
     }
 
-    override fun getItemCount() = DealsModel.count()
+    override fun getItemCount() = DealsModel.size
 
     override fun onBindViewHolder(holder: DealViewHolder, position: Int) {
         val current = DealsModel[position]
