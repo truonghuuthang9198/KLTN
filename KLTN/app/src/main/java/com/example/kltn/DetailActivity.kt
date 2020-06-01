@@ -10,9 +10,6 @@ import android.os.Parcelable
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
-import com.example.kltn.event.EventBusData
-import com.example.kltn.event.EventBusLifeCycle
-import com.example.kltn.event.OnActionData
 import com.example.kltn.screen.cart.CartFragment
 import com.example.kltn.screen.home.model.DealsModel
 import kotlinx.android.synthetic.main.custom_toolbar.*

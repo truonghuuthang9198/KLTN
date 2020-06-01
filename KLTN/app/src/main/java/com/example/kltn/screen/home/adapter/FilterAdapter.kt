@@ -10,8 +10,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
+import com.example.kltn.screen.home.deals.ShowMoreDealFragment.Companion.arrayList
 import com.example.kltn.screen.home.model.FilterModel
 import java.text.NumberFormat
 import java.util.*
@@ -21,6 +25,9 @@ class FilterAdapter internal constructor(
     var context: Context,
     var FilterModel: ArrayList<FilterModel>
 ) : RecyclerView.Adapter<FilterAdapter.FilterViewHolder>() {
+    companion object {
+        var title:String = "Bán Chạy Tuần"
+    }
     inner class FilterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val titleFilter: TextView = itemView.findViewById(R.id.title_filter)
         val imgCheckFilter: ImageView = itemView.findViewById(R.id.icon_check_filter)
@@ -51,6 +58,14 @@ class FilterAdapter internal constructor(
         holder.imgCheckFilter.setImageResource(current.imgCheck)
         holder.imgCheckFilter.visibility = View.GONE
 
+        holder.itemView.setOnClickListener {
+            arrayList.forEach {
+                it.choose = it.id == current.id
+            }
+            title = current.titleFilter
+            reLoadFragment("ShowMoreDealFragment")
+        }
+
         if (current.choose) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 holder.titleFilter.setTextColor(context.getColor(R.color.colorCheckFilter))
@@ -63,12 +78,14 @@ class FilterAdapter internal constructor(
             }
         }
 
-        holder.itemView.setOnClickListener {
-            FilterModel.forEach {
-                it.choose = it.id == current.id
-            }
-            notifyDataSetChanged()
-        }
         holder.titleFilter.text = current.titleFilter
+    }
+    fun reLoadFragment(tag: String) {
+        var frg: Fragment? = null
+        frg =(context as FragmentActivity).getSupportFragmentManager().findFragmentByTag(tag)
+        val ft: FragmentTransaction = (context as FragmentActivity).getSupportFragmentManager().beginTransaction()
+        ft.detach(frg!!)
+        ft.attach(frg!!)
+        ft.commit()
     }
 }

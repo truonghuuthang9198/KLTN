@@ -28,7 +28,7 @@ class CartFragment : Fragment() {
     companion object {
         var arrayListCart: ArrayList<CartModel> = ArrayList<CartModel>()
         var tongtien: Double = 0.0
-        var thanhtienitem: Double = 0.0
+
     }
 
     override fun onAttach(context: Context) {

@@ -1,5 +1,6 @@
 package com.example.kltn.screen.home.deals
 
+import android.nfc.Tag
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,7 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.kltn.R
+import com.example.kltn.screen.cart.model.CartModel
 import com.example.kltn.screen.home.adapter.FilterAdapter
+import com.example.kltn.screen.home.adapter.FilterAdapter.Companion.title
 import com.example.kltn.screen.home.model.FilterModel
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.custom_toolbar_search.*
@@ -26,9 +29,15 @@ class ShowMoreDealFragment : Fragment() {
     lateinit var recyclerViewFilter: RecyclerView
     lateinit var btnBack: ImageView
     lateinit var filterAdapter: FilterAdapter
+    lateinit var titleFilter: TextView
+    lateinit var constraint: ConstraintLayout
     lateinit var btnFilter: ConstraintLayout
     private var tabLayout: TabLayout? = null
     private var viewPager: ViewPager? = null
+    companion object {
+        var arrayList: ArrayList<FilterModel> = ArrayList<FilterModel>()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,8 +47,11 @@ class ShowMoreDealFragment : Fragment() {
         tabLayout = view.findViewById<TabLayout>(R.id.tab_theloai)
         viewPager = view.findViewById<ViewPager>(R.id.viewpager_show_more_deal)
         btnBack = view.findViewById(R.id.btn_back_showmore)
+        constraint = view.findViewById(R.id.constraint_visible)
         btnFilter = view.findViewById(R.id.btn_filter)
-
+        titleFilter = view.findViewById(R.id.title_filter_deal)
+        constraint.visibility = View.GONE
+        titleFilter.text = title
         recyclerViewFilter = view.findViewById(R.id.recyclerview_filter)
         recyclerViewFilter.visibility = View.GONE
         setupRecyclerviewFilter()
@@ -47,12 +59,26 @@ class ShowMoreDealFragment : Fragment() {
             if(check == 0)
             {
                 recyclerViewFilter.visibility = View.VISIBLE
+                constraint.visibility = View.VISIBLE
                 check =1
             }
             else
             {
                 recyclerViewFilter.visibility = View.GONE
+                constraint.visibility = View.GONE
                 check =0
+            }
+        }
+        constraint.setOnClickListener{
+            if(check == 1)
+            {
+                recyclerViewFilter.visibility = View.GONE
+                constraint.visibility = View.GONE
+                check = 0
+            }
+            else
+            {
+                constraint.visibility = View.GONE
             }
         }
         btnBack.setOnClickListener{
@@ -84,7 +110,6 @@ class ShowMoreDealFragment : Fragment() {
         fun addFragment(fragment: Fragment, title: String) {
             fragmentList.add(fragment)
             fragmentTitleList.add(title)
-
         }
     }
 
@@ -92,8 +117,8 @@ class ShowMoreDealFragment : Fragment() {
         val myViewPageStateAdapter: MyViewPageStateAdapter = MyViewPageStateAdapter(activity!!.supportFragmentManager)
         myViewPageStateAdapter.addFragment(ChildShowMoreDealFragment(0), "Tất cả")
         myViewPageStateAdapter.addFragment(ChildShowMoreDealFragment(1), "Thiếu nhi")
-        myViewPageStateAdapter.addFragment(ChildShowMoreDealFragment(2), "Childrens Books")
-        myViewPageStateAdapter.addFragment(ChildShowMoreDealFragment(3), "Văn Học")
+//        myViewPageStateAdapter.addFragment(ChildShowMoreDealFragment(2), "Childrens Books")
+//        myViewPageStateAdapter.addFragment(ChildShowMoreDealFragment(3), "Văn Học")
         viewPager!!.adapter = myViewPageStateAdapter
         tabLayout!!.setupWithViewPager(viewPager, true)
     }
@@ -101,10 +126,17 @@ class ShowMoreDealFragment : Fragment() {
     {
         recyclerViewFilter.layoutManager = LinearLayoutManager(activity,
             LinearLayoutManager.VERTICAL,false)
-        val arrayList = ArrayList<FilterModel>()
-        arrayList.add(FilterModel(0,"Bán Chạy Tuần",R.drawable.ic_check_black_24dp))
-        arrayList.add(FilterModel(1,"Bán Chạy Tháng",R.drawable.ic_check_black_24dp))
-        arrayList.add(FilterModel(2,"Bán Chạy Năm",R.drawable.ic_check_black_24dp))
+        val arrayList1 = ArrayList<FilterModel>()
+        if(arrayList.isEmpty()) {
+            arrayList1.add(FilterModel(0, "Bán Chạy Tuần", R.drawable.ic_check_black_24dp))
+            arrayList1.add(FilterModel(1, "Bán Chạy Tháng", R.drawable.ic_check_black_24dp))
+            arrayList1.add(FilterModel(2, "Bán Chạy Năm", R.drawable.ic_check_black_24dp))
+            arrayList1.add(FilterModel(3, "Nổi Bật Tuần", R.drawable.ic_check_black_24dp))
+            arrayList1.add(FilterModel(4, "Nổi Bật Tháng", R.drawable.ic_check_black_24dp))
+            arrayList1.add(FilterModel(5, "Nổi Bật Năm", R.drawable.ic_check_black_24dp))
+            arrayList1.add(FilterModel(6, "Mới Nhất", R.drawable.ic_check_black_24dp))
+            arrayList =arrayList1
+        }
         filterAdapter = FilterAdapter(activity!!,arrayList)
         recyclerViewFilter.adapter = filterAdapter
     }
