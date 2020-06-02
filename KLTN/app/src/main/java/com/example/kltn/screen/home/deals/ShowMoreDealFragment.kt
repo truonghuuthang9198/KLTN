@@ -1,5 +1,6 @@
 package com.example.kltn.screen.home.deals
 
+import android.content.Context
 import android.nfc.Tag
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -81,9 +82,8 @@ class ShowMoreDealFragment : Fragment() {
                 constraint.visibility = View.GONE
             }
         }
-        btnBack.setOnClickListener{
-            if ( getFragmentManager()!!.getBackStackEntryCount() > 0)
-            {
+        btnBack.setOnClickListener {
+            if (getFragmentManager()!!.getBackStackEntryCount() > 0) {
                 getFragmentManager()!!.popBackStack();
             }
         }
@@ -110,7 +110,9 @@ class ShowMoreDealFragment : Fragment() {
         fun addFragment(fragment: Fragment, title: String) {
             fragmentList.add(fragment)
             fragmentTitleList.add(title)
+            notifyDataSetChanged()
         }
+
     }
 
     private fun setStatePageAdapter() {
@@ -120,6 +122,7 @@ class ShowMoreDealFragment : Fragment() {
 //        myViewPageStateAdapter.addFragment(ChildShowMoreDealFragment(2), "Childrens Books")
 //        myViewPageStateAdapter.addFragment(ChildShowMoreDealFragment(3), "Văn Học")
         viewPager!!.adapter = myViewPageStateAdapter
+        viewPager!!.adapter!!.notifyDataSetChanged()
         tabLayout!!.setupWithViewPager(viewPager, true)
     }
     private fun setupRecyclerviewFilter()

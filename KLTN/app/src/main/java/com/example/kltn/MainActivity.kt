@@ -6,6 +6,7 @@ import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
 import com.example.kltn.screen.cart.CartFragment
 import com.example.kltn.screen.home.HomeFragment
@@ -27,10 +28,12 @@ class MainActivity : AppCompatActivity(),SendData{
         setContentView(R.layout.activity_main)
         setDialogFullScreen()
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        navView.selectedItemId = R.id.navigation_home
         navView.setOnNavigationItemSelectedListener { menuItem ->
             showFragmentForMenuItem(menuItem.itemId)
             return@setOnNavigationItemSelectedListener true
         }
+
         val intent = getIntent()
         val check = intent.getIntExtra("check",-1)
         if (check == 1) {
@@ -39,7 +42,6 @@ class MainActivity : AppCompatActivity(),SendData{
         else {
             navView.selectedItemId = R.id.navigation_home
         }
-
     }
 
     private fun loadFragment(fragment: Fragment?): Boolean {
@@ -53,6 +55,7 @@ class MainActivity : AppCompatActivity(),SendData{
         return false
     }
 
+
     fun showFragmentForMenuItem(menuItem: Int){
         checkFragmentExist()
         val ft = this.supportFragmentManager.beginTransaction()
@@ -62,7 +65,7 @@ class MainActivity : AppCompatActivity(),SendData{
             } else {
                 homeFragment =
                     HomeFragment()
-                ft.replace(R.id.frame_layout, homeFragment!!, menuItem.toString())
+                ft.replace(R.id.frame_layout, homeFragment!!, "HomeFragment")
             }
 
             R.id.navigation_profile -> if (profileFragment !=null && profileFragment?.isAdded!! ) {

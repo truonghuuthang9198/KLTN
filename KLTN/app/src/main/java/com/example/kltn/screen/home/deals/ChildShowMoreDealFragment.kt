@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,7 +28,9 @@ class ChildShowMoreDealFragment(val tabId:Int) : Fragment() {
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_child_show_more_deal, container, false)
         recyclerViewSMDeal = view.findViewById(R.id.recyclerview_show_more_deal)
+        Toast.makeText(activity,"hello1",Toast.LENGTH_LONG).show()
         setUpRecyclerView()
+        Toast.makeText(activity,"hello",Toast.LENGTH_LONG).show()
         return view
     }
     fun setUpRecyclerView()

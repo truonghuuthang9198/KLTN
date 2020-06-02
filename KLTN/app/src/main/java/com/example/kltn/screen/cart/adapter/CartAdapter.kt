@@ -62,18 +62,12 @@ class CartAdapter internal constructor(var context: Context,var CartModel: Array
             current.soLuong = soluong
             reLoadFragment()
             holder.soluong.text = soluong.toString()
-//            val intent = Intent(context, MainActivity::class.java)
-//            intent.putExtra("checkclick",1)
-//            context.startActivity(intent)
-            //this.notifyDataSetChanged()
         }
         holder.btnTru.setOnClickListener{
             soluong-=1
             current.soLuong = soluong
             reLoadFragment()
-            //CartFragment.arrayListCart.get(position).soLuong = soluong
             holder.soluong.text = soluong.toString()
-            //this.notifyDataSetChanged()
         }
         holder.btnDelete.setOnClickListener{
             CartModel.removeAt(position)

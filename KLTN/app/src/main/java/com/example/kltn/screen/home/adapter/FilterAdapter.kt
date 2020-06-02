@@ -64,6 +64,8 @@ class FilterAdapter internal constructor(
             }
             title = current.titleFilter
             reLoadFragment("ShowMoreDealFragment")
+            notifyDataSetChanged()
+
         }
 
         if (current.choose) {
