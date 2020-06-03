@@ -51,7 +51,7 @@ class CartFragment : Fragment() {
         var arrayListCart1: ArrayList<CartModel> = ArrayList<CartModel>()
         if (arrayListCart.isEmpty()) {
             arrayListCart1.add(
-                CartModel(0,
+                CartModel(
                     "Đắc nhân tâm 1",
                     1,
                     26000.00,
@@ -59,7 +59,7 @@ class CartFragment : Fragment() {
                 )
             )
             arrayListCart1.add(
-                CartModel(1,
+                CartModel(
                     "Đắc nhân tâm 2",
                     2,
                     28000.00,
@@ -68,7 +68,6 @@ class CartFragment : Fragment() {
             )
             arrayListCart1.add(
                 CartModel(
-                    2,
                     "Đắc nhân tâm 3",
                     4,
                     35000.00,

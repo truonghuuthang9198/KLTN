@@ -36,47 +36,58 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         setContentView(R.layout.show_detail_book)
         btnMoveCart = findViewById(R.id.btn_move_cart)
         btnAddProductToCart = findViewById(R.id.btn_add_product_to_cart)
+        var checkClick:Int =0
         btnMoveCart.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("check", 1)
             this.startActivity(intent)
         }
         setDialogFullScreen()
-        //checkArrayListCart = arrayListCart
+//        checkArrayListCart = arrayListCart
         val intent = getIntent()
         try {
             dealModel = intent.getParcelableExtra<DealsModel>("deal")
+            Toast.makeText(this,dealModel.titleBookDeal,Toast.LENGTH_LONG).show()
             btnAddProductToCart.setOnClickListener {
-                if (arrayListCart.isEmpty()) {
-                    arrayListCart.add(
-                        CartModel(
-                            0,
-                            dealModel.titleBookDeal,
-                            1,
-                            dealModel.price,
-                            R.drawable.vd1_sach
-                        )
-                    )
-                } else {
-//                    reLoadFragment()
-                    arrayListCart.forEach {
-                        if (it.tenSach.compareTo(dealModel.titleBookDeal) == 0) {
-                            it.soLuong += 1
-                        } else {
+                if(checkClick==0) {
+                    try {
+                        if (arrayListCart.isEmpty()) {
                             arrayListCart.add(
                                 CartModel(
-                                    it.id+1,
                                     dealModel.titleBookDeal,
                                     1,
                                     dealModel.price,
                                     R.drawable.vd1_sach
                                 )
                             )
-                            Toast.makeText(this, "Thêm thành công", Toast.LENGTH_LONG).show()
+                        } else {
+                            arrayListCart.forEach {
+                                if (it.tenSach.compareTo(dealModel.titleBookDeal) == 0) {
+                                    it.soLuong += 1
+                                } else {
+                                    arrayListCart.add(
+                                        CartModel(
+                                            dealModel.titleBookDeal,
+                                            1,
+                                            dealModel.price,
+                                            R.drawable.vd1_sach
+                                        )
+                                    )
+                                    Toast.makeText(this, "Thêm thành công", Toast.LENGTH_LONG)
+                                        .show()
+                                }
+                            }
                         }
+                    } catch (e: Exception) {
+
                     }
                 }
-                //arrayListCart = checkArrayListCart
+                else
+                {
+                    Toast.makeText(this,"Sản phẩm đã được thêm vào giỏ hàng",Toast.LENGTH_LONG).show()
+                }
+                checkClick = 1
+//                arrayListCart = checkArrayListCart
             }
         } catch (e: Exception) {
 
@@ -122,9 +133,10 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
             return arrayOfNulls(size)
         }
     }
-        fun reLoadFragment() {
+
+    fun reLoadFragment() {
         var frg: Fragment? = null
-        frg =this.supportFragmentManager.findFragmentByTag("HomeFragment")
+        frg = this.supportFragmentManager.findFragmentByTag("HomeFragment")
         val ft: FragmentTransaction = this.getSupportFragmentManager().beginTransaction()
         ft.detach(frg!!)
         ft.attach(frg!!)
