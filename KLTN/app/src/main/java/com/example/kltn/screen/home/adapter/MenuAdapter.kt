@@ -32,7 +32,6 @@ class MenuAdapter internal constructor(var context: Context, var MenuModel: Arra
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-
         val cellForRow = layoutInflater.inflate(R.layout.recycleview_menu_item, parent, false)
         val MenuViewHolder = MenuViewHolder(cellForRow)
         return MenuViewHolder

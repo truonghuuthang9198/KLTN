@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.kltn.R
 import com.example.kltn.screen.cart.model.CartModel
+import com.example.kltn.screen.home.`interface`.CallBackFragment
 import com.example.kltn.screen.home.adapter.FilterAdapter
 import com.example.kltn.screen.home.adapter.FilterAdapter.Companion.title
 import com.example.kltn.screen.home.model.FilterModel
@@ -26,7 +27,7 @@ import kotlinx.android.synthetic.main.custom_toolbar_search.*
 /**
  * A simple [Fragment] subclass.
  */
-class ShowMoreDealFragment : Fragment() {
+class ShowMoreDealFragment : Fragment(), CallBackFragment {
     lateinit var recyclerViewFilter: RecyclerView
     lateinit var btnBack: ImageView
     lateinit var filterAdapter: FilterAdapter
@@ -116,7 +117,7 @@ class ShowMoreDealFragment : Fragment() {
     }
 
     private fun setStatePageAdapter() {
-        val myViewPageStateAdapter: MyViewPageStateAdapter = MyViewPageStateAdapter(activity!!.supportFragmentManager)
+        val myViewPageStateAdapter = MyViewPageStateAdapter(activity!!.supportFragmentManager)
         myViewPageStateAdapter.addFragment(ChildShowMoreDealFragment(0), "Tất cả")
         myViewPageStateAdapter.addFragment(ChildShowMoreDealFragment(1), "Thiếu nhi")
 //        myViewPageStateAdapter.addFragment(ChildShowMoreDealFragment(2), "Childrens Books")
@@ -140,8 +141,15 @@ class ShowMoreDealFragment : Fragment() {
             arrayList1.add(FilterModel(6, "Mới Nhất", R.drawable.ic_check_black_24dp))
             arrayList =arrayList1
         }
-        filterAdapter = FilterAdapter(activity!!,arrayList)
+        filterAdapter = FilterAdapter(activity!!,arrayList,this)
         recyclerViewFilter.adapter = filterAdapter
     }
 
+    override fun onCallBack() {
+        this.titleFilter.text = title
+    }
+
+    override fun onSetBackRecyclerView() {
+
+    }
 }

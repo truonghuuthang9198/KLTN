@@ -45,6 +45,5 @@ class ShowMoreDealAdapter internal constructor(var ShowMoreDealModel: ArrayList<
         holder.priceBook.text = priceBookfm
         holder.priceBook.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
         holder.imgBookDeal.setImageResource(current.imgBookSMDeal)
-
     }
 }

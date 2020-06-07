@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.kltn.R
+import com.example.kltn.screen.home.`interface`.CallBackFragment
 import com.example.kltn.screen.home.adapter.DealAdapter
 import com.example.kltn.screen.home.adapter.ShowMoreDealAdapter
 import com.example.kltn.screen.home.model.ShowMoreDealModel
@@ -18,7 +19,7 @@ import com.example.kltn.screen.home.model.ShowMoreDealModel
 /**
  * A simple [Fragment] subclass.
  */
-class ChildShowMoreDealFragment(val tabId:Int) : Fragment() {
+class ChildShowMoreDealFragment(val tabId:Int) : Fragment(),CallBackFragment {
     lateinit var recyclerViewSMDeal: RecyclerView
     lateinit var showMoreDealAdapter: ShowMoreDealAdapter
     override fun onCreateView(
@@ -28,9 +29,7 @@ class ChildShowMoreDealFragment(val tabId:Int) : Fragment() {
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_child_show_more_deal, container, false)
         recyclerViewSMDeal = view.findViewById(R.id.recyclerview_show_more_deal)
-        Toast.makeText(activity,"hello1",Toast.LENGTH_LONG).show()
         setUpRecyclerView()
-        Toast.makeText(activity,"hello",Toast.LENGTH_LONG).show()
         return view
     }
     fun setUpRecyclerView()
@@ -73,6 +72,31 @@ class ChildShowMoreDealFragment(val tabId:Int) : Fragment() {
         }
         showMoreDealAdapter = ShowMoreDealAdapter(listTab0)
         recyclerViewSMDeal.adapter = showMoreDealAdapter
+    }
+
+    override fun onCallBack() {
+    }
+
+    override fun onSetBackRecyclerView() {
+        recyclerViewSMDeal = view!!.findViewById(R.id.recyclerview_show_more_deal)
+        recyclerViewSMDeal.layoutManager = LinearLayoutManager(activity,
+            LinearLayoutManager.HORIZONTAL,false)
+        recyclerViewSMDeal.layoutManager = GridLayoutManager(activity,2)
+        val arrayListVD= ArrayList<ShowMoreDealModel>()
+        arrayListVD.add(
+            ShowMoreDealModel(0,0,R.drawable.vd1_sach,"Dạy Trẻ Biết Đọc Sớm",53720.00,79000.00)
+        )
+        arrayListVD.add(
+            ShowMoreDealModel(1,0,R.drawable.vd1_sach,"Get Set Go: Mathematics Equals",36000.00,52000.00)
+        )
+        arrayListVD.add(
+            ShowMoreDealModel(2,0,R.drawable.vd1_sach,"Bí Mật Hành Trình Tình Yêu",30400.00,48000.00)
+        )
+        arrayListVD.add(
+            ShowMoreDealModel(3,0,R.drawable.vd1_sach,"Dạy Tiếng Anh Xu Hướng Mới",33400.00,56000.00)
+        )
+        showMoreDealAdapter = ShowMoreDealAdapter(arrayListVD)
+        this.recyclerViewSMDeal.adapter = showMoreDealAdapter
     }
 
 }
