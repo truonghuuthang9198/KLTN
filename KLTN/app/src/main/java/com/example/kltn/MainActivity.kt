@@ -12,6 +12,7 @@ import com.example.kltn.screen.cart.CartFragment
 import com.example.kltn.screen.home.HomeFragment
 import com.example.kltn.screen.home.`interface`.SendData
 import com.example.kltn.screen.notification.NotificationFragment
+import com.example.kltn.screen.profile.InformationFragment
 import com.example.kltn.screen.profile.ProfileFragment
 import com.example.kltn.screen.suggest.SuggestFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity(),SendData{
     private var notificationFragment: NotificationFragment? = null
     private var cartFragment: CartFragment? = null
     private var suggestFragment: SuggestFragment? = null
+    private var informationFragment: InformationFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,14 +70,14 @@ class MainActivity : AppCompatActivity(),SendData{
                 ft.replace(R.id.frame_layout, homeFragment!!, "HomeFragment")
             }
 
-            R.id.navigation_profile -> if (profileFragment !=null && profileFragment?.isAdded!! ) {
-                ft.show(profileFragment!!)
+            R.id.navigation_profile -> if (informationFragment !=null && informationFragment?.isAdded!! ) {
+                ft.show(informationFragment!!)
             }
             else
             {
-                profileFragment =
-                    ProfileFragment()
-                ft.replace(R.id.frame_layout, profileFragment!!, menuItem.toString())
+                informationFragment =
+                    InformationFragment()
+                ft.replace(R.id.frame_layout, informationFragment!!, menuItem.toString())
             }
 
             R.id.navigation_suggest-> if (suggestFragment !=null && suggestFragment?.isAdded!! ) {

@@ -12,14 +12,17 @@ import com.example.kltn.R
 
 
 class LoginFragment : Fragment() {
-
+    lateinit var btnDangNhap: Button
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_login, container, false)
-        //val button = view.findViewById<Button>(R.id.btn_dangnhap)
+        btnDangNhap = view.findViewById<Button>(R.id.btn_dangnhap)
+        btnDangNhap.setOnClickListener {
+
+        }
 
         return view
 
