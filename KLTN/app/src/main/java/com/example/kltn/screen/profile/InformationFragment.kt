@@ -1,9 +1,13 @@
 package com.example.kltn.screen.profile
 
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,12 +18,23 @@ import com.example.kltn.screen.profile.model.InformationModel
 class InformationFragment: Fragment() {
     lateinit var recyclerviewIF: RecyclerView
     lateinit var informationAdapter: InformationAdapter
+    lateinit var btnDangXuat: Button
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_information_user, container, false)
+        btnDangXuat = view.findViewById(R.id.btn_dangxuat)
+        btnDangXuat.setOnClickListener {
+            val pref = PreferenceManager.getDefaultSharedPreferences(activity!!)
+            val edit = pref.edit()
+            edit.putBoolean("CheckLogin",true)
+            edit.apply()
+        }
         recyclerviewIF = view.findViewById(R.id.recyclerview_infomation_user)
         recyclerviewIF.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         setUpRecyclerview()
