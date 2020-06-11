@@ -62,7 +62,7 @@ class FilterAdapter internal constructor(
             }
             title = current.titleFilter
             callBack.onCallBack()
-            callBack.onSetBackRecyclerView()
+//            callBack.onSetBackRecyclerView()
             notifyDataSetChanged()
         }
 

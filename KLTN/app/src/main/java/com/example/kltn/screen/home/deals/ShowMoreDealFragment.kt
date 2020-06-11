@@ -149,7 +149,4 @@ class ShowMoreDealFragment : Fragment(), CallBackFragment {
         this.titleFilter.text = title
     }
 
-    override fun onSetBackRecyclerView() {
-
-    }
 }
