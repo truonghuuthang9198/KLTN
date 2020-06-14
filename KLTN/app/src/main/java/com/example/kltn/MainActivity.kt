@@ -19,7 +19,8 @@ import com.example.kltn.screen.profile.ProfileFragment
 import com.example.kltn.screen.suggest.SuggestFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : AppCompatActivity(){
+@Suppress("DEPRECATION")
+class MainActivity : AppCompatActivity() {
     private var homeFragment: HomeFragment? = null
     private var profileFragment: ProfileFragment? = null
     private var notificationFragment: NotificationFragment? = null
@@ -75,20 +76,15 @@ class MainActivity : AppCompatActivity(){
             }
 
             R.id.navigation_profile -> {
-                if (checkLogin == false) {
-                    if (profileFragment != null && profileFragment?.isAdded!!) {
-                        ft.show(profileFragment!!)
-                    } else {
-                        profileFragment = ProfileFragment()
-                        ft.replace(R.id.frameLayout, profileFragment!!, "ProfileFragment")
-                    }
+                if (!checkLogin) {
+                    loadFragment(ProfileFragment())
                 } else {
                     loadFragment(InformationFragment())
                 }
             }
 
             R.id.navigation_suggest -> if (suggestFragment != null && suggestFragment?.isAdded!!) {
-                    ft.show(suggestFragment!!)
+                ft.show(suggestFragment!!)
             } else {
                 suggestFragment =
                     SuggestFragment()
@@ -139,7 +135,7 @@ class MainActivity : AppCompatActivity(){
 //    }
 
     private fun hideOtherFragment(ft: FragmentTransaction, itemId: Int) {
-        if (profileFragment != null && profileFragment!!.isAdded && itemId != R.id.navigation_profile )
+        if (profileFragment != null && profileFragment!!.isAdded && itemId != R.id.navigation_profile)
             ft.hide(profileFragment!!)
         if (notificationFragment != null && notificationFragment?.isAdded!! && itemId != R.id.navigation_notifications)
             ft.hide(notificationFragment!!)
@@ -149,6 +145,8 @@ class MainActivity : AppCompatActivity(){
             ft.hide(homeFragment!!)
         if (suggestFragment != null && suggestFragment!!.isAdded && itemId != R.id.navigation_suggest)
             ft.hide(suggestFragment!!)
+        if (informationFragment != null && informationFragment!!.isAdded && itemId != R.id.navigation_profile)
+            ft.hide(informationFragment!!)
     }
 
     private fun setDialogFullScreen() {

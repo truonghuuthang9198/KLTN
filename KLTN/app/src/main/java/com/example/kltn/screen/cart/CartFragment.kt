@@ -86,13 +86,13 @@ class CartFragment : Fragment() {
     }
 
     fun setUpRecyclerView() {
-        cartViewModel = ViewModelProvider(this).get(CartViewModel::class.java)
-        Toast.makeText(activity!!, "Thanh cong", Toast.LENGTH_LONG).show()
-        cartViewModel.listCart.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            it.forEach {
-                arrayListCart.add(it)
-            }
-        })
+//        cartViewModel = ViewModelProvider(this, defaultViewModelProviderFactory).get(CartViewModel::class.java)
+//        Toast.makeText(activity!!, "Thanh cong", Toast.LENGTH_LONG).show()
+//        cartViewModel.listCart.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+//            it.forEach {
+//                arrayListCart.add(it)
+//            }
+//        })
         cartAdapter = CartAdapter(activity!!, arrayListCart)
         cartAdapter.updateThanhTien()
         recyclerviewcart.adapter = cartAdapter

@@ -15,6 +15,7 @@ import com.example.kltn.R
 import com.example.kltn.screen.profile.adapter.InformationAdapter
 import com.example.kltn.screen.profile.model.InformationModel
 
+@Suppress("DEPRECATION")
 class InformationFragment: Fragment() {
     lateinit var recyclerviewIF: RecyclerView
     lateinit var informationAdapter: InformationAdapter
@@ -32,8 +33,9 @@ class InformationFragment: Fragment() {
         btnDangXuat.setOnClickListener {
             val pref = PreferenceManager.getDefaultSharedPreferences(activity!!)
             val edit = pref.edit()
-            edit.putBoolean("CheckLogin",true)
+            edit.putBoolean("CheckLogin",false)
             edit.apply()
+            loadFragment(ProfileFragment())
         }
         recyclerviewIF = view.findViewById(R.id.recyclerview_infomation_user)
         recyclerviewIF.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
@@ -44,13 +46,23 @@ class InformationFragment: Fragment() {
     fun setUpRecyclerview()
     {
         val arrayList = ArrayList<InformationModel>()
-        arrayList.add(InformationModel(R.drawable.ic_location,"Sổ địa chỉ","Quản lý địa chỉ",R.drawable.ic_next))
-        arrayList.add(InformationModel(R.drawable.ic_history_buy,"Lịch sử mua hàng","Xem thêm",R.drawable.ic_next))
-        arrayList.add(InformationModel(R.drawable.ic_favorite_black,"Sản phẩm yêu thích","Xem thêm",R.drawable.ic_next))
-        arrayList.add(InformationModel(R.drawable.ic_ma_gioi_thieu,"Mã giới thiệu","Xem thêm",R.drawable.ic_next))
-        arrayList.add(InformationModel(R.drawable.ic_swap_language,"Đổi ngôn ngữ","Xem thêm",R.drawable.ic_next))
-        arrayList.add(InformationModel(R.drawable.ic_help,"Hỗ trợ","Xem thêm",R.drawable.ic_next))
+        arrayList.add(InformationModel(1,R.drawable.ic_location,"Sổ địa chỉ","Quản lý địa chỉ",R.drawable.ic_next))
+        arrayList.add(InformationModel(2,R.drawable.ic_history_buy,"Lịch sử mua hàng","Xem thêm",R.drawable.ic_next))
+        arrayList.add(InformationModel(3,R.drawable.ic_favorite_black,"Sản phẩm yêu thích","Xem thêm",R.drawable.ic_next))
+        arrayList.add(InformationModel(4,R.drawable.ic_ma_gioi_thieu,"Mã giới thiệu","Xem thêm",R.drawable.ic_next))
+        arrayList.add(InformationModel(5,R.drawable.ic_swap_language,"Đổi ngôn ngữ","Xem thêm",R.drawable.ic_next))
+        arrayList.add(InformationModel(6,R.drawable.ic_help,"Hỗ trợ","Xem thêm",R.drawable.ic_next))
         informationAdapter = InformationAdapter(activity!!,arrayList)
         recyclerviewIF.adapter = informationAdapter
+    }
+    private fun loadFragment(fragment: Fragment?): Boolean {
+        if (fragment != null) {
+            activity!!.supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.frame_layout, fragment)
+                .commit()
+            return true
+        }
+        return false
     }
 }

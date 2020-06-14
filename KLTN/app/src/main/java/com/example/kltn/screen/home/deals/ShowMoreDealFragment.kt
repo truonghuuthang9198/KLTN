@@ -84,8 +84,8 @@ class ShowMoreDealFragment : Fragment(), CallBackFragment {
             }
         }
         btnBack.setOnClickListener {
-            if (getFragmentManager()!!.getBackStackEntryCount() > 0) {
-                getFragmentManager()!!.popBackStack();
+            if (fragmentManager!!.backStackEntryCount > 0) {
+                fragmentManager!!.popBackStack()
             }
         }
         setStatePageAdapter()

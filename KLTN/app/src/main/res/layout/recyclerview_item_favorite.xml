@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:padding="8dp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/img_book_favorite"
+        android:layout_width="80dp"
+        android:layout_height="120dp"
+        android:layout_margin="8dp"
+        android:src="@drawable/vd1_sach"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+    <TextView
+        android:id="@+id/title_book_favorite"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginLeft="12dp"
+        android:textColor="#000000"
+        android:text="The fellowship of the Ring (The Lord of The Rings,Book1)"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/img_book_favorite"
+        app:layout_constraintTop_toTopOf="@+id/img_book_favorite" />
+
+    <TextView
+        android:id="@+id/price_book_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="119.200 đ"
+        android:textSize="16sp"
+        android:textColor="#FF0000"
+        app:layout_constraintStart_toStartOf="@+id/title_book_favorite"
+        app:layout_constraintTop_toBottomOf="@+id/title_book_favorite"></TextView>
+
+    <Button
+        android:id="@+id/btn_muangay_favorite"
+        android:layout_width="120dp"
+        android:layout_height="45dp"
+        android:text="Mua ngay"
+        android:layout_marginTop="12dp"
+        android:textAllCaps="false"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/img_book_favorite"
+        app:layout_constraintStart_toStartOf="@+id/price_book_favorite"
+        app:layout_constraintTop_toBottomOf="@+id/price_book_favorite"></Button>
+
+    <ImageView
+        android:id="@+id/btn_delete_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_bin"
+        android:layout_marginRight="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_muangay_favorite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_muangay_favorite"></ImageView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="12dp"
+        android:background="#BDBDBD"
+        app:layout_constraintTop_toBottomOf="@+id/img_book_favorite"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"></View>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

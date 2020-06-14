@@ -9,7 +9,6 @@ import com.example.kltn.screen.cart.model.CartModel
 import kotlinx.coroutines.launch
 
 class CartViewModel(application: Application) : AndroidViewModel(application) {
-
     private val cartRepository: CartRepository
     val listCart: LiveData<List<CartModel>>
 

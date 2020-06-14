@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
+import com.example.kltn.screen.profile.FavoriteFragment
 import com.example.kltn.screen.profile.model.InformationModel
 
 class InformationAdapter internal constructor(var context: Context, var InformationModel: ArrayList<InformationModel>) :
@@ -32,16 +33,18 @@ class InformationAdapter internal constructor(var context: Context, var Informat
 
     override fun onBindViewHolder(holder: InformationViewHolder, position: Int) {
         val current = InformationModel[position]
-//        holder.itemView.setOnClickListener {
-//            when (current.id) {
-//                3 -> {
-//                    loadFragment(ShowMoreDealFragment(), "ShowMoreDealFragment")
-//                }
-//                4 -> {
-//                    loadFragment(SuggestFragment(),"SuggestFragment")
-//                }
-//            }
-//        }
+        holder.itemView.setOnClickListener {
+            when (current.id) {
+                1 -> {}
+                2 -> {}
+                3 -> {
+                    loadFragment(FavoriteFragment(), "ShowMoreDealFragment")
+                }
+                4 -> {}
+                5 -> {}
+                6 -> {}
+            }
+        }
         holder.icNameIF.setImageResource(current.icNameIF)
         holder.nameIF.text = current.nameIF
         holder.moreIF.text = current.moreIF
