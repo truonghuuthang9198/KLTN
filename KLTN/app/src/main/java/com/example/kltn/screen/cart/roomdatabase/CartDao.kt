@@ -9,9 +9,16 @@ interface CartDao {
     @Query ("select * from cart_table")
     fun getListCart():LiveData<List<CartModel>>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert
     fun insertItemCart(cartModel: CartModel)
 
     @Delete
     fun deleteItemCart(cartModel: CartModel)
+
+    @Query("DELETE FROM cart_table")
+    fun deleteAll()
+
+    @Query("select * from cart_table")
+    fun getList():List<CartModel>
+
 }

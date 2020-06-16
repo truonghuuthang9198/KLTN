@@ -67,5 +67,4 @@ class ChildDealFragment(val tabId: Int) : Fragment() {
         dealAdapter = DealAdapter(listTab0)
         recycleviewDeal.adapter = dealAdapter
     }
-
 }

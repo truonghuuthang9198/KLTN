@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.custom_toolbar_search.*
 /**
  * A simple [Fragment] subclass.
  */
-class ShowMoreDealFragment : Fragment(), CallBackFragment {
+class ShowMoreDealFragment : Fragment(){
     lateinit var recyclerViewFilter: RecyclerView
     lateinit var btnBack: ImageView
     lateinit var filterAdapter: FilterAdapter
@@ -141,12 +141,12 @@ class ShowMoreDealFragment : Fragment(), CallBackFragment {
             arrayList1.add(FilterModel(6, "Mới Nhất", R.drawable.ic_check_black_24dp))
             arrayList =arrayList1
         }
-        filterAdapter = FilterAdapter(activity!!,arrayList,this)
+        filterAdapter = FilterAdapter(activity!!,arrayList)
         recyclerViewFilter.adapter = filterAdapter
     }
 
-    override fun onCallBack() {
-        this.titleFilter.text = title
-    }
+//    override fun onCallBack() {
+//        this.titleFilter.text = title
+//    }
 
 }

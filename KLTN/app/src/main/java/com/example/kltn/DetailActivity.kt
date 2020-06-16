@@ -2,6 +2,7 @@ package com.example.kltn
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,11 +15,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.example.kltn.screen.cart.CartFragment
 import com.example.kltn.screen.cart.CartFragment.Companion.arrayListCart
 import com.example.kltn.screen.cart.model.CartModel
 import com.example.kltn.screen.cart.roomdatabase.CartViewModel
 import com.example.kltn.screen.home.model.DealsModel
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.custom_toolbar.*
 import java.lang.Exception
 
@@ -26,8 +30,8 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
     lateinit var dealModel: DealsModel
     lateinit var btnMoveCart: Button
     lateinit var btnAddProductToCart: Button
-    lateinit var cartViewModel: CartViewModel
-    var checkArrayListCart: ArrayList<CartModel> = ArrayList<CartModel>()
+    private lateinit var cartViewModel: CartViewModel
+    var arrayListHandle: ArrayList<CartModel> = ArrayList<CartModel>()
 
 
     constructor(parcel: Parcel) : this() {
@@ -39,85 +43,31 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         setContentView(R.layout.show_detail_book)
         btnMoveCart = findViewById(R.id.btn_move_cart)
         btnAddProductToCart = findViewById(R.id.btn_add_product_to_cart)
-        var checkClick: Int = 0
+//        val sharedPreferences = this.getSharedPreferences("ListCart", Context.MODE_PRIVATE);
+//        val editor = sharedPreferences.edit()
+//        var list = ArrayList<CartModel>()
+        cartViewModel = ViewModelProviders.of(this).get(CartViewModel::class.java)
         btnMoveCart.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("check", 1)
             this.startActivity(intent)
         }
         setDialogFullScreen()
-//        checkArrayListCart = arrayListCart\
-
+        //add product to cart and save local
         val intent = getIntent()
-        try {
-            dealModel = intent.getParcelableExtra<DealsModel>("deal")
-            Toast.makeText(this, dealModel.titleBookDeal, Toast.LENGTH_LONG).show()
-            btnAddProductToCart.setOnClickListener {
-                try {
-
-                    cartViewModel = ViewModelProvider(this).get(CartViewModel::class.java)
-                    cartViewModel.insertItemCart(
-                        CartModel(
-                            dealModel.titleBookDeal,
-                            1,
-                            dealModel.price,
-                            R.drawable.vd1_sach
-                        )
-                    )
-                    Toast.makeText(this, "Thêm thành công", Toast.LENGTH_LONG).show()
-                } catch (e: Exception) {
-
-                }
-            }
-
-//            btnAddProductToCart.setOnClickListener {
-//                if(checkClick==0) {
-//                    try {
-//                        if (arrayListCart.isEmpty()) {
-//                            arrayListCart.add(
-//                                CartModel(
-//                                    dealModel.titleBookDeal,
-//                                    1,
-//                                    dealModel.price,
-//                                    R.drawable.vd1_sach
-//                                )
-//                            )
-//                        } else {
-//                            arrayListCart.forEach {
-//                                if (it.tenSach.compareTo(dealModel.titleBookDeal) == 0) {
-//                                    it.soLuong += 1
-//                                } else {
-//                                    arrayListCart.add(
-//                                        CartModel(
-//                                            dealModel.titleBookDeal,
-//                                            1,
-//                                            dealModel.price,
-//                                            R.drawable.vd1_sach
-//                                        )
-//                                    )
-//                                    Toast.makeText(this, "Thêm thành công", Toast.LENGTH_LONG)
-//                                        .show()
-//                                }
-//                            }
-//                        }
-//                    } catch (e: Exception) {
-//
-//                    }
-//                }
-//                else
-//                {
-//                    Toast.makeText(this,"Sản phẩm đã được thêm vào giỏ hàng",Toast.LENGTH_LONG).show()
-//                }
-//                checkClick = 1
-////                arrayListCart = checkArrayListCart
-//            }
-//        } catch (e: Exception) {
-//
+        dealModel = intent.getParcelableExtra<DealsModel>("deal")
+        Toast.makeText(this, dealModel.titleBookDeal, Toast.LENGTH_LONG).show()
+//        var listGetSharedf: List<CartModel> = ArrayList()
+//        listGetSharedf = Gson().fromJson(
+//            sharedPreferences.getString("listCart", null),
+//            object : TypeToken<ArrayList<CartModel>>() {}.type
+//        )
+//        arrayListHandle = listGetSharedf as ArrayList<CartModel>
+        btnAddProductToCart.setOnClickListener {
+            cartViewModel.insertItemCart(CartModel(dealModel.titleBookDeal,1,dealModel.priceReduced,R.drawable.vd1_sach))
         }
-        catch (e: Exception)
-        {
 
-        }
+
         btn_back.setOnClickListener {
             onBackPressed()
         }
@@ -125,12 +75,12 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
             onBackPressed()
         }
         btn_back_cart.setOnClickListener {
+//            editor.clear()
+//            editor.commit()
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("check", 1)
             this.startActivity(intent)
         }
-
-
     }
 
     private fun setDialogFullScreen() {
@@ -169,3 +119,5 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         ft.commit()
     }
 }
+
+

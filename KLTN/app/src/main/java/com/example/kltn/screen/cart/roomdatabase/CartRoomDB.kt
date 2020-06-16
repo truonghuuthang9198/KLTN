@@ -14,7 +14,6 @@ import kotlinx.coroutines.launch
 @Database(entities = [CartModel::class], version = 1,exportSchema = false)
 abstract class CartRoomDB : RoomDatabase() {
     abstract fun cartDao(): CartDao
-
     companion object {
         @Volatile
         private var INSTANCE: CartRoomDB? = null
@@ -25,8 +24,7 @@ abstract class CartRoomDB : RoomDatabase() {
                     context.applicationContext,
                     CartRoomDB::class.java,
                     "cart_database"
-                ).fallbackToDestructiveMigration().allowMainThreadQueries()
-                    .addCallback(CartRoomDBCallback(scope)).build()
+                ).fallbackToDestructiveMigration().allowMainThreadQueries().addCallback(CartRoomDBCallback(scope)).build()
                 INSTANCE = instance
                 instance
             }
@@ -38,7 +36,7 @@ abstract class CartRoomDB : RoomDatabase() {
                 super.onOpen(db)
                 INSTANCE?.let { database ->
                     scope.launch(Dispatchers.IO) {
-                        insertDB(database.cartDao())
+                        database.cartDao()
                     }
                 }
             }

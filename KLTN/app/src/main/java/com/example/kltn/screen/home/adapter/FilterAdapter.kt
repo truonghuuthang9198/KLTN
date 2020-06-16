@@ -26,8 +26,7 @@ import kotlin.collections.ArrayList
 
 class FilterAdapter internal constructor(
     var context: Context,
-    var FilterModel: ArrayList<FilterModel>,
-    var callBack : CallBackFragment
+    var FilterModel: ArrayList<FilterModel>
 ) : RecyclerView.Adapter<FilterAdapter.FilterViewHolder>() {
     companion object {
         var title:String = "Bán Chạy Tuần"
@@ -61,8 +60,7 @@ class FilterAdapter internal constructor(
                 it.choose = it.id == current.id
             }
             title = current.titleFilter
-            callBack.onCallBack()
-//            callBack.onSetBackRecyclerView()
+//            callBack.onCallBack()
             notifyDataSetChanged()
         }
 
