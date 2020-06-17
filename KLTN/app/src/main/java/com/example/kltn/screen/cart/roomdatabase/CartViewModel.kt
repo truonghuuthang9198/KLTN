@@ -23,12 +23,22 @@ class CartViewModel(application: Application) : AndroidViewModel(application) {
         cartRepository.insertItemCart(cartModel)
     }
 
-    fun deleteHistorySearch(cartModel: CartModel) = viewModelScope.launch(Dispatchers.IO) {
+    fun deleteItemCart(cartModel: CartModel) = viewModelScope.launch(Dispatchers.IO) {
         cartRepository.deleteItemCart(cartModel)
+    }
+
+    fun updateSL(pTenSach: String,pSoLuong: Int) = viewModelScope.launch(Dispatchers.IO) {
+        cartRepository.updateSL(pTenSach,pSoLuong)
     }
 
     fun getList():List<CartModel>
     {
         return cartRepository.getList()
     }
+
+    fun checkExistList(pTenSach: String):CartModel
+    {
+        return cartRepository.checkExistList(pTenSach)
+    }
+
 }

@@ -21,4 +21,10 @@ interface CartDao {
     @Query("select * from cart_table")
     fun getList():List<CartModel>
 
+    @Query("update cart_table set soLuong= :pSoLuong where tenSach = :pTenSach")
+    fun updateSL(pTenSach: String,pSoLuong: Int)
+
+    @Query("select * from cart_table where tenSach= :pTenSach")
+    fun checkExistList(pTenSach: String): CartModel
+
 }

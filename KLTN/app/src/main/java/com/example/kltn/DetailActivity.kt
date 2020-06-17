@@ -43,31 +43,30 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         setContentView(R.layout.show_detail_book)
         btnMoveCart = findViewById(R.id.btn_move_cart)
         btnAddProductToCart = findViewById(R.id.btn_add_product_to_cart)
-//        val sharedPreferences = this.getSharedPreferences("ListCart", Context.MODE_PRIVATE);
-//        val editor = sharedPreferences.edit()
-//        var list = ArrayList<CartModel>()
-        cartViewModel = ViewModelProviders.of(this).get(CartViewModel::class.java)
+
+
         btnMoveCart.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("check", 1)
             this.startActivity(intent)
         }
         setDialogFullScreen()
-        //add product to cart and save local
+
+
+        cartViewModel = ViewModelProviders.of(this).get(CartViewModel::class.java)
         val intent = getIntent()
         dealModel = intent.getParcelableExtra<DealsModel>("deal")
         Toast.makeText(this, dealModel.titleBookDeal, Toast.LENGTH_LONG).show()
-//        var listGetSharedf: List<CartModel> = ArrayList()
-//        listGetSharedf = Gson().fromJson(
-//            sharedPreferences.getString("listCart", null),
-//            object : TypeToken<ArrayList<CartModel>>() {}.type
-//        )
-//        arrayListHandle = listGetSharedf as ArrayList<CartModel>
+        val checkItem = cartViewModel.checkExistList(dealModel.titleBookDeal)
         btnAddProductToCart.setOnClickListener {
-            cartViewModel.insertItemCart(CartModel(dealModel.titleBookDeal,1,dealModel.priceReduced,R.drawable.vd1_sach))
+            if(checkItem == null) {
+                cartViewModel.insertItemCart(CartModel(dealModel.titleBookDeal,1,dealModel.priceReduced,R.drawable.vd1_sach))
+            }
+            else
+            {
+                cartViewModel.updateSL(dealModel.titleBookDeal,checkItem.soLuong+1)
+            }
         }
-
-
         btn_back.setOnClickListener {
             onBackPressed()
         }
@@ -75,8 +74,6 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
             onBackPressed()
         }
         btn_back_cart.setOnClickListener {
-//            editor.clear()
-//            editor.commit()
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("check", 1)
             this.startActivity(intent)
