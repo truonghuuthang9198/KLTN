@@ -5,11 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.kltn.R
+import com.facebook.CallbackManager
 import com.google.android.material.tabs.TabLayout
 
 
@@ -18,6 +20,7 @@ class ProfileFragment : Fragment() {
     private var tabLayout: TabLayout? = null
     private var viewPager: ViewPager? = null
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -25,6 +28,8 @@ class ProfileFragment : Fragment() {
         val view =  inflater.inflate(R.layout.fragment_profile, container, false)
         tabLayout = view.findViewById<TabLayout>(R.id.tabs)
         viewPager = view.findViewById<ViewPager>(R.id.viewpager)
+
+
         setStatePageAdapter()
         return view
     }
