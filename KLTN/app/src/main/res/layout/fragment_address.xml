@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintlay_titile_address"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#FFB90F"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/btn_back_address"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/ic_back_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cập nhật địa chỉ"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_back_address"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_back_address"></TextView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tv1_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:text="Vui lòng nhập đầy đủ thông tin của bạn"
+        android:textColor="#000000"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/constraintlay_titile_address"></TextView>
+
+    <EditText
+        android:id="@+id/edt_ho_address"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_margin="12dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/custom_edit_text"
+        android:hint="Họ*"
+        android:padding="6dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv1_address"></EditText>
+
+    <EditText
+        android:id="@+id/edt_ten_address"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_margin="12dp"
+        android:background="@drawable/custom_edit_text"
+        android:hint="Tên*"
+        android:padding="6dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_ho_address"></EditText>
+
+    <EditText
+        android:id="@+id/edt_sdt_address"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_margin="12dp"
+        android:background="@drawable/custom_edit_text"
+        android:hint="Số điện thoại*"
+        android:padding="6dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_ten_address"></EditText>
+
+    <EditText
+        android:id="@+id/edt_tinh_address"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_margin="12dp"
+        android:background="@drawable/custom_edit_text"
+        android:hint="Thành phố*"
+        android:padding="6dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_sdt_address"></EditText>
+
+    <EditText
+        android:id="@+id/edt_quan_address"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_margin="12dp"
+        android:background="@drawable/custom_edit_text"
+        android:hint="Quận huyện*"
+        android:padding="6dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_tinh_address"></EditText>
+
+    <EditText
+        android:id="@+id/edt_xaphuong_address"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_margin="12dp"
+        android:background="@drawable/custom_edit_text"
+        android:hint="Xã phường*"
+        android:padding="6dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_quan_address"></EditText>
+
+    <EditText
+        android:id="@+id/edt_diachinha_address"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_margin="12dp"
+        android:background="@drawable/custom_edit_text"
+        android:hint="Địa chỉ nhà*"
+        android:padding="6dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_xaphuong_address"></EditText>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="30dp"
+        android:background="@color/oranges"
+        android:text="LƯU ĐỊA CHỈ"
+        android:textColor="#FFFFFF"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_diachinha_address"></Button>
+</androidx.constraintlayout.widget.ConstraintLayout>

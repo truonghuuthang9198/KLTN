@@ -36,6 +36,14 @@ class LoginFragment : Fragment() {
         btnDangNhap = view.findViewById(R.id.btn_dangnhap)
         btnDangNhapFB = view.findViewById(R.id.btn_dangnhap_fb)
 
+        btnDangNhap.setOnClickListener {
+            loadFragment(InformationFragment())
+            val pref = PreferenceManager.getDefaultSharedPreferences(activity!!)
+            val edit = pref.edit()
+            edit.putBoolean("CheckLogin",true)
+            edit.apply()
+        }
+
         btnDangNhapFB.setOnClickListener {
             callBackManager = CallbackManager.Factory.create()
             LoginManager.getInstance().logInWithReadPermissions(activity!!,Arrays.asList("public_profile","email"))

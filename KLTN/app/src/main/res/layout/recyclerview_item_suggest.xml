@@ -60,9 +60,9 @@
 
     <RatingBar
         android:id="@+id/star_book_suggest"
-        style="?android:attr/ratingBarStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/RatingBar.RatingBar"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
         android:layout_marginLeft="40dp"
         android:isIndicator="true"
         android:numStars="5"

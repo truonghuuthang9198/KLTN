@@ -57,9 +57,9 @@
 
                 <RatingBar
                     android:id="@+id/rating"
-                    style="?android:attr/ratingBarStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/RatingBar.RatingBar"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="5dp"
                     android:isIndicator="true"
@@ -117,8 +117,8 @@
                     app:layout_constraintTop_toTopOf="@+id/textView6"></TextView>
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginRight="10dp"
                     android:scaleType="centerCrop"

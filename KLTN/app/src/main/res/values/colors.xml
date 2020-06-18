@@ -10,5 +10,7 @@
     <color name="colorCheckFilter">#EEC028</color>
 
     <color name="black">#000000</color>
+    
+    <color name="oranges">#FF8000</color>
 
 </resources>

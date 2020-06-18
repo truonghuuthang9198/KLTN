@@ -1,30 +1,27 @@
 package com.example.kltn.screen.home.adapter
 
-import android.app.Activity
+import android.R.attr.tag
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kltn.DetailActivity
-import com.example.kltn.MainActivity
 import com.example.kltn.R
+import com.example.kltn.screen.home.`interface`.CallBackFragment
 import com.example.kltn.screen.home.deals.ShowMoreDealFragment
 import com.example.kltn.screen.home.model.MenuModel
 import com.example.kltn.screen.suggest.SuggestFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import de.hdodenhof.circleimageview.CircleImageView
 
 class MenuAdapter internal constructor(var context: Context, var MenuModel: ArrayList<MenuModel>) :
     RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
+    lateinit var callBackFragment: CallBackFragment
     inner class MenuViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.tv_name)
         val iconMenu: ImageView = itemView.findViewById(R.id.menu_icon)
@@ -47,6 +44,7 @@ class MenuAdapter internal constructor(var context: Context, var MenuModel: Arra
                     loadFragment(ShowMoreDealFragment(), "ShowMoreDealFragment")
                 }
                 4 -> {
+//                    changeStatusBottomNavigation()
                     loadFragment(SuggestFragment(),"SuggestFragment")
                 }
             }
@@ -67,4 +65,25 @@ class MenuAdapter internal constructor(var context: Context, var MenuModel: Arra
         return false
     }
 
+    private fun changeStatusBottomNavigation()
+    {
+        val fragmentTransaction: FragmentTransaction = (context as FragmentActivity).supportFragmentManager.beginTransaction()
+        val curFrag: Fragment? =
+            (context as FragmentActivity).supportFragmentManager.getPrimaryNavigationFragment()
+        if (curFrag != null) {
+            fragmentTransaction.detach(curFrag)
+        }
+
+        var fragment: Fragment? = (context as FragmentActivity).supportFragmentManager.findFragmentByTag("SuggestFragment")
+        if (fragment == null) {
+            fragment = SuggestFragment()
+            fragmentTransaction.add(R.id.frameLayout,fragment, "SuggestFragment")
+        } else {
+            fragmentTransaction.attach(fragment)
+        }
+
+        fragmentTransaction.setPrimaryNavigationFragment(fragment)
+        fragmentTransaction.setReorderingAllowed(true)
+        fragmentTransaction.commitNowAllowingStateLoss()
+    }
 }
