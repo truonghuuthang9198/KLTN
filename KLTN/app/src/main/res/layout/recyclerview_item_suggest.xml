@@ -60,14 +60,14 @@
 
     <RatingBar
         android:id="@+id/star_book_suggest"
-        style="@style/RatingBar.RatingBar"
+        style="@style/MyRattingBar"
         android:layout_width="15dp"
         android:layout_height="15dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="40dp"
         android:isIndicator="true"
         android:numStars="5"
         android:stepSize="0.5"
-        android:outlineSpotShadowColor="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="@+id/priceReduced_book_suggest"
         app:layout_constraintStart_toEndOf="@+id/priceReduced_book_suggest"
         app:layout_constraintTop_toTopOf="@+id/priceReduced_book_suggest" />

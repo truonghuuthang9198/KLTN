@@ -11,6 +11,7 @@ import android.os.Parcelable
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
+import android.widget.RatingBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -29,6 +30,7 @@ import java.lang.Exception
 class DetailActivity() : AppCompatActivity(), Parcelable {
     lateinit var dealModel: DealsModel
     lateinit var btnMoveCart: Button
+    lateinit var ratingBar: RatingBar
     lateinit var btnAddProductToCart: Button
     private lateinit var cartViewModel: CartViewModel
     var arrayListHandle: ArrayList<CartModel> = ArrayList<CartModel>()
@@ -41,10 +43,11 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.show_detail_book)
+        ratingBar = findViewById(R.id.rating)
+        ratingBar.rating = 4F
         btnMoveCart = findViewById(R.id.btn_move_cart)
         btnAddProductToCart = findViewById(R.id.btn_add_product_to_cart)
-
-
+        var check = 0
         btnMoveCart.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("check", 1)
@@ -59,13 +62,30 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         Toast.makeText(this, dealModel.titleBookDeal, Toast.LENGTH_LONG).show()
         val checkItem = cartViewModel.checkExistList(dealModel.titleBookDeal)
         btnAddProductToCart.setOnClickListener {
-            if(checkItem == null) {
-                cartViewModel.insertItemCart(CartModel(dealModel.titleBookDeal,1,dealModel.priceReduced,R.drawable.vd1_sach))
+            if (check == 0) {
+                if (checkItem == null) {
+                    cartViewModel.insertItemCart(
+                        CartModel(
+                            dealModel.titleBookDeal,
+                            1,
+                            dealModel.priceReduced,
+                            R.drawable.vd1_sach
+                        )
+                    )
+                    Toast.makeText(this, "Sản phẩm đã được thêm vào giỏ hàng", Toast.LENGTH_LONG)
+                        .show()
+                } else {
+                    cartViewModel.updateSL(dealModel.titleBookDeal, checkItem.soLuong + 1)
+                    Toast.makeText(this, "Sản phẩm đã được thêm vào giỏ hàng", Toast.LENGTH_LONG)
+                        .show()
+                }
             }
             else
             {
-                cartViewModel.updateSL(dealModel.titleBookDeal,checkItem.soLuong+1)
+                check = 1
+//                Toast.makeText(this, "Sản phẩm đã được thêm vào giỏ hàng", Toast.LENGTH_LONG).show()
             }
+
         }
         btn_back.setOnClickListener {
             onBackPressed()

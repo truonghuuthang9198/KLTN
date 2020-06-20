@@ -8,17 +8,23 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
 import com.example.kltn.screen.cart.CartFragment
 import com.example.kltn.screen.home.HomeFragment
-import com.example.kltn.screen.home.`interface`.CallBackFragment
-import com.example.kltn.screen.home.`interface`.SendData
 import com.example.kltn.screen.notification.NotificationFragment
 import com.example.kltn.screen.profile.InformationFragment
 import com.example.kltn.screen.profile.ProfileFragment
+import com.example.kltn.screen.retrofit.CityModel
+import com.example.kltn.screen.retrofit.GetDataService
+import com.example.kltn.screen.retrofit.RetrofitClientInstance
+import com.example.kltn.screen.retrofit.reponse.CityReponse
 import com.example.kltn.screen.suggest.SuggestFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
+
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity(){
@@ -29,12 +35,13 @@ class MainActivity : AppCompatActivity(){
     private var suggestFragment: SuggestFragment? = null
     private var informationFragment: InformationFragment? = null
     lateinit var navView: BottomNavigationView
+    private var mService: GetDataService? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setDialogFullScreen()
-
+        loadListCity()
         navView = findViewById(R.id.nav_view)
         //navView.selectedItemId = R.id.navigation_home
         navView.setOnNavigationItemSelectedListener { menuItem ->
@@ -159,5 +166,28 @@ class MainActivity : AppCompatActivity(){
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         }
     }
+    private fun loadListCity()
+    {
+        val list = mutableListOf<CityModel>()
+        val service = RetrofitClientInstance().getClient()?.create(GetDataService::class.java)
+        val call = service?.getListCity()
+            call?.enqueue(object : Callback<CityReponse> {
+                override fun onFailure(call: Call<CityReponse>, t: Throwable) {
+                    Toast.makeText(this@MainActivity,  t.message, Toast.LENGTH_LONG).show()
+                }
+
+                override fun onResponse(
+                    call: Call<CityReponse>,
+                    response: Response<CityReponse>
+                ) {
+                    response.body()!!.listCity.forEach{
+                        list.add(CityModel(it.iD,it.title))
+                    }
+                    Toast.makeText(this@MainActivity,list.toString(), Toast.LENGTH_LONG).show()
+                }
+            })
+
+    }
+
 
 }

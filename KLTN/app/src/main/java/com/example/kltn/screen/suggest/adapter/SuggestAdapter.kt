@@ -47,6 +47,8 @@ class SuggestAdapter internal constructor(var SuggestModel: ArrayList<SuggestMod
         holder.priceBook.text = priceBookfm
         holder.priceBook.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
         holder.imgBookDeal.setImageResource(current.imgBookSuggest)
+        holder.star.numStars = 5
         holder.star.rating = current.starBookSuggest.toFloat()
+        
     }
 }

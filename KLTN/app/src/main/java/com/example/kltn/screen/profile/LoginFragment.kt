@@ -49,7 +49,7 @@ class LoginFragment : Fragment() {
             LoginManager.getInstance().logInWithReadPermissions(activity!!,Arrays.asList("public_profile","email"))
             LoginManager.getInstance().registerCallback(callBackManager,object : FacebookCallback<LoginResult>{
                 override fun onSuccess(result: LoginResult?) {
-                    Toast.makeText(activity!!,result!!.accessToken.token,Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity!!,result!!.toString(),Toast.LENGTH_LONG).show()
                     loadFragment(InformationFragment())
                 }
 
@@ -62,10 +62,10 @@ class LoginFragment : Fragment() {
                 }
 
             })
-            val pref = PreferenceManager.getDefaultSharedPreferences(activity!!)
-            val edit = pref.edit()
-            edit.putBoolean("CheckLogin",true)
-            edit.apply()
+//            val pref = PreferenceManager.getDefaultSharedPreferences(activity!!)
+//            val edit = pref.edit()
+//            edit.putBoolean("CheckLogin",true)
+//            edit.apply()
         }
         return view
 
