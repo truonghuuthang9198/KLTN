@@ -55,7 +55,6 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         }
         setDialogFullScreen()
 
-
         cartViewModel = ViewModelProviders.of(this).get(CartViewModel::class.java)
         val intent = getIntent()
         dealModel = intent.getParcelableExtra<DealsModel>("deal")
@@ -69,7 +68,7 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
                             dealModel.titleBookDeal,
                             1,
                             dealModel.priceReduced,
-                            R.drawable.vd1_sach
+                            R.drawable.vd3_sach
                         )
                     )
                     Toast.makeText(this, "Sản phẩm đã được thêm vào giỏ hàng", Toast.LENGTH_LONG)

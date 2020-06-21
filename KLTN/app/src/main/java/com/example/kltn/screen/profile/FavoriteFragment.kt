@@ -41,21 +41,21 @@ class FavoriteFragment : Fragment() {
         var arrayListFavorite: ArrayList<FavoriteModel> = ArrayList<FavoriteModel>()
         arrayListFavorite.add(
             FavoriteModel(
-                R.drawable.vd_sach,
+                R.drawable.vd3_sach,
                 "The fellowship of the Ring (The Lord of The Rings,Book1)",
                 26000.00
             )
         )
         arrayListFavorite.add(
             FavoriteModel(
-                R.drawable.vd_sach,
+                R.drawable.vd3_sach,
                 "The fellowship of the Ring (The Lord of The Rings,Book1)",
                 26000.00
             )
         )
         arrayListFavorite.add(
             FavoriteModel(
-                R.drawable.vd_sach,
+                R.drawable.vd3_sach,
                 "The fellowship of the Ring (The Lord of The Rings,Book1)",
                 26000.00
             )

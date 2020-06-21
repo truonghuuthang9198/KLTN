@@ -12,7 +12,6 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
-import com.example.kltn.screen.home.`interface`.CallBackFragment
 import com.example.kltn.screen.home.deals.ShowMoreDealFragment
 import com.example.kltn.screen.home.model.MenuModel
 import com.example.kltn.screen.suggest.SuggestFragment
@@ -21,7 +20,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MenuAdapter internal constructor(var context: Context, var MenuModel: ArrayList<MenuModel>) :
     RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
-    lateinit var callBackFragment: CallBackFragment
     inner class MenuViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.tv_name)
         val iconMenu: ImageView = itemView.findViewById(R.id.menu_icon)

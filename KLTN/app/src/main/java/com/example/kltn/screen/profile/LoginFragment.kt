@@ -46,6 +46,7 @@ class LoginFragment : Fragment() {
 
         btnDangNhapFB.setOnClickListener {
             callBackManager = CallbackManager.Factory.create()
+
             LoginManager.getInstance().logInWithReadPermissions(activity!!,Arrays.asList("public_profile","email"))
             LoginManager.getInstance().registerCallback(callBackManager,object : FacebookCallback<LoginResult>{
                 override fun onSuccess(result: LoginResult?) {

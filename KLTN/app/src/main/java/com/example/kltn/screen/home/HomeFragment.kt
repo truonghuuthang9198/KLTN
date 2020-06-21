@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
 import com.example.kltn.screen.home.adapter.MenuAdapter
+import com.example.kltn.screen.home.bestbook.BestBookFragment
 import com.example.kltn.screen.home.deals.DealFragment
 import com.example.kltn.screen.home.model.MenuModel
 import com.example.kltn.screen.home.sgk.SGKFragment
@@ -29,6 +30,7 @@ class HomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         loadFragmentDeal(DealFragment())
         loadFragmentSGK(SGKFragment())
+        loadFragmentBestBook(BestBookFragment())
         recyclerviewMenu = view!!.findViewById(R.id.recyclerview_menu)
         setUpRecyclerView()
         return view
@@ -49,6 +51,16 @@ class HomeFragment : Fragment() {
             fragmentManager!!
                 .beginTransaction()
                 .replace(R.id.frame_SGK, fragment)
+                .commit()
+            return true
+        }
+        return false
+    }
+    private fun loadFragmentBestBook(fragment: Fragment?): Boolean {
+        if (fragment != null) {
+            fragmentManager!!
+                .beginTransaction()
+                .replace(R.id.frame_bestBook, fragment)
                 .commit()
             return true
         }

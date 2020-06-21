@@ -40,22 +40,22 @@ class SuggestFragment : Fragment() {
     fun setUpRecyclerview() {
         val arrayList = ArrayList<SuggestModel>()
         arrayList.add(
-            SuggestModel(R.drawable.vd1_sach, "Dạy Tiếng Anh Xu Hướng Mới", 33400.00, 56000.00, 2)
+            SuggestModel(R.drawable.vd3_sach, "Dạy Tiếng Anh Xu Hướng Mới", 33400.00, 56000.00, 2)
         )
         arrayList.add(
-            SuggestModel(R.drawable.vd1_sach, "Thanh Gươm Diệt Quỷ Tập 5", 23750.00, 25000.00, 5)
+            SuggestModel(R.drawable.vd3_sach, "Thanh Gươm Diệt Quỷ Tập 5", 23750.00, 25000.00, 5)
         )
         arrayList.add(
-            SuggestModel(R.drawable.vd1_sach, "Pokemon Đặc Biệt - Tập 1", 23750.00, 25000.00, 1)
+            SuggestModel(R.drawable.vd3_sach, "Pokemon Đặc Biệt - Tập 1", 23750.00, 25000.00, 1)
         )
         arrayList.add(
-            SuggestModel(R.drawable.vd1_sach, "Pokemon Đặc Biệt - Tập 2", 23750.00, 25000.00, 3)
+            SuggestModel(R.drawable.vd3_sach, "Pokemon Đặc Biệt - Tập 2", 23750.00, 25000.00, 3)
         )
         arrayList.add(
-            SuggestModel(R.drawable.vd1_sach, "Pokemon Đặc Biệt - Tập 1", 23750.00, 25000.00, 1)
+            SuggestModel(R.drawable.vd3_sach, "Pokemon Đặc Biệt - Tập 1", 23750.00, 25000.00, 1)
         )
         arrayList.add(
-            SuggestModel(R.drawable.vd1_sach, "Pokemon Đặc Biệt - Tập 2", 23750.00, 25000.00, 3)
+            SuggestModel(R.drawable.vd3_sach, "Pokemon Đặc Biệt - Tập 2", 23750.00, 25000.00, 3)
         )
         suggestAdapter = SuggestAdapter(arrayList)
         recyclerviewSuggest.adapter = suggestAdapter

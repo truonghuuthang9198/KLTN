@@ -35,7 +35,7 @@ class NotificationFragment : Fragment() {
         val arrayList = ArrayList<NotificationModel>()
         arrayList.add(
             NotificationModel(
-                R.drawable.vd_sach,"Truong Huu Thang"
+                R.drawable.vd3_sach,"Truong Huu Thang"
             )
         )
         notificationAdapter = NotificationAdapter(activity!!,arrayList)

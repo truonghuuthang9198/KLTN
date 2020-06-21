@@ -14,7 +14,7 @@ import com.example.kltn.screen.home.HomeFragment
 import com.example.kltn.screen.notification.NotificationFragment
 import com.example.kltn.screen.profile.InformationFragment
 import com.example.kltn.screen.profile.ProfileFragment
-import com.example.kltn.screen.retrofit.CityModel
+import com.example.kltn.screen.retrofit.model.CityModel
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance
 import com.example.kltn.screen.retrofit.reponse.CityReponse
@@ -181,13 +181,18 @@ class MainActivity : AppCompatActivity(){
                     response: Response<CityReponse>
                 ) {
                     response.body()!!.listCity.forEach{
-                        list.add(CityModel(it.iD,it.title))
+                        list.add(
+                            CityModel(
+                                it.iD,
+                                it.title
+                            )
+                        )
                     }
                     Toast.makeText(this@MainActivity,list.toString(), Toast.LENGTH_LONG).show()
                 }
             })
-
     }
+
 
 
 }

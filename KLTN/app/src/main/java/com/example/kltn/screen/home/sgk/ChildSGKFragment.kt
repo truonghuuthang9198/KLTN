@@ -31,40 +31,40 @@ class ChildSGKFragment(val tabId: Int) : Fragment() {
         val listTab0 = ArrayList<SGKModel>()
 
         arrayList.add(
-            SGKModel(0,0, R.drawable.vd_sach,"Dạy Trẻ Biết Đọc Sớm",53000.00,79000.00)
+            SGKModel(0,0, R.drawable.vd3_sach,"Dạy Trẻ Biết Đọc Sớm",53000.00,79000.00)
         )
         arrayList.add(
-            SGKModel(1,0, R.drawable.vd_sach,"Get Set Go: Mathematics Equals",36400.00,52000.00)
+            SGKModel(1,0, R.drawable.vd3_sach,"Get Set Go: Mathematics Equals",36400.00,52000.00)
         )
         arrayList.add(
-            SGKModel(2,0, R.drawable.vd_sach,"Bí Mật Hành Trình Tình Yêu",30400.00,48000.00)
+            SGKModel(2,0, R.drawable.vd3_sach,"Bí Mật Hành Trình Tình Yêu",30400.00,48000.00)
         )
         arrayList.add(
-            SGKModel(3,0, R.drawable.vd_sach,"Dạy Tiếng Anh Xu Hướng Mới",33330.00,56000.00)
+            SGKModel(3,0, R.drawable.vd3_sach,"Dạy Tiếng Anh Xu Hướng Mới",33330.00,56000.00)
         )
         arrayList.add(
-            SGKModel(0,1, R.drawable.vd1_sach,"Dạy Trẻ Biết Đọc Sớm",53720.00,79000.00)
+            SGKModel(0,1, R.drawable.vd3_sach,"Dạy Trẻ Biết Đọc Sớm",53720.00,79000.00)
         )
         arrayList.add(
-            SGKModel(1,1, R.drawable.vd1_sach,"Get Set Go: Mathematics Equals",36000.00,52000.00)
+            SGKModel(1,1, R.drawable.vd3_sach,"Get Set Go: Mathematics Equals",36000.00,52000.00)
         )
         arrayList.add(
-            SGKModel(2,1, R.drawable.vd1_sach,"Bí Mật Hành Trình Tình Yêu",30400.00,48000.00)
+            SGKModel(2,1, R.drawable.vd3_sach,"Bí Mật Hành Trình Tình Yêu",30400.00,48000.00)
         )
         arrayList.add(
-            SGKModel(3,1, R.drawable.vd1_sach,"Dạy Tiếng Anh Xu Hướng Mới",33400.00,56000.00)
+            SGKModel(3,1, R.drawable.vd3_sach,"Dạy Tiếng Anh Xu Hướng Mới",33400.00,56000.00)
         )
         arrayList.add(
-            SGKModel(0,2, R.drawable.vd1_sach,"Dạy Trẻ Biết Đọc Sớm",53720.00,79000.00)
+            SGKModel(0,2, R.drawable.vd3_sach,"Dạy Trẻ Biết Đọc Sớm",53720.00,79000.00)
         )
         arrayList.add(
-            SGKModel(1,2, R.drawable.vd1_sach,"Get Set Go: Mathematics Equals",36000.00,52000.00)
+            SGKModel(1,2, R.drawable.vd3_sach,"Get Set Go: Mathematics Equals",36000.00,52000.00)
         )
         arrayList.add(
-            SGKModel(2,2, R.drawable.vd1_sach,"Bí Mật Hành Trình Tình Yêu",30400.00,48000.00)
+            SGKModel(2,2, R.drawable.vd3_sach,"Bí Mật Hành Trình Tình Yêu",30400.00,48000.00)
         )
         arrayList.add(
-            SGKModel(3,2, R.drawable.vd1_sach,"Dạy Tiếng Anh Xu Hướng Mới",33400.00,56000.00)
+            SGKModel(3,2, R.drawable.vd3_sach,"Dạy Tiếng Anh Xu Hướng Mới",33400.00,56000.00)
         )
         arrayList.forEach{
             if(it.tabId == tabId)

@@ -17,11 +17,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.kltn.R
 import com.example.kltn.screen.cart.model.CartModel
-import com.example.kltn.screen.home.`interface`.CallBackFragment
 import com.example.kltn.screen.home.adapter.FilterAdapter
 import com.example.kltn.screen.home.adapter.FilterAdapter.Companion.title
 import com.example.kltn.screen.home.model.FilterModel
 import com.google.android.material.tabs.TabLayout
+import datn.datn_expansemanagement.core.base.domain.listener.OnActionData
 import kotlinx.android.synthetic.main.custom_toolbar_search.*
 
 /**
@@ -36,6 +36,8 @@ class ShowMoreDealFragment : Fragment(){
     lateinit var btnFilter: ConstraintLayout
     private var tabLayout: TabLayout? = null
     private var viewPager: ViewPager? = null
+    private var onActionData: OnActionData<FilterModel>? = null
+
     companion object {
         var arrayList: ArrayList<FilterModel> = ArrayList<FilterModel>()
     }
@@ -141,7 +143,14 @@ class ShowMoreDealFragment : Fragment(){
             arrayList1.add(FilterModel(6, "Mới Nhất", R.drawable.ic_check_black_24dp))
             arrayList =arrayList1
         }
-        filterAdapter = FilterAdapter(activity!!,arrayList)
+        onActionData = object : OnActionData<FilterModel>{
+            override fun onAction(data: FilterModel) {
+                titleFilter.text = data.titleFilter
+                setStatePageAdapter()
+            }
+
+        }
+        filterAdapter = FilterAdapter(activity!!,arrayList,onActionData!!)
         recyclerViewFilter.adapter = filterAdapter
     }
 

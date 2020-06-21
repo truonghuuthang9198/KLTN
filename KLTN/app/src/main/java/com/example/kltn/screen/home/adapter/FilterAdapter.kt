@@ -15,18 +15,19 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
-import com.example.kltn.screen.home.`interface`.CallBackFragment
 import com.example.kltn.screen.home.deals.ChildShowMoreDealFragment
 import com.example.kltn.screen.home.deals.ShowMoreDealFragment
 import com.example.kltn.screen.home.deals.ShowMoreDealFragment.Companion.arrayList
 import com.example.kltn.screen.home.model.FilterModel
+import datn.datn_expansemanagement.core.app.domain.excecutor.EventFireUtil
+import datn.datn_expansemanagement.core.base.domain.listener.OnActionData
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
 class FilterAdapter internal constructor(
     var context: Context,
-    var FilterModel: ArrayList<FilterModel>
+    var FilterModel: ArrayList<FilterModel>,var onActionData: OnActionData<FilterModel>
 ) : RecyclerView.Adapter<FilterAdapter.FilterViewHolder>() {
     companion object {
         var title:String = "Bán Chạy Tuần"
@@ -60,7 +61,7 @@ class FilterAdapter internal constructor(
                 it.choose = it.id == current.id
             }
             title = current.titleFilter
-//            callBack.onCallBack()
+            EventFireUtil.fireEvent(onActionData,current)
             notifyDataSetChanged()
         }
 
@@ -76,6 +77,8 @@ class FilterAdapter internal constructor(
             }
         }
         holder.titleFilter.text = current.titleFilter
+
+
     }
     fun reLoadFragment(tag: String) {
         var frg: Fragment? = null

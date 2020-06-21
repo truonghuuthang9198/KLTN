@@ -42,7 +42,7 @@ abstract class CartRoomDB : RoomDatabase() {
             }
         }
         fun insertDB(cartDao: CartDao) {
-            cartDao.insertItemCart(CartModel("Đắc nhân tâm",1,25000.00, R.drawable.vd1_sach))
+            cartDao.insertItemCart(CartModel("Đắc nhân tâm",1,25000.00, R.drawable.vd3_sach))
         }
     }
 }
