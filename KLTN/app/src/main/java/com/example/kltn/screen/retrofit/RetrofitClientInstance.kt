@@ -20,4 +20,16 @@ class RetrofitClientInstance {
             .build()
         return retrofit
     }
+
+    fun getClientSach(): Retrofit? {
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
+        retrofit = Retrofit.Builder()
+            .baseUrl("http://10.0.35.177:5001/api/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
+        return retrofit
+    }
 }

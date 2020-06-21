@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.DetailActivity
 import com.example.kltn.R
 import com.example.kltn.screen.home.model.DealsModel
+import com.squareup.picasso.Picasso
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -51,7 +52,9 @@ class DealAdapter internal constructor(var DealsModel: ArrayList<DealsModel>)
         val priceBookfm =numberFormat.format(current.price)
         holder.priceBook.text = priceBookfm
         holder.priceBook.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-        holder.imgBookDeal.setImageResource(current.imgBookDeal)
+        Picasso.get().load(current.imgBookDeal).into(holder.imgBookDeal)
+
 
     }
+
 }

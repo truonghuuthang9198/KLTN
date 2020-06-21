@@ -13,12 +13,16 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
 import com.example.kltn.screen.home.deals.ShowMoreDealFragment
+import com.example.kltn.screen.home.model.FilterModel
 import com.example.kltn.screen.home.model.MenuModel
 import com.example.kltn.screen.suggest.SuggestFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import datn.datn_expansemanagement.core.app.domain.excecutor.EventFireUtil
+import datn.datn_expansemanagement.core.base.domain.listener.OnActionData
+import datn.datn_expansemanagement.core.base.domain.listener.OnActionNotify
 
 
-class MenuAdapter internal constructor(var context: Context, var MenuModel: ArrayList<MenuModel>) :
+class MenuAdapter internal constructor(var context: Context, var MenuModel: ArrayList<MenuModel>,var onActionNotify: OnActionNotify) :
     RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
     inner class MenuViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.tv_name)
@@ -43,6 +47,7 @@ class MenuAdapter internal constructor(var context: Context, var MenuModel: Arra
                 }
                 4 -> {
 //                    changeStatusBottomNavigation()
+                    EventFireUtil.fireEvent(onActionNotify)
                     loadFragment(SuggestFragment(),"SuggestFragment")
                 }
             }

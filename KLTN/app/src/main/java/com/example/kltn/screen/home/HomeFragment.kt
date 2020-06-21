@@ -13,8 +13,11 @@ import com.example.kltn.R
 import com.example.kltn.screen.home.adapter.MenuAdapter
 import com.example.kltn.screen.home.bestbook.BestBookFragment
 import com.example.kltn.screen.home.deals.DealFragment
+import com.example.kltn.screen.home.model.FilterModel
 import com.example.kltn.screen.home.model.MenuModel
 import com.example.kltn.screen.home.sgk.SGKFragment
+import datn.datn_expansemanagement.core.base.domain.listener.OnActionData
+import datn.datn_expansemanagement.core.base.domain.listener.OnActionNotify
 
 /**
  * A simple [Fragment] subclass.
@@ -23,6 +26,7 @@ class HomeFragment : Fragment() {
 
     lateinit var recyclerviewMenu: RecyclerView
     lateinit var menuAdapter: MenuAdapter
+    private var onActionNotify: OnActionNotify? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -84,7 +88,12 @@ class HomeFragment : Fragment() {
         arrayList.add(MenuModel(8,"Thiếu Nhi",R.drawable.ic_thieunhi))
         arrayList.add(MenuModel(9," Tâm Lý Kỹ  Năng",R.drawable.ic_tlkn))
         arrayList.add(MenuModel(10,"Kinh tế",R.drawable.ic_kinhte))
-        menuAdapter = MenuAdapter(activity!!,arrayList)
+        onActionNotify = object : OnActionNotify{
+            override fun onActionNotify() {
+
+            }
+        }
+        menuAdapter = MenuAdapter(activity!!,arrayList,onActionNotify!!)
         recyclerviewMenu.adapter = menuAdapter
     }
 

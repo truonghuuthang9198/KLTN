@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.kltn.screen.cart.CartFragment
 import com.example.kltn.screen.home.HomeFragment
+import com.example.kltn.screen.home.model.FilterModel
 import com.example.kltn.screen.notification.NotificationFragment
 import com.example.kltn.screen.profile.InformationFragment
 import com.example.kltn.screen.profile.ProfileFragment
@@ -20,6 +21,8 @@ import com.example.kltn.screen.retrofit.RetrofitClientInstance
 import com.example.kltn.screen.retrofit.reponse.CityReponse
 import com.example.kltn.screen.suggest.SuggestFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import datn.datn_expansemanagement.core.base.domain.listener.OnActionData
+import datn.datn_expansemanagement.core.base.domain.listener.OnActionNotify
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,20 +38,24 @@ class MainActivity : AppCompatActivity(){
     private var suggestFragment: SuggestFragment? = null
     private var informationFragment: InformationFragment? = null
     lateinit var navView: BottomNavigationView
-    private var mService: GetDataService? = null
+    private var onActionNotify: OnActionNotify? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setDialogFullScreen()
-        loadListCity()
+//        loadListCity()
         navView = findViewById(R.id.nav_view)
         //navView.selectedItemId = R.id.navigation_home
         navView.setOnNavigationItemSelectedListener { menuItem ->
             showFragmentForMenuItem(menuItem.itemId)
             return@setOnNavigationItemSelectedListener true
         }
-
+        onActionNotify = object : OnActionNotify{
+            override fun onActionNotify() {
+                navView.selectedItemId = R.id.navigation_suggest
+            }
+        }
         val intent = getIntent()
         val check = intent.getIntExtra("check", -1)
         if (check == 1) {
@@ -180,6 +187,7 @@ class MainActivity : AppCompatActivity(){
                     call: Call<CityReponse>,
                     response: Response<CityReponse>
                 ) {
+
                     response.body()!!.listCity.forEach{
                         list.add(
                             CityModel(

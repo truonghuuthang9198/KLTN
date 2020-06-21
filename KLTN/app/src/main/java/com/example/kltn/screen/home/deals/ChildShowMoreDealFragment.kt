@@ -13,7 +13,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
 import com.example.kltn.screen.home.adapter.DealAdapter
 import com.example.kltn.screen.home.adapter.ShowMoreDealAdapter
+import com.example.kltn.screen.home.model.DealsModel
 import com.example.kltn.screen.home.model.ShowMoreDealModel
+import com.example.kltn.screen.retrofit.GetDataService
+import com.example.kltn.screen.retrofit.RetrofitClientInstance
+import com.example.kltn.screen.retrofit.model.CityModel
+import com.example.kltn.screen.retrofit.reponse.CityReponse
+import com.example.kltn.screen.retrofit.reponse.SachReponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ChildShowMoreDealFragment(val tabId:Int) : Fragment(){
     lateinit var recyclerViewSMDeal: RecyclerView
