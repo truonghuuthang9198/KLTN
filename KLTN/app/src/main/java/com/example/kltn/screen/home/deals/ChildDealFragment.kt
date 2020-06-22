@@ -44,14 +44,13 @@ class ChildDealFragment(val tabId: Int) : Fragment() {
         )
         val arrayList = ArrayList<DealModel>()
         val listTab0 = ArrayList<DealModel>()
-
         arrayList.add(
             DealModel(
                 0,
                 0,
                 "Khong",
                 25000.00,
-                0.2,
+                0.5,
                 "it.hinhAnh",
                 "it.kichThuoc",
                 "it.loaiBia",
@@ -107,6 +106,7 @@ class ChildDealFragment(val tabId: Int) : Fragment() {
                 call: Call<List<SachReponse>>,
                 response: Response<List<SachReponse>>
             ) {
+                //Toast.makeText(activity,response.body().toString(),Toast.LENGTH_LONG).show()
                 listSach(response.body()!!)
             }
         })

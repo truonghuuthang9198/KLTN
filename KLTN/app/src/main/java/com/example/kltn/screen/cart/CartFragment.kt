@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
@@ -32,6 +34,7 @@ class CartFragment : Fragment() {
     lateinit var recyclerviewcart: RecyclerView
     lateinit var thanhtien: TextView
     lateinit var cartAdapter: CartAdapter
+    lateinit var btnThanhToan: Button
     private lateinit var cartViewModel: CartViewModel
 
     companion object {
@@ -51,6 +54,10 @@ class CartFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_cart, container, false)
         recyclerviewcart = view!!.findViewById(R.id.recycleview_cart)
         thanhtien = view!!.findViewById(R.id.tv_thanhtien_cart)
+        btnThanhToan = view!!.findViewById(R.id.btn_thanhtoan_cart)
+        btnThanhToan.setOnClickListener {
+            loadFragment(InformationShipFragment(),"InformationShipFragment")
+        }
         setUpRecyclerView()
         return view
     }
@@ -69,5 +76,16 @@ class CartFragment : Fragment() {
         val numberFormat = NumberFormat.getCurrencyInstance(localVN)
         val thanhtienfm = numberFormat.format(tongtien)
         thanhtien.text = thanhtienfm
+    }
+    private fun loadFragment(fragment: Fragment?, tag: String): Boolean {
+        if (fragment != null) {
+            (context as FragmentActivity).supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.frame_layout, fragment, tag)
+                .addToBackStack(null)
+                .commit()
+            return true
+        }
+        return false
     }
 }

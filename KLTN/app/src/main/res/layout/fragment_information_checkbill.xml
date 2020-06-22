@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2F2F2">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#FFB90F"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/btn_back_information_checkbill"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/ic_back_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thông tin thanh toán"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_back_information_checkbill"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_back_information_checkbill"></TextView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_information_checkbill_1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_information_pay_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            android:background="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/cimg_checkbill_1"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/check"
+                app:layout_constraintEnd_toStartOf="@+id/view2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></de.hdodenhof.circleimageview.CircleImageView>
+
+            <TextView
+                android:id="@+id/textView28"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Giao hàng"
+                android:textColor="#000000"
+                app:layout_constraintEnd_toEndOf="@+id/cimg_checkbill_1"
+                app:layout_constraintStart_toStartOf="@+id/cimg_checkbill_1"
+                app:layout_constraintTop_toBottomOf="@+id/cimg_checkbill_1"></TextView>
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="0dp"
+                android:layout_height="3dp"
+                android:background="#0BF60A"
+                app:layout_constraintBottom_toBottomOf="@+id/cimg_checkbill_1"
+                app:layout_constraintEnd_toStartOf="@+id/cimg_checkbill_2"
+                app:layout_constraintStart_toEndOf="@+id/cimg_checkbill_1"
+                app:layout_constraintTop_toTopOf="@+id/cimg_checkbill_1"></View>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/cimg_checkbill_2"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/check"
+                app:layout_constraintBottom_toTopOf="@+id/textView28"
+                app:layout_constraintEnd_toStartOf="@+id/view3"
+                app:layout_constraintStart_toEndOf="@+id/view2"
+                app:layout_constraintTop_toTopOf="@+id/cimg_checkbill_1"></de.hdodenhof.circleimageview.CircleImageView>
+
+            <TextView
+                android:id="@+id/tv_thanhtoan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Thanh toán"
+                android:textColor="#000000"
+                app:layout_constraintEnd_toEndOf="@+id/cimg_checkbill_2"
+                app:layout_constraintStart_toStartOf="@+id/cimg_checkbill_2"
+                app:layout_constraintTop_toBottomOf="@+id/cimg_checkbill_2"></TextView>
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="0dp"
+                android:layout_height="3dp"
+                android:background="#0BF60A"
+                app:layout_constraintBottom_toBottomOf="@+id/cimg_checkbill_2"
+                app:layout_constraintEnd_toStartOf="@+id/cimg_checkbill_3"
+                app:layout_constraintStart_toEndOf="@+id/cimg_checkbill_2"
+                app:layout_constraintTop_toTopOf="@+id/cimg_checkbill_2"></View>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/cimg_checkbill_3"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="50dp"
+                android:src="@drawable/three"
+                app:layout_constraintBottom_toTopOf="@+id/textView28"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/view3"
+                app:layout_constraintTop_toTopOf="@+id/cimg_checkbill_1"></de.hdodenhof.circleimageview.CircleImageView>
+
+            <TextView
+                android:id="@+id/tv_kiemtra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Kiểm tra"
+                android:textColor="#000000"
+                app:layout_constraintEnd_toEndOf="@+id/cimg_checkbill_3"
+                app:layout_constraintStart_toStartOf="@+id/cimg_checkbill_3"
+                app:layout_constraintTop_toBottomOf="@+id/cimg_checkbill_3"></TextView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tv_checkbill_information_checkbill"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:padding="6dp"
+            android:text="KIỂM TRA LẠI ĐƠN HÀNG"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraint_information_pay_1"></TextView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/constraintLayout7"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="#F2F2F2"
+            android:padding="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_checkbill_information_checkbill" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tv_tongsotien_information_checkbill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:text="Tổng số tiền"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/button3"
+            app:layout_constraintTop_toTopOf="parent"></TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="45.000đ"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginRight="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_tongsotien_information_checkbill"
+            app:layout_constraintEnd_toEndOf="@+id/button3"
+            app:layout_constraintTop_toTopOf="@+id/tv_tongsotien_information_checkbill"></TextView>
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/custom_button_dangnhap"
+            android:text="Xác nhận đơn hàng"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tongsotien_information_checkbill"></Button>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
