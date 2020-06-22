@@ -20,12 +20,12 @@ class  CartRepository(private val cartDao: CartDao){
     {
         return cartDao.getList()
     }
-    fun updateSL(pTenSach: String, pSoLuong:Int)
+    fun updateSL(pMaSach: String, pSoLuong:Int)
     {
-        cartDao.updateSL(pTenSach,pSoLuong)
+        cartDao.updateSL(pMaSach,pSoLuong)
     }
-    fun checkExistList(pTenSach: String):CartModel
+    fun checkExistList(pMaSach: String):CartModel
     {
-        return cartDao.checkExistList(pTenSach)
+        return cartDao.checkExistList(pMaSach)
     }
 }

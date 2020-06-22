@@ -21,14 +21,14 @@ import com.example.kltn.screen.cart.CartFragment
 import com.example.kltn.screen.cart.CartFragment.Companion.arrayListCart
 import com.example.kltn.screen.cart.model.CartModel
 import com.example.kltn.screen.cart.roomdatabase.CartViewModel
-import com.example.kltn.screen.home.model.DealsModel
+import com.example.kltn.screen.home.model.DealModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.custom_toolbar.*
 import java.lang.Exception
 
 class DetailActivity() : AppCompatActivity(), Parcelable {
-    lateinit var dealModel: DealsModel
+    lateinit var dealModel: DealModel
     lateinit var btnMoveCart: Button
     lateinit var ratingBar: RatingBar
     lateinit var btnAddProductToCart: Button
@@ -37,7 +37,7 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
 
 
     constructor(parcel: Parcel) : this() {
-        dealModel = parcel.readParcelable(DealsModel::class.java.classLoader)!!
+        dealModel = parcel.readParcelable(DealModel::class.java.classLoader)!!
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,35 +57,50 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
 
         cartViewModel = ViewModelProviders.of(this).get(CartViewModel::class.java)
         val intent = getIntent()
-        dealModel = intent.getParcelableExtra<DealsModel>("deal")
-        Toast.makeText(this, dealModel.titleBookDeal, Toast.LENGTH_LONG).show()
-        val checkItem = cartViewModel.checkExistList(dealModel.titleBookDeal)
-        btnAddProductToCart.setOnClickListener {
-            if (check == 0) {
-                if (checkItem == null) {
-                    cartViewModel.insertItemCart(
-                        CartModel(
-                            dealModel.titleBookDeal,
-                            1,
-                            dealModel.priceReduced,
-                            R.drawable.vd3_sach
+        dealModel = intent.getParcelableExtra<DealModel>("deal")
+        Toast.makeText(this, dealModel.maSach, Toast.LENGTH_LONG).show()
+        try {
+            val checkItem = cartViewModel.checkExistList(dealModel.maSach)
+            btnAddProductToCart.setOnClickListener {
+                if (check == 0) {
+                    if (checkItem == null) {
+                        cartViewModel.insertItemCart(
+                            CartModel(
+                                dealModel.maSach,
+                                dealModel.tenSach,
+                                1,
+                                dealModel.giaGiamDS,
+                                R.drawable.vd3_sach
+                            )
                         )
-                    )
-                    Toast.makeText(this, "Sản phẩm đã được thêm vào giỏ hàng", Toast.LENGTH_LONG)
-                        .show()
+                        Toast.makeText(
+                            this,
+                            "Sản phẩm đã được thêm vào giỏ hàng",
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
+                    } else {
+                        cartViewModel.updateSL(dealModel.maSach, checkItem.soLuong + 1)
+                        Toast.makeText(
+                            this,
+                            "Sản phẩm đã được thêm vào giỏ hàng",
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
+                    }
                 } else {
-                    cartViewModel.updateSL(dealModel.titleBookDeal, checkItem.soLuong + 1)
-                    Toast.makeText(this, "Sản phẩm đã được thêm vào giỏ hàng", Toast.LENGTH_LONG)
-                        .show()
-                }
-            }
-            else
-            {
-                check = 1
+                    check = 1
 //                Toast.makeText(this, "Sản phẩm đã được thêm vào giỏ hàng", Toast.LENGTH_LONG).show()
+                }
+
             }
+        }
+        catch (e: Exception)
+        {
 
         }
+
+
         btn_back.setOnClickListener {
             onBackPressed()
         }

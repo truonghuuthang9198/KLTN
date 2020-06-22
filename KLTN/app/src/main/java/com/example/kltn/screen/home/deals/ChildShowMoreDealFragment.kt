@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
 import com.example.kltn.screen.home.adapter.DealAdapter
 import com.example.kltn.screen.home.adapter.ShowMoreDealAdapter
-import com.example.kltn.screen.home.model.DealsModel
 import com.example.kltn.screen.home.model.ShowMoreDealModel
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance

@@ -35,5 +35,6 @@ class SachReponse(
     @SerializedName("tenSach")
     val tenSach: String,
     @SerializedName("tinhTrang")
-    val tinhTrang: String
+    val tinhTrang: String,
+    val giaGiamDS: Double
 )

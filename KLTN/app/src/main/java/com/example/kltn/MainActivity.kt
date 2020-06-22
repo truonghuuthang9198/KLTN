@@ -196,7 +196,7 @@ class MainActivity : AppCompatActivity(){
                             )
                         )
                     }
-                    Toast.makeText(this@MainActivity,list.toString(), Toast.LENGTH_LONG).show()
+//                    Toast.makeText(this@MainActivity,list.toString(), Toast.LENGTH_LONG).show()
                 }
             })
     }

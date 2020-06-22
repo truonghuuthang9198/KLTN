@@ -61,18 +61,8 @@ class CartFragment : Fragment() {
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 
         cartViewModel = ViewModelProviders.of(this).get(CartViewModel::class.java)
-//        cartViewModel.getList()
-//        Toast.makeText(activity,cartViewModel.getList().toString(),Toast.LENGTH_LONG).show()
-//        cartViewModel.listCart.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-//            val lst: MutableList<CartModel> = mutableListOf()
-//            for (i in 0..it.size - 1) {
-//                lst.add(0, it.get(i))
-//            }
-//            cartAdapter.setListCart(lst)
-//            Toast.makeText(activity!!,lst.toString(),Toast.LENGTH_LONG).show()
-//        })
         arrayListCart = cartViewModel.getList() as ArrayList<CartModel>
-        val cartAdapter = CartAdapter(activity!!,arrayListCart)
+        val cartAdapter = CartAdapter(activity!!, arrayListCart)
         recyclerviewcart.adapter = cartAdapter
         cartAdapter.updateThanhTien()
         val localVN = Locale("vi", "VN")

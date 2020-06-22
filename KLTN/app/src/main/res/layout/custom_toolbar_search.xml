@@ -17,16 +17,18 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_searchview"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         app:cardCornerRadius="4dp"
         app:layout_constraintBottom_toBottomOf="@+id/btn_back_showmore"
+        app:layout_constraintEnd_toStartOf="@+id/btn_back_home_showmore"
         app:layout_constraintStart_toEndOf="@+id/btn_back_showmore"
         app:layout_constraintTop_toTopOf="@+id/btn_back_showmore">
 
         <androidx.appcompat.widget.SearchView
-            android:layout_width="310dp"
+            android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_gravity="center"
             app:defaultQueryHint="Sản phẩm cần tìm..."

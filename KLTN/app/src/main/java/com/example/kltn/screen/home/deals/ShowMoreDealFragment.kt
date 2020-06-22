@@ -121,7 +121,10 @@ class ShowMoreDealFragment : Fragment(){
     private fun setStatePageAdapter() {
         val myViewPageStateAdapter = MyViewPageStateAdapter(activity!!.supportFragmentManager)
         myViewPageStateAdapter.addFragment(ChildShowMoreDealFragment(0), "Tất cả")
-        myViewPageStateAdapter.addFragment(ChildShowMoreDealFragment(1), "Thiếu nhi")
+        myViewPageStateAdapter.addFragment(ChildShowMoreDealFragment(1), "Childrens Book")
+        myViewPageStateAdapter.addFragment(ChildShowMoreDealFragment(2), "Thiếu nhi")
+        myViewPageStateAdapter.addFragment(ChildShowMoreDealFragment(3), "Tâm Lý Kỹ - Năng Sống")
+        myViewPageStateAdapter.addFragment(ChildShowMoreDealFragment(4), "Văn Học")
 //        myViewPageStateAdapter.addFragment(ChildShowMoreDealFragment(2), "Childrens Books")
 //        myViewPageStateAdapter.addFragment(ChildShowMoreDealFragment(3), "Văn Học")
         viewPager!!.adapter = myViewPageStateAdapter

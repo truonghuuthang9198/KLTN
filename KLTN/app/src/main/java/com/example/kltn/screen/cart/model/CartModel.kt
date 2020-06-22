@@ -10,6 +10,8 @@ import kotlinx.android.parcel.Parcelize
 @Entity(tableName = "cart_table")
 data class CartModel(
     @PrimaryKey
+    @ColumnInfo(name = "maSach")
+    val maSach:String,
     @ColumnInfo(name = "tenSach")
     val tenSach: String,
     @ColumnInfo(name = "soLuong")

@@ -11,7 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [CartModel::class], version = 1,exportSchema = false)
+@Database(entities = [CartModel::class], version = 2,exportSchema = false)
 abstract class CartRoomDB : RoomDatabase() {
     abstract fun cartDao(): CartDao
     companion object {
@@ -42,7 +42,7 @@ abstract class CartRoomDB : RoomDatabase() {
             }
         }
         fun insertDB(cartDao: CartDao) {
-            cartDao.insertItemCart(CartModel("Đắc nhân tâm",1,25000.00, R.drawable.vd3_sach))
+            cartDao.insertItemCart(CartModel("SACH001","Đắc nhân tâm",1,25000.00, R.drawable.vd3_sach))
         }
     }
 }

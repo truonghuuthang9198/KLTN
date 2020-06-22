@@ -63,14 +63,14 @@ class CartAdapter internal constructor(var context: Context,var listCart: ArrayL
         holder.btnCong.setOnClickListener {
             soluong+=1
             current.soLuong = soluong
-            cartViewModel.updateSL(current.tenSach,soluong)
+            cartViewModel.updateSL(current.maSach,soluong)
             reLoadFragment()
             holder.soluong.text = soluong.toString()
         }
         holder.btnTru.setOnClickListener{
             soluong-=1
             current.soLuong = soluong
-            cartViewModel.updateSL(current.tenSach,soluong)
+            cartViewModel.updateSL(current.maSach,soluong)
             reLoadFragment()
             holder.soluong.text = soluong.toString()
         }

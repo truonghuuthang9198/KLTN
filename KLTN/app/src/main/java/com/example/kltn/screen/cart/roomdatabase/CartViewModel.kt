@@ -27,8 +27,8 @@ class CartViewModel(application: Application) : AndroidViewModel(application) {
         cartRepository.deleteItemCart(cartModel)
     }
 
-    fun updateSL(pTenSach: String,pSoLuong: Int) = viewModelScope.launch(Dispatchers.IO) {
-        cartRepository.updateSL(pTenSach,pSoLuong)
+    fun updateSL(pMaSach: String,pSoLuong: Int) = viewModelScope.launch(Dispatchers.IO) {
+        cartRepository.updateSL(pMaSach,pSoLuong)
     }
 
     fun getList():List<CartModel>
@@ -36,9 +36,9 @@ class CartViewModel(application: Application) : AndroidViewModel(application) {
         return cartRepository.getList()
     }
 
-    fun checkExistList(pTenSach: String):CartModel
+    fun checkExistList(pMaSach: String):CartModel
     {
-        return cartRepository.checkExistList(pTenSach)
+        return cartRepository.checkExistList(pMaSach)
     }
 
 }
