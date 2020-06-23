@@ -3,6 +3,7 @@ package com.example.kltn
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Paint
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,6 +13,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.RatingBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -26,12 +28,19 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.custom_toolbar.*
 import java.lang.Exception
+import java.text.NumberFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class DetailActivity() : AppCompatActivity(), Parcelable {
     lateinit var dealModel: DealModel
     lateinit var btnMoveCart: Button
     lateinit var ratingBar: RatingBar
     lateinit var btnAddProductToCart: Button
+    lateinit var titlebook: TextView
+    lateinit var pricebook: TextView
+    lateinit var priceOriginBook: TextView
+    lateinit var giamgia: TextView
     private lateinit var cartViewModel: CartViewModel
     var arrayListHandle: ArrayList<CartModel> = ArrayList<CartModel>()
 
@@ -46,6 +55,11 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         ratingBar = findViewById(R.id.rating)
         ratingBar.rating = 4F
         btnMoveCart = findViewById(R.id.btn_move_cart)
+        titlebook = findViewById(R.id.title_book)
+        priceOriginBook = findViewById(R.id.tv_priceorigin_showdetail)
+        pricebook = findViewById(R.id.tv_priceBook_showdetail)
+        giamgia = findViewById(R.id.tv_giamgia_showdetail)
+
         btnAddProductToCart = findViewById(R.id.btn_add_product_to_cart)
         var check = 0
         btnMoveCart.setOnClickListener {
@@ -58,6 +72,21 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         cartViewModel = ViewModelProviders.of(this).get(CartViewModel::class.java)
         val intent = getIntent()
         dealModel = intent.getParcelableExtra<DealModel>("deal")
+        titlebook.text = dealModel.tenSach
+        //---------------------------------------------------
+        val localVN = Locale("vi","VN")
+        val numberFormat = NumberFormat.getCurrencyInstance(localVN)
+        val priceReducedfm =numberFormat.format(dealModel.giaGiamDS)
+        pricebook.text = priceReducedfm
+        //---------------------------------------------------
+        val giamgiaxl = dealModel.giamGia*100
+        val giamgiaString = giamgiaxl.toString()+"%"
+        giamgia.text = giamgiaString
+        //---------------------------------------------------
+        val priceOrigin =numberFormat.format(dealModel.giaban)
+        priceOriginBook.text = priceOrigin
+        priceOriginBook.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+
         Toast.makeText(this, dealModel.maSach, Toast.LENGTH_LONG).show()
         try {
             val checkItem = cartViewModel.checkExistList(dealModel.maSach)
