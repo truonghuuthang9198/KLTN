@@ -159,7 +159,7 @@
             app:layout_constraintTop_toBottomOf="@+id/constraint_information_pay_1"></TextView>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/constraintLayout7"
+            android:id="@+id/recyclerview_checkbill"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="#F2F2F2"
@@ -193,6 +193,7 @@
             app:layout_constraintTop_toTopOf="parent"></TextView>
 
         <TextView
+            android:id="@+id/tv_tongtien_checkbill"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="45.000đ"

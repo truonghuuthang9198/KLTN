@@ -65,6 +65,48 @@ class ChildDealFragment(val tabId: Int) : Fragment() {
                 "Get Set Go: Mathematics Equals",
                 "it.tinhTrang")
         )
+        arrayList.add(
+            DealModel(
+                0,
+                0,
+                "Khong",
+                28000.00,
+                0.2,
+                "it.hinhAnh",
+                "it.kichThuoc",
+                "it.loaiBia",
+                "it.maCongTy",
+                "SACH003",
+                "it.maTacGia",
+                "it.maTheLoai",
+                "it.ngayXuatBan",
+                "it.maNhaXuatBan",
+                2,
+                "it.soTrang",
+                "Dạy Tiếng Anh Xu Hướng Mới",
+                "it.tinhTrang")
+        )
+        arrayList.add(
+            DealModel(
+                0,
+                0,
+                "Khong",
+                20000.00,
+                0.3,
+                "it.hinhAnh",
+                "it.kichThuoc",
+                "it.loaiBia",
+                "it.maCongTy",
+                "SACH004",
+                "it.maTacGia",
+                "it.maTheLoai",
+                "it.ngayXuatBan",
+                "it.maNhaXuatBan",
+                5,
+                "it.soTrang",
+                "Bí Mật Hành Trình Tình Yêu",
+                "it.tinhTrang")
+        )
 //        arrayList.add(
 //            DealsModel(1,0,R.drawable.vd3_sach,"Get Set Go: Mathematics Equals",36400.00,52000.00)
 //        )
