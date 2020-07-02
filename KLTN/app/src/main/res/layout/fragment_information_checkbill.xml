@@ -189,7 +189,7 @@
             android:text="Tổng số tiền"
             android:textColor="#000000"
             android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="@+id/button3"
+            app:layout_constraintStart_toStartOf="@+id/btn_checkbill_ok"
             app:layout_constraintTop_toTopOf="parent"></TextView>
 
         <TextView
@@ -202,11 +202,11 @@
             android:textSize="20sp"
             android:layout_marginRight="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_tongsotien_information_checkbill"
-            app:layout_constraintEnd_toEndOf="@+id/button3"
+            app:layout_constraintEnd_toEndOf="@+id/btn_checkbill_ok"
             app:layout_constraintTop_toTopOf="@+id/tv_tongsotien_information_checkbill"></TextView>
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btn_checkbill_ok"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"

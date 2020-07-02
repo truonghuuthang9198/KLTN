@@ -1,6 +1,5 @@
 package com.example.kltn.screen.home
 
-import android.content.Intent.getIntent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,11 +12,9 @@ import com.example.kltn.R
 import com.example.kltn.screen.home.adapter.MenuAdapter
 import com.example.kltn.screen.home.bestbook.BestBookFragment
 import com.example.kltn.screen.home.deals.DealFragment
-import com.example.kltn.screen.home.model.FilterModel
 import com.example.kltn.screen.home.model.MenuModel
 import com.example.kltn.screen.home.sgk.SGKFragment
-import datn.datn_expansemanagement.core.base.domain.listener.OnActionData
-import datn.datn_expansemanagement.core.base.domain.listener.OnActionNotify
+import com.example.kltn.screen.event.OnActionNotify
 
 /**
  * A simple [Fragment] subclass.
@@ -88,7 +85,7 @@ class HomeFragment : Fragment() {
         arrayList.add(MenuModel(8,"Thiếu Nhi",R.drawable.ic_thieunhi))
         arrayList.add(MenuModel(9," Tâm Lý Kỹ  Năng",R.drawable.ic_tlkn))
         arrayList.add(MenuModel(10,"Kinh tế",R.drawable.ic_kinhte))
-        onActionNotify = object : OnActionNotify{
+        onActionNotify = object : OnActionNotify {
             override fun onActionNotify() {
 
             }

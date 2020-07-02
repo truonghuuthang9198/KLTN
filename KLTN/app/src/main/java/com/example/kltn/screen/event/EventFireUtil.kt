@@ -1,7 +1,7 @@
 package datn.datn_expansemanagement.core.app.domain.excecutor
 
 import datn.datn_expansemanagement.core.base.domain.listener.OnActionData
-import datn.datn_expansemanagement.core.base.domain.listener.OnActionNotify
+import com.example.kltn.screen.event.OnActionNotify
 
 
 class EventFireUtil {

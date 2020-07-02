@@ -1,6 +1,5 @@
 package com.example.kltn.screen.home.adapter
 
-import android.R.attr.tag
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -13,13 +12,10 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
 import com.example.kltn.screen.home.deals.ShowMoreDealFragment
-import com.example.kltn.screen.home.model.FilterModel
 import com.example.kltn.screen.home.model.MenuModel
 import com.example.kltn.screen.suggest.SuggestFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import datn.datn_expansemanagement.core.app.domain.excecutor.EventFireUtil
-import datn.datn_expansemanagement.core.base.domain.listener.OnActionData
-import datn.datn_expansemanagement.core.base.domain.listener.OnActionNotify
+import com.example.kltn.screen.event.OnActionNotify
 
 
 class MenuAdapter internal constructor(var context: Context, var MenuModel: ArrayList<MenuModel>,var onActionNotify: OnActionNotify) :

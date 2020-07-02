@@ -32,7 +32,7 @@ class ChildDealFragment(val tabId: Int) : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_child_deal, container, false)
         recycleviewDeal = view!!.findViewById<RecyclerView>(R.id.recyclerview_deal)
-        loadListSach()
+        //loadListSach()
         setUpRecyclerView()
         return view
     }

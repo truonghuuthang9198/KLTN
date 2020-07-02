@@ -12,20 +12,21 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import com.example.kltn.R
-import com.facebook.CallbackManager
-import com.facebook.FacebookActivity
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
+import com.facebook.*
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
+import com.google.firebase.auth.FacebookAuthProvider
+import com.google.firebase.auth.FirebaseAuth
 import java.util.*
 
 
 @Suppress("DEPRECATION")
 class LoginFragment : Fragment() {
     private var callBackManager: CallbackManager? = null
+    private var auth: FirebaseAuth? = null
     lateinit var btnDangNhap: Button
+
     lateinit var btnDangNhapFB: Button
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +37,7 @@ class LoginFragment : Fragment() {
         btnDangNhap = view.findViewById(R.id.btn_dangnhap)
         btnDangNhapFB = view.findViewById(R.id.btn_dangnhap_fb)
 
+        callBackManager = CallbackManager.Factory.create()
         btnDangNhap.setOnClickListener {
             loadFragment(InformationFragment())
             val pref = PreferenceManager.getDefaultSharedPreferences(activity!!)
@@ -43,15 +45,13 @@ class LoginFragment : Fragment() {
             edit.putBoolean("CheckLogin",true)
             edit.apply()
         }
-
         btnDangNhapFB.setOnClickListener {
-            callBackManager = CallbackManager.Factory.create()
-
             LoginManager.getInstance().logInWithReadPermissions(activity!!,Arrays.asList("public_profile","email"))
             LoginManager.getInstance().registerCallback(callBackManager,object : FacebookCallback<LoginResult>{
                 override fun onSuccess(result: LoginResult?) {
+                    handleFacebookAccessToken(result?.accessToken)
                     Toast.makeText(activity!!,result!!.toString(),Toast.LENGTH_LONG).show()
-                    loadFragment(InformationFragment())
+
                 }
 
                 override fun onCancel() {
@@ -70,6 +70,17 @@ class LoginFragment : Fragment() {
         }
         return view
 
+    }
+
+    private fun handleFacebookAccessToken(accessToken: AccessToken?) {
+        var credential = FacebookAuthProvider.getCredential(accessToken?.token!!)
+        auth?.signInWithCredential(credential)?.addOnCompleteListener {
+            task ->
+            if (task.isSuccessful)
+            {
+                loadFragment(InformationFragment())
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

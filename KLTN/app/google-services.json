@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "959499013939",
+    "firebase_url": "https://khoaluan2020-834b9.firebaseio.com",
+    "project_id": "khoaluan2020-834b9",
+    "storage_bucket": "khoaluan2020-834b9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:959499013939:android:983631f66dbc9b43863846",
+        "android_client_info": {
+          "package_name": "com.example.kltn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "959499013939-ep7c5ch1b7q60lu43ps6amtkch14bttk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCkAE6h2Vk3ld-keUqnrcxSvvvqzqxXl4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "959499013939-ep7c5ch1b7q60lu43ps6amtkch14bttk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
