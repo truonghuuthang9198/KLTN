@@ -1,5 +1,6 @@
 package com.example.kltn.screen.cart
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -22,11 +23,8 @@ import com.example.kltn.screen.cart.model.CheckBillModel
 import com.example.kltn.screen.cart.roomdatabase.CartViewModel
 import com.example.kltn.screen.firebase.ChiTietHDModel
 import com.example.kltn.screen.firebase.HoaDonModel
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.firestore.FirebaseFirestore
+
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -39,7 +37,7 @@ class CheckBillFragment : Fragment() {
     lateinit var btnBack: ImageView
     lateinit var btnCheckBill: Button
     val arrayListCheckBill = ArrayList<CheckBillModel>()
-    @RequiresApi(Build.VERSION_CODES.O)
+    @SuppressLint("NewApi")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,7 +48,6 @@ class CheckBillFragment : Fragment() {
         tv_tongtien = view.findViewById(R.id.tv_tongtien_checkbill)
         recyclerViewCheckBill = view.findViewById(R.id.recyclerview_checkbill)
         btnCheckBill = view.findViewById(R.id.btn_checkbill_ok)
-        MaHDBill()
         setUpRecyclerView()
         btnCheckBill.setOnClickListener {
             addBillToFireBase()
@@ -92,7 +89,6 @@ class CheckBillFragment : Fragment() {
         checkListBillAdapter = CheckListBillAdapter(activity!!, arrayListCheckBill)
         recyclerViewCheckBill.adapter = checkListBillAdapter
     }
-
     @RequiresApi(Build.VERSION_CODES.O)
     fun addBillToFireBase() {
         val arrayList = ArrayList<ChiTietHDModel>()
@@ -115,18 +111,9 @@ class CheckBillFragment : Fragment() {
             arrayList
         )
         database.child(billId!!).setValue(hoaDon).addOnCompleteListener {
-            //Toast.makeText(this,"Push thanh cong",Toast.LENGTH_LONG).show()
+            Toast.makeText(activity!!,"Push thanh cong",Toast.LENGTH_LONG).show()
         }
 
-    }
-
-    fun MaHDBill() {
-        val getListFB = ArrayList<HoaDonModel>()
-        var maHDHandle = "123"
-        val database = FirebaseDatabase.getInstance().getReference("Bills")
-
-        var a = database.child("child_added");
-        Toast.makeText(activity, a.toString(), Toast.LENGTH_LONG).show()
     }
 
 }
