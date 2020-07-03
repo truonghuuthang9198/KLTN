@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".screen.profile.LoginFragment">
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -79,7 +78,7 @@
     <Button
         android:id="@+id/btn_dangnhap"
         android:layout_marginTop="30dp"
-        android:layout_width="280dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/dang_nhap"
@@ -98,7 +97,7 @@
     <Button
         android:id="@+id/btn_dangnhap_fb"
         android:background="@drawable/custon_button_dangnhapfb"
-        android:layout_width="280dp"
+        android:layout_width="300dp"
         android:drawableLeft="@drawable/icon_facebook_circle"
         android:layout_height="wrap_content"
         android:gravity="center"

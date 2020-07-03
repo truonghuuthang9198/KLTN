@@ -9,6 +9,7 @@
         android:id="@+id/img_notification"
         android:layout_width="70dp"
         android:layout_height="70dp"
+        android:src="@drawable/vd3_sach"
         android:layout_centerVertical="true"></de.hdodenhof.circleimageview.CircleImageView>
 
     <TextView

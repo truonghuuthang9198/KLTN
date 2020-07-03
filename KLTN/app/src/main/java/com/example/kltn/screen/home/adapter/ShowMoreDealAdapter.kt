@@ -32,7 +32,7 @@ class ShowMoreDealAdapter internal constructor(var ShowMoreDealModel: ArrayList<
         return ShowMoreDealViewHolder
     }
 
-    override fun getItemCount() = ShowMoreDealModel.count()
+    override fun getItemCount() = ShowMoreDealModel.size
 
     override fun onBindViewHolder(holder: ShowMoreDealViewHolder, position: Int) {
         val current = ShowMoreDealModel[position]
@@ -45,6 +45,5 @@ class ShowMoreDealAdapter internal constructor(var ShowMoreDealModel: ArrayList<
         holder.priceBook.text = priceBookfm
         holder.priceBook.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
         holder.imgBookDeal.setImageResource(current.imgBookSMDeal)
-
     }
 }

@@ -2,6 +2,8 @@ package com.example.kltn
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
+import android.graphics.Paint
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,49 +11,138 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.view.View
 import android.view.WindowManager
+import android.widget.Button
+import android.widget.RatingBar
+import android.widget.TextView
 import android.widget.Toast
-import com.example.kltn.event.EventBusData
-import com.example.kltn.event.EventBusLifeCycle
-import com.example.kltn.event.OnActionData
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.example.kltn.screen.cart.CartFragment
-import com.example.kltn.screen.home.model.DealsModel
+import com.example.kltn.screen.cart.CartFragment.Companion.arrayListCart
+import com.example.kltn.screen.cart.model.CartModel
+import com.example.kltn.screen.cart.roomdatabase.CartViewModel
+import com.example.kltn.screen.home.model.DealModel
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.custom_toolbar.*
 import java.lang.Exception
+import java.text.NumberFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
-class DetailActivity() : AppCompatActivity(),Parcelable {
-    lateinit var dealModel:DealsModel
+class DetailActivity() : AppCompatActivity(), Parcelable {
+    lateinit var dealModel: DealModel
+    lateinit var btnMoveCart: Button
+    lateinit var ratingBar: RatingBar
+    lateinit var btnAddProductToCart: Button
+    lateinit var titlebook: TextView
+    lateinit var pricebook: TextView
+    lateinit var priceOriginBook: TextView
+    lateinit var giamgia: TextView
+    private lateinit var cartViewModel: CartViewModel
+    var arrayListHandle: ArrayList<CartModel> = ArrayList<CartModel>()
+
 
     constructor(parcel: Parcel) : this() {
-        dealModel = parcel.readParcelable(DealsModel::class.java.classLoader)!!
+        dealModel = parcel.readParcelable(DealModel::class.java.classLoader)!!
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.show_detail_book)
+        ratingBar = findViewById(R.id.rating)
+        ratingBar.rating = 4F
+        btnMoveCart = findViewById(R.id.btn_move_cart)
+        titlebook = findViewById(R.id.title_book)
+        priceOriginBook = findViewById(R.id.tv_priceorigin_showdetail)
+        pricebook = findViewById(R.id.tv_priceBook_showdetail)
+        giamgia = findViewById(R.id.tv_giamgia_showdetail)
+
+        btnAddProductToCart = findViewById(R.id.btn_add_product_to_cart)
+        var check = 0
+        btnMoveCart.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("check", 1)
+            this.startActivity(intent)
+        }
         setDialogFullScreen()
+
+        cartViewModel = ViewModelProviders.of(this).get(CartViewModel::class.java)
         val intent = getIntent()
+        dealModel = intent.getParcelableExtra<DealModel>("deal")
+        titlebook.text = dealModel.tenSach
+        //---------------------------------------------------
+        val localVN = Locale("vi","VN")
+        val numberFormat = NumberFormat.getCurrencyInstance(localVN)
+        val priceReducedfm =numberFormat.format(dealModel.giaGiamDS)
+        pricebook.text = priceReducedfm
+        //---------------------------------------------------
+        val giamgiaxl = dealModel.giamGia*100
+        val giamgiaString = giamgiaxl.toString()+"%"
+        giamgia.text = giamgiaString
+        //---------------------------------------------------
+        val priceOrigin =numberFormat.format(dealModel.giaban)
+        priceOriginBook.text = priceOrigin
+        priceOriginBook.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+
+        Toast.makeText(this, dealModel.maSach, Toast.LENGTH_LONG).show()
         try {
-            dealModel = intent.getParcelableExtra<DealsModel>("deal")
-            var title: String = dealModel.titleBookDeal
-            Toast.makeText(this,title,Toast.LENGTH_LONG).show()
+            val checkItem = cartViewModel.checkExistList(dealModel.maSach)
+            btnAddProductToCart.setOnClickListener {
+                if (check == 0) {
+                    if (checkItem == null) {
+                        cartViewModel.insertItemCart(
+                            CartModel(
+                                dealModel.maSach,
+                                dealModel.tenSach,
+                                1,
+                                dealModel.giaGiamDS,
+                                R.drawable.vd3_sach
+                            )
+                        )
+                        Toast.makeText(
+                            this,
+                            "Sản phẩm đã được thêm vào giỏ hàng",
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
+                    } else {
+                        cartViewModel.updateSL(dealModel.maSach, checkItem.soLuong + 1)
+                        Toast.makeText(
+                            this,
+                            "Sản phẩm đã được thêm vào giỏ hàng",
+                            Toast.LENGTH_LONG
+                        )
+                            .show()
+                    }
+                } else {
+                    check = 1
+//                Toast.makeText(this, "Sản phẩm đã được thêm vào giỏ hàng", Toast.LENGTH_LONG).show()
+                }
+
+            }
         }
         catch (e: Exception)
         {
 
         }
-        btn_back.setOnClickListener{
+
+
+        btn_back.setOnClickListener {
             onBackPressed()
         }
-        btn_back_home.setOnClickListener{
+        btn_back_home.setOnClickListener {
             onBackPressed()
         }
-        btn_back_cart.setOnClickListener{
-            val intent = Intent(this,MainActivity::class.java)
-            intent.putExtra("check",1)
+        btn_back_cart.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("check", 1)
             this.startActivity(intent)
         }
-
     }
+
     private fun setDialogFullScreen() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             this.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
@@ -78,4 +169,15 @@ class DetailActivity() : AppCompatActivity(),Parcelable {
             return arrayOfNulls(size)
         }
     }
+
+    fun reLoadFragment() {
+        var frg: Fragment? = null
+        frg = this.supportFragmentManager.findFragmentByTag("HomeFragment")
+        val ft: FragmentTransaction = this.getSupportFragmentManager().beginTransaction()
+        ft.detach(frg!!)
+        ft.attach(frg!!)
+        ft.commit()
+    }
 }
+
+

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/cart_item"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    android:padding="10dp"
+    android:background="@drawable/custom_cart_item">
+
+    <ImageView
+        android:id="@+id/img_sach_checkbill"
+        android:layout_width="100dp"
+        android:layout_height="120dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_tensach_checkbill"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:textSize="16sp"
+        android:layout_marginTop="4dp"
+        android:textColor="#000000"
+        android:text="Gieo Mầm Tính Cách - Quan Tâm (Tái Bản 2019)"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/img_sach_checkbill"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_giatien_checkbill"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="20dp"
+        android:text="25.600 đ"
+        android:textColor="#FFA500"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/img_sach_checkbill"
+        app:layout_constraintTop_toBottomOf="@+id/tv_tensach_checkbill" />
+
+    <TextView
+        android:id="@+id/tv_soluong_checkbill"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="4dp"
+        android:textColor="#000000"
+        android:text="Số lượng: 1"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/img_sach_checkbill"
+        app:layout_constraintTop_toBottomOf="@+id/tv_giatien_checkbill"></TextView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

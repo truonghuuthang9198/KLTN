@@ -2,43 +2,91 @@ package com.example.kltn;
 
 import android.os.Build
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.View
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.kltn.screen.cart.CartFragment
+import com.example.kltn.screen.event.OnActionNotify
 import com.example.kltn.screen.home.HomeFragment
+import com.example.kltn.screen.notification.FcmPush
 import com.example.kltn.screen.notification.NotificationFragment
+import com.example.kltn.screen.profile.InformationFragment
 import com.example.kltn.screen.profile.ProfileFragment
+import com.example.kltn.screen.retrofit.GetDataService
+import com.example.kltn.screen.retrofit.RetrofitClientInstance
+import com.example.kltn.screen.retrofit.model.CityModel
+import com.example.kltn.screen.retrofit.reponse.CityReponse
 import com.example.kltn.screen.suggest.SuggestFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.iid.FirebaseInstanceId
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class MainActivity : AppCompatActivity(){
+
+@Suppress("DEPRECATION")
+class MainActivity : AppCompatActivity() {
     private var homeFragment: HomeFragment? = null
     private var profileFragment: ProfileFragment? = null
     private var notificationFragment: NotificationFragment? = null
     private var cartFragment: CartFragment? = null
     private var suggestFragment: SuggestFragment? = null
+    private var informationFragment: InformationFragment? = null
+    lateinit var navView: BottomNavigationView
+    private var onActionNotify: OnActionNotify? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setDialogFullScreen()
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+//        loadListCity()
+        navView = findViewById(R.id.nav_view)
+        //navView.selectedItemId = R.id.navigation_home
         navView.setOnNavigationItemSelectedListener { menuItem ->
             showFragmentForMenuItem(menuItem.itemId)
             return@setOnNavigationItemSelectedListener true
         }
+        onActionNotify = object : OnActionNotify {
+            override fun onActionNotify() {
+                navView.selectedItemId = R.id.navigation_suggest
+            }
+        }
         val intent = getIntent()
-        val check = intent.getIntExtra("check",-1)
+        val check = intent.getIntExtra("check", -1)
         if (check == 1) {
             navView.selectedItemId = R.id.navigation_cart
-        }
-        else {
+        } else {
             navView.selectedItemId = R.id.navigation_home
         }
 
+        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
+            val token = instanceIdResult.token
+            println(token)
+        }
+
+
+
+//        val postListener = object : ValueEventListener {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                // Get Post object and use the values to update the UI
+//                val post = dataSnapshot.getValue()
+//                Toast.makeText(this@MainActivity,post.toString(),Toast.LENGTH_LONG).show()
+//
+//                // ...
+//            }
+//
+//            override fun onCancelled(databaseError: DatabaseError) {
+//                // Getting Post failed, log a message
+//                //Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
+//                // ...
+//            }
+//        }
+//        database.addValueEventListener(postListener)
     }
 
     private fun loadFragment(fragment: Fragment?): Boolean {
@@ -52,82 +100,80 @@ class MainActivity : AppCompatActivity(){
         return false
     }
 
-    fun showFragmentForMenuItem(menuItem: Int){
-        checkFragmentExist()
+
+    fun showFragmentForMenuItem(menuItem: Int) {
+        //checkFragmentExist()
         val ft = this.supportFragmentManager.beginTransaction()
+        val pref = PreferenceManager.getDefaultSharedPreferences(this)
+        var checkLogin = pref.getBoolean("CheckLogin", false)
         when (menuItem) {
             R.id.navigation_home -> if (homeFragment != null && homeFragment?.isAdded!!) {
                 ft.show(homeFragment!!)
             } else {
                 homeFragment =
                     HomeFragment()
-                ft.replace(R.id.frame_layout, homeFragment!!, menuItem.toString())
+                ft.replace(R.id.frame_layout, homeFragment!!, "HomeFragment")
             }
 
-            R.id.navigation_profile -> if (profileFragment !=null && profileFragment?.isAdded!! ) {
-                ft.show(profileFragment!!)
-            }
-            else
-            {
-                profileFragment =
-                    ProfileFragment()
-                ft.replace(R.id.frame_layout, profileFragment!!, menuItem.toString())
+            R.id.navigation_profile -> {
+                if (!checkLogin) {
+                    loadFragment(ProfileFragment())
+                } else {
+                    loadFragment(InformationFragment())
+                }
             }
 
-            R.id.navigation_suggest-> if (suggestFragment !=null && suggestFragment?.isAdded!! ) {
+            R.id.navigation_suggest -> if (suggestFragment != null && suggestFragment?.isAdded!!) {
                 ft.show(suggestFragment!!)
-            }
-            else {
+            } else {
                 suggestFragment =
                     SuggestFragment()
-                ft.replace(R.id.frame_layout,suggestFragment!!,menuItem.toString())
+                ft.replace(R.id.frame_layout, suggestFragment!!, menuItem.toString())
             }
 
-            R.id.navigation_notifications-> if (notificationFragment !=null && notificationFragment?.isAdded!! ) {
+            R.id.navigation_notifications -> if (notificationFragment != null && notificationFragment?.isAdded!!) {
                 ft.show(notificationFragment!!)
-            }
-            else
-            {
+            } else {
                 notificationFragment =
                     NotificationFragment()
-                ft.replace(R.id.frame_layout,notificationFragment!!,menuItem.toString())
+                ft.replace(R.id.frame_layout, notificationFragment!!, menuItem.toString())
             }
 
-            R.id.navigation_cart-> if (cartFragment!= null && cartFragment?.isAdded!!) {
+            R.id.navigation_cart -> if (cartFragment != null && cartFragment?.isAdded!!) {
 
                 ft.show(cartFragment!!)
-            }
-            else
-            {
+            } else {
                 cartFragment =
                     CartFragment()
-                ft.replace(R.id.frame_layout,cartFragment!!,"Cart")
+                ft.replace(R.id.frame_layout, cartFragment!!, "Cart")
             }
         }
-        hideOtherFragment(ft,menuItem)
+        hideOtherFragment(ft, menuItem)
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
         ft.commit()
     }
-    private fun checkFragmentExist() {
-        val fragments = this.supportFragmentManager.fragments
-        for (f in fragments) {
-            if (homeFragment == null && f is HomeFragment) {
-                homeFragment = f
-            }
-            if (notificationFragment == null && f is NotificationFragment) {
-                notificationFragment = f
-            }
-            if (cartFragment == null && f is CartFragment) {
-                cartFragment = f
-            }
-            if (suggestFragment == null && f is SuggestFragment) {
-                suggestFragment = f
-            }
-            if (profileFragment == null && f is ProfileFragment) {
-                profileFragment = f
-            }
-        }
-    }
+
+//    private fun checkFragmentExist() {
+//        val fragments = this.supportFragmentManager.fragments
+//        for (f in fragments) {
+//            if (homeFragment == null && f is HomeFragment) {
+//                homeFragment = f
+//            }
+//            if (notificationFragment == null && f is NotificationFragment) {
+//                notificationFragment = f
+//            }
+//            if (cartFragment == null && f is CartFragment) {
+//                cartFragment = f
+//            }
+//            if (suggestFragment == null && f is SuggestFragment) {
+//                suggestFragment = f
+//            }
+//            if (profileFragment == null && f is ProfileFragment || informationFragment == null && f is InformationFragment) {
+//                profileFragment = informationFragment = f
+//            }
+//        }
+//    }
+
     private fun hideOtherFragment(ft: FragmentTransaction, itemId: Int) {
         if (profileFragment != null && profileFragment!!.isAdded && itemId != R.id.navigation_profile)
             ft.hide(profileFragment!!)
@@ -139,6 +185,8 @@ class MainActivity : AppCompatActivity(){
             ft.hide(homeFragment!!)
         if (suggestFragment != null && suggestFragment!!.isAdded && itemId != R.id.navigation_suggest)
             ft.hide(suggestFragment!!)
+        if (informationFragment != null && informationFragment!!.isAdded && itemId != R.id.navigation_profile)
+            ft.hide(informationFragment!!)
     }
 
     private fun setDialogFullScreen() {
@@ -149,4 +197,42 @@ class MainActivity : AppCompatActivity(){
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         }
     }
+
+    private fun loadListCity() {
+        val list = mutableListOf<CityModel>()
+        val service = RetrofitClientInstance().getClient()?.create(GetDataService::class.java)
+        val call = service?.getListCity()
+        call?.enqueue(object : Callback<CityReponse> {
+            override fun onFailure(call: Call<CityReponse>, t: Throwable) {
+                Toast.makeText(this@MainActivity, t.message, Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(
+                call: Call<CityReponse>,
+                response: Response<CityReponse>
+            ) {
+
+                response.body()!!.listCity.forEach {
+                    list.add(
+                        CityModel(
+                            it.iD,
+                            it.title
+                        )
+                    )
+                }
+//                    Toast.makeText(this@MainActivity,list.toString(), Toast.LENGTH_LONG).show()
+            }
+        })
+    }
+
+    override fun onStop() {
+        super.onStop()
+        FcmPush.instance.sendMessage(
+            "cD0jSRY-fq3jxXWh6xgcmy:APA91bFbsgiPHgj85YRqaRKcsxFbtkIOkJU8VUFOenEZlJHHjbULlkLvLx0SwD2EjDjEcpfLD0JHo31Nejz7QunslJRKkiXXaJwxa_tDHBg2_jJjdlaNHbcUeITrOWymHR5qjBmGIoew",
+            "Hello",
+            "Xin chao Thang Truong"
+        )
+    }
+
+
 }

@@ -7,5 +7,10 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="MyRattingBar" parent="@style/Widget.AppCompat.RatingBar">
+        <item name="android:progressDrawable">@drawable/ratting_bar_2</item>
+        <item name="android:minHeight">20dp</item>
+        <item name="android:maxHeight">20dp</item>
+    </style>
 
 </resources>

@@ -3,6 +3,7 @@ package com.example.kltn.screen.cart.adapter
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,18 +13,22 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.MainActivity
 import com.example.kltn.R
 import com.example.kltn.screen.cart.CartFragment
 import com.example.kltn.screen.cart.model.CartModel
+import com.example.kltn.screen.cart.roomdatabase.CartViewModel
 import java.text.NumberFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
-class CartAdapter internal constructor(var context: Context,var CartModel: ArrayList<CartModel>)
+class CartAdapter internal constructor(var context: Context,var listCart: ArrayList<CartModel>)
     : RecyclerView.Adapter<CartAdapter.CartViewHolder>(){
-
+//    private var cartList = emptyList<CartModel>()
+    private lateinit var cartViewModel: CartViewModel
     companion object {
         var thanhtien:Double =0.0
     }
@@ -39,16 +44,15 @@ class CartAdapter internal constructor(var context: Context,var CartModel: Array
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-
         val cellForRow = layoutInflater.inflate(R.layout.recycleview_cart_item,parent,false)
         val CartViewHolder = CartViewHolder(cellForRow)
         return CartViewHolder
     }
 
-    override fun getItemCount() = CartModel.count()
+    override fun getItemCount() = listCart.size
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
-
-        val current = CartModel[position]
+        cartViewModel = ViewModelProviders.of(context as FragmentActivity).get(CartViewModel::class.java)
+        val current = listCart[position]
         var soluong = current.soLuong
         holder.tensach.text = current.tenSach
         holder.soluong.text = current.soLuong.toString()
@@ -59,27 +63,23 @@ class CartAdapter internal constructor(var context: Context,var CartModel: Array
         holder.btnCong.setOnClickListener {
             soluong+=1
             current.soLuong = soluong
+            cartViewModel.updateSL(current.maSach,soluong)
             reLoadFragment()
             holder.soluong.text = soluong.toString()
-//            val intent = Intent(context, MainActivity::class.java)
-//            intent.putExtra("checkclick",1)
-//            context.startActivity(intent)
-            //this.notifyDataSetChanged()
         }
         holder.btnTru.setOnClickListener{
             soluong-=1
             current.soLuong = soluong
+            cartViewModel.updateSL(current.maSach,soluong)
             reLoadFragment()
-            //CartFragment.arrayListCart.get(position).soLuong = soluong
             holder.soluong.text = soluong.toString()
-            //this.notifyDataSetChanged()
         }
         holder.btnDelete.setOnClickListener{
-            CartModel.removeAt(position)
-            reLoadFragment()
+            cartViewModel.deleteItemCart(current)
             this.notifyDataSetChanged()
             notifyItemRemoved(position)
-            notifyItemRangeChanged(position,CartModel.size)
+            notifyItemRangeChanged(position,listCart.size)
+            reLoadFragment()
         }
         holder.igmsach.setImageResource(current.image)
     }
@@ -87,9 +87,11 @@ class CartAdapter internal constructor(var context: Context,var CartModel: Array
     {
         var thanhtienitemt:Double = 0.0
         var tongtien:Double = 0.0
-        CartFragment.arrayListCart.forEach {
-            thanhtienitemt = (it.giaTien * it.soLuong)
-            tongtien+= thanhtienitemt
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            CartFragment.arrayListCart.forEach {
+                thanhtienitemt = (it.giaTien * it.soLuong)
+                tongtien+= thanhtienitemt
+            }
         }
         CartFragment.tongtien = tongtien
     }

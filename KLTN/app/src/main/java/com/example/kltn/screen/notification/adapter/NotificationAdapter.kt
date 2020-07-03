@@ -30,7 +30,7 @@ class NotificationAdapter internal constructor(var context: Context,var Notifica
         return NotificationViewHolder
     }
 
-    override fun getItemCount() = NotificationModel.count()
+    override fun getItemCount() = NotificationModel.size
     @SuppressLint("NewApi")
     override fun onBindViewHolder(holder: NotificationViewHolder, position: Int) {
 

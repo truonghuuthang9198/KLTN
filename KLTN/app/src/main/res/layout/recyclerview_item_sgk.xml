@@ -14,7 +14,7 @@
         android:id="@+id/img_book_sgk"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/vd_sach"
+        android:src="@drawable/vd3_sach"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></ImageView>

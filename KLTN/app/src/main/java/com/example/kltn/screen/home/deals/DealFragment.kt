@@ -70,12 +70,11 @@ class DealFragment : Fragment() {
         if (fragment != null) {
             activity!!.supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.frame_layout, fragment)
+                .replace(R.id.frame_layout, fragment,"ShowMoreDealFragment")
                 .addToBackStack(null)
                 .commit()
             return true
         }
         return false
     }
-
 }

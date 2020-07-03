@@ -53,6 +53,7 @@
         android:layout_gravity="center"
         android:background="@drawable/custom_button_dangnhap"
         android:text="Xem thêm"
+        android:textSize="16sp"
         android:layout_marginBottom="8dp"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
