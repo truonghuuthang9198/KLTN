@@ -12,6 +12,7 @@ import com.example.kltn.DetailActivity
 import com.example.kltn.R
 import com.example.kltn.screen.home.model.DealModel
 import com.squareup.picasso.Picasso
+import org.w3c.dom.Text
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -20,6 +21,7 @@ class DealAdapter internal constructor(var DealsModel: ArrayList<DealModel>)
     : RecyclerView.Adapter<DealAdapter.DealViewHolder>(){
     inner class DealViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
     {
+        val salebook: TextView = itemView.findViewById(R.id.tv_salebook)
         val titleBookDeal: TextView = itemView.findViewById(R.id.title_book_deal)
         val priceReducedBook: TextView = itemView.findViewById(R.id.priceReduced_book_deal)
         val priceBook: TextView = itemView.findViewById(R.id.price_book_deal)
@@ -44,6 +46,9 @@ class DealAdapter internal constructor(var DealsModel: ArrayList<DealModel>)
 
     override fun onBindViewHolder(holder: DealViewHolder, position: Int) {
         val current = DealsModel[position]
+        val giamgiahandle = Math.round(current.giamGia*100)
+
+        holder.salebook.text = giamgiahandle.toString()+"%"
         holder.titleBookDeal.text = current.tenSach
         val localVN = Locale("vi","VN")
         val numberFormat = NumberFormat.getCurrencyInstance(localVN)

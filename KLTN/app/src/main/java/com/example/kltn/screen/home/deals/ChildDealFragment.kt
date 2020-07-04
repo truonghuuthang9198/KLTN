@@ -1,6 +1,8 @@
 package com.example.kltn.screen.home.deals
 
+import com.example.kltn.screen.retrofit.reponse.SachResponse
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +16,6 @@ import com.example.kltn.screen.home.adapter.DealAdapter
 import com.example.kltn.screen.home.model.DealModel
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance
-import com.example.kltn.screen.retrofit.reponse.SachReponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,23 +26,22 @@ import retrofit2.Response
 class ChildDealFragment(val tabId: Int) : Fragment() {
     lateinit var recycleviewDeal: RecyclerView
     lateinit var dealAdapter: DealAdapter
-    var listSachAdapter = ArrayList<DealModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_child_deal, container, false)
         recycleviewDeal = view!!.findViewById<RecyclerView>(R.id.recyclerview_deal)
-        //loadListSach()
-        setUpRecyclerView()
-        return view
-    }
-
-    fun setUpRecyclerView() {
         recycleviewDeal.layoutManager = LinearLayoutManager(
             activity,
             LinearLayoutManager.HORIZONTAL, false
         )
+        loadListSach()
+        //setUpRecyclerView()
+        return view
+    }
+
+    fun setUpRecyclerView() {
         val arrayList = ArrayList<DealModel>()
         val listTab0 = ArrayList<DealModel>()
         arrayList.add(
@@ -63,7 +63,8 @@ class ChildDealFragment(val tabId: Int) : Fragment() {
                 2,
                 "it.soTrang",
                 "Get Set Go: Mathematics Equals",
-                "it.tinhTrang")
+                "it.tinhTrang"
+            )
         )
         arrayList.add(
             DealModel(
@@ -84,7 +85,8 @@ class ChildDealFragment(val tabId: Int) : Fragment() {
                 2,
                 "it.soTrang",
                 "Dạy Tiếng Anh Xu Hướng Mới",
-                "it.tinhTrang")
+                "it.tinhTrang"
+            )
         )
         arrayList.add(
             DealModel(
@@ -105,7 +107,8 @@ class ChildDealFragment(val tabId: Int) : Fragment() {
                 5,
                 "it.soTrang",
                 "Bí Mật Hành Trình Tình Yêu",
-                "it.tinhTrang")
+                "it.tinhTrang"
+            )
         )
 //        arrayList.add(
 //            DealsModel(1,0,R.drawable.vd3_sach,"Get Set Go: Mathematics Equals",36400.00,52000.00)
@@ -140,25 +143,28 @@ class ChildDealFragment(val tabId: Int) : Fragment() {
     private fun loadListSach() {
         val service = RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
         val call = service?.getListSach()
-        call?.enqueue(object : Callback<List<SachReponse>> {
-            override fun onFailure(call: Call<List<SachReponse>>, t: Throwable) {
-                Toast.makeText(activity!!, t.message, Toast.LENGTH_LONG).show()
+        call?.enqueue(object : Callback<List<SachResponse>> {
+            override fun onFailure(call: Call<List<SachResponse>>, t: Throwable) {
+                Log.d("ThangTruong", t.message)
             }
+
             override fun onResponse(
-                call: Call<List<SachReponse>>,
-                response: Response<List<SachReponse>>
+                call: Call<List<SachResponse>>,
+                response: Response<List<SachResponse>>
             ) {
-                //Toast.makeText(activity,response.body().toString(),Toast.LENGTH_LONG).show()
                 listSach(response.body()!!)
+                Log.d("ThangTruong", response.body().toString())
+
             }
         })
 
     }
 
-    private fun listSach(list: List<SachReponse>) {
+    private fun listSach(response: List<SachResponse>) {
         var id = 0
-        var tabid= 0
-        list.forEach {
+        var tabid = 0
+        val listSachAdapter = ArrayList<DealModel>()
+        response.forEach {
             listSachAdapter.add(
                 DealModel(
                     id,
@@ -178,25 +184,21 @@ class ChildDealFragment(val tabId: Int) : Fragment() {
                     it.soLuong,
                     it.soTrang,
                     it.tenSach,
-                    it.tinhTrang,
-                    it.giaGiamDS
+                    it.tinhTrang
                 )
             )
             id++
-            if( id == 5 && tabid<=2)
-            {
+            if (id >= 5 && tabid <= 2) {
                 tabid++
             }
         }
         val listAddInTab = ArrayList<DealModel>()
         listSachAdapter.forEach {
-            if (tabId == it.tabId)
-            {
+            if (tabId == it.tabId) {
                 listAddInTab.add(it)
             }
         }
         dealAdapter = DealAdapter(listAddInTab)
         recycleviewDeal.adapter = dealAdapter
-        dealAdapter.notifyDataSetChanged()
     }
 }

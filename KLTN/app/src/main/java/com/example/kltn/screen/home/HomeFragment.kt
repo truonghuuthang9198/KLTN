@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,12 +24,17 @@ class HomeFragment : Fragment() {
 
     lateinit var recyclerviewMenu: RecyclerView
     lateinit var menuAdapter: MenuAdapter
+    lateinit var btnCategory: ImageView
     private var onActionNotify: OnActionNotify? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
+        btnCategory = view.findViewById(R.id.img_danhmuc)
+        btnCategory.setOnClickListener {
+            loadFragmentCategory(CategoryFragment())
+        }
         loadFragmentDeal(DealFragment())
         loadFragmentSGK(SGKFragment())
         loadFragmentBestBook(BestBookFragment())
@@ -62,6 +68,16 @@ class HomeFragment : Fragment() {
             fragmentManager!!
                 .beginTransaction()
                 .replace(R.id.frame_bestBook, fragment)
+                .commit()
+            return true
+        }
+        return false
+    }
+    private fun loadFragmentCategory(fragment: Fragment?):Boolean{
+        if (fragment != null) {
+            fragmentManager!!
+                .beginTransaction()
+                .replace(R.id.frame_layout, fragment)
                 .commit()
             return true
         }

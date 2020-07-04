@@ -36,7 +36,7 @@
                     android:layout_height="120dp"
                     android:background="@drawable/custom_poster"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/poster_sale"></ImageView>
+                    android:src="@drawable/poster_sale1"></ImageView>
             </androidx.cardview.widget.CardView>
 
             <FrameLayout

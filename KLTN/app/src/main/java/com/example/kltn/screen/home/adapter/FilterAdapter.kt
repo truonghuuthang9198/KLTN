@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
 import com.example.kltn.screen.home.deals.ChildShowMoreDealFragment
 import com.example.kltn.screen.home.deals.ShowMoreDealFragment
-import com.example.kltn.screen.home.deals.ShowMoreDealFragment.Companion.arrayList
+import com.example.kltn.screen.home.deals.ShowMoreDealFragment.Companion.arrayListFilter
 import com.example.kltn.screen.home.model.FilterModel
 import datn.datn_expansemanagement.core.app.domain.excecutor.EventFireUtil
 import datn.datn_expansemanagement.core.base.domain.listener.OnActionData
@@ -57,7 +57,7 @@ class FilterAdapter internal constructor(
         holder.imgCheckFilter.visibility = View.GONE
 
         holder.itemView.setOnClickListener {
-            arrayList.forEach {
+            arrayListFilter.forEach {
                 it.choose = it.id == current.id
             }
             title = current.titleFilter

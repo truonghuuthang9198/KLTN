@@ -71,7 +71,6 @@
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:background="@drawable/custom_button_dangnhap"
             android:drawableRight="@drawable/ic_arrow_forward_black_24dp"

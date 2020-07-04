@@ -39,7 +39,7 @@ class ShowMoreDealFragment : Fragment(){
     private var onActionData: OnActionData<FilterModel>? = null
 
     companion object {
-        var arrayList: ArrayList<FilterModel> = ArrayList<FilterModel>()
+        var arrayListFilter: ArrayList<FilterModel> = ArrayList<FilterModel>()
     }
 
     override fun onCreateView(
@@ -136,7 +136,7 @@ class ShowMoreDealFragment : Fragment(){
         recyclerViewFilter.layoutManager = LinearLayoutManager(activity,
             LinearLayoutManager.VERTICAL,false)
         val arrayList1 = ArrayList<FilterModel>()
-        if(arrayList.isEmpty()) {
+        if(arrayListFilter.isEmpty()) {
             arrayList1.add(FilterModel(0, "Bán Chạy Tuần", R.drawable.ic_check_black_24dp))
             arrayList1.add(FilterModel(1, "Bán Chạy Tháng", R.drawable.ic_check_black_24dp))
             arrayList1.add(FilterModel(2, "Bán Chạy Năm", R.drawable.ic_check_black_24dp))
@@ -144,7 +144,7 @@ class ShowMoreDealFragment : Fragment(){
             arrayList1.add(FilterModel(4, "Nổi Bật Tháng", R.drawable.ic_check_black_24dp))
             arrayList1.add(FilterModel(5, "Nổi Bật Năm", R.drawable.ic_check_black_24dp))
             arrayList1.add(FilterModel(6, "Mới Nhất", R.drawable.ic_check_black_24dp))
-            arrayList =arrayList1
+            arrayListFilter =arrayList1
         }
         onActionData = object : OnActionData<FilterModel>{
             override fun onAction(data: FilterModel) {
@@ -153,7 +153,7 @@ class ShowMoreDealFragment : Fragment(){
             }
 
         }
-        filterAdapter = FilterAdapter(activity!!,arrayList,onActionData!!)
+        filterAdapter = FilterAdapter(activity!!,arrayListFilter,onActionData!!)
         recyclerViewFilter.adapter = filterAdapter
     }
 
