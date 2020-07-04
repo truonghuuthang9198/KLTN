@@ -14,7 +14,7 @@ import com.example.kltn.screen.profile.AddressFragment
 import com.example.kltn.screen.profile.FavoriteFragment
 import com.example.kltn.screen.profile.model.InformationModel
 
-class InformationAdapter internal constructor(var context: Context, var InformationModel: ArrayList<InformationModel>) :
+class InformationAdapter internal constructor(var context: Context?, var InformationModel: ArrayList<InformationModel>) :
     RecyclerView.Adapter<InformationAdapter.InformationViewHolder>() {
     inner class InformationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val icNameIF: ImageView = itemView.findViewById(R.id.ic_name_infomation)

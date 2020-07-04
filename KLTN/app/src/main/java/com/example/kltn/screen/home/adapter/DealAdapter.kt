@@ -10,14 +10,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.DetailActivity
 import com.example.kltn.R
-import com.example.kltn.screen.home.model.DealModel
+import com.example.kltn.screen.home.model.BookModel
 import com.squareup.picasso.Picasso
-import org.w3c.dom.Text
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class DealAdapter internal constructor(var DealsModel: ArrayList<DealModel>)
+class DealAdapter internal constructor(var dealsModel: ArrayList<BookModel>)
     : RecyclerView.Adapter<DealAdapter.DealViewHolder>(){
     inner class DealViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
     {
@@ -34,7 +33,7 @@ class DealAdapter internal constructor(var DealsModel: ArrayList<DealModel>)
         val cellForRow = layoutInflater.inflate(R.layout.recyclerview_item_deal,parent,false)
         val DealViewHolder = DealViewHolder(cellForRow)
         DealViewHolder.itemView.setOnClickListener {
-            var dealModel = DealsModel.get(DealViewHolder.adapterPosition)
+            var dealModel = dealsModel.get(DealViewHolder.adapterPosition)
             val intent = Intent(Context,DetailActivity::class.java)
             intent.putExtra("deal",dealModel)
             Context.startActivity(intent)
@@ -42,10 +41,10 @@ class DealAdapter internal constructor(var DealsModel: ArrayList<DealModel>)
         return DealViewHolder
     }
 
-    override fun getItemCount() = DealsModel.size
+    override fun getItemCount() = dealsModel.size
 
     override fun onBindViewHolder(holder: DealViewHolder, position: Int) {
-        val current = DealsModel[position]
+        val current = dealsModel[position]
         val giamgiahandle = Math.round(current.giamGia*100)
 
         holder.salebook.text = giamgiahandle.toString()+"%"

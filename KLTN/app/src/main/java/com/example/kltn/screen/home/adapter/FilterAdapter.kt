@@ -26,7 +26,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class FilterAdapter internal constructor(
-    var context: Context,
+    var context: Context?,
     var FilterModel: ArrayList<FilterModel>,var onActionData: OnActionData<FilterModel>
 ) : RecyclerView.Adapter<FilterAdapter.FilterViewHolder>() {
     companion object {
@@ -67,13 +67,13 @@ class FilterAdapter internal constructor(
 
         if (current.choose) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                holder.titleFilter.setTextColor(context.getColor(R.color.colorCheckFilter))
+                holder.titleFilter.setTextColor(context!!.getColor(R.color.colorCheckFilter))
             }
             holder.imgCheckFilter.visibility = View.VISIBLE
         } else {
             holder.imgCheckFilter.visibility = View.GONE
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                holder.titleFilter.setTextColor(context.getColor(R.color.black))
+                holder.titleFilter.setTextColor(context!!.getColor(R.color.black))
             }
         }
         holder.titleFilter.text = current.titleFilter

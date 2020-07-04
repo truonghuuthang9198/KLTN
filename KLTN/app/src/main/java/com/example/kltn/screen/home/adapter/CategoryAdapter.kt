@@ -27,7 +27,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class CategoryAdapter internal constructor(
-    var context: Context,
+    var context: Context?,
     var CategoryModel: ArrayList<CategoryModel>,var onActionData: OnActionData<CategoryModel>
 ) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
     inner class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -51,7 +51,6 @@ class CategoryAdapter internal constructor(
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val current = CategoryModel[position]
-
         holder.itemView.setOnClickListener {
             CategoryFragment.arrayListCategory.forEach {
                 it.choose = it.id == current.id
@@ -60,11 +59,11 @@ class CategoryAdapter internal constructor(
             notifyDataSetChanged()
         }
         if (current.choose) {
-            holder.titleCategory.setTextColor(context.getColor(R.color.colorPrimary))
-            holder.view.setBackgroundColor(context.getColor(R.color.colorPrimary))
+            holder.titleCategory.setTextColor(context!!.getColor(R.color.colorPrimary))
+            holder.view.setBackgroundColor(context!!.getColor(R.color.colorPrimary))
         } else {
-            holder.titleCategory.setTextColor(context.getColor(R.color.Gray))
-            holder.view.setBackgroundColor(context.getColor(R.color.white))
+            holder.titleCategory.setTextColor(context!!.getColor(R.color.Gray))
+            holder.view.setBackgroundColor(context!!.getColor(R.color.white))
         }
         holder.titleCategory.text = current.titleCategory
     }

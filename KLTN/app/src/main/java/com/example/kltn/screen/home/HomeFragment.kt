@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -33,7 +34,7 @@ class HomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         btnCategory = view.findViewById(R.id.img_danhmuc)
         btnCategory.setOnClickListener {
-            loadFragmentCategory(CategoryFragment())
+            loadFragmentCategory(CategoryFragment(),"CategoryFragment")
         }
         loadFragmentDeal(DealFragment())
         loadFragmentSGK(SGKFragment())
@@ -73,11 +74,12 @@ class HomeFragment : Fragment() {
         }
         return false
     }
-    private fun loadFragmentCategory(fragment: Fragment?):Boolean{
+    private fun loadFragmentCategory(fragment: Fragment?, tag: String): Boolean {
         if (fragment != null) {
-            fragmentManager!!
+            (context as FragmentActivity).supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.frame_layout, fragment)
+                .replace(R.id.frame_layout, fragment, tag)
+                .addToBackStack(null)
                 .commit()
             return true
         }
@@ -106,7 +108,7 @@ class HomeFragment : Fragment() {
 
             }
         }
-        menuAdapter = MenuAdapter(activity!!,arrayList,onActionNotify!!)
+        menuAdapter = MenuAdapter(context,arrayList,onActionNotify!!)
         recyclerviewMenu.adapter = menuAdapter
     }
 

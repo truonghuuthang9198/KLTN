@@ -22,7 +22,7 @@ import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class CheckListBillAdapter internal constructor(var context: Context, var listBill: ArrayList<CheckBillModel>)
+class CheckListBillAdapter internal constructor(var context: Context?, var listBill: ArrayList<CheckBillModel>)
     : RecyclerView.Adapter<CheckListBillAdapter.CheckListBillViewHolder>(){
     inner class CheckListBillViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
     {

@@ -11,7 +11,7 @@ import com.example.kltn.R
 import com.example.kltn.screen.cart.model.AddressShipModel
 import com.example.kltn.screen.cart.model.MethodPayModel
 
-class MethodPayAdapter internal constructor(var context: Context, var methodPayModel: ArrayList<MethodPayModel>) :
+class MethodPayAdapter internal constructor(var context: Context?, var methodPayModel: ArrayList<MethodPayModel>) :
     RecyclerView.Adapter<MethodPayAdapter.MethodPayViewHolder>() {
     private var lastSelectedPosition = -1
     inner class MethodPayViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

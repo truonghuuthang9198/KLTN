@@ -8,15 +8,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
-import com.example.kltn.screen.home.model.DealModel
-import com.example.kltn.screen.home.model.SGKModel
-import com.example.kltn.screen.home.model.ShowMoreDealModel
+import com.example.kltn.screen.home.model.BookModel
 import com.squareup.picasso.Picasso
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ShowMoreDealAdapter internal constructor(var ShowMoreDealModel: ArrayList<DealModel>)
+class ShowMoreDealAdapter internal constructor(var showMoreBookModel: ArrayList<BookModel>)
     : RecyclerView.Adapter<ShowMoreDealAdapter.ShowMoreDealViewHolder>(){
     inner class ShowMoreDealViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
     {
@@ -35,10 +33,10 @@ class ShowMoreDealAdapter internal constructor(var ShowMoreDealModel: ArrayList<
         return ShowMoreDealViewHolder
     }
 
-    override fun getItemCount() = ShowMoreDealModel.size
+    override fun getItemCount() = showMoreBookModel.size
 
     override fun onBindViewHolder(holder: ShowMoreDealViewHolder, position: Int) {
-        val current = ShowMoreDealModel[position]
+        val current = showMoreBookModel[position]
         val giamgiahandle = Math.round(current.giamGia*100)
 
         holder.salebook.text = giamgiahandle.toString()+"%"

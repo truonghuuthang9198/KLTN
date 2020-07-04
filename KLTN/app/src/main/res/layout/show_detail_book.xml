@@ -28,16 +28,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#FFFFFF"
-                android:padding="5dp"
+                android:padding="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:id="@+id/img_detail_book"
-                    android:layout_width="200dp"
-                    android:layout_height="300dp"
+                    android:layout_width="150dp"
+                    android:layout_height="200dp"
                     android:src="@drawable/vd3_sach"
+                    android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"></ImageView>
@@ -50,7 +51,7 @@
                     android:layout_marginTop="10dp"
                     android:text="Sự Im Lặng Của Bầy Cừu (Tái Bản 2019)"
                     android:textColor="#000000"
-                    android:textSize="15dp"
+                    android:textSize="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/img_detail_book"></TextView>
@@ -61,10 +62,11 @@
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="8dp"
                     android:isIndicator="true"
                     android:numStars="5"
                     android:stepSize="0.5"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView4"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/title_book" />
 
@@ -72,8 +74,8 @@
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="8dp"
                     android:text="(131 đánh giá)"
                     android:textColor="@color/colorPrimary"
                     app:layout_constraintStart_toEndOf="@+id/rating"
@@ -84,8 +86,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_goneMarginBottom="8dp"
                     android:text="64.000 đ"
+                    android:layout_marginBottom="8dp"
                     android:textColor="@color/colorPrimary"
                     android:textSize="20dp"
                     android:textStyle="bold"
@@ -97,8 +101,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
                     android:text="80.000đ"
+                    android:textSize="17sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_priceBook_showdetail"
                     app:layout_constraintStart_toEndOf="@+id/tv_priceBook_showdetail"
                     app:layout_constraintTop_toTopOf="@+id/tv_priceBook_showdetail"></TextView>
 
@@ -108,17 +113,18 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/custom_textview_sale"
-                    android:text="-20%"
+                    android:text="20%"
                     android:textAlignment="center"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="#FFFFFF"
                     android:textSize="16dp"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_priceorigin_showdetail"
                     app:layout_constraintStart_toEndOf="@+id/tv_priceorigin_showdetail"
                     app:layout_constraintTop_toTopOf="@+id/tv_priceorigin_showdetail"></TextView>
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginRight="10dp"
                     android:scaleType="centerCrop"
@@ -202,10 +208,10 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout3"
                 android:layout_width="match_parent"
-                android:layout_height="325dp"
+                android:layout_height="330dp"
                 android:layout_marginTop="8dp"
                 android:background="#FFFFFF"
-                android:padding="8dp"
+                android:padding="12dp"
                 android:textColor="#000000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -245,7 +251,7 @@
                     app:layout_constraintTop_toBottomOf="@id/view"></TextView>
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/tv_showdetail_masach"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="120dp"
@@ -265,14 +271,14 @@
                     app:layout_constraintTop_toBottomOf="@id/textView11"></TextView>
 
                 <TextView
-                    android:id="@+id/textView16"
+                    android:id="@+id/tv_showdetail_ctyphathanh"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="CT00133"
                     android:textColor="#000000"
-                    app:layout_constraintStart_toStartOf="@+id/textView14"
-                    app:layout_constraintTop_toBottomOf="@+id/textView14"></TextView>
+                    app:layout_constraintStart_toStartOf="@+id/tv_showdetail_masach"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_showdetail_masach"></TextView>
 
                 <TextView
                     android:id="@+id/textView13"
@@ -285,14 +291,14 @@
                     app:layout_constraintTop_toBottomOf="@id/textView12"></TextView>
 
                 <TextView
-                    android:id="@+id/tv_author"
+                    android:id="@+id/tv_showdetail_author"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="Trương Hữu Thắng"
                     android:textColor="#000000"
-                    app:layout_constraintStart_toStartOf="@+id/textView16"
-                    app:layout_constraintTop_toBottomOf="@+id/textView16"></TextView>
+                    app:layout_constraintStart_toStartOf="@+id/tv_showdetail_ctyphathanh"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_showdetail_ctyphathanh"></TextView>
 
                 <TextView
                     android:id="@+id/textView18"
@@ -305,14 +311,14 @@
                     app:layout_constraintTop_toBottomOf="@id/textView13"></TextView>
 
                 <TextView
-                    android:id="@+id/textView20"
+                    android:id="@+id/tv_showdetail_nhaxuatban"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="NXB Kim Đồng"
                     android:textColor="#000000"
-                    app:layout_constraintStart_toStartOf="@+id/tv_author"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_author"></TextView>
+                    app:layout_constraintStart_toStartOf="@+id/tv_showdetail_author"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_showdetail_author"></TextView>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -324,31 +330,30 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView18"></TextView>
 
                 <TextView
-                    android:id="@+id/textView21"
+                    android:id="@+id/tv_showdetail_ngayxuatban"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="2019"
                     android:textColor="#000000"
-                    app:layout_constraintStart_toStartOf="@+id/tv_author"
-                    app:layout_constraintTop_toBottomOf="@+id/textView20"></TextView>
+                    app:layout_constraintStart_toStartOf="@+id/tv_showdetail_author"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_showdetail_nhaxuatban"></TextView>
 
                 <TextView
-                    android:id="@+id/textView15"
+                    android:id="@+id/tv_showdetail_ghichu"
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:layout_marginTop="15dp"
                     android:text="@string/gioi_thieu_sach"
-                    android:textAlignment="center"
                     android:textColor="#000000"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView21"></TextView>
+                    app:layout_constraintTop_toBottomOf="@+id/tv_showdetail_ngayxuatban"></TextView>
 
                 <Button
-                    android:id="@+id/btn_dangnhap"
-                    android:layout_width="150dp"
-                    android:layout_height="35dp"
+                    android:id="@+id/btn_showdetail_xemthem"
+                    android:layout_width="160dp"
+                    android:layout_height="38dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/custom_button_dangnhap"
@@ -357,7 +362,7 @@
                     android:textColor="#FFFFFF"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView15"></Button>
+                    app:layout_constraintTop_toBottomOf="@+id/tv_showdetail_ghichu"></Button>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -414,8 +419,10 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/img_add_comment"></TextView>
                 <Button
-                    android:layout_width="380dp"
+                    android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
                     android:layout_marginTop="12dp"
                     android:text="Viết nhận xét của bạn"
                     android:gravity="center"
@@ -446,8 +453,9 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <Button
+                android:layout_weight="1"
                 android:id="@+id/btn_add_product_to_cart"
-                android:layout_width="200dp"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/custom_button_addcart"
                 android:text="Thêm vào giỏ hàng"
@@ -455,6 +463,7 @@
                 android:textColor="#FFB90F"></Button>
 
             <Button
+                android:layout_weight="1"
                 android:id="@+id/btn_move_cart"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"

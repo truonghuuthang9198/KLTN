@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class DealModel(
+data class BookModel(
     val id: Int,
     val tabId: Int,
     val ghiChu: String,

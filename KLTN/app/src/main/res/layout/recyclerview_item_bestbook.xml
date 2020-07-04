@@ -40,6 +40,7 @@
         android:layout_marginTop="10dp"
         android:text="Mary Had A Little Lamb Fin Pup"
         android:textColor="#000000"
+        android:maxLines="2"
         app:layout_constraintEnd_toEndOf="@+id/img_bestbook"
         app:layout_constraintStart_toStartOf="@+id/img_bestbook"
         app:layout_constraintTop_toBottomOf="@+id/img_bestbook"></TextView>

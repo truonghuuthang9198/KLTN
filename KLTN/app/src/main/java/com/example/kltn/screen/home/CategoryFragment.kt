@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.AdapterListUpdateCallback
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,6 +29,7 @@ class CategoryFragment : Fragment() {
     lateinit var recyclerViewCategoryDetail: RecyclerView
     lateinit var categoryDetailAdapter: CategoryDetailAdapter
     private var onActionData: OnActionData<CategoryModel>? = null
+
     companion object {
         var arrayListCategory: ArrayList<CategoryModel> = ArrayList<CategoryModel>()
     }
@@ -39,26 +41,22 @@ class CategoryFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_category, container, false)
         recyclerViewTopic = view.findViewById(R.id.recyclerview_category_topic)
         recyclerViewCategoryDetail = view.findViewById(R.id.recyclerview_category_detail)
-        recyclerViewCategoryDetail.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false)
-        recyclerViewTopic.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false)
+        recyclerViewCategoryDetail.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        recyclerViewTopic.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         backButtonCategory = view.findViewById(R.id.btn_back_category)
         backButtonCategory.setOnClickListener {
-            loadFragmentHome(HomeFragment())
+            if (fragmentManager!!.backStackEntryCount > 0) {
+                fragmentManager!!.popBackStack()
+            }
         }
         setUpRecyclerview()
         return view
     }
-    private fun loadFragmentHome(fragment: Fragment?): Boolean {
-        if (fragment != null) {
-            fragmentManager!!
-                .beginTransaction()
-                .replace(R.id.frame_layout, fragment)
-                .commit()
-            return true
-        }
-        return false
-    }
-    fun setUpRecyclerview(){
+
+
+    fun setUpRecyclerview() {
         val arrayListSachTN = ArrayList<CategoryDetailModel>()
         arrayListSachTN.add(CategoryDetailModel("Tất cả sản phẩm"))
         arrayListSachTN.add(CategoryDetailModel("Văn Học"))
@@ -66,27 +64,31 @@ class CategoryFragment : Fragment() {
         arrayListSachTN.add(CategoryDetailModel("Tâm Lý - Kĩ Năng Sống"))
         arrayListSachTN.add(CategoryDetailModel("Sách Thiếu Nhi"))
         arrayListSachTN.add(CategoryDetailModel("Tiểu Sử - Hồi Ký"))
-        if(arrayListCategory.isEmpty()) {
-            arrayListCategory.add(CategoryModel(0, "Sách Trong Nước"))
+        if (arrayListCategory.isEmpty()) {
+            arrayListCategory.add(CategoryModel(0, "Sách Trong Nước",true))
             arrayListCategory.add(CategoryModel(1, "FOREIGN BOOKS"))
             arrayListCategory.add(CategoryModel(2, "VPP - Dụng Cụ Học Sinh"))
             arrayListCategory.add(CategoryModel(3, "Tuyển Tập"))
             arrayListCategory.add(CategoryModel(4, "Sách Theo Nhà Cung Cấp"))
             arrayListCategory.add(CategoryModel(5, "Khuyên Đọc"))
         }
+        categoryDetailAdapter = CategoryDetailAdapter(context, arrayListSachTN)
+        recyclerViewCategoryDetail.adapter = categoryDetailAdapter
         onActionData = object : OnActionData<CategoryModel> {
             override fun onAction(data: CategoryModel) {
-                when(data.id)
-                {
-                    0-> {
-                        categoryDetailAdapter = CategoryDetailAdapter(activity!!,arrayListSachTN)
+                when (data.id) {
+                    0 -> {
+                        categoryDetailAdapter = CategoryDetailAdapter(activity!!, arrayListSachTN)
                         recyclerViewCategoryDetail.adapter = categoryDetailAdapter
                     }
-                    2-> { }
+                    2 -> {
+
+                    }
+
                 }
             }
         }
-        categoryAdapter = CategoryAdapter(activity!!, arrayListCategory,onActionData!!)
+        categoryAdapter = CategoryAdapter(context, arrayListCategory, onActionData!!)
         recyclerViewTopic.adapter = categoryAdapter
     }
 

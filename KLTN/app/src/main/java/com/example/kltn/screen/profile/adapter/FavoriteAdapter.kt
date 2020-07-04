@@ -17,7 +17,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class FavoriteAdapter internal constructor(var context: Context, var favoriteModel: ArrayList<FavoriteModel>) :
+class FavoriteAdapter internal constructor(var context: Context?, var favoriteModel: ArrayList<FavoriteModel>) :
     RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
     inner class FavoriteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageBook_favorite: ImageView = itemView.findViewById(R.id.img_book_favorite)

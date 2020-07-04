@@ -16,7 +16,7 @@ import datn.datn_expansemanagement.core.app.domain.excecutor.EventFireUtil
 import datn.datn_expansemanagement.core.base.domain.listener.OnActionData
 
 class CategoryDetailAdapter internal constructor(
-    var context: Context,
+    var context: Context?,
     var CategoryDetailModel: ArrayList<CategoryDetailModel>
 ) : RecyclerView.Adapter<CategoryDetailAdapter.CategoryDetailViewHolder>() {
     inner class CategoryDetailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

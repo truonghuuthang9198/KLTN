@@ -25,9 +25,8 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class CartAdapter internal constructor(var context: Context,var listCart: ArrayList<CartModel>)
+class CartAdapter internal constructor(var context: Context?,var listCart: ArrayList<CartModel>)
     : RecyclerView.Adapter<CartAdapter.CartViewHolder>(){
-//    private var cartList = emptyList<CartModel>()
     private lateinit var cartViewModel: CartViewModel
     companion object {
         var thanhtien:Double =0.0

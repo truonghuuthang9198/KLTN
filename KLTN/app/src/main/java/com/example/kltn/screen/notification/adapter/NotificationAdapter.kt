@@ -14,7 +14,7 @@ import com.example.kltn.screen.notification.model.NotificationModel
 
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
-class NotificationAdapter internal constructor(var context: Context,var NotificationModel: ArrayList<NotificationModel>)
+class NotificationAdapter internal constructor(var context: Context?,var NotificationModel: ArrayList<NotificationModel>)
     : RecyclerView.Adapter<NotificationAdapter.NotificationViewHolder>(){
 
     inner class NotificationViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
@@ -38,9 +38,8 @@ class NotificationAdapter internal constructor(var context: Context,var Notifica
         holder.imgNotification.setImageResource(current.image)
         holder.nameNotification.text = current.nameNotification
         holder.btnMore.setOnClickListener {
-//day click vo thi show cai bottom sheet ra
             val customView = LayoutInflater.from(context).inflate(R.layout.bottomsheet_dialog_notification, null, false)
-            val dialog = BottomSheetDialog(context)
+            val dialog = BottomSheetDialog(context!!)
             dialog.setContentView(customView)
             dialog.create()
             dialog.show()

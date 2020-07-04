@@ -67,7 +67,7 @@ class InformationShipFragment : Fragment() {
         val arrayList = ArrayList<AddressShipModel>()
         arrayList.add(AddressShipModel("Trương Hữu Thắng - 0384180187","76/32/13 Lê Trọng Tấn, Phường Tây Thạnh,Quận Tân Phú, TP Hồ Chí Minh",-1))
         arrayList.add(AddressShipModel("Trương Hữu Thắng - 0384180187","76/32/13 Lê Trọng Tấn, Phường Tây Thạnh,Quận Tân Phú, TP Hồ Chí Minh",-1))
-        addressAdapter = AddressShipAdapter(activity!!,arrayList)
+        addressAdapter = AddressShipAdapter(context,arrayList)
         recyclerviewShip.adapter = addressAdapter
     }
 }

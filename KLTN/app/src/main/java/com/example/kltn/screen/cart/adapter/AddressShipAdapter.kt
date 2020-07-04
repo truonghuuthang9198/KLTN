@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
 import com.example.kltn.screen.cart.model.AddressShipModel
 
-class AddressShipAdapter internal constructor(var context: Context, var addressShipModel: ArrayList<AddressShipModel>) :
+class AddressShipAdapter internal constructor(var context: Context?, var addressShipModel: ArrayList<AddressShipModel>) :
     RecyclerView.Adapter<AddressShipAdapter.AddressShipViewHolder>() {
     private var lastSelectedPosition = -1
     inner class AddressShipViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

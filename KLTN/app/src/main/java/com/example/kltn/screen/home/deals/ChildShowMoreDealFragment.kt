@@ -5,23 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.kltn.R
-import com.example.kltn.screen.home.adapter.DealAdapter
 import com.example.kltn.screen.home.adapter.ShowMoreDealAdapter
-import com.example.kltn.screen.home.model.DealModel
-import com.example.kltn.screen.home.model.ShowMoreDealModel
-import com.example.kltn.screen.retrofit.GetDataService
-import com.example.kltn.screen.retrofit.RetrofitClientInstance
-import com.example.kltn.screen.retrofit.model.CityModel
-import com.example.kltn.screen.retrofit.reponse.CityReponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.kltn.screen.home.model.BookModel
 
 class ChildShowMoreDealFragment(val tabId:Int) : Fragment(){
     lateinit var recyclerViewSMDeal: RecyclerView
@@ -41,8 +31,8 @@ class ChildShowMoreDealFragment(val tabId:Int) : Fragment(){
         recyclerViewSMDeal.layoutManager = LinearLayoutManager(activity,
             LinearLayoutManager.HORIZONTAL,false)
         recyclerViewSMDeal.layoutManager = GridLayoutManager(activity,2)
-        val arrayList = ArrayList<DealModel>()
-        val listTab0 = ArrayList<DealModel>()
+        val arrayList = ArrayList<BookModel>()
+        val listTab0 = ArrayList<BookModel>()
 
         arrayList.forEach{
             if(it.tabId == tabId)

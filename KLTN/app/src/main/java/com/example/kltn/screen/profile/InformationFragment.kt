@@ -52,7 +52,7 @@ class InformationFragment: Fragment() {
         arrayList.add(InformationModel(4,R.drawable.ic_ma_gioi_thieu,"Mã giới thiệu","Xem thêm",R.drawable.ic_next))
         arrayList.add(InformationModel(5,R.drawable.ic_swap_language,"Đổi ngôn ngữ","Xem thêm",R.drawable.ic_next))
         arrayList.add(InformationModel(6,R.drawable.ic_help,"Hỗ trợ","Xem thêm",R.drawable.ic_next))
-        informationAdapter = InformationAdapter(activity!!,arrayList)
+        informationAdapter = InformationAdapter(context,arrayList)
         recyclerviewIF.adapter = informationAdapter
     }
     private fun loadFragment(fragment: Fragment?): Boolean {

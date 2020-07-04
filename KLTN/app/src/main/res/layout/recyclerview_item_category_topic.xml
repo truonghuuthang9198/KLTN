@@ -23,7 +23,7 @@
         android:gravity="center"
         android:text="Sách Trong Nước"
         android:textColor="#6E6E6E"
-        android:textSize="14sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

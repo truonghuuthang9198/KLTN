@@ -153,7 +153,7 @@ class ShowMoreDealFragment : Fragment(){
             }
 
         }
-        filterAdapter = FilterAdapter(activity!!,arrayListFilter,onActionData!!)
+        filterAdapter = FilterAdapter(context,arrayListFilter,onActionData!!)
         recyclerViewFilter.adapter = filterAdapter
     }
 

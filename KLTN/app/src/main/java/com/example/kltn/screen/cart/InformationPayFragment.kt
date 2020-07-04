@@ -64,7 +64,7 @@ class InformationPayFragment : Fragment() {
         arrayList.add(MethodPayModel("Thẻ Visa/ Master/ JCB",-1))
         arrayList.add(MethodPayModel("Ví ZaloPay",-1))
         arrayList.add(MethodPayModel("Ví Momo",-1))
-        methodPayAdapter = MethodPayAdapter(activity!!,arrayList)
+        methodPayAdapter = MethodPayAdapter(context,arrayList)
         recyclerviewMethodPay.adapter = methodPayAdapter
     }
 }

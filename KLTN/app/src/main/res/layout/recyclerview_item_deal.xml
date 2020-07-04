@@ -10,7 +10,6 @@
     android:padding="10dp"
     android:layout_marginRight="10dp">
 
-
     <ImageView
         android:id="@+id/img_book_deal"
         android:layout_width="150dp"
@@ -39,6 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:maxLines="2"
         android:text="Mary Had A Little Lamb Fin Pup"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="@+id/img_book_deal"
