@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
-import com.example.kltn.screen.profile.AddressFragment
+import com.example.kltn.screen.profile.ManangerAddressFragment
 import com.example.kltn.screen.profile.FavoriteFragment
 import com.example.kltn.screen.profile.model.InformationModel
 
@@ -37,7 +37,7 @@ class InformationAdapter internal constructor(var context: Context?, var Informa
         holder.itemView.setOnClickListener {
             when (current.id) {
                 1 -> {
-                    loadFragment(AddressFragment(),"AddressFragment")
+                    loadFragment(ManangerAddressFragment(),"AddAddressFragment")
                 }
                 2 -> {}
                 3 -> {
