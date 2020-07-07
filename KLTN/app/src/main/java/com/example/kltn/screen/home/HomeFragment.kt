@@ -1,5 +1,6 @@
 package com.example.kltn.screen.home
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kltn.MainActivity
 import com.example.kltn.R
 import com.example.kltn.screen.home.adapter.MenuAdapter
 import com.example.kltn.screen.home.bestbook.BestBookFragment
@@ -27,6 +29,8 @@ class HomeFragment : Fragment() {
     lateinit var menuAdapter: MenuAdapter
     lateinit var btnCategory: ImageView
     private var onActionNotify: OnActionNotify? = null
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -105,11 +109,14 @@ class HomeFragment : Fragment() {
         arrayList.add(MenuModel(10,"Kinh tế",R.drawable.ic_kinhte))
         onActionNotify = object : OnActionNotify {
             override fun onActionNotify() {
-
+//                  sendData?.ChangeStateSuggest()
+//                val mainActivity = HomeFragment()
+//                val bundle = Bundle()
+//                bundle.putInt("setStateSuggest",1)
+//                mainActivity.ar
             }
         }
         menuAdapter = MenuAdapter(context,arrayList,onActionNotify!!)
         recyclerviewMenu.adapter = menuAdapter
     }
-
 }

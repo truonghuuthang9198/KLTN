@@ -90,7 +90,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_ten_address"></EditText>
 
-    <TextView
+    <EditText
         android:id="@+id/edt_tinh_address"
         android:layout_width="match_parent"
         android:layout_height="35dp"
@@ -102,9 +102,9 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_sdt_address"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/edt_sdt_address"></EditText>
 
-    <TextView
+    <EditText
         android:id="@+id/edt_quan_address"
         android:layout_width="match_parent"
         android:layout_height="35dp"
@@ -116,9 +116,9 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_tinh_address"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/edt_tinh_address"></EditText>
 
-    <TextView
+    <EditText
         android:id="@+id/edt_xaphuong_address"
         android:layout_width="match_parent"
         android:layout_height="35dp"
@@ -130,7 +130,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_quan_address"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/edt_quan_address"></EditText>
 
     <EditText
         android:id="@+id/edt_diachinha_address"

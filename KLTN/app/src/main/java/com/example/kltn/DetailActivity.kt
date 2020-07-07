@@ -55,7 +55,7 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         setContentView(R.layout.show_detail_book)
 
         ratingBar = findViewById(R.id.rating)
-        ratingBar.rating = 4F
+        ratingBar.rating = 4.5F
         btnMoveCart = findViewById(R.id.btn_move_cart)
         titlebook = findViewById(R.id.title_book)
         priceOriginBook = findViewById(R.id.tv_priceorigin_showdetail)

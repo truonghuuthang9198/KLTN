@@ -3,6 +3,7 @@ package com.example.kltn;
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
@@ -12,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.kltn.screen.cart.CartFragment
 import com.example.kltn.screen.event.OnActionNotify
 import com.example.kltn.screen.home.HomeFragment
+import com.example.kltn.screen.home.SendData
 import com.example.kltn.screen.notification.FcmPush
 import com.example.kltn.screen.notification.NotificationFragment
 import com.example.kltn.screen.profile.InformationFragment
@@ -19,10 +21,10 @@ import com.example.kltn.screen.profile.ProfileFragment
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance
 import com.example.kltn.screen.retrofit.model.CityModel
-import com.example.kltn.screen.retrofit.reponse.CityReponse
+import com.example.kltn.screen.retrofit.reponse.CityResponse
+import com.example.kltn.screen.retrofit.reponse.DistrictResponse
 import com.example.kltn.screen.suggest.SuggestFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.iid.FirebaseInstanceId
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,7 +32,7 @@ import retrofit2.Response
 
 
 @Suppress("DEPRECATION")
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),SendData {
     private var homeFragment: HomeFragment? = null
     private var profileFragment: ProfileFragment? = null
     private var notificationFragment: NotificationFragment? = null
@@ -44,18 +46,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setDialogFullScreen()
-//        loadListCity()
         navView = findViewById(R.id.nav_view)
         //navView.selectedItemId = R.id.navigation_home
         navView.setOnNavigationItemSelectedListener { menuItem ->
             showFragmentForMenuItem(menuItem.itemId)
             return@setOnNavigationItemSelectedListener true
         }
-        onActionNotify = object : OnActionNotify {
-            override fun onActionNotify() {
-                navView.selectedItemId = R.id.navigation_suggest
-            }
-        }
+//        onActionNotify = object : OnActionNotify {
+//            override fun onActionNotify() {
+//                navView.selectedItemId = R.id.navigation_suggest
+//            }
+//        }
         val intent = getIntent()
         val check = intent.getIntExtra("check", -1)
         if (check == 1) {
@@ -198,31 +199,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadListCity() {
-        val list = mutableListOf<CityModel>()
-        val service = RetrofitClientInstance().getClient()?.create(GetDataService::class.java)
-        val call = service?.getListCity()
-        call?.enqueue(object : Callback<CityReponse> {
-            override fun onFailure(call: Call<CityReponse>, t: Throwable) {
-                Toast.makeText(this@MainActivity, t.message, Toast.LENGTH_LONG).show()
-            }
 
-            override fun onResponse(
-                call: Call<CityReponse>,
-                response: Response<CityReponse>
-            ) {
-
-                response.body()!!.listCity.forEach {
-                    list.add(
-                        CityModel(
-                            it.iD,
-                            it.title
-                        )
-                    )
-                }
-            }
-        })
-    }
 
     override fun onStop() {
         super.onStop()
@@ -233,5 +210,7 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-
+    override fun ChangeStateSuggest() {
+        navView.selectedItemId = R.id.navigation_suggest
+    }
 }

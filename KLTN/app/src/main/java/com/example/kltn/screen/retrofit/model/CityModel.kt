@@ -1,3 +1,7 @@
 package com.example.kltn.screen.retrofit.model
 
-data class CityModel(val id: Int,val title: String)
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class CityModel(val id: Int,val cityname: String): Parcelable
