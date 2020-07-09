@@ -1,11 +1,11 @@
 package com.example.kltn.screen.retrofit
 
-import com.example.kltn.screen.retrofit.reponse.SachResponse
-import com.example.kltn.screen.retrofit.reponse.CityResponse
-import com.example.kltn.screen.retrofit.reponse.DistrictResponse
-import com.example.kltn.screen.retrofit.reponse.WardResponse
+import com.example.kltn.screen.retrofit.model.LoginModel
+import com.example.kltn.screen.retrofit.reponse.*
 import retrofit2.Call
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface GetDataService {
@@ -17,4 +17,8 @@ interface GetDataService {
     fun getListDistrict(@Path("id") id: Int): Call<List<DistrictResponse>>
     @GET("district/{id}/ward")
     fun getListWard(@Path("id") id:Int):Call<List<WardResponse>>
+    @POST("login")
+    fun login(@Body loginModel: LoginModel): Call<LoginResponse>
+
+
 }

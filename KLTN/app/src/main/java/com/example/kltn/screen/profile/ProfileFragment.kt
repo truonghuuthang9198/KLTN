@@ -11,14 +11,16 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.kltn.R
+import com.example.kltn.screen.retrofit.model.CityModel
 import com.facebook.CallbackManager
 import com.google.android.material.tabs.TabLayout
 
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment() , LoginFragment.OnInputSelected {
 
     private var tabLayout: TabLayout? = null
     private var viewPager: ViewPager? = null
+
 
 
     override fun onCreateView(
@@ -28,8 +30,6 @@ class ProfileFragment : Fragment() {
         val view =  inflater.inflate(R.layout.fragment_profile, container, false)
         tabLayout = view.findViewById<TabLayout>(R.id.tabs)
         viewPager = view.findViewById<ViewPager>(R.id.viewpager)
-
-
         setStatePageAdapter()
         return view
     }
@@ -65,6 +65,10 @@ class ProfileFragment : Fragment() {
         viewPager!!.adapter=myViewPageStateAdapter
         tabLayout!!.setupWithViewPager(viewPager,true)
 
+    }
+
+    override fun sendInput(tabid: Int) {
+        viewPager!!.currentItem = tabid
     }
 
 

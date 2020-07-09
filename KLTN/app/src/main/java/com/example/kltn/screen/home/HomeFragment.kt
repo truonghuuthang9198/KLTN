@@ -1,24 +1,24 @@
 package com.example.kltn.screen.home
 
-import android.content.Context
+import android.app.Activity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kltn.MainActivity
 import com.example.kltn.R
+import com.example.kltn.screen.event.OnActionNotify
 import com.example.kltn.screen.home.adapter.MenuAdapter
 import com.example.kltn.screen.home.bestbook.BestBookFragment
 import com.example.kltn.screen.home.deals.DealFragment
 import com.example.kltn.screen.home.model.MenuModel
 import com.example.kltn.screen.home.sgk.SGKFragment
-import com.example.kltn.screen.event.OnActionNotify
+
 
 /**
  * A simple [Fragment] subclass.
@@ -29,8 +29,16 @@ class HomeFragment : Fragment() {
     lateinit var menuAdapter: MenuAdapter
     lateinit var btnCategory: ImageView
     private var onActionNotify: OnActionNotify? = null
+    var sendData: SendData? = null
 
-
+    override fun onAttach(activity: Activity) {
+        super.onAttach(activity)
+        try {
+            sendData = activity as SendData
+        } catch (e: ClassCastException) {
+            throw ClassCastException("$activity must implement onSomeEventListener")
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -109,6 +117,7 @@ class HomeFragment : Fragment() {
         arrayList.add(MenuModel(10,"Kinh tế",R.drawable.ic_kinhte))
         onActionNotify = object : OnActionNotify {
             override fun onActionNotify() {
+                sendData?.ChangeStateSuggest()
 //                  sendData?.ChangeStateSuggest()
 //                val mainActivity = HomeFragment()
 //                val bundle = Bundle()

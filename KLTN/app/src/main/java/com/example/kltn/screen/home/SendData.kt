@@ -1,5 +1,5 @@
 package com.example.kltn.screen.home
 
-public interface SendData {
+interface SendData {
     fun ChangeStateSuggest()
 }

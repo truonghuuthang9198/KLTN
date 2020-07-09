@@ -3,14 +3,17 @@ package com.example.kltn
 import android.content.Intent
 import android.graphics.Paint
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
-import android.widget.*
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.RatingBar
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
@@ -21,10 +24,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.bottomsheet_dialog_addcart.*
 import kotlinx.android.synthetic.main.custom_toolbar.*
-import java.lang.Exception
 import java.text.NumberFormat
 import java.util.*
-import kotlin.collections.ArrayList
+
 
 class DetailActivity() : AppCompatActivity(), Parcelable {
     lateinit var bookModel: BookModel
@@ -34,6 +36,7 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
     lateinit var btnAddProductToCart: Button
     lateinit var titlebook: TextView
     lateinit var pricebook: TextView
+    lateinit var btn_showdetail_xemthem: Button
     lateinit var priceOriginBook: TextView
     lateinit var tv_showdetail_masach: TextView
     lateinit var tv_showdetail_congtyphathanh: TextView
@@ -54,8 +57,8 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.show_detail_book)
 
-        ratingBar = findViewById(R.id.rating)
-        ratingBar.rating = 4.5F
+        ratingBar = findViewById<RatingBar>(R.id.rating)
+        ratingBar.rating = 4F
         btnMoveCart = findViewById(R.id.btn_move_cart)
         titlebook = findViewById(R.id.title_book)
         priceOriginBook = findViewById(R.id.tv_priceorigin_showdetail)
@@ -68,7 +71,7 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         tv_showdetail_ngayxuatban = findViewById(R.id.tv_showdetail_ngayxuatban)
         tv_showdetail_ghichu = findViewById(R.id.tv_showdetail_ghichu)
         img_detail_book = findViewById(R.id.img_detail_book)
-
+        btn_showdetail_xemthem =findViewById(R.id.btn_showdetail_xemthem)
         btnAddProductToCart = findViewById(R.id.btn_add_product_to_cart)
         var check = 0
         btnMoveCart.setOnClickListener {
@@ -82,6 +85,12 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         val intent = getIntent()
         bookModel = intent.getParcelableExtra<BookModel>("deal")
         titlebook.text = bookModel.tenSach
+        //---send data to information product-------------------
+        btn_showdetail_xemthem.setOnClickListener {
+            val intent = Intent(this,InformationProductActivity::class.java)
+            intent.putExtra("InformationBook",bookModel)
+            this.startActivity(intent)
+        }
         //---------------------------------------------------
         val localVN = Locale("vi", "VN")
         val numberFormat = NumberFormat.getCurrencyInstance(localVN)

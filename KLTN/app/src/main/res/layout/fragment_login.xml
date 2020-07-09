@@ -117,6 +117,7 @@
             android:layout_height="wrap_content"
             android:text="@string/ban_chua_co_tk"></TextView>
         <TextView
+            android:id="@+id/tvDangKiTaiKhoan"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="@string/ng_k_t_i_kho_n"

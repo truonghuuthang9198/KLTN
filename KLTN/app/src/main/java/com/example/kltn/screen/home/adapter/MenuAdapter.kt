@@ -22,7 +22,7 @@ import com.example.kltn.screen.home.SendData
 
 class MenuAdapter internal constructor(var context: Context?, var MenuModel: ArrayList<MenuModel>,var onActionNotify: OnActionNotify) :
     RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
-    private var sendData: SendData? = null
+
     inner class MenuViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.tv_name)
         val iconMenu: ImageView = itemView.findViewById(R.id.menu_icon)
@@ -48,9 +48,7 @@ class MenuAdapter internal constructor(var context: Context?, var MenuModel: Arr
                     loadFragment(ShowMoreDealFragment(), "ShowMoreDealFragment")
                 }
                 4 -> {
-                    sendData?.ChangeStateSuggest()
                     EventFireUtil.fireEvent(onActionNotify)
-                    //loadFragment(SuggestFragment(),"SuggestFragment")
                 }
             }
         }

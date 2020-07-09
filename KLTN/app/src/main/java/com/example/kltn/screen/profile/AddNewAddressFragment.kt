@@ -21,7 +21,6 @@ class AddNewAddressFragment() : Fragment(), Parcelable, CityDialog.OnInputSelect
     lateinit var edt_phuong_addnew_address: TextView
     private var idtitleCity: Int = 0
     private var idtitleDistrict: Int = 0
-    private var idtitleWard: Int = 0
 
 
 
@@ -72,8 +71,6 @@ class AddNewAddressFragment() : Fragment(), Parcelable, CityDialog.OnInputSelect
 //            edt_tinh_addnew_address.text = cityModel.cityname
 //        }
 
-
-//        edt_tinh_addnew_address.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
 
         edt_tinh_addnew_address.setOnClickListener {
                 val diaLogCity = CityDialog(1, idtitleCity)
