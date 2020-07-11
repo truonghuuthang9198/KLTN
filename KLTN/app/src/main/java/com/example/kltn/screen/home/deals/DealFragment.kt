@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_deals.*
 /**
  * A simple [Fragment] subclass.
  */
-class DealFragment : Fragment() {
+class DealFragment() : Fragment() {
     lateinit var btnShowMore: Button
     private var tabLayout: TabLayout? = null
     private var viewPager: ViewPager? = null
@@ -64,7 +64,6 @@ class DealFragment : Fragment() {
         myViewPageStateAdapter.addFragment(ChildDealFragment(1),"Sách HOT - Giảm sốc")
         viewPager!!.adapter=myViewPageStateAdapter
         tabLayout!!.setupWithViewPager(viewPager,true)
-
     }
     private fun loadFragment(fragment: Fragment?): Boolean {
         if (fragment != null) {

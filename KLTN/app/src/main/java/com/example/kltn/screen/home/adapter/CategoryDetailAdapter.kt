@@ -9,11 +9,7 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
-import com.example.kltn.screen.home.CategoryFragment
 import com.example.kltn.screen.home.model.CategoryDetailModel
-import com.example.kltn.screen.home.model.CategoryModel
-import datn.datn_expansemanagement.core.app.domain.excecutor.EventFireUtil
-import datn.datn_expansemanagement.core.base.domain.listener.OnActionData
 
 class CategoryDetailAdapter internal constructor(
     var context: Context?,

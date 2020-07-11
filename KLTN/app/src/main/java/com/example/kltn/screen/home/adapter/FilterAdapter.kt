@@ -1,8 +1,6 @@
 package com.example.kltn.screen.home.adapter
 
 import android.content.Context
-import android.content.Intent
-import android.graphics.Paint
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -15,22 +13,18 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
-import com.example.kltn.screen.home.deals.ChildShowMoreDealFragment
-import com.example.kltn.screen.home.deals.ShowMoreDealFragment
-import com.example.kltn.screen.home.deals.ShowMoreDealFragment.Companion.arrayListFilter
 import com.example.kltn.screen.home.model.FilterModel
-import datn.datn_expansemanagement.core.app.domain.excecutor.EventFireUtil
-import datn.datn_expansemanagement.core.base.domain.listener.OnActionData
-import java.text.NumberFormat
-import java.util.*
+import com.example.kltn.screen.event.EventFireUtil
+import com.example.kltn.screen.event.OnActionData
 import kotlin.collections.ArrayList
 
 class FilterAdapter internal constructor(
     var context: Context?,
-    var FilterModel: ArrayList<FilterModel>,var onActionData: OnActionData<FilterModel>
+    var FilterModel: ArrayList<FilterModel>, var onActionData: OnActionData<FilterModel>, var tabId: Int
 ) : RecyclerView.Adapter<FilterAdapter.FilterViewHolder>() {
     companion object {
         var title:String = "Bán Chạy Tuần"
+
     }
     inner class FilterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val titleFilter: TextView = itemView.findViewById(R.id.title_filter)
@@ -39,8 +33,8 @@ class FilterAdapter internal constructor(
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilterViewHolder {
-        val Context = parent.context
-        val layoutInflater = LayoutInflater.from(Context)
+//        val Context = parent.context
+        val layoutInflater = LayoutInflater.from(context)
 
         val cellForRow = layoutInflater.inflate(R.layout.recyclerview_item_filter, parent, false)
         val FilterViewHolder = FilterViewHolder(cellForRow)
@@ -57,12 +51,29 @@ class FilterAdapter internal constructor(
         holder.imgCheckFilter.visibility = View.GONE
 
         holder.itemView.setOnClickListener {
-            arrayListFilter.forEach {
-                it.choose = it.id == current.id
+//            if(tabId == current.tabId) {
+                FilterModel.forEach {
+//                    if(it.tabId == tabId)
+//                    {
+//
+//                    }
+                    it.choose = it.id == current.id
+                    title = current.titleFilter
+                    notifyDataSetChanged()
+                    EventFireUtil.fireEvent(onActionData, current)
+//                }
+
+//                arrayListFilter.forEach {
+//                    if (it.id == current.id && it.tabId == tabId) {
+//                        current.choose == true
+//                    }
+//                }
+//                if (it.id == current.id) {
+//                    title = current.titleFilter
+//
+//
+//                }
             }
-            title = current.titleFilter
-            EventFireUtil.fireEvent(onActionData,current)
-            notifyDataSetChanged()
         }
 
         if (current.choose) {

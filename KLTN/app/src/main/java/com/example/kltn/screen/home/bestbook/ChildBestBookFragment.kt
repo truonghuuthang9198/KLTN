@@ -1,6 +1,7 @@
 package com.example.kltn.screen.home.bestbook
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -74,6 +75,7 @@ class ChildBestBookFragment(val tabId: Int) : Fragment() {
                 listTab0.add(it)
             }
         }
+        Log.d("listTab0",listTab0.toString())
         bestbookAdapter = BestBookAdapter(listTab0)
         recycleviewBestBook.adapter = bestbookAdapter
 

@@ -2,28 +2,17 @@ package com.example.kltn.screen.home.adapter
 
 import com.example.kltn.screen.home.model.CategoryModel
 import android.content.Context
-import android.content.Intent
-import android.graphics.Paint
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
 import com.example.kltn.screen.home.CategoryFragment
-import com.example.kltn.screen.home.deals.ChildShowMoreDealFragment
-import com.example.kltn.screen.home.deals.ShowMoreDealFragment
-import com.example.kltn.screen.home.model.FilterModel
-import datn.datn_expansemanagement.core.app.domain.excecutor.EventFireUtil
-import datn.datn_expansemanagement.core.base.domain.listener.OnActionData
-import java.text.NumberFormat
-import java.util.*
+import com.example.kltn.screen.event.EventFireUtil
+import com.example.kltn.screen.event.OnActionData
 import kotlin.collections.ArrayList
 
 class CategoryAdapter internal constructor(

@@ -19,7 +19,7 @@ import com.example.kltn.screen.retrofit.model.CityModel
 import com.example.kltn.screen.retrofit.reponse.CityResponse
 import com.example.kltn.screen.retrofit.reponse.DistrictResponse
 import com.example.kltn.screen.retrofit.reponse.WardResponse
-import datn.datn_expansemanagement.core.base.domain.listener.OnActionData
+import com.example.kltn.screen.event.OnActionData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

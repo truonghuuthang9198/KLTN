@@ -11,10 +11,9 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
-import com.example.kltn.screen.home.model.FilterModel
 import com.example.kltn.screen.profile.adapter.ManangerAddressAdapter
 import com.example.kltn.screen.profile.model.ManangerAddressModel
-import datn.datn_expansemanagement.core.base.domain.listener.OnActionData
+import com.example.kltn.screen.event.OnActionData
 
 class ManangerAddressFragment : Fragment() {
     lateinit var btnBack_Address: ImageView
@@ -61,7 +60,7 @@ class ManangerAddressFragment : Fragment() {
         arrayList.add(ManangerAddressModel("Trương Hữu","Thắng","73/32/13 Lê Trọng Tấn, Phường Tây Thạnh, Quận Tân Phú, TP HCM","0384180187","Địa chỉ thanh toán mặc định"))
         arrayList.add(ManangerAddressModel("Lê Thanh","Tuyên","115/22 Lê Trọng Tấn, Phường Sơn Kỳ, Quận Tân Phú, TP HCM","0384180187","Địa chỉ giao hàng mặc định"))
         arrayList.add(ManangerAddressModel("Lê Hoàng","Phúc","115/66 Nguyễn Đỗ Cung, Phường Tây Thạnh, Quận Tân Phú, TP HCM","0384180667","Địa chỉ khác"))
-        onActionData = object : OnActionData<ManangerAddressModel>{
+        onActionData = object : OnActionData<ManangerAddressModel> {
             override fun onAction(data: ManangerAddressModel) {
                 loadFragment(UpdateAddressFragment(),"UpdateAddressFragment")
             }

@@ -10,8 +10,8 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
 import com.example.kltn.screen.profile.model.ManangerAddressModel
-import datn.datn_expansemanagement.core.app.domain.excecutor.EventFireUtil
-import datn.datn_expansemanagement.core.base.domain.listener.OnActionData
+import com.example.kltn.screen.event.EventFireUtil
+import com.example.kltn.screen.event.OnActionData
 import kotlin.collections.ArrayList
 
 class ManangerAddressAdapter internal constructor(var context: Context?, var listAddresses: ArrayList<ManangerAddressModel>, var onActionData: OnActionData<ManangerAddressModel>) :

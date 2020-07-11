@@ -1,21 +1,13 @@
 package com.example.kltn.screen.retrofit.model
 
-import android.graphics.Paint
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
-import com.example.kltn.screen.home.adapter.BestBookAdapter
-import com.example.kltn.screen.home.model.FilterModel
-import com.example.kltn.screen.profile.AddNewAddressFragment
-import datn.datn_expansemanagement.core.app.domain.excecutor.EventFireUtil
-import datn.datn_expansemanagement.core.base.domain.listener.OnActionData
-import java.text.NumberFormat
-import java.util.*
+import com.example.kltn.screen.event.EventFireUtil
+import com.example.kltn.screen.event.OnActionData
 import kotlin.collections.ArrayList
 
 class CityAdapter internal constructor(val listCity: ArrayList<CityModel>,var onActionData: OnActionData<CityModel>): RecyclerView.Adapter<CityAdapter.CityViewHolder>(){

@@ -6,21 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.recyclerview.widget.AdapterListUpdateCallback
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
 import com.example.kltn.screen.home.adapter.CategoryAdapter
 import com.example.kltn.screen.home.adapter.CategoryDetailAdapter
-import com.example.kltn.screen.home.bestbook.BestBookFragment
-import com.example.kltn.screen.home.deals.DealFragment
-import com.example.kltn.screen.home.deals.ShowMoreDealFragment
 import com.example.kltn.screen.home.model.CategoryDetailModel
 import com.example.kltn.screen.home.model.CategoryModel
-import com.example.kltn.screen.home.model.FilterModel
-import com.example.kltn.screen.home.sgk.SGKFragment
-import datn.datn_expansemanagement.core.base.domain.listener.OnActionData
+import com.example.kltn.screen.event.OnActionData
 
 class CategoryFragment : Fragment() {
     lateinit var recyclerViewTopic: RecyclerView
