@@ -20,6 +20,7 @@ import com.example.kltn.R
 import com.example.kltn.screen.cart.CartFragment
 import com.example.kltn.screen.cart.model.CartModel
 import com.example.kltn.screen.cart.roomdatabase.CartViewModel
+import com.squareup.picasso.Picasso
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -80,7 +81,7 @@ class CartAdapter internal constructor(var context: Context?,var listCart: Array
             notifyItemRangeChanged(position,listCart.size)
             reLoadFragment()
         }
-        holder.igmsach.setImageResource(current.image)
+        Picasso.get().load(current.image).into(holder.igmsach)
     }
     fun updateThanhTien()
     {

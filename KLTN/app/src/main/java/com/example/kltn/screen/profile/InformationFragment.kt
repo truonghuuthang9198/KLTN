@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,13 +15,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
 import com.example.kltn.screen.profile.adapter.InformationAdapter
 import com.example.kltn.screen.profile.model.InformationModel
+import com.example.kltn.screen.retrofit.reponse.CheckLoginResponse
+import com.example.kltn.screen.retrofit.reponse.LoginResponse
 
 @Suppress("DEPRECATION")
-class InformationFragment: Fragment() {
+class InformationFragment(val responseUser: LoginResponse): Fragment() {
     lateinit var recyclerviewIF: RecyclerView
     lateinit var informationAdapter: InformationAdapter
     lateinit var btnDangXuat: Button
-
+    lateinit var tv_hoten_infomation: TextView
+    lateinit var tv_email_infomation: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,6 +34,10 @@ class InformationFragment: Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_information_user, container, false)
         btnDangXuat = view.findViewById(R.id.btn_dangxuat)
+        tv_hoten_infomation = view.findViewById(R.id.tv_hoten_infomation)
+        tv_email_infomation = view.findViewById(R.id.tv_email_infomation)
+        tv_hoten_infomation.text = responseUser.firstName
+        tv_email_infomation.text = responseUser.username
         btnDangXuat.setOnClickListener {
             val pref = PreferenceManager.getDefaultSharedPreferences(activity!!)
             val edit = pref.edit()

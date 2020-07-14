@@ -1,41 +1,71 @@
-package com.example.kltn.screen.home.bestbook
+package com.example.kltn
 
+import android.content.Intent
+import android.graphics.Paint
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.view.WindowManager
+import android.widget.RatingBar
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kltn.R
-import com.example.kltn.screen.home.adapter.BestBookAdapter
-import com.example.kltn.screen.home.adapter.SGKAdapter
-import com.example.kltn.screen.home.model.BestBookModel
+import com.example.kltn.screen.SearchAdapter
+import com.example.kltn.screen.cart.model.CartModel
+import com.example.kltn.screen.cart.roomdatabase.CartViewModel
 import com.example.kltn.screen.home.model.BookModel
-import com.example.kltn.screen.home.model.SGKModel
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.custom_toolbar.*
+import java.text.NumberFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
-class ChildBestBookFragment(val tabId: Int) : Fragment() {
-    lateinit var recycleviewBestBook: RecyclerView
-    lateinit var bestbookAdapter: BestBookAdapter
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_child_bestbook, container, false)
-        recycleviewBestBook = view!!.findViewById<RecyclerView>(R.id.recyclerview_bestbook)
-        setUpRecyclerView()
-        return view
+class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
+    lateinit var recyclerViewSearch: RecyclerView
+    lateinit var searchAdapter: SearchAdapter
+    private var editSearchView: SearchView? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_search)
+        setDialogFullScreen()
+        recyclerViewSearch = findViewById(R.id.recyclerview_search)
+        editSearchView = findViewById(R.id.search_text)
+        editSearchView!!.setOnQueryTextListener(this)
+//        val intent = getIntent()
+//        val query = intent.getStringExtra("keySearch")
+//        editSearchView!!.setQuery(query,true)
+        setUpRecyclerview()
     }
 
-    fun setUpRecyclerView() {
-        recycleviewBestBook.layoutManager = LinearLayoutManager(
-            activity,
-            LinearLayoutManager.HORIZONTAL, false
-        )
-        val arrayList = ArrayList<BookModel>()
-        val listTab0 = ArrayList<BookModel>()
-        arrayList.add(
+    override fun onQueryTextSubmit(query: String?): Boolean {
+
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+
+        return false
+    }
+
+    private fun setDialogFullScreen() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            this.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+            this.window?.statusBarColor = this.resources.getColor(R.color.colorPrimary)
+            this.window?.decorView?.systemUiVisibility =
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        }
+    }
+
+    private fun setUpRecyclerview() {
+        recyclerViewSearch.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        recyclerViewSearch.layoutManager = GridLayoutManager(this, 2)
+        val arrayListSearch = ArrayList<BookModel>()
+        arrayListSearch.add(
             BookModel(
                 0,
                 0,
@@ -55,10 +85,10 @@ class ChildBestBookFragment(val tabId: Int) : Fragment() {
                 "188 Trang",
                 "Sket Dance - Quái Kiệt Học Đường - Tập 30",
                 "Còn hàng",
-                1
+                3
             )
         )
-        arrayList.add(
+        arrayListSearch.add(
             BookModel(
                 1,
                 0,
@@ -80,10 +110,10 @@ class ChildBestBookFragment(val tabId: Int) : Fragment() {
                 "304 Trang",
                 "Mr. Lemoncello's All-Star Breakout Game (Mr. Lemoncello'S Library)",
                 "Còn hàng",
-                3
+                4
             )
         )
-        arrayList.add(
+        arrayListSearch.add(
             BookModel(
                 2,
                 0,
@@ -103,17 +133,11 @@ class ChildBestBookFragment(val tabId: Int) : Fragment() {
                 "188 Trang",
                 "Sorcery of Thorns",
                 "Còn hàng",
-                2
+                5
             )
         )
-
-        arrayList.forEach {
-            if (it.tabId == tabId) {
-                listTab0.add(it)
-            }
-        }
-        bestbookAdapter = BestBookAdapter(listTab0)
-        recycleviewBestBook.adapter = bestbookAdapter
+        searchAdapter = SearchAdapter(arrayListSearch)
+        recyclerViewSearch.adapter = searchAdapter
     }
 
 }

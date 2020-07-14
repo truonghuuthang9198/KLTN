@@ -58,7 +58,7 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         setContentView(R.layout.show_detail_book)
 
         ratingBar = findViewById<RatingBar>(R.id.rating)
-        ratingBar.rating = 4F
+
         btnMoveCart = findViewById(R.id.btn_move_cart)
         titlebook = findViewById(R.id.title_book)
         priceOriginBook = findViewById(R.id.tv_priceorigin_showdetail)
@@ -111,9 +111,9 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         tv_showdetail_nhaxuatban.text = bookModel.maNhaXuatBan
         tv_showdetail_ngayxuatban.text = bookModel.ngayXuatBan
         tv_showdetail_ghichu.text = bookModel.ghiChu
+        ratingBar.rating = bookModel.soSao.toFloat()
         Picasso.get().load(bookModel.hinhAnh).into(img_detail_book)
         try {
-
             btnAddProductToCart.setOnClickListener {
                 val checkItem = cartViewModel.checkExistList(bookModel.maSach)
                 if (checkItem == null) {
@@ -123,7 +123,7 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
                             bookModel.tenSach,
                             1,
                             bookModel.giaGiamDS,
-                            R.drawable.vd3_sach
+                            bookModel.hinhAnh
                         )
                     )
                     setUpBottomSheetDiaLog()

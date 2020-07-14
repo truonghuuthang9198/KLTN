@@ -1,8 +1,11 @@
 package com.example.kltn;
 
+import android.R.attr
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.util.JsonToken
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
@@ -14,25 +17,25 @@ import com.example.kltn.screen.cart.CartFragment
 import com.example.kltn.screen.event.OnActionNotify
 import com.example.kltn.screen.home.HomeFragment
 import com.example.kltn.screen.home.SendData
-import com.example.kltn.screen.notification.FcmPush
 import com.example.kltn.screen.notification.NotificationFragment
 import com.example.kltn.screen.profile.InformationFragment
+import com.example.kltn.screen.profile.LoginFragment
 import com.example.kltn.screen.profile.ProfileFragment
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance
-import com.example.kltn.screen.retrofit.model.CityModel
-import com.example.kltn.screen.retrofit.reponse.CityResponse
-import com.example.kltn.screen.retrofit.reponse.DistrictResponse
+import com.example.kltn.screen.retrofit.reponse.CheckLoginResponse
+import com.example.kltn.screen.retrofit.reponse.LoginResponse
 import com.example.kltn.screen.suggest.SuggestFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.iid.FirebaseInstanceId
+import com.onesignal.OneSignal
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
 @Suppress("DEPRECATION")
-class MainActivity : AppCompatActivity(),SendData {
+class MainActivity : AppCompatActivity(), SendData {
     private var homeFragment: HomeFragment? = null
     private var profileFragment: ProfileFragment? = null
     private var notificationFragment: NotificationFragment? = null
@@ -45,6 +48,13 @@ class MainActivity : AppCompatActivity(),SendData {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // OneSignal Initialization
+        OneSignal.startInit(this)
+            .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+            .unsubscribeWhenNotificationsAreDisabled(true)
+            .init()
+
         setDialogFullScreen()
         navView = findViewById(R.id.nav_view)
         //navView.selectedItemId = R.id.navigation_home
@@ -65,11 +75,10 @@ class MainActivity : AppCompatActivity(),SendData {
             navView.selectedItemId = R.id.navigation_home
         }
 
-        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
-            val token = instanceIdResult.token
-            println(token)
-        }
-
+//        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
+//            val token = instanceIdResult.token
+//            println(token)
+//        }
 
 
 //        val postListener = object : ValueEventListener {
@@ -107,6 +116,7 @@ class MainActivity : AppCompatActivity(),SendData {
         val ft = this.supportFragmentManager.beginTransaction()
         val pref = PreferenceManager.getDefaultSharedPreferences(this)
         var checkLogin = pref.getBoolean("CheckLogin", false)
+        var token = pref.getString("Token","")
         when (menuItem) {
             R.id.navigation_home -> if (homeFragment != null && homeFragment?.isAdded!!) {
                 ft.show(homeFragment!!)
@@ -117,11 +127,15 @@ class MainActivity : AppCompatActivity(),SendData {
             }
 
             R.id.navigation_profile -> {
-                if (!checkLogin) {
-                    loadFragment(ProfileFragment())
-                } else {
-                    loadFragment(InformationFragment())
+                if (token != null) {
+                    getUserwithToken(token)
                 }
+//                if (token == null) {
+//                    loadFragment(ProfileFragment())
+//                } else {
+//
+//                    loadFragment(InformationFragment())
+//                }
             }
 
             R.id.navigation_suggest -> if (suggestFragment != null && suggestFragment?.isAdded!!) {
@@ -200,7 +214,6 @@ class MainActivity : AppCompatActivity(),SendData {
     }
 
 
-
     override fun onStop() {
         super.onStop()
 //        FcmPush.instance.sendMessage(
@@ -213,4 +226,39 @@ class MainActivity : AppCompatActivity(),SendData {
     override fun ChangeStateSuggest() {
         navView.selectedItemId = R.id.navigation_suggest
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        for (fragment in supportFragmentManager.fragments) {
+            for (fragment in supportFragmentManager.fragments) {
+                fragment.onActivityResult(requestCode, resultCode, data)
+            }
+        }
+    }
+
+    fun getUserwithToken(token: String) {
+        val service = RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
+        val call = service?.getUserWithToken("Bearer "+token)
+        call?.enqueue(object : Callback<CheckLoginResponse> {
+            override fun onFailure(call: Call<CheckLoginResponse>, t: Throwable) {
+                Toast.makeText(this@MainActivity, t.message, Toast.LENGTH_LONG).show()
+            }
+            override fun onResponse(
+                call: Call<CheckLoginResponse>,
+                response: Response<CheckLoginResponse>
+            ) {
+                if(response.body()?.success == true)
+                {
+                    val response = response.body()
+//                    val responseLogin = LoginResponse(response!!.khachHang.tenKhachHang,response.khachHang.)
+//                    loadFragment(InformationFragment())
+                }
+                else
+                {
+                    loadFragment(LoginFragment())
+                }
+            }
+        })
+    }
+
 }

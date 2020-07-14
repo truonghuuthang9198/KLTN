@@ -33,7 +33,6 @@ class FilterAdapter internal constructor(
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilterViewHolder {
-//        val Context = parent.context
         val layoutInflater = LayoutInflater.from(context)
 
         val cellForRow = layoutInflater.inflate(R.layout.recyclerview_item_filter, parent, false)
@@ -51,28 +50,11 @@ class FilterAdapter internal constructor(
         holder.imgCheckFilter.visibility = View.GONE
 
         holder.itemView.setOnClickListener {
-//            if(tabId == current.tabId) {
                 FilterModel.forEach {
-//                    if(it.tabId == tabId)
-//                    {
-//
-//                    }
                     it.choose = it.id == current.id
                     title = current.titleFilter
                     notifyDataSetChanged()
                     EventFireUtil.fireEvent(onActionData, current)
-//                }
-
-//                arrayListFilter.forEach {
-//                    if (it.id == current.id && it.tabId == tabId) {
-//                        current.choose == true
-//                    }
-//                }
-//                if (it.id == current.id) {
-//                    title = current.titleFilter
-//
-//
-//                }
             }
         }
 

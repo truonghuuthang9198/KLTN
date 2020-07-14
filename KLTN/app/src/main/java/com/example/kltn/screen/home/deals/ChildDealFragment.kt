@@ -34,8 +34,8 @@ class ChildDealFragment(val tabId: Int) : Fragment() {
             activity,
             LinearLayoutManager.HORIZONTAL, false
         )
-        //loadListSach()
-        setUpRecyclerView()
+        loadListSach()
+        //setUpRecyclerView()
         return view
     }
 
@@ -61,7 +61,7 @@ class ChildDealFragment(val tabId: Int) : Fragment() {
                 2,
                 "188 Trang",
                 "Sket Dance - Quái Kiệt Học Đường - Tập 30",
-                "Còn hàng"
+                "Còn hàng", 2
             )
         )
         arrayList.add(
@@ -85,7 +85,8 @@ class ChildDealFragment(val tabId: Int) : Fragment() {
                 2,
                 "304 Trang",
                 "Mr. Lemoncello's All-Star Breakout Game (Mr. Lemoncello'S Library)",
-                "Còn hàng"
+                "Còn hàng",
+                2
             )
         )
         arrayList.add(
@@ -107,7 +108,8 @@ class ChildDealFragment(val tabId: Int) : Fragment() {
                 2,
                 "188 Trang",
                 "Sorcery of Thorns",
-                "Còn hàng"
+                "Còn hàng",
+                3
             )
         )
 //        arrayList.add(
@@ -184,7 +186,8 @@ class ChildDealFragment(val tabId: Int) : Fragment() {
                     it.soLuong,
                     it.soTrang,
                     it.tenSach,
-                    it.tinhTrang
+                    it.tinhTrang,
+                    it.soSao
                 )
             )
             id++

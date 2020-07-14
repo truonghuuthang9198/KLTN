@@ -181,7 +181,6 @@ class ChildShowMoreDealFragment(val tabId: Int) : Fragment() {
                 titleFilter.text = data.titleFilter
             }
         }
-        Log.d("ThangTruong",arrrayListFilter.toString())
         filterAdapter = FilterAdapter(context, arrrayListFilter, onActionData!!, tabId)
         recyclerViewFilter.adapter = filterAdapter
     }

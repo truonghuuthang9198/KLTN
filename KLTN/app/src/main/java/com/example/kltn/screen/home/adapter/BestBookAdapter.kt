@@ -1,5 +1,6 @@
 package com.example.kltn.screen.home.adapter
 
+import android.content.Intent
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
@@ -7,14 +8,17 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kltn.DetailActivity
 import com.example.kltn.R
 import com.example.kltn.screen.home.model.BestBookModel
+import com.example.kltn.screen.home.model.BookModel
 import com.example.kltn.screen.home.model.SGKModel
+import com.squareup.picasso.Picasso
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class BestBookAdapter internal constructor(var BestBookModel: ArrayList<BestBookModel>)
+class BestBookAdapter internal constructor(var BestBookModel: ArrayList<BookModel>)
     : RecyclerView.Adapter<BestBookAdapter.BestBookViewHolder>(){
     inner class BestBookViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
     {
@@ -29,12 +33,12 @@ class BestBookAdapter internal constructor(var BestBookModel: ArrayList<BestBook
 
         val cellForRow = layoutInflater.inflate(R.layout.recyclerview_item_bestbook,parent,false)
         val BestBookViewHolder = BestBookViewHolder(cellForRow)
-//        SGKViewHolder.itemView.setOnClickListener {
-//            var dealModel = DealsModel.get(SGKViewHolder.adapterPosition)
-//            val intent = Intent(Context, DetailActivity::class.java)
-//            intent.putExtra("deal",dealModel)
-//            Context.startActivity(intent)
-//        }
+        BestBookViewHolder.itemView.setOnClickListener {
+            var dealModel = BestBookModel.get(BestBookViewHolder.adapterPosition)
+            val intent = Intent(Context, DetailActivity::class.java)
+            intent.putExtra("deal",dealModel)
+            Context.startActivity(intent)
+        }
         return BestBookViewHolder
     }
 
@@ -42,15 +46,15 @@ class BestBookAdapter internal constructor(var BestBookModel: ArrayList<BestBook
 
     override fun onBindViewHolder(holder: BestBookViewHolder, position: Int) {
         val current = BestBookModel[position]
-        holder.titleBook.text = current.titleBestBook
+        holder.titleBook.text = current.tenSach
         val localVN = Locale("vi","VN")
         val numberFormat = NumberFormat.getCurrencyInstance(localVN)
-        val priceReducedfm =numberFormat.format(current.priceReducedBB)
+        val priceReducedfm =numberFormat.format(current.giaGiamDS)
         holder.priceReducedBook.text = priceReducedfm
-        val priceBookfm =numberFormat.format(current.priceBB)
+        val priceBookfm =numberFormat.format(current.giaban)
         holder.priceBook.text = priceBookfm
         holder.priceBook.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-        holder.imgBookDeal.setImageResource(current.imgBestBook)
+        Picasso.get().load(current.hinhAnh).into(holder.imgBookDeal)
 
     }
 }

@@ -18,6 +18,7 @@ import com.example.kltn.screen.cart.CartFragment
 import com.example.kltn.screen.cart.model.CartModel
 import com.example.kltn.screen.cart.model.CheckBillModel
 import com.example.kltn.screen.cart.roomdatabase.CartViewModel
+import com.squareup.picasso.Picasso
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -48,6 +49,6 @@ class CheckListBillAdapter internal constructor(var context: Context?, var listB
         val numberFormat = NumberFormat.getCurrencyInstance(localVN)
         val thanhtienfm = numberFormat.format(current.giaTien)
         holder.giatienCheckBill.text = thanhtienfm
-        holder.igmsachCheckBill.setImageResource(current.image)
+        Picasso.get().load(current.image).into(holder.igmsachCheckBill)
     }
 }

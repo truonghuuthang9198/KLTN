@@ -19,5 +19,5 @@ data class CartModel(
     @ColumnInfo(name= "giaTien")
     val giaTien: Double,
     @ColumnInfo(name ="image")
-    val image: Int
+    val image: String
 ) : Parcelable

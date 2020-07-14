@@ -14,6 +14,9 @@ import com.example.kltn.R
 import com.example.kltn.screen.profile.adapter.ManangerAddressAdapter
 import com.example.kltn.screen.profile.model.ManangerAddressModel
 import com.example.kltn.screen.event.OnActionData
+import com.example.kltn.screen.profile.model.SendArrayAddress
+import de.greenrobot.event.EventBus
+
 
 class ManangerAddressFragment : Fragment() {
     lateinit var btnBack_Address: ImageView

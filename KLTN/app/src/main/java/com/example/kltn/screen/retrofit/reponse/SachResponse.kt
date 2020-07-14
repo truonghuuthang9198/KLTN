@@ -42,7 +42,9 @@ data class SachResponse(
     @SerializedName("theLoai")
     val theLoai: TheLoai,
     @SerializedName("tinhTrang")
-    val tinhTrang: String
+    val tinhTrang: String,
+    @SerializedName("soSao")
+    val soSao: Int
 ) {
     data class CongTyPhatHanh(
         @SerializedName("diaChi")

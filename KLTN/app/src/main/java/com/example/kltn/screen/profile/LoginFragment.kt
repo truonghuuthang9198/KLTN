@@ -28,6 +28,7 @@ import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
+import com.onesignal.OneSignal
 import kotlinx.android.synthetic.main.fragment_login.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -74,28 +75,39 @@ class LoginFragment : Fragment() {
             val tendn = edit_email_sdt.text.toString()
             val mk = edit_password.text.toString()
             //----Login----------------------
-//            val checklogin = LoginModel(tendn,mk)
-//            val service = RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
-//            val call = service?.login(checklogin)
-//            call?.enqueue(object : Callback<LoginResponse> {
-//                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-//                    Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
-//                }
-//
-//                override fun onResponse(
-//                    call: Call<LoginResponse>,
-//                    response: Response<LoginResponse>
-//                ) {
-//                    Log.d("aaa",response.body()!!.message.toString())
-//                    loadFragment(InformationFragment())
-//                }
-//            })
-            loadFragment(InformationFragment())
-//            val pref = PreferenceManager.getDefaultSharedPreferences(activity!!)
-//            val edit = pref.edit()
-//            edit.putBoolean("CheckLogin",true)
-//            edit.apply()
+            val checklogin = LoginModel(tendn,mk)
+            val service = RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
+            val call = service?.login(checklogin)
+            call?.enqueue(object : Callback<LoginResponse> {
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                    Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
+                }
+                override fun onResponse(
+                    call: Call<LoginResponse>,
+                    response: Response<LoginResponse>
+                ) {
+                    if ( response.isSuccessful) {
+                        val pref = PreferenceManager.getDefaultSharedPreferences(activity!!)
+                        val edit = pref.edit()
+                        edit.putString("Token",response.body()!!.token)
+                        edit.apply()
+                        loadFragment(InformationFragment(response.body()!!))
+                    }
+                    else
+                    {
+                        Toast.makeText(context,"Sai tài khoản hoặc mật khẩu",Toast.LENGTH_LONG).show()
+                    }
+                }
+            })
+//          val status = OneSignal.getPermissionSubscriptionState()
+////        status.permissionStatus.enabled
+////        status.subscriptionStatus.subscribed
+////        status.subscriptionStatus.userSubscriptionSetting
+////        status.subscriptionStatus.userId
+//          Log.d("Thang",status.subscriptionStatus.userId)
+//          loadFragment(InformationFragment())
         }
+
         tvDangKiTaiKhoan.setOnClickListener {
             mOnInputSelected!!.sendInput(2)
         }
@@ -106,15 +118,12 @@ class LoginFragment : Fragment() {
                     handleFacebookAccessToken(result?.accessToken)
                     Toast.makeText(activity!!,result!!.toString(),Toast.LENGTH_LONG).show()
                 }
-
                 override fun onCancel() {
                     TODO("Not yet implemented")
                 }
-
                 override fun onError(error: FacebookException?) {
                     TODO("Not yet implemented")
                 }
-
             })
 //            val pref = PreferenceManager.getDefaultSharedPreferences(activity!!)
 //            val edit = pref.edit()
@@ -131,7 +140,7 @@ class LoginFragment : Fragment() {
             task ->
             if (task.isSuccessful)
             {
-                loadFragment(InformationFragment())
+//                loadFragment(InformationFragment())
             }
         }
     }

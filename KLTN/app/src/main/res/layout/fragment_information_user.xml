@@ -120,7 +120,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView23"></TextView>
 
         <TextView
-            android:id="@+id/textView27"
+            android:id="@+id/tv_capdothanhvien"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"

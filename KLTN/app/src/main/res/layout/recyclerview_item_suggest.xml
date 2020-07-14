@@ -9,7 +9,7 @@
 
     <ImageView
         android:id="@+id/img_book_suggest"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="150dp"
         android:src="@drawable/vd3_sach"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,7 +18,7 @@
 
     <TextView
         android:id="@+id/title_book_suggest"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Mary Had A Little Lamb Fin Pup"
@@ -40,10 +40,11 @@
 
     <TextView
         android:id="@+id/price_book_suggest"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="12.000 đ"
+        app:layout_constraintEnd_toEndOf="@+id/priceReduced_book_suggest"
         app:layout_constraintStart_toStartOf="@+id/title_book_suggest"
         app:layout_constraintTop_toBottomOf="@+id/priceReduced_book_suggest"></TextView>
 
@@ -60,15 +61,22 @@
 
     <RatingBar
         android:id="@+id/star_book_suggest"
-        style="@style/MyRattingBar"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="40dp"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginLeft="55dp"
         android:isIndicator="true"
         android:numStars="5"
+        android:progressBackgroundTint="#000000"
+        android:progressTint="@color/colorPrimary"
+        android:rating="3.5"
+        android:scaleX="1"
+        android:scaleY="1"
         android:stepSize="0.5"
+        android:transformPivotX="0dp"
+        android:transformPivotY="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/priceReduced_book_suggest"
+        app:layout_constraintEnd_toEndOf="@+id/img_book_suggest"
         app:layout_constraintStart_toEndOf="@+id/priceReduced_book_suggest"
         app:layout_constraintTop_toTopOf="@+id/priceReduced_book_suggest" />
 </androidx.constraintlayout.widget.ConstraintLayout>

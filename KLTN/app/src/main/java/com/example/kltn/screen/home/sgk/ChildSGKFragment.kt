@@ -52,7 +52,9 @@ class ChildSGKFragment(val tabId: Int) : Fragment() {
                 2,
                 "188 Trang",
                 "Sket Dance - Quái Kiệt Học Đường - Tập 30",
-                "Còn hàng"
+                "Còn hàng",
+                4
+
             )
         )
         arrayList.add(
@@ -76,7 +78,8 @@ class ChildSGKFragment(val tabId: Int) : Fragment() {
                 2,
                 "304 Trang",
                 "Mr. Lemoncello's All-Star Breakout Game (Mr. Lemoncello'S Library)",
-                "Còn hàng"
+                "Còn hàng",
+                5
             )
         )
         arrayList.add(
@@ -98,7 +101,8 @@ class ChildSGKFragment(val tabId: Int) : Fragment() {
                 2,
                 "188 Trang",
                 "Sorcery of Thorns",
-                "Còn hàng"
+                "Còn hàng",
+                2
             )
         )
         arrayList.add(
@@ -120,7 +124,8 @@ class ChildSGKFragment(val tabId: Int) : Fragment() {
                 2,
                 "188 Trang",
                 "Sorcery of Thorns",
-                "Còn hàng"
+                "Còn hàng",
+                2
             )
         )
         arrayList.add(
@@ -142,7 +147,9 @@ class ChildSGKFragment(val tabId: Int) : Fragment() {
                 2,
                 "188 Trang",
                 "Sorcery of Thorns",
-                "Còn hàng"
+                "Còn hàng",
+                4
+
             )
         )
         arrayList.add(
@@ -164,7 +171,8 @@ class ChildSGKFragment(val tabId: Int) : Fragment() {
                 2,
                 "188 Trang",
                 "Sorcery of Thorns",
-                "Còn hàng"
+                "Còn hàng",
+                3
             )
         )
         arrayList.add(
@@ -186,7 +194,8 @@ class ChildSGKFragment(val tabId: Int) : Fragment() {
                 2,
                 "188 Trang",
                 "Sorcery of Thorns",
-                "Còn hàng"
+                "Còn hàng",
+            2
             )
         )
         arrayList.add(
@@ -208,7 +217,8 @@ class ChildSGKFragment(val tabId: Int) : Fragment() {
                 2,
                 "188 Trang",
                 "Sorcery of Thorns",
-                "Còn hàng"
+                "Còn hàng",
+                3
             )
         )
         arrayList.add(
@@ -230,7 +240,8 @@ class ChildSGKFragment(val tabId: Int) : Fragment() {
                 2,
                 "188 Trang",
                 "Sorcery of Thorns",
-                "Còn hàng"
+                "Còn hàng",
+                4
             )
         )
         arrayList.add(
@@ -252,7 +263,8 @@ class ChildSGKFragment(val tabId: Int) : Fragment() {
                 2,
                 "188 Trang",
                 "Sorcery of Thorns",
-                "Còn hàng"
+                "Còn hàng",
+                4
             )
         )
         arrayList.add(
@@ -274,7 +286,8 @@ class ChildSGKFragment(val tabId: Int) : Fragment() {
                 2,
                 "188 Trang",
                 "Sorcery of Thorns",
-                "Còn hàng"
+                "Còn hàng",
+                1
             )
         )
         arrayList.add(
@@ -296,7 +309,8 @@ class ChildSGKFragment(val tabId: Int) : Fragment() {
                 2,
                 "188 Trang",
                 "Sorcery of Thorns",
-                "Còn hàng"
+                "Còn hàng",
+                3
             )
         )
         arrayList.forEach {

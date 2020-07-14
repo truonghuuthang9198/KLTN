@@ -113,12 +113,16 @@
         android:orientation="horizontal"
         android:gravity="center">
         <TextView
-            android:layout_width="160dp"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/ban_chua_co_tk"></TextView>
         <TextView
+            android:layout_weight="1"
             android:id="@+id/tvDangKiTaiKhoan"
-            android:layout_width="150dp"
+            android:gravity="left"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/ng_k_t_i_kho_n"
             android:background="?attr/actionBarItemBackground"

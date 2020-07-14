@@ -17,7 +17,7 @@ class ChangePasswordFragment : Fragment() {
     lateinit var edt_nhapmkcu: EditText
     lateinit var edt_nhapmatkhaumoi: EditText
     lateinit var edt_xacnhanmkmoi: EditText
-    lateinit var btn_back_doimatkhau: Button
+    lateinit var btn_back_doimatkhau: ImageView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
