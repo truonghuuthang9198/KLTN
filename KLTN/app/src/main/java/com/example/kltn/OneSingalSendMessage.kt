@@ -15,11 +15,12 @@ class OneSingalSendMessage : Application() {
             .unsubscribeWhenNotificationsAreDisabled(true)
             .init()
         val status = OneSignal.getPermissionSubscriptionState()
+        Log.d("Thang",status.subscriptionStatus.userId)
 //        status.permissionStatus.enabled
 //        status.subscriptionStatus.subscribed
 //        status.subscriptionStatus.userSubscriptionSetting
 //        status.subscriptionStatus.userId
-        Log.d("Thang",status.subscriptionStatus.userId)
+
 //        status.subscriptionStatus.pushToken
     }
 }

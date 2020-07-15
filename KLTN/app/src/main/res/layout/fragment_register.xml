@@ -1,98 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".screen.profile.RegisterFragment">
 
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/so_dien_thoai"
-        android:textColor="#000000"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:layout_marginStart="10dp"></TextView>
-
-    <com.google.android.material.textfield.TextInputLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/edit_sdt_dangki"
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/custom_edit_text"
-            android:textSize="15sp"
-            android:gravity="center_vertical"
-            android:paddingLeft="5dp"
-            android:hint="@string/nhap_so_dien_thoai"
-            android:inputType="textEmailAddress"></EditText>
-    </com.google.android.material.textfield.TextInputLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/m_t_kh_u"
-        android:textColor="#000000"
-        android:textStyle="bold"
-        android:textSize="16sp"></TextView>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:passwordToggleEnabled="true"
-        app:passwordToggleTint="#808080">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/so_dien_thoai"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"></TextView>
 
-        <EditText
-            android:id="@+id/edit_password_dangki"
-            android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/custom_edit_text"
-            android:textSize="15sp"
-            android:gravity="center_vertical"
-            android:paddingLeft="5dp"
-            android:hint="@string/nh_p_m_t_kh_u"
-            android:inputType="textPassword"></EditText>
-    </com.google.android.material.textfield.TextInputLayout>
-    <Button
-        android:id="@+id/btn_dangky"
-        android:layout_marginTop="50dp"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/dang_ki"
-        android:textColor="#FFFFFF"
-        android:textAllCaps="false"
-        android:background="@drawable/custom_button_dangnhap"
-        android:layout_gravity="center"></Button>
-    <LinearLayout
-        android:layout_marginTop="50dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-        <TextView
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:text="@string/ban_da_co_tai_khoan"></TextView>
-        <TextView
-            android:id="@+id/btn_tv_dangnhapngay"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="@string/dang_nhap_ngay"
-            android:textColor="#FF4500"
-            android:background="?attr/selectableItemBackground"
-            android:textStyle="bold"></TextView>
-    </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edit_email_dangki"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/custom_edit_text"
+                    android:gravity="center_vertical"
+                    android:hint="@string/nhap_so_dien_thoai"
+                    android:inputType="textEmailAddress"
+                    android:paddingLeft="5dp"
+                    android:textSize="15sp"></EditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/m_t_kh_u"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"></TextView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="#808080">
+
+                <EditText
+                    android:id="@+id/edit_password_dangki"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/custom_edit_text"
+                    android:gravity="center_vertical"
+                    android:hint="@string/nh_p_m_t_kh_u"
+                    android:inputType="textPassword"
+                    android:paddingLeft="5dp"
+                    android:textSize="15sp"></EditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Họ tên"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"></TextView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edit_ho_ten_dangki"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/custom_edit_text"
+                    android:gravity="center_vertical"
+                    android:hint="Nhập họ tên"
+                    android:inputType="textEmailAddress"
+                    android:paddingLeft="5dp"
+                    android:textSize="15sp"></EditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Địa chỉ"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"></TextView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edt_diachi_dangki"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/custom_edit_text"
+                    android:gravity="center_vertical"
+                    android:hint="Nhập địa chỉ"
+                    android:inputType="textEmailAddress"
+                    android:paddingLeft="5dp"
+                    android:textSize="15sp"></EditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Số điện thoại"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"></TextView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edt_sodienthoai_dangki"
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/custom_edit_text"
+                    android:gravity="center_vertical"
+                    android:hint="Nhập số điện thoại"
+                    android:inputType="textEmailAddress"
+                    android:paddingLeft="5dp"
+                    android:textSize="15sp"></EditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_dangky"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/custom_button_dangnhap"
+                android:gravity="center"
+                android:text="@string/dang_ki"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"></Button>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ban_da_co_tai_khoan"></TextView>
+
+                <TextView
+                    android:id="@+id/btn_tv_dangnhapngay"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:text="@string/dang_nhap_ngay"
+                    android:textColor="#FF4500"
+                    android:textStyle="bold"></TextView>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

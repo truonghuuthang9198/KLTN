@@ -19,8 +19,8 @@
     <string name="nh_p_email_s_i_n_tho_i">  Nhập email/Số điện thoại</string>
     <string name="m_t_kh_u">Mật khẩu</string>
     <string name="nh_p_m_t_kh_u">  Nhập mật khẩu</string>
-    <string name="so_dien_thoai">Số điện thoại</string>
-    <string name="nhap_so_dien_thoai">Nhập số điện thoại</string>
+    <string name="so_dien_thoai">Email</string>
+    <string name="nhap_so_dien_thoai">Nhập email</string>
     <string name="dang_ki">Đăng Ký</string>
     <string name="ban_da_co_tai_khoan">Bạn đã có tài khoản?</string>
     <string name="dang_nhap_ngay">Đăng nhập ngay</string>

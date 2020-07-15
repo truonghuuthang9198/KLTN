@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import android.widget.RatingBar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProviders
@@ -17,8 +18,17 @@ import com.example.kltn.screen.SearchAdapter
 import com.example.kltn.screen.cart.model.CartModel
 import com.example.kltn.screen.cart.roomdatabase.CartViewModel
 import com.example.kltn.screen.home.model.BookModel
+import com.example.kltn.screen.profile.ProfileFragment
+import com.example.kltn.screen.retrofit.GetDataService
+import com.example.kltn.screen.retrofit.RetrofitClientInstance
+import com.example.kltn.screen.retrofit.reponse.RegisterResponse
+import com.example.kltn.screen.retrofit.reponse.SachResponse
+import com.example.kltn.screen.retrofit.reponse.SearchResponse
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.custom_toolbar.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -35,10 +45,11 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         recyclerViewSearch = findViewById(R.id.recyclerview_search)
         editSearchView = findViewById(R.id.search_text)
         editSearchView!!.setOnQueryTextListener(this)
-//        val intent = getIntent()
-//        val query = intent.getStringExtra("keySearch")
-//        editSearchView!!.setQuery(query,true)
-        setUpRecyclerview()
+        val intent = getIntent()
+        val query = intent.getStringExtra("keySearch")
+        editSearchView!!.setQuery(query, true)
+        getListSearch(query)
+        //setUpRecyclerview()
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
@@ -59,6 +70,7 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         }
     }
+
 
     private fun setUpRecyclerview() {
         recyclerViewSearch.layoutManager =
@@ -140,4 +152,63 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         recyclerViewSearch.adapter = searchAdapter
     }
 
+    fun getListSearch(id: String) {
+        val service =
+            RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
+        val call = service?.getListSearch(id)
+        call?.enqueue(object : Callback<List<SearchResponse>> {
+            override fun onFailure(call: Call<List<SearchResponse>>, t: Throwable) {
+                Toast.makeText(this@SearchActivity, t.message, Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(
+                call: Call<List<SearchResponse>>,
+                response: Response<List<SearchResponse>>
+            ) {
+                if (response.isSuccessful) {
+                    setUpRecyclerView(response)
+                } else {
+                    Toast.makeText(
+                        this@SearchActivity,
+                        "Không tìm thấy sách theo yêu cầu",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        })
+    }
+
+    fun setUpRecyclerView(response: Response<List<SearchResponse>>) {
+        recyclerViewSearch.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        recyclerViewSearch.layoutManager = GridLayoutManager(this, 2)
+        val arrayListSearch = ArrayList<BookModel>()
+        response.body()!!.forEach {
+            arrayListSearch.add(
+                BookModel(
+                    0,
+                    0,
+                    it.ghiChu,
+                    it.giaBan,
+                    it.giamGia,
+                    it.hinhAnh,
+                    it.kichThuoc,
+                    it.loaiBia,
+                    it.maCongTy,
+                    it.maSach,
+                    it.tenTacGia,
+                    it.tenTheLoai,
+                    it.ngayXuatBan,
+                    it.tenNhaXuatBan,
+                    it.soLuong,
+                    it.soTrang,
+                    it.tenSach,
+                    it.tinhTrang,
+                    it.soSao
+                )
+            )
+        }
+        searchAdapter = SearchAdapter(arrayListSearch)
+        recyclerViewSearch.adapter = searchAdapter
+    }
 }

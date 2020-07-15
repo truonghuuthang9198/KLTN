@@ -1,6 +1,7 @@
 package com.example.kltn.screen.retrofit
 
 import com.example.kltn.screen.retrofit.model.LoginModel
+import com.example.kltn.screen.retrofit.model.RegisterModel
 import com.example.kltn.screen.retrofit.reponse.*
 import retrofit2.Call
 import retrofit2.http.*
@@ -18,4 +19,8 @@ interface GetDataService {
     fun login(@Body loginModel: LoginModel): Call<LoginResponse>
     @GET("NguoiDung")
     fun getUserWithToken(@Header("Authorization") token:String): Call<CheckLoginResponse>
+    @POST("KhachHang")
+    fun registerUser(@Body registerModel: RegisterModel):Call<RegisterResponse>
+    @GET("Search/{id}")
+    fun getListSearch(@Path("id") id: String): Call<List<SearchResponse>>
 }

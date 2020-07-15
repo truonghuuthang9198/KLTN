@@ -36,12 +36,13 @@ class InformationFragment(val responseUser: LoginResponse): Fragment() {
         btnDangXuat = view.findViewById(R.id.btn_dangxuat)
         tv_hoten_infomation = view.findViewById(R.id.tv_hoten_infomation)
         tv_email_infomation = view.findViewById(R.id.tv_email_infomation)
-        tv_hoten_infomation.text = responseUser.firstName
-        tv_email_infomation.text = responseUser.username
+        tv_hoten_infomation.text = responseUser.tenKhachHang
+        tv_email_infomation.text = responseUser.email
         btnDangXuat.setOnClickListener {
             val pref = PreferenceManager.getDefaultSharedPreferences(activity!!)
             val edit = pref.edit()
             edit.putBoolean("CheckLogin",false)
+            edit.remove("Token").commit()
             edit.apply()
             loadFragment(ProfileFragment())
         }
@@ -49,7 +50,6 @@ class InformationFragment(val responseUser: LoginResponse): Fragment() {
         recyclerviewIF.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         setUpRecyclerview()
         return view
-
     }
     fun setUpRecyclerview()
     {

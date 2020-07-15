@@ -26,4 +26,3 @@ data class BookModel(
     val soSao:Int,
     val giaGiamDS:Double = giaban*(1.00-giamGia)
 ) : Parcelable
-

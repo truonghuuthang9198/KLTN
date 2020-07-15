@@ -58,5 +58,4 @@ class DealAdapter internal constructor(var dealsModel: ArrayList<BookModel>)
         holder.priceBook.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
         Picasso.get().load(current.hinhAnh).into(holder.imgBookDeal)
     }
-
 }

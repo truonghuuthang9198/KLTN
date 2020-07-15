@@ -54,6 +54,8 @@ class MainActivity : AppCompatActivity(), SendData {
             .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
             .unsubscribeWhenNotificationsAreDisabled(true)
             .init()
+        val status = OneSignal.getPermissionSubscriptionState()
+        Log.d("Thang",status.subscriptionStatus.userId)
 
         setDialogFullScreen()
         navView = findViewById(R.id.nav_view)
@@ -130,12 +132,6 @@ class MainActivity : AppCompatActivity(), SendData {
                 if (token != null) {
                     getUserwithToken(token)
                 }
-//                if (token == null) {
-//                    loadFragment(ProfileFragment())
-//                } else {
-//
-//                    loadFragment(InformationFragment())
-//                }
             }
 
             R.id.navigation_suggest -> if (suggestFragment != null && suggestFragment?.isAdded!!) {
@@ -241,6 +237,7 @@ class MainActivity : AppCompatActivity(), SendData {
         val call = service?.getUserWithToken("Bearer "+token)
         call?.enqueue(object : Callback<CheckLoginResponse> {
             override fun onFailure(call: Call<CheckLoginResponse>, t: Throwable) {
+                loadFragment(ProfileFragment())
                 Toast.makeText(this@MainActivity, t.message, Toast.LENGTH_LONG).show()
             }
             override fun onResponse(
@@ -250,12 +247,12 @@ class MainActivity : AppCompatActivity(), SendData {
                 if(response.body()?.success == true)
                 {
                     val response = response.body()
-//                    val responseLogin = LoginResponse(response!!.khachHang.tenKhachHang,response.khachHang.)
-//                    loadFragment(InformationFragment())
+                    val responseLogin = LoginResponse(response!!.khachHang.diaChi,response.khachHang.email,response.khachHang.maKhachHang,response.khachHang.soDienThoai,response.khachHang.tenKhachHang,"")
+                    loadFragment(InformationFragment(responseLogin))
                 }
                 else
                 {
-                    loadFragment(LoginFragment())
+                    loadFragment(ProfileFragment())
                 }
             }
         })
