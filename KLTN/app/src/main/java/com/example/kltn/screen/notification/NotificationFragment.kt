@@ -38,7 +38,7 @@ class NotificationFragment : Fragment() {
                 R.drawable.vd3_sach,"Truong Huu Thang"
             )
         )
-        notificationAdapter = NotificationAdapter(activity!!,arrayList)
+        notificationAdapter = NotificationAdapter(context,arrayList)
         recycleviewNotification.adapter = notificationAdapter
     }
 

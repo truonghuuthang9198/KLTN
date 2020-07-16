@@ -18,12 +18,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></ImageView>
+    <TextView
+        android:id="@+id/tv_salebook_sgk"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/custom_textview_sale"
+        android:gravity="center"
+        android:text="30%"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/title_book_sgk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:maxLines="2"
         android:text="Mary Had A Little Lamb Fin Pup"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="@+id/img_book_sgk"

@@ -1,8 +1,12 @@
 package com.example.kltn;
 
+import android.R.attr
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.util.JsonToken
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
@@ -12,25 +16,26 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.kltn.screen.cart.CartFragment
 import com.example.kltn.screen.event.OnActionNotify
 import com.example.kltn.screen.home.HomeFragment
-import com.example.kltn.screen.notification.FcmPush
+import com.example.kltn.screen.home.SendData
 import com.example.kltn.screen.notification.NotificationFragment
 import com.example.kltn.screen.profile.InformationFragment
+import com.example.kltn.screen.profile.LoginFragment
 import com.example.kltn.screen.profile.ProfileFragment
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance
-import com.example.kltn.screen.retrofit.model.CityModel
-import com.example.kltn.screen.retrofit.reponse.CityReponse
+import com.example.kltn.screen.retrofit.reponse.CheckLoginResponse
+import com.example.kltn.screen.retrofit.reponse.LoginResponse
 import com.example.kltn.screen.suggest.SuggestFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.iid.FirebaseInstanceId
+import com.onesignal.OneSignal
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
 @Suppress("DEPRECATION")
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SendData {
     private var homeFragment: HomeFragment? = null
     private var profileFragment: ProfileFragment? = null
     private var notificationFragment: NotificationFragment? = null
@@ -43,19 +48,27 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // OneSignal Initialization
+        OneSignal.startInit(this)
+            .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+            .unsubscribeWhenNotificationsAreDisabled(true)
+            .init()
+        val status = OneSignal.getPermissionSubscriptionState()
+        Log.d("Thang",status.subscriptionStatus.userId)
+
         setDialogFullScreen()
-//        loadListCity()
         navView = findViewById(R.id.nav_view)
         //navView.selectedItemId = R.id.navigation_home
         navView.setOnNavigationItemSelectedListener { menuItem ->
             showFragmentForMenuItem(menuItem.itemId)
             return@setOnNavigationItemSelectedListener true
         }
-        onActionNotify = object : OnActionNotify {
-            override fun onActionNotify() {
-                navView.selectedItemId = R.id.navigation_suggest
-            }
-        }
+//        onActionNotify = object : OnActionNotify {
+//            override fun onActionNotify() {
+//                navView.selectedItemId = R.id.navigation_suggest
+//            }
+//        }
         val intent = getIntent()
         val check = intent.getIntExtra("check", -1)
         if (check == 1) {
@@ -64,11 +77,10 @@ class MainActivity : AppCompatActivity() {
             navView.selectedItemId = R.id.navigation_home
         }
 
-        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
-            val token = instanceIdResult.token
-            println(token)
-        }
-
+//        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
+//            val token = instanceIdResult.token
+//            println(token)
+//        }
 
 
 //        val postListener = object : ValueEventListener {
@@ -106,6 +118,7 @@ class MainActivity : AppCompatActivity() {
         val ft = this.supportFragmentManager.beginTransaction()
         val pref = PreferenceManager.getDefaultSharedPreferences(this)
         var checkLogin = pref.getBoolean("CheckLogin", false)
+        var token = pref.getString("Token","")
         when (menuItem) {
             R.id.navigation_home -> if (homeFragment != null && homeFragment?.isAdded!!) {
                 ft.show(homeFragment!!)
@@ -116,10 +129,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             R.id.navigation_profile -> {
-                if (!checkLogin) {
-                    loadFragment(ProfileFragment())
-                } else {
-                    loadFragment(InformationFragment())
+                if (token != null) {
+                    getUserwithToken(token)
                 }
             }
 
@@ -198,41 +209,53 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadListCity() {
-        val list = mutableListOf<CityModel>()
-        val service = RetrofitClientInstance().getClient()?.create(GetDataService::class.java)
-        val call = service?.getListCity()
-        call?.enqueue(object : Callback<CityReponse> {
-            override fun onFailure(call: Call<CityReponse>, t: Throwable) {
-                Toast.makeText(this@MainActivity, t.message, Toast.LENGTH_LONG).show()
-            }
-
-            override fun onResponse(
-                call: Call<CityReponse>,
-                response: Response<CityReponse>
-            ) {
-
-                response.body()!!.listCity.forEach {
-                    list.add(
-                        CityModel(
-                            it.iD,
-                            it.title
-                        )
-                    )
-                }
-//                    Toast.makeText(this@MainActivity,list.toString(), Toast.LENGTH_LONG).show()
-            }
-        })
-    }
 
     override fun onStop() {
         super.onStop()
-        FcmPush.instance.sendMessage(
-            "cD0jSRY-fq3jxXWh6xgcmy:APA91bFbsgiPHgj85YRqaRKcsxFbtkIOkJU8VUFOenEZlJHHjbULlkLvLx0SwD2EjDjEcpfLD0JHo31Nejz7QunslJRKkiXXaJwxa_tDHBg2_jJjdlaNHbcUeITrOWymHR5qjBmGIoew",
-            "Hello",
-            "Xin chao Thang Truong"
-        )
+//        FcmPush.instance.sendMessage(
+//            "cD0jSRY-fq3jxXWh6xgcmy:APA91bFbsgiPHgj85YRqaRKcsxFbtkIOkJU8VUFOenEZlJHHjbULlkLvLx0SwD2EjDjEcpfLD0JHo31Nejz7QunslJRKkiXXaJwxa_tDHBg2_jJjdlaNHbcUeITrOWymHR5qjBmGIoew",
+//            "Hello",
+//            "Xin chao Thang Truong"
+//        )
     }
 
+    override fun ChangeStateSuggest() {
+        navView.selectedItemId = R.id.navigation_suggest
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        for (fragment in supportFragmentManager.fragments) {
+            for (fragment in supportFragmentManager.fragments) {
+                fragment.onActivityResult(requestCode, resultCode, data)
+            }
+        }
+    }
+
+    fun getUserwithToken(token: String) {
+        val service = RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
+        val call = service?.getUserWithToken("Bearer "+token)
+        call?.enqueue(object : Callback<CheckLoginResponse> {
+            override fun onFailure(call: Call<CheckLoginResponse>, t: Throwable) {
+                loadFragment(ProfileFragment())
+                Toast.makeText(this@MainActivity, t.message, Toast.LENGTH_LONG).show()
+            }
+            override fun onResponse(
+                call: Call<CheckLoginResponse>,
+                response: Response<CheckLoginResponse>
+            ) {
+                if(response.body()?.success == true)
+                {
+                    val response = response.body()
+                    val responseLogin = LoginResponse(response!!.khachHang.diaChi,response.khachHang.email,response.khachHang.maKhachHang,response.khachHang.soDienThoai,response.khachHang.tenKhachHang,"")
+                    loadFragment(InformationFragment(responseLogin))
+                }
+                else
+                {
+                    loadFragment(ProfileFragment())
+                }
+            }
+        })
+    }
 
 }

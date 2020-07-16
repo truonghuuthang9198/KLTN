@@ -86,7 +86,7 @@ class CheckBillFragment : Fragment() {
             )
         }
 
-        checkListBillAdapter = CheckListBillAdapter(activity!!, arrayListCheckBill)
+        checkListBillAdapter = CheckListBillAdapter(context, arrayListCheckBill)
         recyclerViewCheckBill.adapter = checkListBillAdapter
     }
     @RequiresApi(Build.VERSION_CODES.O)

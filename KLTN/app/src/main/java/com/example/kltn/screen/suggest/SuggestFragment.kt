@@ -2,6 +2,7 @@ package com.example.kltn.screen.suggest
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
 import com.example.kltn.screen.home.model.ShowMoreDealModel
+import com.example.kltn.screen.profile.model.SendArrayAddress
 import com.example.kltn.screen.suggest.adapter.SuggestAdapter
 import com.example.kltn.screen.suggest.model.SuggestModel
+import com.google.common.eventbus.Subscribe
+import de.greenrobot.event.EventBus
 
 /**
  * A simple [Fragment] subclass.
@@ -32,7 +36,8 @@ class SuggestFragment : Fragment() {
             activity,
             LinearLayoutManager.VERTICAL, false
         )
-        recyclerviewSuggest.layoutManager = GridLayoutManager(activity,2)
+
+        recyclerviewSuggest.layoutManager = GridLayoutManager(activity, 2)
         setUpRecyclerview()
         return view
     }
@@ -60,6 +65,4 @@ class SuggestFragment : Fragment() {
         suggestAdapter = SuggestAdapter(arrayList)
         recyclerviewSuggest.adapter = suggestAdapter
     }
-
-
 }

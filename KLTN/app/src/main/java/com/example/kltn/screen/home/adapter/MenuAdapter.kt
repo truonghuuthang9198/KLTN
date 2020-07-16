@@ -14,12 +14,14 @@ import com.example.kltn.R
 import com.example.kltn.screen.home.deals.ShowMoreDealFragment
 import com.example.kltn.screen.home.model.MenuModel
 import com.example.kltn.screen.suggest.SuggestFragment
-import datn.datn_expansemanagement.core.app.domain.excecutor.EventFireUtil
+import com.example.kltn.screen.event.EventFireUtil
 import com.example.kltn.screen.event.OnActionNotify
+import com.example.kltn.screen.home.CategoryFragment
 
 
-class MenuAdapter internal constructor(var context: Context, var MenuModel: ArrayList<MenuModel>,var onActionNotify: OnActionNotify) :
+class MenuAdapter internal constructor(var context: Context?, var MenuModel: ArrayList<MenuModel>,var onActionNotify: OnActionNotify) :
     RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
+
     inner class MenuViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.tv_name)
         val iconMenu: ImageView = itemView.findViewById(R.id.menu_icon)
@@ -38,13 +40,14 @@ class MenuAdapter internal constructor(var context: Context, var MenuModel: Arra
         val current = MenuModel[position]
         holder.itemView.setOnClickListener {
             when (current.id) {
+                1 -> {
+                    loadFragment(CategoryFragment(),"CategoryFragment")
+                }
                 3 -> {
                     loadFragment(ShowMoreDealFragment(), "ShowMoreDealFragment")
                 }
                 4 -> {
-//                    changeStatusBottomNavigation()
                     EventFireUtil.fireEvent(onActionNotify)
-                    loadFragment(SuggestFragment(),"SuggestFragment")
                 }
             }
         }

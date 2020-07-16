@@ -53,6 +53,7 @@ class BestBookFragment : Fragment() {
         myViewPageStateAdapter.addFragment(ChildBestBookFragment(1),"Personal Development")
         myViewPageStateAdapter.addFragment(ChildBestBookFragment(2),"Children's Book")
         viewPager!!.adapter=myViewPageStateAdapter
+        viewPager!!.offscreenPageLimit = 3
         tabLayout!!.setupWithViewPager(viewPager,true)
 
     }

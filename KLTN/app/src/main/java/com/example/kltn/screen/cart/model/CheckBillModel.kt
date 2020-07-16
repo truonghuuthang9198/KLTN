@@ -5,5 +5,5 @@ data class CheckBillModel(
     val tenSach: String,
     var soLuong: Int,
     val giaTien: Double,
-    val image: Int
+    val image: String
 )

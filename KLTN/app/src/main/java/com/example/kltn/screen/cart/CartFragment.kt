@@ -66,10 +66,9 @@ class CartFragment : Fragment() {
     fun setUpRecyclerView() {
         recyclerviewcart.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-
         cartViewModel = ViewModelProviders.of(this).get(CartViewModel::class.java)
         arrayListCart = cartViewModel.getList() as ArrayList<CartModel>
-        val cartAdapter = CartAdapter(activity!!, arrayListCart)
+        val cartAdapter = CartAdapter(context, arrayListCart)
         recyclerviewcart.adapter = cartAdapter
         cartAdapter.updateThanhTien()
         val localVN = Locale("vi", "VN")

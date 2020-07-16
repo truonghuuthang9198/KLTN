@@ -1,3 +1,16 @@
+buildscript {
+    repositories {
+        maven { url 'https://plugins.gradle.org/m2/'}
+    }
+    dependencies {
+        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.12.8, 0.99.99]'
+    }
+}
+apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+
+repositories {
+    maven { url 'https://maven.google.com' }
+}
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
@@ -7,6 +20,8 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 apply plugin: 'com.google.gms.google-services'
+
+apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 
 
 android {
@@ -28,6 +43,12 @@ android {
             sourceCompatibility = 1.8
             targetCompatibility = 1.8
         }
+
+        manifestPlaceholders = [
+                onesignal_app_id: '06e6e024-466e-48b3-9255-089a5521f05e',
+                // Project number pulled from dashboard, local value is ignored.
+                onesignal_google_project_number: 'REMOTE'
+        ]
     }
 
     buildTypes {
@@ -107,4 +128,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.7.0'
 
     implementation "com.squareup.picasso:picasso:2.71828"
+
+    implementation 'com.onesignal:OneSignal:[3.15.0, 3.99.99]'
+
+    implementation 'de.greenrobot:eventbus:2.4.0'
 }

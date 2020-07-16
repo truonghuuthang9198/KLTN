@@ -36,7 +36,7 @@
                     android:layout_height="120dp"
                     android:background="@drawable/custom_poster"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/poster_sale"></ImageView>
+                    android:src="@drawable/poster_sale1"></ImageView>
             </androidx.cardview.widget.CardView>
 
             <FrameLayout
@@ -77,6 +77,7 @@
                         app:cardCornerRadius="4dp">
 
                         <androidx.appcompat.widget.SearchView
+                            android:id="@+id/search_view_home"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:layout_gravity="center"

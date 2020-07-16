@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -98,6 +97,7 @@
         android:layout_margin="12dp"
         android:background="@drawable/custom_edit_text"
         android:hint="Thành phố*"
+        android:drawableRight="@drawable/ic_expand_more"
         android:padding="6dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -110,6 +110,7 @@
         android:layout_height="35dp"
         android:layout_margin="12dp"
         android:background="@drawable/custom_edit_text"
+        android:drawableRight="@drawable/ic_expand_more"
         android:hint="Quận huyện*"
         android:padding="6dp"
         android:textSize="16sp"
@@ -123,6 +124,7 @@
         android:layout_height="35dp"
         android:layout_margin="12dp"
         android:background="@drawable/custom_edit_text"
+        android:drawableRight="@drawable/ic_expand_more"
         android:hint="Xã phường*"
         android:padding="6dp"
         android:textSize="16sp"
@@ -143,18 +145,57 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_xaphuong_address"></EditText>
 
+    <CheckBox
+        android:id="@+id/ckb_diachigiaohangmacdinh"
+        android:layout_width="0dp"
+        android:textSize="16sp"
+        android:layout_marginTop="12dp"
+        android:layout_height="wrap_content"
+        android:text="Địa chỉ giao hàng mặc định"
+        app:layout_constraintEnd_toEndOf="@+id/edt_diachinha_address"
+        app:layout_constraintStart_toStartOf="@+id/edt_diachinha_address"
+        app:layout_constraintTop_toBottomOf="@+id/edt_diachinha_address"></CheckBox>
+
+    <CheckBox
+        android:id="@+id/ckb_diachithanhtoanmacdinh"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Địa chỉ thanh toán mặc định"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/edt_diachinha_address"
+        app:layout_constraintStart_toStartOf="@+id/edt_diachinha_address"
+        app:layout_constraintTop_toBottomOf="@+id/ckb_diachigiaohangmacdinh"></CheckBox>
+
     <Button
+        android:id="@+id/btn_save_address"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="16dp"
         android:background="@color/oranges"
         android:text="LƯU ĐỊA CHỈ"
         android:textColor="#FFFFFF"
-        android:textSize="16dp"
+        android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_diachinha_address"></Button>
+        app:layout_constraintTop_toBottomOf="@+id/ckb_diachithanhtoanmacdinh"></Button>
+
+    <Button
+        android:id="@+id/btn_delete_address"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/custom_button_addcart"
+        android:text="XOÁ ĐỊA CHỈ"
+        android:textColor="#F56200"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_save_address"></Button>
 </androidx.constraintlayout.widget.ConstraintLayout>

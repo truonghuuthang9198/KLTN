@@ -10,11 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
-import com.example.kltn.screen.profile.AddressFragment
+import com.example.kltn.screen.profile.ChangePasswordFragment
+import com.example.kltn.screen.profile.ManangerAddressFragment
 import com.example.kltn.screen.profile.FavoriteFragment
 import com.example.kltn.screen.profile.model.InformationModel
 
-class InformationAdapter internal constructor(var context: Context, var InformationModel: ArrayList<InformationModel>) :
+class InformationAdapter internal constructor(var context: Context?, var InformationModel: ArrayList<InformationModel>) :
     RecyclerView.Adapter<InformationAdapter.InformationViewHolder>() {
     inner class InformationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val icNameIF: ImageView = itemView.findViewById(R.id.ic_name_infomation)
@@ -37,15 +38,23 @@ class InformationAdapter internal constructor(var context: Context, var Informat
         holder.itemView.setOnClickListener {
             when (current.id) {
                 1 -> {
-                    loadFragment(AddressFragment(),"AddressFragment")
+                    loadFragment(ManangerAddressFragment(),"AddAddressFragment")
                 }
-                2 -> {}
+                2 -> {
+
+                }
                 3 -> {
                     loadFragment(FavoriteFragment(), "ShowMoreDealFragment")
                 }
-                4 -> {}
-                5 -> {}
-                6 -> {}
+                4 -> {
+
+                }
+                5 -> {
+                    loadFragment(ChangePasswordFragment(),"ChangePasswordFragment")
+                }
+                6 -> {
+
+                }
             }
         }
         holder.icNameIF.setImageResource(current.icNameIF)

@@ -18,6 +18,20 @@
         app:layout_constraintTop_toTopOf="parent"></ImageView>
 
     <TextView
+        android:id="@+id/tv_salebook_showmore"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/custom_textview_sale"
+        android:gravity="center"
+        android:text="30%"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/img_book_showmore_deal"
+        app:layout_constraintTop_toTopOf="parent"></TextView>
+
+    <TextView
         android:id="@+id/title_book_showmore_deal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

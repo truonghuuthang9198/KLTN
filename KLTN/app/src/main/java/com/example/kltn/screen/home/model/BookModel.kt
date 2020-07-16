@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class DealModel(
+data class BookModel(
     val id: Int,
     val tabId: Int,
     val ghiChu: String,
@@ -23,6 +23,6 @@ data class DealModel(
     val soTrang: String,
     val tenSach: String,
     val tinhTrang: String,
+    val soSao:Int,
     val giaGiamDS:Double = giaban*(1.00-giamGia)
 ) : Parcelable
-

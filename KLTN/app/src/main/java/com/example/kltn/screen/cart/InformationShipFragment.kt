@@ -1,27 +1,26 @@
 package com.example.kltn.screen.cart
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CheckBox
+import android.widget.CompoundButton
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
 import com.example.kltn.screen.cart.adapter.AddressShipAdapter
-import com.example.kltn.screen.cart.adapter.CartAdapter
 import com.example.kltn.screen.cart.model.AddressShipModel
-import com.example.kltn.screen.cart.model.CartModel
-import com.example.kltn.screen.cart.roomdatabase.CartViewModel
-import com.example.kltn.screen.suggest.adapter.SuggestAdapter
-import java.text.NumberFormat
-import java.util.*
-import kotlin.collections.ArrayList
+import com.example.kltn.screen.profile.model.SendArrayAddress
+import com.google.android.material.textfield.TextInputEditText
+import com.google.common.eventbus.Subscribe
+import de.greenrobot.event.EventBus
+
 
 class InformationShipFragment : Fragment() {
 
@@ -29,6 +28,12 @@ class InformationShipFragment : Fragment() {
     lateinit var btnGiaoHang: Button
     lateinit var recyclerviewShip: RecyclerView
     lateinit var addressAdapter: AddressShipAdapter
+    lateinit var tv_ghichukhachhang: TextInputEditText
+    lateinit var chk_box_ghichu: CheckBox
+//    override fun onResume() {
+//        super.onResume()
+//        EventBus.getDefault().register(this)
+//    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,6 +43,22 @@ class InformationShipFragment : Fragment() {
         btnBackShip = view.findViewById(R.id.btn_back_information_ship)
         btnGiaoHang = view.findViewById(R.id.btn_giaohang_information_ship)
         recyclerviewShip = view.findViewById(R.id.reyclerview_address_ship)
+        tv_ghichukhachhang = view.findViewById(R.id.tv_ghichukhachhang)
+        chk_box_ghichu = view.findViewById(R.id.chk_box_ghichu)
+        tv_ghichukhachhang.visibility = View.GONE
+        var checked = 0
+        chk_box_ghichu.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { compoundButton, b ->
+            if (checked ==0) {
+                tv_ghichukhachhang.visibility = View.VISIBLE
+                checked = 1
+            }
+            else {
+                tv_ghichukhachhang.visibility = View.GONE
+                checked = 0
+            }
+
+        })
+
         btnBackShip.setOnClickListener {
             if (fragmentManager!!.backStackEntryCount > 0) {
                 fragmentManager!!.popBackStack()
@@ -65,9 +86,13 @@ class InformationShipFragment : Fragment() {
         recyclerviewShip.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         val arrayList = ArrayList<AddressShipModel>()
-        arrayList.add(AddressShipModel("Trương Hữu Thắng - 0384180187","76/32/13 Lê Trọng Tấn, Phường Tây Thạnh,Quận Tân Phú, TP Hồ Chí Minh",-1))
-        arrayList.add(AddressShipModel("Trương Hữu Thắng - 0384180187","76/32/13 Lê Trọng Tấn, Phường Tây Thạnh,Quận Tân Phú, TP Hồ Chí Minh",-1))
-        addressAdapter = AddressShipAdapter(activity!!,arrayList)
+
+//        arrayList.add(AddressShipModel("Trương Hữu Thắng - 0384180187","76/32/13 Lê Trọng Tấn, Phường Tây Thạnh,Quận Tân Phú, TP Hồ Chí Minh",-1))
+//        arrayList.add(AddressShipModel("Trương Hữu Thắng - 0384180187","76/32/13 Lê Trọng Tấn, Phường Tây Thạnh,Quận Tân Phú, TP Hồ Chí Minh",-1))
+        addressAdapter = AddressShipAdapter(context,arrayList)
         recyclerviewShip.adapter = addressAdapter
     }
+
+
 }
+

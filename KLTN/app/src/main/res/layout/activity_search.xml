@@ -37,6 +37,8 @@
             app:layout_constraintTop_toTopOf="@+id/btn_back_activity_search">
 
             <androidx.appcompat.widget.SearchView
+                android:id="@+id/search_text"
+                android:background="#FFFFFF"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
@@ -65,63 +67,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tool_search_activity">
 
-        <TextView
-            android:id="@+id/textView25"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/ic_filter"
-            android:gravity="center"
-            android:text="Tất cả"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/textView24"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"></TextView>
-
-        <TextView
-            android:id="@+id/textView24"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/ic_sort"
-            android:gravity="center"
-            android:text="Sắp xếp"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView25"
-            app:layout_constraintTop_toTopOf="parent"></TextView>
-
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_result_search"
+            android:id="@+id/recyclerview_search"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="#F2F2F2"
+            android:background="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView25"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_filter_searchactivity"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_recyclerview_corners"
-            app:layout_constraintEnd_toEndOf="@+id/textView25"
-            app:layout_constraintStart_toStartOf="@+id/textView25"
-            app:layout_constraintTop_toBottomOf="@+id/textView25"></androidx.recyclerview.widget.RecyclerView>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_sort"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_recyclerview_corners"
-            app:layout_constraintEnd_toEndOf="@+id/textView24"
-            app:layout_constraintStart_toStartOf="@+id/textView24"
-            app:layout_constraintTop_toBottomOf="@+id/textView24"></androidx.recyclerview.widget.RecyclerView>
-
-
+            app:layout_constraintTop_toTopOf="parent"></androidx.recyclerview.widget.RecyclerView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

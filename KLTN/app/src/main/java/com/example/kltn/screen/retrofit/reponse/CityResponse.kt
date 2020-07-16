@@ -1,14 +1,14 @@
 package com.example.kltn.screen.retrofit.reponse
+
 import com.google.gson.annotations.SerializedName
 
 
-data class CityReponse(
+data class CityResponse(
     @SerializedName("LtsItem")
-    val listCity: List<LtsItem>,
+    val ltsItem: List<LtsItem>,
     @SerializedName("TotalDoanhNghiep")
     val totalDoanhNghiep: Int
-)
-{
+) {
     data class LtsItem(
         @SerializedName("Created")
         val created: Any,
