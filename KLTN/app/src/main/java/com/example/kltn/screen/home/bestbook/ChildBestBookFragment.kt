@@ -11,9 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
 import com.example.kltn.screen.home.adapter.BestBookAdapter
 import com.example.kltn.screen.home.adapter.SGKAdapter
-import com.example.kltn.screen.home.model.BestBookModel
 import com.example.kltn.screen.home.model.BookModel
-import com.example.kltn.screen.home.model.SGKModel
 
 class ChildBestBookFragment(val tabId: Int) : Fragment() {
     lateinit var recycleviewBestBook: RecyclerView

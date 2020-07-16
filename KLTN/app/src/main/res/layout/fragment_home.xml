@@ -19,17 +19,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/img_poster"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 app:cardCornerRadius="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/frameLayout">
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout9">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -39,65 +40,67 @@
                     android:src="@drawable/poster_sale1"></ImageView>
             </androidx.cardview.widget.CardView>
 
-            <FrameLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/frameLayout"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:background="@drawable/custom_framlayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:id="@+id/img_danhmuc"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="4dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_danh_muc" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_searchview"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:orientation="horizontal">
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    app:cardCornerRadius="4dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/img_scanQR"
+                    app:layout_constraintStart_toEndOf="@+id/img_danhmuc"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <ImageView
-                        android:id="@+id/img_danhmuc"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="3dp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:foregroundGravity="center"
-                        app:srcCompat="@drawable/ic_danh_muc"
-                        tools:ignore="VectorDrawableCompat" />
-
-                    <androidx.cardview.widget.CardView
-                        android:id="@+id/card_searchview"
+                    <androidx.appcompat.widget.SearchView
+                        android:id="@+id/search_view_home"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_toLeftOf="@+id/img_scanQR"
-                        android:layout_toRightOf="@+id/img_danhmuc"
-                        android:foregroundGravity="center"
-                        app:cardCornerRadius="4dp">
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        app:defaultQueryHint="Sản phẩm cần tìm..."
+                        app:queryHint="Sản phẩm cần tìm..."></androidx.appcompat.widget.SearchView>
+                </androidx.cardview.widget.CardView>
 
-                        <androidx.appcompat.widget.SearchView
-                            android:id="@+id/search_view_home"
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center"
-                            app:defaultQueryHint="Sản phẩm cần tìm..."
-                            app:queryHint="Sản phẩm cần tìm..."></androidx.appcompat.widget.SearchView>
-                    </androidx.cardview.widget.CardView>
-
-                    <ImageView
-                        android:id="@+id/img_scanQR"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginRight="5dp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:foregroundGravity="center"
-                        app:srcCompat="@drawable/ic_scan"
-                        tools:ignore="VectorDrawableCompat" />
-                </RelativeLayout>
-            </FrameLayout>
+                <ImageView
+                    android:id="@+id/img_scanQR"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="4dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview_menu"
@@ -114,34 +117,48 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:background="#FFFFFF"
                 android:padding="6dp"
                 android:paddingBottom="4dp"
-                android:background="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/recyclerview_menu"></FrameLayout>
+
             <FrameLayout
                 android:id="@+id/frame_SGK"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:background="#FFFFFF"
                 android:padding="6dp"
                 android:paddingBottom="4dp"
-                android:background="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/frame_deals"></FrameLayout>
+
             <FrameLayout
                 android:id="@+id/frame_bestBook"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:background="#FFFFFF"
                 android:padding="6dp"
                 android:paddingBottom="4dp"
-                android:background="#FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/frame_SGK"></FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frame_ChildrenBook"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="#FFFFFF"
+                android:padding="6dp"
+                android:paddingBottom="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/frame_bestBook"></FrameLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

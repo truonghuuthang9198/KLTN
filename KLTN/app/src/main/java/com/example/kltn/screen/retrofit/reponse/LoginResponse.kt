@@ -4,15 +4,15 @@ import com.google.gson.annotations.SerializedName
 
 data class LoginResponse(
     @SerializedName("diaChi")
-    val diaChi: String,
+    val diaChi: String?,
     @SerializedName("email")
-    val email: String,
+    val email: String?,
     @SerializedName("maKhachHang")
-    val maKhachHang: String,
+    val maKhachHang: String?,
     @SerializedName("soDienThoai")
-    val soDienThoai: String,
+    val soDienThoai: String?,
     @SerializedName("tenKhachHang")
-    val tenKhachHang: String,
+    val tenKhachHang: String?,
     @SerializedName("token")
-    val token: String
+    val token: String?
 )

@@ -9,13 +9,13 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
-import com.example.kltn.screen.home.model.ShowMoreDealModel
-import com.example.kltn.screen.suggest.model.SuggestModel
+import com.example.kltn.screen.home.model.BookModel
+import com.squareup.picasso.Picasso
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class SuggestAdapter internal constructor(var SuggestModel: ArrayList<SuggestModel>)
+class SuggestAdapter internal constructor(var SuggestModel: ArrayList<BookModel>)
     : RecyclerView.Adapter<SuggestAdapter.SuggestViewHolder>(){
     inner class SuggestViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
     {
@@ -38,17 +38,17 @@ class SuggestAdapter internal constructor(var SuggestModel: ArrayList<SuggestMod
 
     override fun onBindViewHolder(holder: SuggestViewHolder, position: Int) {
         val current = SuggestModel[position]
-        holder.titleBook.text = current.titleBookSuggest
+        holder.titleBook.text = current.tenSach
         val localVN = Locale("vi","VN")
         val numberFormat = NumberFormat.getCurrencyInstance(localVN)
-        val priceReducedfm =numberFormat.format(current.priceReducedSuggest)
+        val priceReducedfm =numberFormat.format(current.giaGiamDS)
         holder.priceReducedBook.text = priceReducedfm
-        val priceBookfm =numberFormat.format(current.priceSuggest)
+        val priceBookfm =numberFormat.format(current.giaban)
         holder.priceBook.text = priceBookfm
         holder.priceBook.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-        holder.imgBookDeal.setImageResource(current.imgBookSuggest)
+        Picasso.get().load(current.hinhAnh).into(holder.imgBookDeal)
         holder.star.numStars = 5
-        holder.star.rating = current.starBookSuggest.toFloat()
-        
+        holder.star.rating = current.soSao.toFloat()
+
     }
 }

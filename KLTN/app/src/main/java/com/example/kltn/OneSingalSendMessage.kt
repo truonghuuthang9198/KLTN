@@ -14,8 +14,6 @@ class OneSingalSendMessage : Application() {
             .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
             .unsubscribeWhenNotificationsAreDisabled(true)
             .init()
-        val status = OneSignal.getPermissionSubscriptionState()
-        Log.d("Thang",status.subscriptionStatus.userId)
 //        status.permissionStatus.enabled
 //        status.subscriptionStatus.subscribed
 //        status.subscriptionStatus.userSubscriptionSetting

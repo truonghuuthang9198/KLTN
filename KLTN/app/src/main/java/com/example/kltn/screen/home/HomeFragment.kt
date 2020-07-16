@@ -19,6 +19,7 @@ import com.example.kltn.SearchActivity
 import com.example.kltn.screen.event.OnActionNotify
 import com.example.kltn.screen.home.adapter.MenuAdapter
 import com.example.kltn.screen.home.bestbook.BestBookFragment
+import com.example.kltn.screen.home.children.ChildrenBookFragment
 import com.example.kltn.screen.home.deals.DealFragment
 import com.example.kltn.screen.home.model.MenuModel
 import com.example.kltn.screen.home.sgk.SGKFragment
@@ -60,6 +61,7 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         loadFragmentDeal(DealFragment())
         loadFragmentSGK(SGKFragment())
         loadFragmentBestBook(BestBookFragment())
+        loadFragmentChildrenBook(ChildrenBookFragment())
         recyclerviewMenu = view!!.findViewById(R.id.recyclerview_menu)
         setUpRecyclerView()
         return view
@@ -95,6 +97,18 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         }
         return false
     }
+    private fun loadFragmentChildrenBook(fragment: Fragment?): Boolean {
+        if (fragment != null) {
+            fragmentManager!!
+                .beginTransaction()
+                .replace(R.id.frame_ChildrenBook, fragment)
+                .commit()
+            return true
+        }
+        return false
+    }
+
+
     private fun loadFragmentCategory(fragment: Fragment?, tag: String): Boolean {
         if (fragment != null) {
             (context as FragmentActivity).supportFragmentManager

@@ -1,48 +1,37 @@
-package com.example.kltn.screen.suggest
-
+package com.example.kltn.screen.home.children
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
+import com.example.kltn.screen.home.adapter.BestBookAdapter
+import com.example.kltn.screen.home.adapter.ChildrenBookAdapter
 import com.example.kltn.screen.home.model.BookModel
-import com.example.kltn.screen.suggest.adapter.SuggestAdapter
-import com.example.kltn.screen.suggest.model.SuggestModel
-import com.google.common.eventbus.Subscribe
-import de.greenrobot.event.EventBus
 
-/**
- * A simple [Fragment] subclass.
- */
-class SuggestFragment : Fragment() {
-    lateinit var recyclerviewSuggest: RecyclerView
-    lateinit var suggestAdapter: SuggestAdapter
-
+class ChildChildrenBookFragment(val tabId: Int) : Fragment() {
+    lateinit var recycleviewChildrenBook: RecyclerView
+    lateinit var bestbookAdapter: ChildrenBookAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_suggest, container, false)
-        recyclerviewSuggest = view.findViewById(R.id.recyclerview_suggest)
-        recyclerviewSuggest.layoutManager = LinearLayoutManager(
-            activity,
-            LinearLayoutManager.VERTICAL, false
-        )
-
-        recyclerviewSuggest.layoutManager = GridLayoutManager(activity, 2)
-        setUpRecyclerview()
+        val view = inflater.inflate(R.layout.fragment_child_childrenbook, container, false)
+        recycleviewChildrenBook = view!!.findViewById(R.id.recyclerview_childrenbook)
+        setUpRecyclerView()
         return view
     }
 
-    fun setUpRecyclerview() {
+    fun setUpRecyclerView() {
+        recycleviewChildrenBook.layoutManager = LinearLayoutManager(
+            activity,
+            LinearLayoutManager.HORIZONTAL, false
+        )
         val arrayList = ArrayList<BookModel>()
+        val listTab0 = ArrayList<BookModel>()
         arrayList.add(
             BookModel(
                 0,
@@ -62,7 +51,8 @@ class SuggestFragment : Fragment() {
                 2,
                 "188 Trang",
                 "Sket Dance - Quái Kiệt Học Đường - Tập 30",
-                "Còn hàng", 2
+                "Còn hàng",
+                1
             )
         )
         arrayList.add(
@@ -87,56 +77,40 @@ class SuggestFragment : Fragment() {
                 "304 Trang",
                 "Mr. Lemoncello's All-Star Breakout Game (Mr. Lemoncello'S Library)",
                 "Còn hàng",
+                3
+            )
+        )
+        arrayList.add(
+            BookModel(
+                2,
+                0,
+                "Nghỉ hè năm lớp 12 dầu sôi lửa bỏng, Bossun lại bận bù đầu (không phải vì học đâu ạ!)… đi biển, làm trợ lí cho họa sĩ manga và thậm trí còn lên đường du ngoạn bằng… xe đạp một mình! Còn nữa, nhất định phải xem cuộc gặp gỡ kì thú giữa bộ ba Sket Dan và cặp đôi hài của “Viking” các bạn nhé!",
+                266900.00,
+                0.15,
+                "https://cdn0.fahasa.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/9/7/9781481497619.jpg",
+                "16 x 24 cm",
+                "Bìa Cứng",
+                "Simon And Schuster",
+                "9781481497619",
+                "Margaret Rogerson",
+                "Tiểu thuyết",
+                "2019",
+                "Margaret K. McElderry Books",
+                2,
+                "188 Trang",
+                "Sorcery of Thorns",
+                "Còn hàng",
                 2
             )
         )
-        arrayList.add(
-            BookModel(
-                2,
-                0,
-                "Nghỉ hè năm lớp 12 dầu sôi lửa bỏng, Bossun lại bận bù đầu (không phải vì học đâu ạ!)… đi biển, làm trợ lí cho họa sĩ manga và thậm trí còn lên đường du ngoạn bằng… xe đạp một mình! Còn nữa, nhất định phải xem cuộc gặp gỡ kì thú giữa bộ ba Sket Dan và cặp đôi hài của “Viking” các bạn nhé!",
-                266900.00,
-                0.15,
-                "https://cdn0.fahasa.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/9/7/9781481497619.jpg",
-                "16 x 24 cm",
-                "Bìa Cứng",
-                "Simon And Schuster",
-                "9781481497619",
-                "Margaret Rogerson",
-                "Tiểu thuyết",
-                "2019",
-                "Margaret K. McElderry Books",
-                2,
-                "188 Trang",
-                "Sorcery of Thorns",
-                "Còn hàng",
-                3
-            )
-        )
-        arrayList.add(
-            BookModel(
-                2,
-                0,
-                "Nghỉ hè năm lớp 12 dầu sôi lửa bỏng, Bossun lại bận bù đầu (không phải vì học đâu ạ!)… đi biển, làm trợ lí cho họa sĩ manga và thậm trí còn lên đường du ngoạn bằng… xe đạp một mình! Còn nữa, nhất định phải xem cuộc gặp gỡ kì thú giữa bộ ba Sket Dan và cặp đôi hài của “Viking” các bạn nhé!",
-                266900.00,
-                0.15,
-                "https://cdn0.fahasa.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/9/7/9781481497619.jpg",
-                "16 x 24 cm",
-                "Bìa Cứng",
-                "Simon And Schuster",
-                "9781481497619",
-                "Margaret Rogerson",
-                "Tiểu thuyết",
-                "2019",
-                "Margaret K. McElderry Books",
-                2,
-                "188 Trang",
-                "Sorcery of Thorns",
-                "Còn hàng",
-                3
-            )
-        )
-        suggestAdapter = SuggestAdapter(arrayList)
-        recyclerviewSuggest.adapter = suggestAdapter
+
+        arrayList.forEach {
+            if (it.tabId == tabId) {
+                listTab0.add(it)
+            }
+        }
+        bestbookAdapter = ChildrenBookAdapter(listTab0)
+        recycleviewChildrenBook.adapter = bestbookAdapter
     }
+
 }

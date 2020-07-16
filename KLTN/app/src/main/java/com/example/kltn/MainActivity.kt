@@ -1,12 +1,9 @@
 package com.example.kltn;
 
-import android.R.attr
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.util.JsonToken
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
@@ -19,7 +16,6 @@ import com.example.kltn.screen.home.HomeFragment
 import com.example.kltn.screen.home.SendData
 import com.example.kltn.screen.notification.NotificationFragment
 import com.example.kltn.screen.profile.InformationFragment
-import com.example.kltn.screen.profile.LoginFragment
 import com.example.kltn.screen.profile.ProfileFragment
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance
@@ -27,8 +23,6 @@ import com.example.kltn.screen.retrofit.reponse.CheckLoginResponse
 import com.example.kltn.screen.retrofit.reponse.LoginResponse
 import com.example.kltn.screen.suggest.SuggestFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.iid.FirebaseInstanceId
-import com.onesignal.OneSignal
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -50,12 +44,10 @@ class MainActivity : AppCompatActivity(), SendData {
         setContentView(R.layout.activity_main)
 
         // OneSignal Initialization
-        OneSignal.startInit(this)
-            .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
-            .unsubscribeWhenNotificationsAreDisabled(true)
-            .init()
-        val status = OneSignal.getPermissionSubscriptionState()
-        Log.d("Thang",status.subscriptionStatus.userId)
+//        OneSignal.startInit(this)
+//            .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+//            .unsubscribeWhenNotificationsAreDisabled(true)
+//            .init()
 
         setDialogFullScreen()
         navView = findViewById(R.id.nav_view)

@@ -13,6 +13,7 @@ import com.example.kltn.R
 import com.example.kltn.screen.profile.ChangePasswordFragment
 import com.example.kltn.screen.profile.ManangerAddressFragment
 import com.example.kltn.screen.profile.FavoriteFragment
+import com.example.kltn.screen.profile.HistoryFragment
 import com.example.kltn.screen.profile.model.InformationModel
 
 class InformationAdapter internal constructor(var context: Context?, var InformationModel: ArrayList<InformationModel>) :
@@ -41,7 +42,7 @@ class InformationAdapter internal constructor(var context: Context?, var Informa
                     loadFragment(ManangerAddressFragment(),"AddAddressFragment")
                 }
                 2 -> {
-
+                    loadFragment(HistoryFragment(),"HistoryFragment")
                 }
                 3 -> {
                     loadFragment(FavoriteFragment(), "ShowMoreDealFragment")
