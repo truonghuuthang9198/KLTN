@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -37,12 +38,23 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     lateinit var recyclerViewSearch: RecyclerView
     lateinit var searchAdapter: SearchAdapter
     private var editSearchView: SearchView? = null
+    lateinit var btn_back_activity_search: ImageView
+    lateinit var btn_back_home_searchActivity: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
         setDialogFullScreen()
         recyclerViewSearch = findViewById(R.id.recyclerview_search)
+        btn_back_activity_search = findViewById(R.id.btn_back_activity_search)
+        btn_back_home_searchActivity = findViewById(R.id.btn_back_home_searchActivity)
+        btn_back_activity_search.setOnClickListener {
+            onBackPressed()
+        }
+        btn_back_home_searchActivity.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
         editSearchView = findViewById(R.id.search_text)
         editSearchView!!.setOnQueryTextListener(this)
         val intent = getIntent()

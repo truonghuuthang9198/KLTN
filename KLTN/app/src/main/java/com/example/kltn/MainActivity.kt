@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
@@ -37,30 +38,17 @@ class MainActivity : AppCompatActivity(), SendData {
     private var suggestFragment: SuggestFragment? = null
     private var informationFragment: InformationFragment? = null
     lateinit var navView: BottomNavigationView
-    private var onActionNotify: OnActionNotify? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        // OneSignal Initialization
-//        OneSignal.startInit(this)
-//            .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
-//            .unsubscribeWhenNotificationsAreDisabled(true)
-//            .init()
-
         setDialogFullScreen()
         navView = findViewById(R.id.nav_view)
-        //navView.selectedItemId = R.id.navigation_home
         navView.setOnNavigationItemSelectedListener { menuItem ->
             showFragmentForMenuItem(menuItem.itemId)
             return@setOnNavigationItemSelectedListener true
         }
-//        onActionNotify = object : OnActionNotify {
-//            override fun onActionNotify() {
-//                navView.selectedItemId = R.id.navigation_suggest
-//            }
-//        }
         val intent = getIntent()
         val check = intent.getIntExtra("check", -1)
         if (check == 1) {
@@ -68,29 +56,6 @@ class MainActivity : AppCompatActivity(), SendData {
         } else {
             navView.selectedItemId = R.id.navigation_home
         }
-
-//        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
-//            val token = instanceIdResult.token
-//            println(token)
-//        }
-
-
-//        val postListener = object : ValueEventListener {
-//            override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                // Get Post object and use the values to update the UI
-//                val post = dataSnapshot.getValue()
-//                Toast.makeText(this@MainActivity,post.toString(),Toast.LENGTH_LONG).show()
-//
-//                // ...
-//            }
-//
-//            override fun onCancelled(databaseError: DatabaseError) {
-//                // Getting Post failed, log a message
-//                //Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
-//                // ...
-//            }
-//        }
-//        database.addValueEventListener(postListener)
     }
 
     private fun loadFragment(fragment: Fragment?): Boolean {
@@ -109,8 +74,8 @@ class MainActivity : AppCompatActivity(), SendData {
         //checkFragmentExist()
         val ft = this.supportFragmentManager.beginTransaction()
         val pref = PreferenceManager.getDefaultSharedPreferences(this)
-        var checkLogin = pref.getBoolean("CheckLogin", false)
         var token = pref.getString("Token","")
+        Log.d("Thang",token.toString())
         when (menuItem) {
             R.id.navigation_home -> if (homeFragment != null && homeFragment?.isAdded!!) {
                 ft.show(homeFragment!!)

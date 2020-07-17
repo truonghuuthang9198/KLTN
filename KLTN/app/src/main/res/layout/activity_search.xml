@@ -32,7 +32,7 @@
             android:foregroundGravity="center"
             app:cardCornerRadius="4dp"
             app:layout_constraintBottom_toBottomOf="@+id/btn_back_activity_search"
-            app:layout_constraintEnd_toStartOf="@+id/img_scanQR"
+            app:layout_constraintEnd_toStartOf="@+id/btn_back_home_searchActivity"
             app:layout_constraintStart_toEndOf="@+id/btn_back_activity_search"
             app:layout_constraintTop_toTopOf="@+id/btn_back_activity_search">
 
@@ -41,13 +41,14 @@
                 android:background="#FFFFFF"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                app:iconifiedByDefault="false"
                 android:layout_gravity="center"
                 app:defaultQueryHint="Sản phẩm cần tìm..."
                 app:queryHint="Sản phẩm cần tìm..."></androidx.appcompat.widget.SearchView>
         </androidx.cardview.widget.CardView>
 
         <ImageView
-            android:id="@+id/img_scanQR"
+            android:id="@+id/btn_back_home_searchActivity"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginRight="10dp"
@@ -55,7 +56,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/btn_back_activity_search"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/btn_back_activity_search"
-            app:srcCompat="@drawable/ic_scan"/>
+            app:srcCompat="@drawable/ic_home_toolbar"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

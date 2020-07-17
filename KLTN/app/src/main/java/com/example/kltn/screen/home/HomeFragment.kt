@@ -13,7 +13,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kltn.DetailActivity
+import androidx.viewpager.widget.ViewPager
 import com.example.kltn.R
 import com.example.kltn.SearchActivity
 import com.example.kltn.screen.event.OnActionNotify
@@ -25,6 +25,7 @@ import com.example.kltn.screen.home.model.MenuModel
 import com.example.kltn.screen.home.sgk.SGKFragment
 import com.example.kltn.screen.profile.model.SendArrayAddress
 import de.greenrobot.event.EventBus
+import kotlinx.android.synthetic.main.fragment_home.*
 
 
 /**
@@ -36,6 +37,7 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
     lateinit var menuAdapter: MenuAdapter
     lateinit var btnCategory: ImageView
     lateinit var editSearchView: SearchView
+    lateinit var viewpager: ViewPager
     private var onActionNotify: OnActionNotify? = null
     var sendData: SendData? = null
 
@@ -54,7 +56,10 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         btnCategory = view.findViewById(R.id.img_danhmuc)
         editSearchView = view.findViewById(R.id.search_view_home)
+        viewpager = view.findViewById(R.id.design_potter)
+        editSearchView.queryHint = "Sản phẩm cần tìm..."
         editSearchView!!.setOnQueryTextListener(this)
+
         btnCategory.setOnClickListener {
             loadFragmentCategory(CategoryFragment(),"CategoryFragment")
         }
@@ -64,6 +69,7 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         loadFragmentChildrenBook(ChildrenBookFragment())
         recyclerviewMenu = view!!.findViewById(R.id.recyclerview_menu)
         setUpRecyclerView()
+        imageSliderImplementation()
         return view
     }
 
@@ -106,6 +112,10 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
             return true
         }
         return false
+    }
+    private fun imageSliderImplementation() {
+        val adapter = SlideAdapter(context)
+        viewpager.adapter = adapter
     }
 
 

@@ -3,70 +3,76 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#FFFFFF"
-    android:padding="12dp"
-    android:layout_marginBottom="8dp">
+    android:layout_marginBottom="8dp"
+    android:background="#FFFFFF">
 
-    <TextView
-        android:id="@+id/tv_id_donhang_history_salebook"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout11"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ID Đơn Hàng: "
-        android:textColor="#000000"
-        android:textSize="16sp"
+        android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></TextView>
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tv_ngaydathang_history_salebook"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:text="Ngày Đặt Đơn Hàng: "
-        android:textColor="#000000"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_id_donhang_history_salebook"
-        app:layout_constraintStart_toStartOf="@+id/tv_id_donhang_history_salebook"
-        app:layout_constraintTop_toBottomOf="@+id/tv_id_donhang_history_salebook"></TextView>
+        <TextView
+            android:id="@+id/tv_id_donhang_history_salebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ID Đơn Hàng: "
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></TextView>
 
-    <TextView
-        android:id="@+id/tv_thanhtien_history_salebook"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:text="Thành tiền: "
-        android:textColor="#FF4500"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/tv_id_donhang_history_salebook"
-        app:layout_constraintStart_toStartOf="@+id/tv_id_donhang_history_salebook"
-        app:layout_constraintTop_toBottomOf="@+id/tv_ngaydathang_history_salebook"></TextView>
+        <TextView
+            android:id="@+id/tv_ngaydathang_history_salebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Ngày Đặt Đơn Hàng: "
+            android:textColor="#000000"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_id_donhang_history_salebook"
+            app:layout_constraintStart_toStartOf="@+id/tv_id_donhang_history_salebook"
+            app:layout_constraintTop_toBottomOf="@+id/tv_id_donhang_history_salebook"></TextView>
 
-    <TextView
-        android:id="@+id/btn_xemchitiet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:drawableRight="@drawable/ic_showdown_filter"
-        android:gravity="center"
-        android:background="?attr/selectableItemBackground"
-        android:text="Xem chi tiết đơn hàng"
-        android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="@+id/tv_id_donhang_history_salebook"
-        app:layout_constraintStart_toStartOf="@+id/tv_id_donhang_history_salebook"
-        app:layout_constraintTop_toBottomOf="@+id/tv_thanhtien_history_salebook"></TextView>
+        <TextView
+            android:id="@+id/tv_thanhtien_history_salebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Thành tiền: "
+            android:textColor="#FF7300"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tv_id_donhang_history_salebook"
+            app:layout_constraintStart_toStartOf="@+id/tv_id_donhang_history_salebook"
+            app:layout_constraintTop_toBottomOf="@+id/tv_ngaydathang_history_salebook"></TextView>
+
+        <TextView
+            android:id="@+id/btn_xemchitiet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="?attr/selectableItemBackground"
+            android:drawableRight="@drawable/ic_showdown_filter"
+            android:gravity="center"
+            android:text="Xem chi tiết đơn hàng"
+            android:textColor="#000000"
+            app:layout_constraintEnd_toEndOf="@+id/tv_id_donhang_history_salebook"
+            app:layout_constraintStart_toStartOf="@+id/tv_id_donhang_history_salebook"
+            app:layout_constraintTop_toBottomOf="@+id/tv_thanhtien_history_salebook"></TextView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_detail_history_bill"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
-        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/tv_id_donhang_history_salebook"
-        app:layout_constraintStart_toStartOf="@+id/tv_id_donhang_history_salebook"
-        app:layout_constraintTop_toBottomOf="@+id/btn_xemchitiet" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout11" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

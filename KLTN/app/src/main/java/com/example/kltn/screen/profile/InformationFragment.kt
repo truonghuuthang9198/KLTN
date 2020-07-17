@@ -41,7 +41,6 @@ class InformationFragment(val responseUser: LoginResponse): Fragment() {
         btnDangXuat.setOnClickListener {
             val pref = PreferenceManager.getDefaultSharedPreferences(activity!!)
             val edit = pref.edit()
-            edit.putBoolean("CheckLogin",false)
             edit.remove("Token").commit()
             edit.apply()
             loadFragment(ProfileFragment())

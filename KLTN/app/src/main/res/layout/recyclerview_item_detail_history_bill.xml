@@ -1,98 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/cart_item"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cart_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="6dp"
     android:layout_marginBottom="6dp"
-    android:padding="10dp"
     android:background="@drawable/custom_item_history_detail_bill">
 
-    <ImageView
-        android:id="@+id/img_sach_detailBill"
-        android:layout_width="100dp"
-        android:layout_height="120dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <TextView
-        android:id="@+id/tv_tensach_detailbill"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="20dp"
-        android:textSize="15sp"
-        android:textColor="#000000"
-        android:text="Gieo Mầm Tính Cách - Quan Tâm (Tái Bản 2019)"
+        android:padding="12dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/img_sach_detailBill"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <TextView
-        android:id="@+id/textView27"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="Đơn giá: "
-        android:paddingLeft="20dp"
-        android:textColor="#000000"
-        android:textSize="15sp"
-        app:layout_constraintStart_toEndOf="@+id/img_sach_detailBill"
-        app:layout_constraintTop_toBottomOf="@+id/tv_tensach_detailbill"></TextView>
+        <ImageView
+            android:id="@+id/img_sach_detailBill"
+            android:layout_width="100dp"
+            android:layout_height="120dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_giatien_detailbill"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:paddingLeft="15dp"
-        android:text="25.600 đ"
-        android:textColor="#FF4500"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/textView27"
-        app:layout_constraintEnd_toEndOf="@+id/tv_tensach_detailbill"
-        app:layout_constraintStart_toEndOf="@+id/textView27"
-        app:layout_constraintTop_toTopOf="@+id/textView27" />
+        <TextView
+            android:id="@+id/tv_tensach_detailbill"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:text="Gieo Mầm Tính Cách - Quan Tâm (Tái Bản 2019)"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/img_sach_detailBill"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textview28"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="20dp"
-        android:text="Số lượng: "
-        android:gravity="center"
-        android:layout_marginTop="8dp"
-        android:textColor="#000000"
-        android:textSize="15sp"
-        app:layout_constraintStart_toEndOf="@+id/img_sach_detailBill"
-        app:layout_constraintTop_toBottomOf="@+id/textView27"></TextView>
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:text="Đơn giá: "
+            android:textColor="#000000"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/img_sach_detailBill"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tensach_detailbill"></TextView>
 
-    <TextView
-        android:id="@+id/tv_soluong_detail_bill"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:paddingLeft="15dp"
-        android:text="2"
-        android:textColor="#FF4500"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/textview28"
-        app:layout_constraintEnd_toStartOf="@+id/btn_mualai_detailbill"
-        app:layout_constraintStart_toEndOf="@+id/textview28"
-        app:layout_constraintTop_toTopOf="@+id/textview28" />
+        <TextView
+            android:id="@+id/tv_giatien_detailbill"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:text="25.600 đ"
+            android:textColor="#FF4500"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/textView27"
+            app:layout_constraintEnd_toEndOf="@+id/tv_tensach_detailbill"
+            app:layout_constraintStart_toEndOf="@+id/textView27"
+            app:layout_constraintTop_toTopOf="@+id/textView27" />
 
-    <Button
-        android:id="@+id/btn_mualai_detailbill"
-        android:layout_width="120dp"
-        android:layout_height="35dp"
-        android:background="@drawable/custom_button_mualai"
-        android:text="Mua lại"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/img_sach_detailBill"
-        app:layout_constraintEnd_toEndOf="@+id/tv_tensach_detailbill"></Button>
+        <TextView
+            android:id="@+id/textview28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:text="Số lượng: "
+            android:textColor="#000000"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/img_sach_detailBill"
+            app:layout_constraintTop_toBottomOf="@+id/textView27"></TextView>
+
+        <TextView
+            android:id="@+id/tv_soluong_detail_bill"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:text="2"
+            android:textColor="#FF4500"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/textview28"
+            app:layout_constraintEnd_toStartOf="@+id/btn_mualai_detailbill"
+            app:layout_constraintStart_toEndOf="@+id/textview28"
+            app:layout_constraintTop_toTopOf="@+id/textview28" />
+
+        <Button
+            android:id="@+id/btn_mualai_detailbill"
+            android:layout_width="120dp"
+            android:layout_height="35dp"
+            android:background="@drawable/custom_button_mualai"
+            android:text="Mua lại"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/img_sach_detailBill"
+            app:layout_constraintEnd_toEndOf="@+id/tv_tensach_detailbill"></Button>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

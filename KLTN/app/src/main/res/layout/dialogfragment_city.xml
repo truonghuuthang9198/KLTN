@@ -45,6 +45,7 @@
         android:textSize="16dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/custom_searchview"
+        app:layout_constraintEnd_toEndOf="@+id/title_location"
         app:layout_constraintStart_toEndOf="@+id/custom_searchview"
         app:layout_constraintTop_toTopOf="@+id/custom_searchview" />
 
