@@ -68,11 +68,17 @@ class CartAdapter internal constructor(var context: Context?,var listCart: Array
             holder.soluong.text = soluong.toString()
         }
         holder.btnTru.setOnClickListener{
-            soluong-=1
-            current.soLuong = soluong
-            cartViewModel.updateSL(current.maSach,soluong)
-            reLoadFragment()
-            holder.soluong.text = soluong.toString()
+            if(current.soLuong<=1)
+            {
+                current.soLuong =1
+            }
+            else {
+                soluong -= 1
+                current.soLuong = soluong
+                cartViewModel.updateSL(current.maSach, soluong)
+                reLoadFragment()
+                holder.soluong.text = soluong.toString()
+            }
         }
         holder.btnDelete.setOnClickListener{
             cartViewModel.deleteItemCart(current)

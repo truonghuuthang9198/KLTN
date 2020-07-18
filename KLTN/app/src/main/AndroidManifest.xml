@@ -19,7 +19,8 @@
         <activity android:name=".SearchActivity"></activity>
         <activity
             android:name=".MainActivity"
-            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="stateHidden"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>

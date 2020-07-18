@@ -23,10 +23,6 @@ class MethodPayAdapter internal constructor(var context: Context?, var methodPay
         val layoutInflater = LayoutInflater.from(parent.context)
         val cellForRow = layoutInflater.inflate(R.layout.reyclerview_item_phuongthucthanhtoan, parent, false)
         val MethodPayViewHolder = MethodPayViewHolder(cellForRow)
-        MethodPayViewHolder.itemView.setOnClickListener {
-            lastSelectedPosition = MethodPayViewHolder.adapterPosition
-            notifyDataSetChanged()
-        }
         return MethodPayViewHolder
     }
 
@@ -35,9 +31,14 @@ class MethodPayAdapter internal constructor(var context: Context?, var methodPay
     override fun onBindViewHolder(holder: MethodPayViewHolder, position: Int) {
         val current = methodPayModel[position]
         holder.nameSdt.text = current.name
+        holder.itemView.setOnClickListener {
+            lastSelectedPosition = position
+            notifyDataSetChanged()
+        }
         holder.radioButton.isChecked = (lastSelectedPosition == position)
         holder.radioButton.setOnClickListener {
-
+            lastSelectedPosition = position
+            notifyDataSetChanged()
         }
     }
 

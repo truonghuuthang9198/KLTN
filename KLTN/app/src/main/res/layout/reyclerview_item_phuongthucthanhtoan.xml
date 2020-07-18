@@ -10,6 +10,9 @@
         android:id="@+id/rdbtn_methodpay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:buttonTint="@color/colorPrimary"
+        android:backgroundTint="#F2F2F2"
+        android:checked="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></RadioButton>
 

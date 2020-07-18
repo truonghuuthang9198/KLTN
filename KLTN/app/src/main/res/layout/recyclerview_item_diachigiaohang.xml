@@ -9,6 +9,7 @@
         android:id="@+id/rdbtn_offer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:buttonTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="@+id/tv_diachi_diachigiaohang"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_name_sdt_diachigiaohang"></RadioButton>

@@ -82,9 +82,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
-                    android:textSize="16sp"
                     android:text="Giao hàng"
                     android:textColor="#000000"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="@+id/circleImageView2"
                     app:layout_constraintStart_toStartOf="@+id/circleImageView2"
                     app:layout_constraintTop_toBottomOf="@+id/circleImageView2"></TextView>
@@ -114,9 +114,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
-                    android:textSize="16sp"
                     android:text="Thanh toán"
                     android:textColor="#000000"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="@+id/circleImageView3"
                     app:layout_constraintStart_toStartOf="@+id/circleImageView3"
                     app:layout_constraintTop_toBottomOf="@+id/circleImageView3"></TextView>
@@ -147,9 +147,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="6dp"
-                    android:textSize="16sp"
                     android:text="Kiểm tra"
                     android:textColor="#000000"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="@+id/circleImageView4"
                     app:layout_constraintStart_toStartOf="@+id/circleImageView4"
                     app:layout_constraintTop_toBottomOf="@+id/circleImageView4"></TextView>
@@ -190,8 +190,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:padding="6dp"
                     android:orientation="horizontal"
+                    android:padding="6dp"
                     app:layout_constraintTop_toBottomOf="@+id/reyclerview_address_ship">
 
                     <de.hdodenhof.circleimageview.CircleImageView
@@ -203,11 +203,11 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
                         android:text="Giao đến địa chỉ khác"
-                        android:layout_gravity="center"
-                        android:textSize="16sp"
                         android:textColor="#FF8000"
+                        android:textSize="16sp"
                         android:textStyle="bold"></TextView>
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -216,8 +216,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:padding="6dp"
                 android:background="#FFFFFF"
+                android:padding="6dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout7">
@@ -227,6 +227,8 @@
                     android:layout_width="26dp"
                     android:layout_height="26dp"
                     android:layout_marginTop="6dp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:buttonTint="@color/colorPrimary"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"></CheckBox>
 
@@ -235,8 +237,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="6dp"
                     android:text="Ghi chú của khách hàng"
-                    android:textSize="16sp"
                     android:textColor="#000000"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="@+id/chk_box_ghichu"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/chk_box_ghichu"
@@ -282,8 +284,8 @@
             android:background="@drawable/custom_button_dangnhap"
             android:text="Giao đến địa chỉ này"
             android:textAllCaps="false"
-            android:textSize="16sp"
             android:textColor="#FFFFFF"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

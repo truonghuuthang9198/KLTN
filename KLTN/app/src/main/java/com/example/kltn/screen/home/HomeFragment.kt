@@ -1,12 +1,16 @@
 package com.example.kltn.screen.home
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -25,7 +29,6 @@ import com.example.kltn.screen.home.model.MenuModel
 import com.example.kltn.screen.home.sgk.SGKFragment
 import com.example.kltn.screen.profile.model.SendArrayAddress
 import de.greenrobot.event.EventBus
-import kotlinx.android.synthetic.main.fragment_home.*
 
 
 /**
@@ -49,6 +52,8 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
             throw ClassCastException("$activity must implement onSomeEventListener")
         }
     }
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,11 +62,11 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         btnCategory = view.findViewById(R.id.img_danhmuc)
         editSearchView = view.findViewById(R.id.search_view_home)
         viewpager = view.findViewById(R.id.design_potter)
-        editSearchView.queryHint = "Sản phẩm cần tìm..."
-        editSearchView!!.setOnQueryTextListener(this)
+        editSearchView.setOnQueryTextListener(this)
+        closeKeyboardFromFragment()
 
         btnCategory.setOnClickListener {
-            loadFragmentCategory(CategoryFragment(),"CategoryFragment")
+            loadFragmentCategory(CategoryFragment(), "CategoryFragment")
         }
         loadFragmentDeal(DealFragment())
         loadFragmentSGK(SGKFragment())
@@ -83,6 +88,7 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         }
         return false
     }
+
     private fun loadFragmentSGK(fragment: Fragment?): Boolean {
         if (fragment != null) {
             fragmentManager!!
@@ -93,6 +99,7 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         }
         return false
     }
+
     private fun loadFragmentBestBook(fragment: Fragment?): Boolean {
         if (fragment != null) {
             fragmentManager!!
@@ -103,6 +110,7 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         }
         return false
     }
+
     private fun loadFragmentChildrenBook(fragment: Fragment?): Boolean {
         if (fragment != null) {
             fragmentManager!!
@@ -113,6 +121,7 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         }
         return false
     }
+
     private fun imageSliderImplementation() {
         val adapter = SlideAdapter(context)
         viewpager.adapter = adapter
@@ -131,23 +140,24 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         return false
     }
 
-    fun setUpRecyclerView()
-    {
-        recyclerviewMenu.layoutManager = LinearLayoutManager(activity,
-            LinearLayoutManager.HORIZONTAL,false)
-        recyclerviewMenu.layoutManager = GridLayoutManager(activity,5)
+    fun setUpRecyclerView() {
+        recyclerviewMenu.layoutManager = LinearLayoutManager(
+            activity,
+            LinearLayoutManager.HORIZONTAL, false
+        )
+        recyclerviewMenu.layoutManager = GridLayoutManager(activity, 5)
 
         val arrayList = ArrayList<MenuModel>()
-        arrayList.add(MenuModel(1,"Danh Mục",R.drawable.ic_danhmuc))
-        arrayList.add(MenuModel(2,"Flash Sale",R.drawable.ic_flash))
-        arrayList.add(MenuModel(3,"Deal Hot",R.drawable.ic_dealhot))
-        arrayList.add(MenuModel(4,"Gợi Ý",R.drawable.ic_goiy))
-        arrayList.add(MenuModel(5,"Đồ Chơi",R.drawable.ic_dochoi))
-        arrayList.add(MenuModel(6,"Văn Phòng Phẩm",R.drawable.ic_vpp))
-        arrayList.add(MenuModel(7,"Văn Học",R.drawable.ic_vanhoc))
-        arrayList.add(MenuModel(8,"Thiếu Nhi",R.drawable.ic_thieunhi))
-        arrayList.add(MenuModel(9," Tâm Lý Kỹ  Năng",R.drawable.ic_tlkn))
-        arrayList.add(MenuModel(10,"Kinh tế",R.drawable.ic_kinhte))
+        arrayList.add(MenuModel(1, "Danh Mục", R.drawable.ic_danhmuc))
+        arrayList.add(MenuModel(2, "Flash Sale", R.drawable.ic_flash))
+        arrayList.add(MenuModel(3, "Deal Hot", R.drawable.ic_dealhot))
+        arrayList.add(MenuModel(4, "Gợi Ý", R.drawable.ic_goiy))
+        arrayList.add(MenuModel(5, "Đồ Chơi", R.drawable.ic_dochoi))
+        arrayList.add(MenuModel(6, "Văn Phòng Phẩm", R.drawable.ic_vpp))
+        arrayList.add(MenuModel(7, "Văn Học", R.drawable.ic_vanhoc))
+        arrayList.add(MenuModel(8, "Thiếu Nhi", R.drawable.ic_thieunhi))
+        arrayList.add(MenuModel(9, " Tâm Lý Kỹ  Năng", R.drawable.ic_tlkn))
+        arrayList.add(MenuModel(10, "Kinh tế", R.drawable.ic_kinhte))
         val newEvent = SendArrayAddress(arrayList)
         EventBus.getDefault().post(newEvent)
         onActionNotify = object : OnActionNotify {
@@ -160,18 +170,31 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
 //                mainActivity.ar
             }
         }
-        menuAdapter = MenuAdapter(context,arrayList,onActionNotify!!)
+        menuAdapter = MenuAdapter(context, arrayList, onActionNotify!!)
         recyclerviewMenu.adapter = menuAdapter
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         val intent = Intent(context, SearchActivity::class.java)
-        intent.putExtra("keySearch",query)
+        intent.putExtra("keySearch", query)
         context?.startActivity(intent)
         return true
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
         return false
+    }
+
+    override fun onResume() {
+        super.onResume()
+    }
+
+    fun closeKeyboardFromFragment() {
+        val view = activity?.currentFocus
+        if(view !=null) {
+            val imm: InputMethodManager? =
+                activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+            imm?.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+        }
     }
 }

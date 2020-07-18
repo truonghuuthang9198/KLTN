@@ -166,16 +166,6 @@ class MainActivity : AppCompatActivity(), SendData {
         }
     }
 
-
-    override fun onStop() {
-        super.onStop()
-//        FcmPush.instance.sendMessage(
-//            "cD0jSRY-fq3jxXWh6xgcmy:APA91bFbsgiPHgj85YRqaRKcsxFbtkIOkJU8VUFOenEZlJHHjbULlkLvLx0SwD2EjDjEcpfLD0JHo31Nejz7QunslJRKkiXXaJwxa_tDHBg2_jJjdlaNHbcUeITrOWymHR5qjBmGIoew",
-//            "Hello",
-//            "Xin chao Thang Truong"
-//        )
-    }
-
     override fun ChangeStateSuggest() {
         navView.selectedItemId = R.id.navigation_suggest
     }

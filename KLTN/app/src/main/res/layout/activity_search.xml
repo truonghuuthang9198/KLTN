@@ -13,6 +13,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <ImageView
             android:id="@+id/btn_back_activity_search"
             android:layout_width="30dp"
@@ -40,7 +41,7 @@
                 android:id="@+id/search_text"
                 android:background="#FFFFFF"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="38dp"
                 app:iconifiedByDefault="false"
                 android:layout_gravity="center"
                 app:defaultQueryHint="Sản phẩm cần tìm..."
@@ -53,10 +54,10 @@
             android:layout_height="30dp"
             android:layout_marginRight="10dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_back_activity_search"
+            app:layout_constraintBottom_toBottomOf="@+id/card_searchview"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btn_back_activity_search"
-            app:srcCompat="@drawable/ic_home_toolbar"/>
+            app:layout_constraintTop_toTopOf="@+id/card_searchview"
+            app:srcCompat="@drawable/ic_home_toolbar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

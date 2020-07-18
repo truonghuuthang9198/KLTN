@@ -31,13 +31,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:orientation="horizontal"
+                android:focusableInTouchMode="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:id="@+id/img_danhmuc"
-                    android:layout_width="35dp"
+                    android:layout_width="28dp"
                     android:layout_height="0dp"
                     android:layout_marginLeft="4dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
@@ -57,12 +58,11 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/img_danhmuc"
                     app:layout_constraintTop_toTopOf="parent">
-
                     <androidx.appcompat.widget.SearchView
                         android:id="@+id/search_view_home"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        app:defaultQueryHint="Sản phẩm cần tìm..."
+                        android:layout_height="38dp"
+                        android:focusable="false"
                         app:iconifiedByDefault="false"
                         app:queryHint="Sản phẩm cần tìm..."></androidx.appcompat.widget.SearchView>
                 </androidx.cardview.widget.CardView>
