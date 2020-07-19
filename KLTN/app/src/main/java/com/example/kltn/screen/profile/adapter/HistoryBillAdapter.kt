@@ -1,20 +1,26 @@
 package com.example.kltn.screen.profile.adapter
 
 import android.content.Context
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
 import com.example.kltn.screen.profile.model.HistoryBillModel
 import com.example.kltn.screen.profile.model.HistoryDetailBillModel
+import com.example.kltn.screen.retrofit.reponse.HistoryResponse
+import retrofit2.Response
 import java.text.NumberFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 
-class HistoryBillAdapter internal constructor(var context: Context?, var listHistory: ArrayList<HistoryBillModel>) :
+class HistoryBillAdapter internal constructor(var context: Context?, var listHistory: ArrayList<HistoryBillModel>,var response: Response<List<HistoryResponse>>) :
     RecyclerView.Adapter<HistoryBillAdapter.HistoryBillViewHolder>() {
     inner class HistoryBillViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tv_id_donhang: TextView = itemView.findViewById(R.id.tv_id_donhang_history_salebook)
@@ -33,18 +39,48 @@ class HistoryBillAdapter internal constructor(var context: Context?, var listHis
 
     override fun getItemCount() = listHistory.size
 
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: HistoryBillViewHolder, position: Int) {
         var check:Int = 1
         val arrayList = ArrayList<HistoryDetailBillModel>()
         val current = listHistory[position]
         holder.tv_id_donhang.append(current.idHD)
-        holder.tv_ngaydathang.append(current.ngayLap)
+        var formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+        val formatted = current.ngayLap.format(formatter)
+        holder.tv_ngaydathang.append(formatted)
+
         val localVN = Locale("vi","VN")
         val numberFormat = NumberFormat.getCurrencyInstance(localVN)
         val giatienfm =numberFormat.format(current.thanhTien)
         holder.tv_thanhtien.append(giatienfm)
         holder.recyclerview_detail_history_bill.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
         holder.recyclerview_detail_history_bill.visibility = View.GONE
+        response.body()!!.forEach {
+            if (it.maHoaDon == current.idHD)
+            {
+                it.chiTietHoaDons.forEach {
+                    arrayList.add(HistoryDetailBillModel(0,
+                        0,
+                         it.sach.ghiChu,
+                         it.donGia,
+                         it.sach.giamGia,
+                        it.sach.hinhAnh,
+                        it.sach.kichThuoc,
+                        it.sach.loaiBia,
+                        it.sach.congTyPhatHanh.tenCongTy,
+                        it.sach.maSach,
+                        it.sach.tacGia.tenTacGia,
+                        it.sach.theLoai.tenTheLoai,
+                        it.sach.ngayXuatBan,
+                        it.sach.nhaXuatBan.tenNhaXuatBan,
+                        it.sach.soTrang,
+                        it.sach.tenSach,
+                        it.sach.tinhTrang,
+                        it.sach.soSao,it.donGia, it.soLuong))
+                }
+            }
+        }
         holder.btn_xemchitiet.setOnClickListener {
             if(check == 1)
             {
@@ -62,66 +98,5 @@ class HistoryBillAdapter internal constructor(var context: Context?, var listHis
                 check=1
             }
         }
-
-        arrayList.add(
-            HistoryDetailBillModel(0,
-                0,
-                "Nghỉ hè năm lớp 12 dầu sôi lửa bỏng, Bossun lại bận bù đầu (không phải vì học đâu ạ!)… đi biển, làm trợ lí cho họa sĩ manga và thậm trí còn lên đường du ngoạn bằng… xe đạp một mình! Còn nữa, nhất định phải xem cuộc gặp gỡ kì thú giữa bộ ba Sket Dan và cặp đôi hài của “Viking” các bạn nhé!",
-                18000.00,
-                0.05,
-                "https://cdn0.fahasa.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/s/k/sket-dance---quai-kiet--hoc-duong-tap-30.jpg",
-                "17.6 x 11.3 cm",
-                "Bìa Mềm",
-                "Nhà Xuất Bản Kim Đồng",
-                "8935244841961",
-                "TG001",
-                "Tiểu thuyết",
-                "2020",
-                "NXB Kim Đồng",
-                "200 Trang",
-                "Kenta Shinohara",
-                "Sket Dance - Quái Kiệt Học Đường - Tập 30",
-                2,200000.00, 2)
-        )
-        arrayList.add(
-            HistoryDetailBillModel(0,
-                0,
-                "Nghỉ hè năm lớp 12 dầu sôi lửa bỏng, Bossun lại bận bù đầu (không phải vì học đâu ạ!)… đi biển, làm trợ lí cho họa sĩ manga và thậm trí còn lên đường du ngoạn bằng… xe đạp một mình! Còn nữa, nhất định phải xem cuộc gặp gỡ kì thú giữa bộ ba Sket Dan và cặp đôi hài của “Viking” các bạn nhé!",
-                18000.00,
-                0.05,
-                "https://cdn0.fahasa.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/s/k/sket-dance---quai-kiet--hoc-duong-tap-30.jpg",
-                "17.6 x 11.3 cm",
-                "Bìa Mềm",
-                "Nhà Xuất Bản Kim Đồng",
-                "8935244841961",
-                "TG001",
-                "Tiểu thuyết",
-                "2020",
-                "NXB Kim Đồng",
-                "200 Trang",
-                "Kenta Shinohara",
-                "Sket Dance - Quái Kiệt Học Đường - Tập 30",
-                2,200000.00, 2)
-        )
-        arrayList.add(
-            HistoryDetailBillModel(0,
-                0,
-                "Nghỉ hè năm lớp 12 dầu sôi lửa bỏng, Bossun lại bận bù đầu (không phải vì học đâu ạ!)… đi biển, làm trợ lí cho họa sĩ manga và thậm trí còn lên đường du ngoạn bằng… xe đạp một mình! Còn nữa, nhất định phải xem cuộc gặp gỡ kì thú giữa bộ ba Sket Dan và cặp đôi hài của “Viking” các bạn nhé!",
-                18000.00,
-                0.05,
-                "https://cdn0.fahasa.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/s/k/sket-dance---quai-kiet--hoc-duong-tap-30.jpg",
-                "17.6 x 11.3 cm",
-                "Bìa Mềm",
-                "Nhà Xuất Bản Kim Đồng",
-                "8935244841961",
-                "TG001",
-                "Tiểu thuyết",
-                "2020",
-                "NXB Kim Đồng",
-                "200 Trang",
-                "Kenta Shinohara",
-                "Sket Dance - Quái Kiệt Học Đường - Tập 30",
-                2,200000.00, 2)
-        )
     }
 }

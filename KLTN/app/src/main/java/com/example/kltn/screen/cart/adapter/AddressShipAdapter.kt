@@ -1,19 +1,20 @@
 package com.example.kltn.screen.cart.adapter
 
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
-import com.example.kltn.screen.cart.model.AddressShipModel
-import com.example.kltn.screen.profile.model.SendArrayAddress
+import com.example.kltn.screen.profile.model.ManangerAddressModel
 
-class AddressShipAdapter internal constructor(var context: Context?, var addressShipModel: ArrayList<AddressShipModel>) :
+
+class AddressShipAdapter internal constructor(var context: Context?, var addressShipModel: ArrayList<ManangerAddressModel>) :
     RecyclerView.Adapter<AddressShipAdapter.AddressShipViewHolder>() {
     private var lastSelectedPosition = -1
     inner class AddressShipViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -36,7 +37,7 @@ class AddressShipAdapter internal constructor(var context: Context?, var address
 
     override fun onBindViewHolder(holder: AddressShipViewHolder, position: Int) {
         val current = addressShipModel[position]
-        holder.nameSdt.text = current.name
+        holder.nameSdt.text = current.ho +" "+ current.ten + " - " + current.sdt
         holder.address.text = current.address
         holder.itemView.setOnClickListener {
             lastSelectedPosition = position

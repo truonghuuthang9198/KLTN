@@ -1,14 +1,12 @@
 package com.example.kltn.screen.cart
 
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.CompoundButton
-import android.widget.ImageView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,10 +14,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
 import com.example.kltn.screen.cart.adapter.AddressShipAdapter
 import com.example.kltn.screen.cart.model.AddressShipModel
+import com.example.kltn.screen.profile.adapter.ManangerAddressAdapter
+import com.example.kltn.screen.profile.model.ManangerAddressModel
 import com.example.kltn.screen.profile.model.SendArrayAddress
+import com.example.kltn.screen.retrofit.GetDataService
+import com.example.kltn.screen.retrofit.RetrofitClientInstance
+import com.example.kltn.screen.retrofit.reponse.ManagerAddressRespone
 import com.google.android.material.textfield.TextInputEditText
 import com.google.common.eventbus.Subscribe
 import de.greenrobot.event.EventBus
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class InformationShipFragment : Fragment() {
@@ -85,12 +91,37 @@ class InformationShipFragment : Fragment() {
     {
         recyclerviewShip.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        val arrayList = ArrayList<AddressShipModel>()
+        val arrayList = ArrayList<ManangerAddressModel>()
+        val pref = PreferenceManager.getDefaultSharedPreferences(context)
+        var token = pref.getString("Token", "")
+        val service = RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
+        val call = service?.getListAddress("Bearer " + token)
+        call?.enqueue(object : Callback<List<ManagerAddressRespone>> {
+            override fun onFailure(call: Call<List<ManagerAddressRespone>>, t: Throwable) {
+                Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
+            }
 
-//        arrayList.add(AddressShipModel("Trương Hữu Thắng - 0384180187","76/32/13 Lê Trọng Tấn, Phường Tây Thạnh,Quận Tân Phú, TP Hồ Chí Minh",-1))
-//        arrayList.add(AddressShipModel("Trương Hữu Thắng - 0384180187","76/32/13 Lê Trọng Tấn, Phường Tây Thạnh,Quận Tân Phú, TP Hồ Chí Minh",-1))
-        addressAdapter = AddressShipAdapter(context,arrayList)
-        recyclerviewShip.adapter = addressAdapter
+            override fun onResponse(
+                call: Call<List<ManagerAddressRespone>>,
+                response: Response<List<ManagerAddressRespone>>
+            ) {
+                if (response.isSuccessful) {
+                    response.body()!!.forEach {
+                        arrayList.add(
+                            ManangerAddressModel(
+                                "Lê Hoàng",
+                                "Phúc",
+                                it.diaChi,
+                                it.soDienThoai,"Địa chỉ khác"
+                            )
+                        )
+                        addressAdapter = AddressShipAdapter(context,arrayList)
+                        recyclerviewShip.adapter = addressAdapter
+                    }
+                }
+            }
+        })
+
     }
 
 

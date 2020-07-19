@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.example.kltn.R
+import com.example.kltn.screen.profile.model.ManangerAddressModel
 
-class UpdateAddressFragment : Fragment() {
+class UpdateAddressFragment(var data: ManangerAddressModel) : Fragment() {
     lateinit var btnBack_Address: ImageView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

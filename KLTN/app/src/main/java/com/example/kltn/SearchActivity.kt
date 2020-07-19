@@ -8,9 +8,11 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.RatingBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,6 +41,7 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     lateinit var searchAdapter: SearchAdapter
     private var editSearchView: SearchView? = null
     lateinit var btn_back_activity_search: ImageView
+    lateinit var search_null: ConstraintLayout
     lateinit var btn_back_home_searchActivity: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +50,7 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         setDialogFullScreen()
         recyclerViewSearch = findViewById(R.id.recyclerview_search)
         btn_back_activity_search = findViewById(R.id.btn_back_activity_search)
+        search_null = findViewById(R.id.search_null)
         btn_back_home_searchActivity = findViewById(R.id.btn_back_home_searchActivity)
         btn_back_activity_search.setOnClickListener {
             onBackPressed()
@@ -65,7 +69,7 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
-
+        getListSearch(query!!)
         return true
     }
 
@@ -177,9 +181,13 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 call: Call<List<SearchResponse>>,
                 response: Response<List<SearchResponse>>
             ) {
-                if (response.isSuccessful) {
+                if (response.isSuccessful && response.body()!!.isNotEmpty()) {
+                    recyclerViewSearch.visibility = View.VISIBLE
+                    search_null.visibility = View.GONE
                     setUpRecyclerView(response)
                 } else {
+                    recyclerViewSearch.visibility = View.GONE
+                    search_null.visibility = View.VISIBLE
                     Toast.makeText(
                         this@SearchActivity,
                         "Không tìm thấy sách theo yêu cầu",
@@ -195,32 +203,34 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerViewSearch.layoutManager = GridLayoutManager(this, 2)
         val arrayListSearch = ArrayList<BookModel>()
-        response.body()!!.forEach {
-            arrayListSearch.add(
-                BookModel(
-                    0,
-                    0,
-                    it.ghiChu,
-                    it.giaBan,
-                    it.giamGia,
-                    it.hinhAnh,
-                    it.kichThuoc,
-                    it.loaiBia,
-                    it.maCongTy,
-                    it.maSach,
-                    it.tenTacGia,
-                    it.tenTheLoai,
-                    it.ngayXuatBan,
-                    it.tenNhaXuatBan,
-                    it.soLuong,
-                    it.soTrang,
-                    it.tenSach,
-                    it.tinhTrang,
-                    it.soSao
+        if(response.body()!!.isNotEmpty()) {
+            response.body()!!.forEach {
+                arrayListSearch.add(
+                    BookModel(
+                        0,
+                        0,
+                        it.ghiChu,
+                        it.giaBan,
+                        it.giamGia,
+                        it.hinhAnh,
+                        it.kichThuoc,
+                        it.loaiBia,
+                        it.maCongTy,
+                        it.maSach,
+                        it.tenTacGia,
+                        it.tenTheLoai,
+                        it.ngayXuatBan,
+                        it.tenNhaXuatBan,
+                        it.soLuong,
+                        it.soTrang,
+                        it.tenSach,
+                        it.tinhTrang,
+                        it.soSao
+                    )
                 )
-            )
+            }
+            searchAdapter = SearchAdapter(arrayListSearch)
+            recyclerViewSearch.adapter = searchAdapter
         }
-        searchAdapter = SearchAdapter(arrayListSearch)
-        recyclerViewSearch.adapter = searchAdapter
     }
 }

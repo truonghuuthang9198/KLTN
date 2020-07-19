@@ -51,7 +51,7 @@
         app:layout_constraintTop_toBottomOf="@id/constraintlay_titile_address"></TextView>
 
     <EditText
-        android:id="@+id/edt_ho_address"
+        android:id="@+id/edt_ho_update_address"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_margin="12dp"
@@ -65,7 +65,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv1_address"></EditText>
 
     <EditText
-        android:id="@+id/edt_ten_address"
+        android:id="@+id/edt_ten_update_address"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_margin="12dp"
@@ -75,10 +75,10 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_ho_address"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/edt_ho_update_address"></EditText>
 
     <EditText
-        android:id="@+id/edt_sdt_address"
+        android:id="@+id/edt_sdt_update_address"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_margin="12dp"
@@ -88,7 +88,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_ten_address"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/edt_ten_update_address"></EditText>
 
     <EditText
         android:id="@+id/edt_tinh_address"
@@ -102,10 +102,10 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_sdt_address"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/edt_sdt_update_address"></EditText>
 
     <EditText
-        android:id="@+id/edt_quan_address"
+        android:id="@+id/edt_quan_update_address"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_margin="12dp"
@@ -130,10 +130,10 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_quan_address"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/edt_quan_update_address"></EditText>
 
     <EditText
-        android:id="@+id/edt_diachinha_address"
+        android:id="@+id/edt_diachinha_update_address"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_margin="12dp"
@@ -146,29 +146,29 @@
         app:layout_constraintTop_toBottomOf="@+id/edt_xaphuong_address"></EditText>
 
     <CheckBox
-        android:id="@+id/ckb_diachigiaohangmacdinh"
+        android:id="@+id/ckb_diachigiaohangmacdinh_update_address"
         android:layout_width="0dp"
         android:textSize="16sp"
         android:layout_marginTop="12dp"
         android:layout_height="wrap_content"
         android:text="Địa chỉ giao hàng mặc định"
-        app:layout_constraintEnd_toEndOf="@+id/edt_diachinha_address"
-        app:layout_constraintStart_toStartOf="@+id/edt_diachinha_address"
-        app:layout_constraintTop_toBottomOf="@+id/edt_diachinha_address"></CheckBox>
+        app:layout_constraintEnd_toEndOf="@+id/edt_diachinha_update_address"
+        app:layout_constraintStart_toStartOf="@+id/edt_diachinha_update_address"
+        app:layout_constraintTop_toBottomOf="@+id/edt_diachinha_update_address"></CheckBox>
 
     <CheckBox
-        android:id="@+id/ckb_diachithanhtoanmacdinh"
+        android:id="@+id/ckb_diachithanhtoanmacdinh_update_address"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Địa chỉ thanh toán mặc định"
         android:textSize="16sp"
         android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="@+id/edt_diachinha_address"
-        app:layout_constraintStart_toStartOf="@+id/edt_diachinha_address"
-        app:layout_constraintTop_toBottomOf="@+id/ckb_diachigiaohangmacdinh"></CheckBox>
+        app:layout_constraintEnd_toEndOf="@+id/edt_diachinha_update_address"
+        app:layout_constraintStart_toStartOf="@+id/edt_diachinha_update_address"
+        app:layout_constraintTop_toBottomOf="@+id/ckb_diachigiaohangmacdinh_update_address"></CheckBox>
 
     <Button
-        android:id="@+id/btn_save_address"
+        android:id="@+id/btn_save_update_address"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginStart="20dp"
@@ -181,10 +181,10 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ckb_diachithanhtoanmacdinh"></Button>
+        app:layout_constraintTop_toBottomOf="@+id/ckb_diachithanhtoanmacdinh_update_address"></Button>
 
     <Button
-        android:id="@+id/btn_delete_address"
+        android:id="@+id/btn_delete_update_address"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginStart="20dp"
@@ -197,5 +197,5 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_save_address"></Button>
+        app:layout_constraintTop_toBottomOf="@+id/btn_save_update_address"></Button>
 </androidx.constraintlayout.widget.ConstraintLayout>

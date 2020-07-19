@@ -59,9 +59,10 @@
     <TextView
         android:id="@+id/price_book_deal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="5dp"
         android:text="12.000 đ"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/title_book_deal"
         app:layout_constraintTop_toBottomOf="@+id/priceReduced_book_deal"></TextView>
 

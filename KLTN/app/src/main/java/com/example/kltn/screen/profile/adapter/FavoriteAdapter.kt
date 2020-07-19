@@ -11,13 +11,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
+import com.example.kltn.screen.home.model.BookModel
 import com.example.kltn.screen.profile.model.FavoriteModel
+import com.squareup.picasso.Picasso
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
 
-class FavoriteAdapter internal constructor(var context: Context?, var favoriteModel: ArrayList<FavoriteModel>) :
+class FavoriteAdapter internal constructor(var context: Context?, var favoriteModel: ArrayList<BookModel>) :
     RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
     inner class FavoriteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageBook_favorite: ImageView = itemView.findViewById(R.id.img_book_favorite)
@@ -38,12 +40,12 @@ class FavoriteAdapter internal constructor(var context: Context?, var favoriteMo
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
         val current = favoriteModel[position]
-        holder.imageBook_favorite.setImageResource(current.image)
-        holder.titleBook_favorite.text = current.titleFavorite
+        holder.titleBook_favorite.text = current.tenSach
         val localVN = Locale("vi","VN")
         val numberFormat = NumberFormat.getCurrencyInstance(localVN)
-        val giatienfm =numberFormat.format(current.priceFavorite)
+        val giatienfm =numberFormat.format(current.giaGiamDS)
         holder.priceBook_favorite.text = giatienfm
+        Picasso.get().load(current.hinhAnh).into(holder.imageBook_favorite)
         holder.btnDelete.setOnClickListener {
 
         }

@@ -162,7 +162,7 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         EventBus.getDefault().post(newEvent)
         onActionNotify = object : OnActionNotify {
             override fun onActionNotify() {
-                sendData?.ChangeStateSuggest()
+                sendData?.ChangeStateSuggest(1)
 //                  sendData?.ChangeStateSuggest()
 //                val mainActivity = HomeFragment()
 //                val bundle = Bundle()

@@ -1,11 +1,13 @@
 package com.example.kltn.screen.profile
 
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,8 +16,17 @@ import com.example.kltn.R
 import com.example.kltn.screen.profile.adapter.ManangerAddressAdapter
 import com.example.kltn.screen.profile.model.ManangerAddressModel
 import com.example.kltn.screen.event.OnActionData
+import com.example.kltn.screen.profile.adapter.HistoryBillAdapter
+import com.example.kltn.screen.profile.model.HistoryBillModel
 import com.example.kltn.screen.profile.model.SendArrayAddress
+import com.example.kltn.screen.retrofit.GetDataService
+import com.example.kltn.screen.retrofit.RetrofitClientInstance
+import com.example.kltn.screen.retrofit.reponse.HistoryResponse
+import com.example.kltn.screen.retrofit.reponse.ManagerAddressRespone
 import de.greenrobot.event.EventBus
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class ManangerAddressFragment : Fragment() {
@@ -33,7 +44,8 @@ class ManangerAddressFragment : Fragment() {
         recyclerViewAddAddress = view.findViewById(R.id.recyclerview_address)
         btnBack_Address = view.findViewById(R.id.btn_back_add_address)
         btn_add_address = view.findViewById(R.id.btn_addnew_address)
-        recyclerViewAddAddress.layoutManager = LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false)
+        recyclerViewAddAddress.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         btnBack_Address = view.findViewById(R.id.btn_back_add_address)
         btnBack_Address.setOnClickListener {
             if (fragmentManager!!.backStackEntryCount > 0) {
@@ -41,11 +53,12 @@ class ManangerAddressFragment : Fragment() {
             }
         }
         btn_add_address.setOnClickListener {
-            loadFragment(AddNewAddressFragment(),"AddNewAddressFragment")
+            loadFragment(AddNewAddressFragment(), "AddNewAddressFragment")
         }
         setUpRecyclerview()
         return view
     }
+
     private fun loadFragment(fragment: Fragment?, tag: String): Boolean {
         if (fragment != null) {
             (context as FragmentActivity).supportFragmentManager
@@ -57,18 +70,46 @@ class ManangerAddressFragment : Fragment() {
         }
         return false
     }
-    fun setUpRecyclerview()
-    {
+
+    fun setUpRecyclerview() {
         val arrayList = ArrayList<ManangerAddressModel>()
-        arrayList.add(ManangerAddressModel("Trương Hữu","Thắng","73/32/13 Lê Trọng Tấn, Phường Tây Thạnh, Quận Tân Phú, TP HCM","0384180187","Địa chỉ thanh toán mặc định"))
-        arrayList.add(ManangerAddressModel("Lê Thanh","Tuyên","115/22 Lê Trọng Tấn, Phường Sơn Kỳ, Quận Tân Phú, TP HCM","0384180187","Địa chỉ giao hàng mặc định"))
-        arrayList.add(ManangerAddressModel("Lê Hoàng","Phúc","115/66 Nguyễn Đỗ Cung, Phường Tây Thạnh, Quận Tân Phú, TP HCM","0384180667","Địa chỉ khác"))
+//        arrayList.add(ManangerAddressModel("Trương Hữu","Thắng","73/32/13 Lê Trọng Tấn, Phường Tây Thạnh, Quận Tân Phú, TP HCM","0384180187","Địa chỉ thanh toán mặc định"))
+//        arrayList.add(ManangerAddressModel("Lê Thanh","Tuyên","115/22 Lê Trọng Tấn, Phường Sơn Kỳ, Quận Tân Phú, TP HCM","0384180187","Địa chỉ giao hàng mặc định"))
+//        arrayList.add(ManangerAddressModel("Lê Hoàng","Phúc","115/66 Nguyễn Đỗ Cung, Phường Tây Thạnh, Quận Tân Phú, TP HCM","0384180667","Địa chỉ khác"))
+        val pref = PreferenceManager.getDefaultSharedPreferences(context)
+        var token = pref.getString("Token", "")
+        val service = RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
+        val call = service?.getListAddress("Bearer " + token)
+        call?.enqueue(object : Callback<List<ManagerAddressRespone>> {
+            override fun onFailure(call: Call<List<ManagerAddressRespone>>, t: Throwable) {
+                Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
+            }
+
+            override fun onResponse(
+                call: Call<List<ManagerAddressRespone>>,
+                response: Response<List<ManagerAddressRespone>>
+            ) {
+                if (response.isSuccessful) {
+                    response.body()!!.forEach {
+                        arrayList.add(
+                            ManangerAddressModel(
+                                "Lê Hoàng",
+                                "Phúc",
+                                it.diaChi,
+                                it.soDienThoai,"Địa chỉ khác"
+                            )
+                        )
+                        manangerAddressAdapter = ManangerAddressAdapter(context, arrayList, onActionData!!)
+                        recyclerViewAddAddress.adapter = manangerAddressAdapter
+                    }
+                }
+            }
+        })
         onActionData = object : OnActionData<ManangerAddressModel> {
             override fun onAction(data: ManangerAddressModel) {
-                loadFragment(UpdateAddressFragment(),"UpdateAddressFragment")
+                loadFragment(UpdateAddressFragment(data), "UpdateAddressFragment")
             }
         }
-        manangerAddressAdapter = ManangerAddressAdapter(context,arrayList,onActionData!!)
-        recyclerViewAddAddress.adapter = manangerAddressAdapter
+
     }
 }

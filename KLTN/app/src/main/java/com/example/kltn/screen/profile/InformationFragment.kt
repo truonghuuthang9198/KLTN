@@ -42,6 +42,7 @@ class InformationFragment(val responseUser: LoginResponse): Fragment() {
             val pref = PreferenceManager.getDefaultSharedPreferences(activity!!)
             val edit = pref.edit()
             edit.remove("Token").commit()
+            edit.remove("MaKH").commit()
             edit.apply()
             loadFragment(ProfileFragment())
         }

@@ -23,4 +23,10 @@ interface GetDataService {
     fun registerUser(@Body registerModel: RegisterModel):Call<RegisterResponse>
     @GET("Search/{id}")
     fun getListSearch(@Path("id") id: String): Call<List<SearchResponse>>
+    @GET("YeuThich")
+    fun getListFavorite(@Header("Authorization") token:String):Call<List<FavoriteResponse>>
+    @GET("LichSuMuaHang")
+    fun getListHistory(@Header ("Authorization") token: String): Call<List<HistoryResponse>>
+    @GET("SoDiaChi")
+    fun getListAddress(@Header ("Authorization") token: String): Call<List<ManagerAddressRespone>>
 }

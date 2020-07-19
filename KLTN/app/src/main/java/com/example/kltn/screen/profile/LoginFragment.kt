@@ -5,6 +5,7 @@ package com.example.kltn.screen.profile
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,6 +16,9 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.example.kltn.R
+import com.example.kltn.screen.retrofit.GetDataService
+import com.example.kltn.screen.retrofit.RetrofitClientInstance
+import com.example.kltn.screen.retrofit.model.LoginModel
 import com.example.kltn.screen.retrofit.reponse.LoginResponse
 import com.facebook.*
 import com.facebook.login.LoginManager
@@ -22,6 +26,9 @@ import com.facebook.login.LoginResult
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.onesignal.OneSignal
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.*
 
 
@@ -61,37 +68,41 @@ class LoginFragment : Fragment() {
         tvDangKiTaiKhoan =view.findViewById(R.id.tvDangKiTaiKhoan)
         callBackManager = CallbackManager.Factory.create()
         btnDangNhap.setOnClickListener {
-            val status = OneSignal.getPermissionSubscriptionState()
-            Log.d("Thang",status.subscriptionStatus.userId)
+
             val tendn = edit_email_sdt.text.toString()
             val mk = edit_password.text.toString()
             //----Login----------------------
-//            val checklogin = LoginModel(tendn,mk)
-//            val service = RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
-//            val call = service?.login(checklogin)
-//            call?.enqueue(object : Callback<LoginResponse> {
-//                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-//                    Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
-//                }
-//                override fun onResponse(
-//                    call: Call<LoginResponse>,
-//                    response: Response<LoginResponse>
-//                ) {
-//                    if ( response.isSuccessful) {
-//                        val pref = PreferenceManager.getDefaultSharedPreferences(activity!!)
-//                        val edit = pref.edit()
-//                        edit.putString("Token",response.body()!!.token)
-//                        edit.apply()
-//                        loadFragment(InformationFragment(response.body()!!))
-//                    }
-//                    else
-//                    {
-//                        Toast.makeText(context,"Sai tài khoản hoặc mật khẩu",Toast.LENGTH_LONG).show()
-//                    }
-//                }
-//            })
-            val loginResponse = LoginResponse(null,null,null,null,null,null)
-            loadFragment(InformationFragment(loginResponse))
+            val checklogin = LoginModel(tendn,mk)
+            val service = RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
+            val call = service?.login(checklogin)
+            call?.enqueue(object : Callback<LoginResponse> {
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                    Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
+                }
+                override fun onResponse(
+                    call: Call<LoginResponse>,
+                    response: Response<LoginResponse>
+                ) {
+                    if ( response.isSuccessful) {
+                        //Lưu token vào local
+                        val pref = PreferenceManager.getDefaultSharedPreferences(activity!!)
+                        val edit = pref.edit()
+                        edit.putString("Token",response.body()!!.token)
+                        edit.putString("MaKH",response.body()!!.maKhachHang)
+                        edit.apply()
+                       //Gửi id thiết bị lên sever
+                        val status = OneSignal.getPermissionSubscriptionState()
+                        Log.d("Thang",status.subscriptionStatus.userId)
+                        loadFragment(InformationFragment(response.body()!!))
+                    }
+                    else
+                    {
+                        Toast.makeText(context,"Sai tài khoản hoặc mật khẩu",Toast.LENGTH_LONG).show()
+                    }
+                }
+            })
+//            val loginResponse = LoginResponse(null,null,null,null,null,null)
+//            loadFragment(InformationFragment(loginResponse))
         }
 
         tvDangKiTaiKhoan.setOnClickListener {

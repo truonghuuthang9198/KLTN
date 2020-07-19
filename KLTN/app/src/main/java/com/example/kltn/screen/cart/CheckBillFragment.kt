@@ -3,6 +3,7 @@ package com.example.kltn.screen.cart
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +30,7 @@ import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
+@Suppress("DEPRECATION")
 class CheckBillFragment : Fragment() {
     private lateinit var cartViewModel: CartViewModel
     lateinit var recyclerViewCheckBill: RecyclerView
@@ -94,6 +96,8 @@ class CheckBillFragment : Fragment() {
         val arrayList = ArrayList<ChiTietHDModel>()
         var stt: Int = 1
         var tongtienHD: Double = 0.0
+        val pref = PreferenceManager.getDefaultSharedPreferences(context)
+        var makh = pref.getString("MaKH","")
         var maCTHD = "CTHD000" + stt.toString()
         arrayListCheckBill.forEach {
             arrayList.add(ChiTietHDModel(maCTHD, it.maSach, it.soLuong, it.giaTien))
@@ -105,7 +109,7 @@ class CheckBillFragment : Fragment() {
         val billId = database.push().key
         val hoaDon = HoaDonModel(
             "MaHD",
-            "KH001",
+            makh.toString(),
             java.time.LocalDate.now().toString(),
             tongtienHD,
             arrayList

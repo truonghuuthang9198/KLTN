@@ -25,6 +25,7 @@ class SearchAdapter internal constructor(var listSearch: ArrayList<BookModel>)
         val priceReducedBook: TextView = itemView.findViewById(R.id.priceReduced_book_suggest)
         val priceBook: TextView = itemView.findViewById(R.id.price_book_suggest)
         val imgBookDeal: ImageView = itemView.findViewById(R.id.img_book_suggest)
+        val tvsale: TextView = itemView.findViewById(R.id.tv_salebook_suggest)
         val star: RatingBar = itemView.findViewById(R.id.star_book_suggest)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
@@ -46,6 +47,9 @@ class SearchAdapter internal constructor(var listSearch: ArrayList<BookModel>)
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
         val current = listSearch[position]
+        val giamgiahandle = Math.round(current.giamGia*100)
+
+        holder.tvsale.text = giamgiahandle.toString()+"%"
         holder.titleBook.text = current.tenSach
         val localVN = Locale("vi","VN")
         val numberFormat = NumberFormat.getCurrencyInstance(localVN)
@@ -55,6 +59,7 @@ class SearchAdapter internal constructor(var listSearch: ArrayList<BookModel>)
         holder.priceBook.text = priceBookfm
         holder.priceBook.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
         Picasso.get().load(current.hinhAnh).into(holder.imgBookDeal)
+
         holder.star.numStars = 5
         holder.star.rating = current.soSao.toFloat()
     }

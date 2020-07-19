@@ -62,7 +62,7 @@ class CityDialog(val type: Int,val idTitle: Int) : DialogFragment() {
         }
         else
         {
-            tv_title_location.text = "Phường Xã"
+            tv_title_location.text = "Phường Xã*"
             loadListWard(idTitle)
         }
         return view

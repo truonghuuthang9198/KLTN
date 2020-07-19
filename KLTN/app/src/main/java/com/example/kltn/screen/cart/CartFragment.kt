@@ -1,5 +1,6 @@
 package com.example.kltn.screen.cart
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -24,6 +25,7 @@ import com.example.kltn.R
 import com.example.kltn.screen.cart.adapter.CartAdapter
 import com.example.kltn.screen.cart.model.CartModel
 import com.example.kltn.screen.cart.roomdatabase.CartViewModel
+import com.example.kltn.screen.home.SendData
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -45,6 +47,16 @@ class CartFragment : Fragment() {
     lateinit var cartAdapter: CartAdapter
     lateinit var btnThanhToan: Button
     private lateinit var cartViewModel: CartViewModel
+    var sendData: SendData? = null
+
+    override fun onAttach(activity: Activity) {
+        super.onAttach(activity)
+        try {
+            sendData = activity as SendData
+        } catch (e: ClassCastException) {
+            throw ClassCastException("$activity must implement onSomeEventListener")
+        }
+    }
 
     companion object {
         var arrayListCart: ArrayList<CartModel> = ArrayList<CartModel>()
@@ -65,20 +77,13 @@ class CartFragment : Fragment() {
         thanhtien = view!!.findViewById(R.id.tv_thanhtien_cart)
         btnThanhToan = view!!.findViewById(R.id.btn_thanhtoan_cart)
         btnThanhToan.setOnClickListener {
-            val pref = PreferenceManager.getDefaultSharedPreferences(context)
-            var token = pref.getString("Token", "")
-            if (token == "") {
-                setUpBottomSheetDiaLog()
-                Toast.makeText(
-                    activity,
-                    "Vui lòng đăng nhập để thực hiện thanh toán",
-                    Toast.LENGTH_LONG
-                ).show()
-            } else {
-
+//            val pref = PreferenceManager.getDefaultSharedPreferences(context)
+//            var token = pref.getString("Token", "")
+//            if (token == "") {
+//                setUpBottomSheetDiaLog()
+//            } else {
                 loadFragment(InformationShipFragment(), "InformationShipFragment")
-
-            }
+//            }
         }
         setUpRecyclerView()
         return view
@@ -120,6 +125,8 @@ class CartFragment : Fragment() {
             dialog.dismiss()
         }
         dialog.btn_ok_dialog_login.setOnClickListener {
+            sendData?.ChangeStateSuggest(2)
+            dialog.dismiss()
         }
     }
 }
