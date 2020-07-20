@@ -17,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
+import com.example.kltn.screen.FormatData
+import com.example.kltn.screen.FormatData.Companion.convertDateFormat
 import com.example.kltn.screen.cart.model.CartModel
 import com.example.kltn.screen.cart.roomdatabase.CartViewModel
 import com.example.kltn.screen.home.model.BookModel
@@ -25,6 +27,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.bottomsheet_dialog_addcart.*
 import kotlinx.android.synthetic.main.custom_toolbar.*
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -71,7 +74,7 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         tv_showdetail_ngayxuatban = findViewById(R.id.tv_showdetail_ngayxuatban)
         tv_showdetail_ghichu = findViewById(R.id.tv_showdetail_ghichu)
         img_detail_book = findViewById(R.id.img_detail_book)
-        btn_showdetail_xemthem =findViewById(R.id.btn_showdetail_xemthem)
+        btn_showdetail_xemthem = findViewById(R.id.btn_showdetail_xemthem)
         btnAddProductToCart = findViewById(R.id.btn_add_product_to_cart)
         var check = 0
         btnMoveCart.setOnClickListener {
@@ -87,21 +90,19 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         titlebook.text = bookModel.tenSach
         //---send data to information product-------------------
         btn_showdetail_xemthem.setOnClickListener {
-            val intent = Intent(this,InformationProductActivity::class.java)
-            intent.putExtra("InformationBook",bookModel)
+            val intent = Intent(this, InformationProductActivity::class.java)
+            intent.putExtra("InformationBook", bookModel)
             this.startActivity(intent)
         }
         //---------------------------------------------------
-        val localVN = Locale("vi", "VN")
-        val numberFormat = NumberFormat.getCurrencyInstance(localVN)
-        val priceReducedfm = numberFormat.format(bookModel.giaGiamDS)
-        pricebook.text = priceReducedfm
+
+        pricebook.text = FormatData.formatMoneyVND(bookModel.giaGiamDS)
         //---------------------------------------------------
         val giamgiaxl = Math.round(bookModel.giamGia * 100)
         val giamgiaString = giamgiaxl.toString() + "%"
         giamgia.text = giamgiaString
         //---------------------------------------------------
-        val priceOrigin = numberFormat.format(bookModel.giaban)
+        val priceOrigin = FormatData.formatMoneyVND(bookModel.giaban)
         priceOriginBook.text = priceOrigin
         priceOriginBook.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
         //---------------------------------------------------
@@ -109,7 +110,12 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         tv_showdetail_congtyphathanh.text = bookModel.maCongTy
         tv_showdetail_author.text = bookModel.maTacGia
         tv_showdetail_nhaxuatban.text = bookModel.maNhaXuatBan
-        tv_showdetail_ngayxuatban.text = bookModel.ngayXuatBan
+        tv_showdetail_ngayxuatban.text = convertDateFormat(
+            bookModel.ngayXuatBan,
+            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"),
+            SimpleDateFormat("dd-MM-yyyy")
+        )
+
         tv_showdetail_ghichu.text = bookModel.ghiChu
         ratingBar.rating = bookModel.soSao.toFloat()
         Picasso.get().load(bookModel.hinhAnh).into(img_detail_book)

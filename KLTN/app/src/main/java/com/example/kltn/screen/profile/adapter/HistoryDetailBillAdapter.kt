@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
+import com.example.kltn.screen.FormatData
 import com.example.kltn.screen.profile.model.HistoryBillModel
 import com.example.kltn.screen.profile.model.HistoryDetailBillModel
 import com.squareup.picasso.Picasso
@@ -40,10 +41,7 @@ class HistoryDetailBillAdapter internal constructor(var context: Context?, var l
         val current = listDetailBillHistory[position]
         holder.tv_tensach_detailbill.text = current.tenSach
         holder.tv_soluong_detail_bill.text = current.soLuong.toString()
-        val localVN = Locale("vi","VN")
-        val numberFormat = NumberFormat.getCurrencyInstance(localVN)
-        val giatienfm =numberFormat.format(current.donGia)
-        holder.tv_giatien_detailbill.text = giatienfm
+        holder.tv_giatien_detailbill.text = FormatData.formatMoneyVND(current.donGia)
         Picasso.get().load(current.hinhAnh).into(holder.img_sach_detailBill)
         holder.btn_mualai_detailbill.setOnClickListener {
 

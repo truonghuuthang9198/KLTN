@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.MainActivity
 import com.example.kltn.R
+import com.example.kltn.screen.FormatData.Companion.formatMoneyVND
 import com.example.kltn.screen.cart.adapter.CartAdapter
 import com.example.kltn.screen.cart.model.CartModel
 import com.example.kltn.screen.cart.roomdatabase.CartViewModel
@@ -33,6 +34,8 @@ import kotlinx.android.synthetic.main.bottomsheet_dialog_addcart.*
 import kotlinx.android.synthetic.main.custom_dialog_login.*
 import kotlinx.android.synthetic.main.custom_dialog_login.view.*
 import java.lang.Exception
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -98,10 +101,7 @@ class CartFragment : Fragment() {
         val cartAdapter = CartAdapter(context, arrayListCart)
         recyclerviewcart.adapter = cartAdapter
         cartAdapter.updateThanhTien()
-        val localVN = Locale("vi", "VN")
-        val numberFormat = NumberFormat.getCurrencyInstance(localVN)
-        val thanhtienfm = numberFormat.format(tongtien)
-        thanhtien.text = thanhtienfm
+        thanhtien.text = formatMoneyVND(tongtien)
     }
 
     private fun loadFragment(fragment: Fragment?, tag: String): Boolean {
@@ -129,4 +129,5 @@ class CartFragment : Fragment() {
             dialog.dismiss()
         }
     }
+
 }

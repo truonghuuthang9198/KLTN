@@ -10,8 +10,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.DetailActivity
 import com.example.kltn.R
+import com.example.kltn.screen.FormatData
 import com.example.kltn.screen.home.model.BookModel
 import com.squareup.picasso.Picasso
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -46,16 +49,12 @@ class DealAdapter internal constructor(var dealsModel: ArrayList<BookModel>)
     override fun onBindViewHolder(holder: DealViewHolder, position: Int) {
         val current = dealsModel[position]
         val giamgiahandle = Math.round(current.giamGia*100)
-
         holder.salebook.text = giamgiahandle.toString()+"%"
         holder.titleBookDeal.text = current.tenSach
-        val localVN = Locale("vi","VN")
-        val numberFormat = NumberFormat.getCurrencyInstance(localVN)
-        val priceReducedfm =numberFormat.format(current.giaGiamDS)
-        holder.priceReducedBook.text = priceReducedfm
-        val priceBookfm =numberFormat.format(current.giaban)
-        holder.priceBook.text = priceBookfm
+        holder.priceReducedBook.text = FormatData.formatMoneyVND(current.giaGiamDS)
+        holder.priceBook.text = FormatData.formatMoneyVND(current.giaban)
         holder.priceBook.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
         Picasso.get().load(current.hinhAnh).into(holder.imgBookDeal)
     }
+
 }

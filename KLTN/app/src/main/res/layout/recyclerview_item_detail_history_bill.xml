@@ -20,6 +20,7 @@
             android:id="@+id/img_sach_detailBill"
             android:layout_width="100dp"
             android:layout_height="120dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -77,15 +78,14 @@
 
         <TextView
             android:id="@+id/tv_soluong_detail_bill"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="15dp"
-            android:text="2"
+            android:text="20"
             android:textColor="#FF4500"
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/textview28"
-            app:layout_constraintEnd_toStartOf="@+id/btn_mualai_detailbill"
             app:layout_constraintStart_toEndOf="@+id/textview28"
             app:layout_constraintTop_toTopOf="@+id/textview28" />
 
@@ -93,13 +93,15 @@
             android:id="@+id/btn_mualai_detailbill"
             android:layout_width="120dp"
             android:layout_height="35dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/custom_button_mualai"
             android:text="Mua lại"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/img_sach_detailBill"
-            app:layout_constraintEnd_toEndOf="@+id/tv_tensach_detailbill"></Button>
+            app:layout_constraintStart_toStartOf="@+id/textview28"
+            app:layout_constraintTop_toBottomOf="@+id/tv_soluong_detail_bill"></Button>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

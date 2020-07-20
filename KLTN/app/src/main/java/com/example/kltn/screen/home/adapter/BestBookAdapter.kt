@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.DetailActivity
 import com.example.kltn.R
+import com.example.kltn.screen.FormatData
 import com.example.kltn.screen.home.model.BestBookModel
 import com.example.kltn.screen.home.model.BookModel
 import com.example.kltn.screen.home.model.SGKModel
@@ -47,12 +48,8 @@ class BestBookAdapter internal constructor(var BestBookModel: ArrayList<BookMode
     override fun onBindViewHolder(holder: BestBookViewHolder, position: Int) {
         val current = BestBookModel[position]
         holder.titleBook.text = current.tenSach
-        val localVN = Locale("vi","VN")
-        val numberFormat = NumberFormat.getCurrencyInstance(localVN)
-        val priceReducedfm =numberFormat.format(current.giaGiamDS)
-        holder.priceReducedBook.text = priceReducedfm
-        val priceBookfm =numberFormat.format(current.giaban)
-        holder.priceBook.text = priceBookfm
+        holder.priceReducedBook.text = FormatData.formatMoneyVND(current.giaGiamDS)
+        holder.priceBook.text = FormatData.formatMoneyVND(current.giaban)
         holder.priceBook.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
         Picasso.get().load(current.hinhAnh).into(holder.imgBookDeal)
 

@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
+import com.example.kltn.screen.FormatData
 import com.example.kltn.screen.cart.adapter.CartAdapter
 import com.example.kltn.screen.cart.adapter.CheckListBillAdapter
 import com.example.kltn.screen.cart.model.CartModel
@@ -71,10 +72,7 @@ class CheckBillFragment : Fragment() {
         arrayListCart.forEach {
             tongtien += (it.giaTien * it.soLuong)
         }
-        val localVN = Locale("vi", "VN")
-        val numberFormat = NumberFormat.getCurrencyInstance(localVN)
-        val tongtienfm = numberFormat.format(tongtien)
-        tv_tongtien.text = tongtienfm
+        tv_tongtien.text = FormatData.formatMoneyVND(tongtien)
 
         arrayListCart.forEach {
             arrayListCheckBill.add(

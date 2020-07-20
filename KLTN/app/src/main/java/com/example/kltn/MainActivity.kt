@@ -200,7 +200,7 @@ class MainActivity : AppCompatActivity(), SendData {
                 if(response.body()?.success == true)
                 {
                     val response = response.body()
-                    val responseLogin = LoginResponse(response!!.khachHang.diaChi,response.khachHang.email,response.khachHang.maKhachHang,response.khachHang.soDienThoai,response.khachHang.tenKhachHang,"")
+                    val responseLogin = LoginResponse(response!!.khachHang.capDoThanhVien,response!!.khachHang.diaChi,response.khachHang.email,response.khachHang.gioiTinh,response.khachHang.maKhachHang,response.khachHang.soDienThoai,response.khachHang.tenKhachHang,"")
                     loadFragment(InformationFragment(responseLogin))
                 }
                 else

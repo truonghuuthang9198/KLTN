@@ -70,15 +70,5 @@ class FilterAdapter internal constructor(
             }
         }
         holder.titleFilter.text = current.titleFilter
-
-
-    }
-    fun reLoadFragment(tag: String) {
-        var frg: Fragment? = null
-        frg =(context as FragmentActivity).getSupportFragmentManager().findFragmentByTag(tag)
-        val ft: FragmentTransaction = (context as FragmentActivity).getSupportFragmentManager().beginTransaction()
-        ft.detach(frg!!)
-        ft.attach(frg!!)
-        ft.commit()
     }
 }

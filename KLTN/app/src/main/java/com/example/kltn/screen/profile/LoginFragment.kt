@@ -116,10 +116,8 @@ class LoginFragment : Fragment() {
                     Toast.makeText(activity!!,result!!.toString(),Toast.LENGTH_LONG).show()
                 }
                 override fun onCancel() {
-                    TODO("Not yet implemented")
                 }
                 override fun onError(error: FacebookException?) {
-                    TODO("Not yet implemented")
                 }
             })
 //            val pref = PreferenceManager.getDefaultSharedPreferences(activity!!)
@@ -145,11 +143,6 @@ class LoginFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         callBackManager?.onActivityResult(requestCode,resultCode,data)
-    }
-    fun newInstance(): LoginFragment {
-        val recipeTabFragment =
-            LoginFragment()
-        return recipeTabFragment
     }
     private fun loadFragment(fragment: Fragment?): Boolean {
         if (fragment != null) {

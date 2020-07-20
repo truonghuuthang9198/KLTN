@@ -11,12 +11,15 @@ import android.widget.RadioButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
+import com.example.kltn.screen.event.EventFireUtil
+import com.example.kltn.screen.event.OnActionData
+import com.example.kltn.screen.home.model.FilterModel
 import com.example.kltn.screen.profile.model.ManangerAddressModel
 
 
-class AddressShipAdapter internal constructor(var context: Context?, var addressShipModel: ArrayList<ManangerAddressModel>) :
+class AddressShipAdapter internal constructor(var context: Context?, var addressShipModel: ArrayList<ManangerAddressModel>,var onActionData: OnActionData<ManangerAddressModel>) :
     RecyclerView.Adapter<AddressShipAdapter.AddressShipViewHolder>() {
-    private var lastSelectedPosition = -1
+    private var lastSelectedPosition = 0
     inner class AddressShipViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameSdt: TextView = itemView.findViewById(R.id.tv_name_sdt_diachigiaohang)
         val address: TextView = itemView.findViewById(R.id.tv_diachi_diachigiaohang)
@@ -36,10 +39,13 @@ class AddressShipAdapter internal constructor(var context: Context?, var address
     override fun getItemCount() = addressShipModel.size
 
     override fun onBindViewHolder(holder: AddressShipViewHolder, position: Int) {
+
         val current = addressShipModel[position]
         holder.nameSdt.text = current.ho +" "+ current.ten + " - " + current.sdt
-        holder.address.text = current.address
+        holder.address.text = current.address +", "+current.xa+", "+current.quan+", "+current.tinh+", Việt Nam"
+//        EventFireUtil.fireEvent(onActionData, addressShipModel[0])
         holder.itemView.setOnClickListener {
+            EventFireUtil.fireEvent(onActionData, current)
             lastSelectedPosition = position
             notifyDataSetChanged()
         }

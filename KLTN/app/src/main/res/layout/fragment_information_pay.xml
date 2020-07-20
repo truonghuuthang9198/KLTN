@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F2F2F2">
@@ -43,8 +44,10 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout8"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5"
+        app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -80,9 +83,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:textSize="16sp"
                     android:text="Giao hàng"
                     android:textColor="#000000"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="@+id/cimg_1"
                     app:layout_constraintStart_toStartOf="@+id/cimg_1"
                     app:layout_constraintTop_toBottomOf="@+id/cimg_1"></TextView>
@@ -112,9 +115,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:textSize="16sp"
                     android:text="Thanh toán"
                     android:textColor="#000000"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="@+id/cimg_2"
                     app:layout_constraintStart_toStartOf="@+id/cimg_2"
                     app:layout_constraintTop_toBottomOf="@+id/cimg_2"></TextView>
@@ -145,9 +148,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:textSize="16sp"
                     android:text="Kiểm tra"
                     android:textColor="#000000"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="@+id/cimg_3"
                     app:layout_constraintStart_toStartOf="@+id/cimg_3"
                     app:layout_constraintTop_toBottomOf="@+id/cimg_3"></TextView>
@@ -192,12 +195,12 @@
                 <RadioButton
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:padding="6dp"
                     android:buttonTint="@color/colorPrimary"
                     android:checked="true"
-                    android:textSize="16sp"
+                    android:padding="6dp"
                     android:text="Giao hàng tiêu chuẩn: 15.000đ Ngày giao hàng: Thứ ba - 23/06"
                     android:textColor="#000000"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_information_ship_1"></RadioButton>
@@ -229,64 +232,10 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_phuongthuctt_information_ship"></androidx.recyclerview.widget.RecyclerView>
 
             <TextView
-                android:id="@+id/tv_makhuyenmai"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:padding="6dp"
-                android:text="MÃ KHUYẾN MÃI"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerview_phuongthucthanhtoan"></TextView>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraint_information_pay_2"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="#FFFFFF"
-                android:padding="6dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_makhuyenmai">
-
-                <EditText
-                    android:id="@+id/editText2"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/custom_edit_text"
-                    android:hint="Nhập mã khuyến mãi"
-                    android:padding="8dp"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/button2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"></EditText>
-
-                <Button
-                    android:id="@+id/button2"
-                    android:layout_width="100dp"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="10dp"
-                    android:background="@drawable/custom_button_dangnhap"
-                    android:text="Áp dụng"
-                    android:textAllCaps="false"
-                    android:textColor="#FFFFFF"
-                    app:layout_constraintBottom_toBottomOf="@+id/editText2"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/editText2"></Button>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <TextView
                 android:id="@+id/tv_giatridonhang"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:padding="6dp"
                 android:text="GIÁ TRỊ ĐƠN HÀNG"
                 android:textColor="#000000"
@@ -294,7 +243,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraint_information_pay_2"></TextView>
+                app:layout_constraintTop_toBottomOf="@+id/recyclerview_phuongthucthanhtoan"></TextView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraint_information_pay_3"

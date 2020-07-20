@@ -14,6 +14,8 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
+import com.example.kltn.screen.FormatData
+import com.example.kltn.screen.FormatData.Companion.formatMoneyVND
 import com.example.kltn.screen.cart.CartFragment
 import com.example.kltn.screen.cart.model.CartModel
 import com.example.kltn.screen.cart.model.CheckBillModel
@@ -43,12 +45,8 @@ class CheckListBillAdapter internal constructor(var context: Context?, var listB
     override fun onBindViewHolder(holder: CheckListBillViewHolder, position: Int) {
         val current = listBill[position]
         holder.tensachCheckBill.text = current.tenSach
-
         holder.soluongCheckBill.text ="Số lượng: "+current.soLuong.toString()
-        val localVN = Locale("vi", "VN")
-        val numberFormat = NumberFormat.getCurrencyInstance(localVN)
-        val thanhtienfm = numberFormat.format(current.giaTien)
-        holder.giatienCheckBill.text = thanhtienfm
+        holder.giatienCheckBill.text = formatMoneyVND(current.giaTien)
         Picasso.get().load(current.image).into(holder.igmsachCheckBill)
     }
 }

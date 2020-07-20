@@ -33,9 +33,17 @@ class ManangerAddressAdapter internal constructor(var context: Context?, var lis
 
     override fun onBindViewHolder(holder: AddAddressViewHolder, position: Int) {
         val current = listAddresses[position]
-        holder.tv_addaddress.text = current.address
+        holder.tv_addaddress.text = current.address+", "+current.xa+", "+current.quan+", "+current.tinh+", Việt Nam"
         holder.tv_sodienthoai.text = current.sdt
-        holder.tv_address_payship.text = current.checkaddress
+        if(current.checkaddress == 1) {
+            holder.tv_address_payship.text = "Địa chỉ giao hàng mặc định"
+        }else if(current.checkaddress == 2)
+        {
+            holder.tv_address_payship.text = "Địa chỉ thanh toán mặc định"
+        }else
+        {
+            holder.tv_address_payship.text = "Địa chỉ khác"
+        }
         holder.itemView.setOnClickListener {
             EventFireUtil.fireEvent(onActionData,current)
         }

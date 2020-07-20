@@ -25,6 +25,7 @@ class InformationFragment(val responseUser: LoginResponse): Fragment() {
     lateinit var btnDangXuat: Button
     lateinit var tv_hoten_infomation: TextView
     lateinit var tv_email_infomation: TextView
+    lateinit var tv_capdothanhvien: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +37,15 @@ class InformationFragment(val responseUser: LoginResponse): Fragment() {
         btnDangXuat = view.findViewById(R.id.btn_dangxuat)
         tv_hoten_infomation = view.findViewById(R.id.tv_hoten_infomation)
         tv_email_infomation = view.findViewById(R.id.tv_email_infomation)
+        tv_capdothanhvien = view.findViewById(R.id.tv_capdothanhvien)
+        if(responseUser.capDoThanhVien == 1)
+        {
+            tv_capdothanhvien.text = "Thân Thiết"
+        }
+        else
+        {
+            tv_capdothanhvien.text = "Khách Vip"
+        }
         tv_hoten_infomation.text = responseUser.tenKhachHang
         tv_email_infomation.text = responseUser.email
         btnDangXuat.setOnClickListener {

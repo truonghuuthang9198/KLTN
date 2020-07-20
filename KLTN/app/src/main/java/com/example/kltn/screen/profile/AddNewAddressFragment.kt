@@ -3,45 +3,61 @@ package com.example.kltn.screen.profile
 import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
+import android.preference.PreferenceManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import com.example.kltn.R
+import com.example.kltn.screen.retrofit.GetDataService
+import com.example.kltn.screen.retrofit.RetrofitClientInstance
 import com.example.kltn.screen.retrofit.address_handle.CityDialog
+import com.example.kltn.screen.retrofit.model.AddAddressModel
 import com.example.kltn.screen.retrofit.model.CityModel
+import com.example.kltn.screen.retrofit.model.LoginModel
+import com.example.kltn.screen.retrofit.reponse.AddAddressResponse
+import com.example.kltn.screen.retrofit.reponse.LoginResponse
+import com.example.kltn.screen.retrofit.reponse.ManangerAddressResponse
+import com.onesignal.OneSignal
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.util.*
 
+@Suppress("DEPRECATION")
 class AddNewAddressFragment() : Fragment(), Parcelable, CityDialog.OnInputSelected {
     lateinit var btnBack_Address: ImageView
     lateinit var edt_tinh_addnew_address: TextView
     lateinit var edt_quan_addnew_address: TextView
     lateinit var edt_phuong_addnew_address: TextView
+    lateinit var edt_ho_addnew_address: EditText
+    lateinit var edt_ten_addnew_address: EditText
+    lateinit var edt_sdt_addnew_address: EditText
+    lateinit var edt_diachinha_addnew_address: EditText
+    lateinit var ckb_diachigiaohangmacdinh_addnew_address: CheckBox
+    lateinit var ckb_diachithanhtoanmacdinh_addnew_address: CheckBox
+    lateinit var btn_save_addnew_address: Button
     private var idtitleCity: Int = 0
     private var idtitleDistrict: Int = 0
 
 
-
-    override fun sendInput(cityModel: CityModel,type: Int) {
-        if(type==1) {
+    override fun sendInput(cityModel: CityModel, type: Int) {
+        if (type == 1) {
             this.edt_tinh_addnew_address.text = cityModel.cityname
-            this.edt_quan_addnew_address.text =null
-            this.edt_phuong_addnew_address.text =null
+            this.edt_quan_addnew_address.text = null
+            this.edt_phuong_addnew_address.text = null
             idtitleCity = cityModel.id
-        }
-        else if(type==2)
-        {
+        } else if (type == 2) {
             this.edt_quan_addnew_address.text = cityModel.cityname
-            this.edt_phuong_addnew_address.text =null
+            this.edt_phuong_addnew_address.text = null
             idtitleDistrict = cityModel.id
-        }
-        else
-        {
+        } else {
             this.edt_phuong_addnew_address.text = cityModel.cityname
         }
     }
+
     constructor(parcel: Parcel) : this() {
 
     }
@@ -64,33 +80,74 @@ class AddNewAddressFragment() : Fragment(), Parcelable, CityDialog.OnInputSelect
         edt_phuong_addnew_address = view.findViewById(R.id.edt_phuong_addnew_address)
         edt_quan_addnew_address = view.findViewById(R.id.edt_quan_addnew_address)
         edt_tinh_addnew_address = view.findViewById(R.id.edt_tinh_addnew_address)
+        edt_ho_addnew_address = view.findViewById(R.id.edt_ho_addnew_address)
+        edt_ten_addnew_address = view.findViewById(R.id.edt_ten_addnew_address)
+        edt_sdt_addnew_address = view.findViewById(R.id.edt_sdt_addnew_address)
+        edt_diachinha_addnew_address = view.findViewById(R.id.edt_diachinha_addnew_address)
+        ckb_diachigiaohangmacdinh_addnew_address =
+            view.findViewById(R.id.ckb_diachigiaohangmacdinh_addnew_address)
+        ckb_diachithanhtoanmacdinh_addnew_address =
+            view.findViewById(R.id.ckb_diachithanhtoanmacdinh_addnew_address)
+        btn_save_addnew_address = view.findViewById(R.id.btn_save_addnew_address)
+        val pref = PreferenceManager.getDefaultSharedPreferences(context)
+        var makh = pref.getString("MaKH", "")
+        btn_save_addnew_address.setOnClickListener {
+            val rd = Random()
+            val soDC = rd.nextInt(101)
+            val addAddressModel = AddAddressModel(
+                soDC.toString(),
+                makh!!,
+                edt_diachinha_addnew_address.text.toString(),
+                edt_sdt_addnew_address.text.toString(),
+                edt_ho_addnew_address.text.toString(),
+                edt_ten_addnew_address.text.toString(),
+                edt_tinh_addnew_address.text.toString(),
+                edt_quan_addnew_address.text.toString(),
+                edt_phuong_addnew_address.text.toString(),
+                1
+            )
+            val pref = PreferenceManager.getDefaultSharedPreferences(context)
+            var token = pref.getString("Token", "")
+            val service =
+                RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
+            val call = service?.addAddressNew("Bearer " + token, addAddressModel)
+            call?.enqueue(object : Callback<AddAddressResponse> {
+                override fun onFailure(call: Call<AddAddressResponse>, t: Throwable) {
+                    Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
+                }
 
-//        val bundle = this.arguments
-//        if (bundle != null) {
-//            val cityModel = bundle.getParcelable<CityModel>("cityModel")!!
-//            edt_tinh_addnew_address.text = cityModel.cityname
-//        }
+                override fun onResponse(
+                    call: Call<AddAddressResponse>,
+                    response: Response<AddAddressResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(context, "Thêm địa chỉ thành công", Toast.LENGTH_LONG)
+                            .show()
+                    } else {
+                        Toast.makeText(context, "Thêm thất bại", Toast.LENGTH_LONG).show()
+                    }
+                }
+            })
+        }
 
 
         edt_tinh_addnew_address.setOnClickListener {
-                val diaLogCity = CityDialog(1, idtitleCity)
-                if (diaLogCity.isAdded) {
-                    diaLogCity.showsDialog
-                } else {
-                    if (fm != null) {
-                        diaLogCity.setTargetFragment(this@AddNewAddressFragment, 1)
-                        fm?.let { it1 -> diaLogCity.show(it1, "CityDialog") }
-                    }
+            val diaLogCity = CityDialog(1, idtitleCity)
+            if (diaLogCity.isAdded) {
+                diaLogCity.showsDialog
+            } else {
+                if (fm != null) {
+                    diaLogCity.setTargetFragment(this@AddNewAddressFragment, 1)
+                    fm?.let { it1 -> diaLogCity.show(it1, "CityDialog") }
                 }
+            }
 
         }
 
         edt_phuong_addnew_address.setOnClickListener {
-            if(edt_quan_addnew_address.text.isEmpty())
-            {
-                Toast.makeText(context,"Vui lòng chọn quận/huyện",Toast.LENGTH_LONG).show()
-            }
-            else {
+            if (edt_quan_addnew_address.text.isEmpty()) {
+                Toast.makeText(context, "Vui lòng chọn quận/huyện", Toast.LENGTH_LONG).show()
+            } else {
                 val diaLogCity = CityDialog(3, idtitleDistrict)
                 if (diaLogCity.isAdded) {
                     diaLogCity.showsDialog
@@ -105,11 +162,9 @@ class AddNewAddressFragment() : Fragment(), Parcelable, CityDialog.OnInputSelect
         }
 
         edt_quan_addnew_address.setOnClickListener {
-            if(edt_tinh_addnew_address.text.isEmpty())
-            {
-                Toast.makeText(context,"Vui lòng chọn thành phố",Toast.LENGTH_LONG).show()
-            }
-            else {
+            if (edt_tinh_addnew_address.text.isEmpty()) {
+                Toast.makeText(context, "Vui lòng chọn thành phố", Toast.LENGTH_LONG).show()
+            } else {
                 val diaLogCity = CityDialog(2, idtitleCity)
                 if (diaLogCity.isAdded) {
                     diaLogCity.showsDialog
@@ -123,6 +178,18 @@ class AddNewAddressFragment() : Fragment(), Parcelable, CityDialog.OnInputSelect
         }
 
         return view
+    }
+
+
+    fun getSaltString(): String? {
+        val SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+        val salt = StringBuilder()
+        val rnd = Random()
+        while (salt.length < 4) { // length of the random string.
+            val index = (rnd.nextFloat() * SALTCHARS.length) as Int
+            salt.append(SALTCHARS[index])
+        }
+        return salt.toString()
     }
 
     private fun loadFragment(fragment: Fragment?): Boolean {
@@ -155,9 +222,6 @@ class AddNewAddressFragment() : Fragment(), Parcelable, CityDialog.OnInputSelect
             return arrayOfNulls(size)
         }
     }
-
-
-
 
 
 }

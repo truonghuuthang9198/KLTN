@@ -16,19 +16,15 @@ import com.example.kltn.R
 import com.example.kltn.screen.profile.adapter.ManangerAddressAdapter
 import com.example.kltn.screen.profile.model.ManangerAddressModel
 import com.example.kltn.screen.event.OnActionData
-import com.example.kltn.screen.profile.adapter.HistoryBillAdapter
-import com.example.kltn.screen.profile.model.HistoryBillModel
-import com.example.kltn.screen.profile.model.SendArrayAddress
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance
-import com.example.kltn.screen.retrofit.reponse.HistoryResponse
-import com.example.kltn.screen.retrofit.reponse.ManagerAddressRespone
-import de.greenrobot.event.EventBus
+import com.example.kltn.screen.retrofit.reponse.ManangerAddressResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
+@Suppress("DEPRECATION")
 class ManangerAddressFragment : Fragment() {
     lateinit var btnBack_Address: ImageView
     lateinit var recyclerViewAddAddress: RecyclerView
@@ -73,35 +69,40 @@ class ManangerAddressFragment : Fragment() {
 
     fun setUpRecyclerview() {
         val arrayList = ArrayList<ManangerAddressModel>()
-//        arrayList.add(ManangerAddressModel("Trương Hữu","Thắng","73/32/13 Lê Trọng Tấn, Phường Tây Thạnh, Quận Tân Phú, TP HCM","0384180187","Địa chỉ thanh toán mặc định"))
-//        arrayList.add(ManangerAddressModel("Lê Thanh","Tuyên","115/22 Lê Trọng Tấn, Phường Sơn Kỳ, Quận Tân Phú, TP HCM","0384180187","Địa chỉ giao hàng mặc định"))
-//        arrayList.add(ManangerAddressModel("Lê Hoàng","Phúc","115/66 Nguyễn Đỗ Cung, Phường Tây Thạnh, Quận Tân Phú, TP HCM","0384180667","Địa chỉ khác"))
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
         var token = pref.getString("Token", "")
         val service = RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
         val call = service?.getListAddress("Bearer " + token)
-        call?.enqueue(object : Callback<List<ManagerAddressRespone>> {
-            override fun onFailure(call: Call<List<ManagerAddressRespone>>, t: Throwable) {
+        call?.enqueue(object : Callback<List<ManangerAddressResponse>> {
+            override fun onFailure(call: Call<List<ManangerAddressResponse>>, t: Throwable) {
                 Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
             }
 
             override fun onResponse(
-                call: Call<List<ManagerAddressRespone>>,
-                response: Response<List<ManagerAddressRespone>>
+                call: Call<List<ManangerAddressResponse>>,
+                response: Response<List<ManangerAddressResponse>>
             ) {
                 if (response.isSuccessful) {
-                    response.body()!!.forEach {
+                    response.body()!!.forEachIndexed { index, managerAddressRespone ->
                         arrayList.add(
                             ManangerAddressModel(
-                                "Lê Hoàng",
-                                "Phúc",
-                                it.diaChi,
-                                it.soDienThoai,"Địa chỉ khác"
+                                index,
+                                managerAddressRespone.maSo,
+                                managerAddressRespone.maKhachHang,
+                                managerAddressRespone.ho,
+                                managerAddressRespone.ten,
+                                managerAddressRespone.soDienThoai,
+                                managerAddressRespone.thanhPho,
+                                managerAddressRespone.quan,
+                                managerAddressRespone.phuong,
+                                managerAddressRespone.diaChi,
+                                managerAddressRespone.loaiDiaChi
                             )
                         )
-                        manangerAddressAdapter = ManangerAddressAdapter(context, arrayList, onActionData!!)
-                        recyclerViewAddAddress.adapter = manangerAddressAdapter
                     }
+                    manangerAddressAdapter =
+                        ManangerAddressAdapter(context, arrayList, onActionData!!)
+                    recyclerViewAddAddress.adapter = manangerAddressAdapter
                 }
             }
         })

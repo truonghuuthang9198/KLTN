@@ -10,26 +10,31 @@ data class CheckLoginResponse(
     @SerializedName("success")
     val success: Boolean
 ) {
+
     data class KhachHang(
+        @SerializedName("capDoThanhVien")
+        val capDoThanhVien: Int,
         @SerializedName("diaChi")
         val diaChi: String,
         @SerializedName("email")
         val email: String,
+        @SerializedName("gioiTinh")
+        val gioiTinh: String,
         @SerializedName("hoaDons")
-        val hoaDons: Any,
+        val hoaDons: String?,
         @SerializedName("maKhachHang")
         val maKhachHang: String,
         @SerializedName("matKhau")
         val matKhau: String,
         @SerializedName("soDiaChis")
-        val soDiaChis: Any,
+        val soDiaChis: String?,
         @SerializedName("soDienThoai")
         val soDienThoai: String,
         @SerializedName("tenKhachHang")
         val tenKhachHang: String,
         @SerializedName("thongBaos")
-        val thongBaos: Any,
+        val thongBaos: String?,
         @SerializedName("yeuThiches")
-        val yeuThiches: Any
+        val yeuThiches: String?
     )
 }

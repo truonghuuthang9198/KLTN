@@ -66,7 +66,6 @@ class HistoryFragment : Fragment() {
                     response.body()!!.forEach {
                         arrayList.add(HistoryBillModel(it.maHoaDon,it.ngayLap,it.thanhTien))
                     }
-                    arrayList.add(HistoryBillModel("HD002","20/10/2010",200000.00))
                     adapterHistoryBill = HistoryBillAdapter(context,arrayList,response!!)
                     recyclerview_bill.adapter = adapterHistoryBill
                 }

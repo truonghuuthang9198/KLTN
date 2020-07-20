@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.DetailActivity
 import com.example.kltn.R
+import com.example.kltn.screen.FormatData
 import com.example.kltn.screen.home.model.BookModel
 import com.squareup.picasso.Picasso
 import java.text.NumberFormat
@@ -45,11 +46,8 @@ class ChildrenBookAdapter internal constructor(var ChildrenBookModel: ArrayList<
     override fun onBindViewHolder(holder: ChildBookViewHolder, position: Int) {
         val current = ChildrenBookModel[position]
         holder.titleBook.text = current.tenSach
-        val localVN = Locale("vi","VN")
-        val numberFormat = NumberFormat.getCurrencyInstance(localVN)
-        val priceReducedfm =numberFormat.format(current.giaGiamDS)
-        holder.priceReducedBook.text = priceReducedfm
-        val priceBookfm =numberFormat.format(current.giaban)
+        holder.priceReducedBook.text = FormatData.formatMoneyVND(current.giaGiamDS)
+        val priceBookfm =FormatData.formatMoneyVND(current.giaban)
         holder.priceBook.text = priceBookfm
         holder.priceBook.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
         Picasso.get().load(current.hinhAnh).into(holder.imgBookDeal)

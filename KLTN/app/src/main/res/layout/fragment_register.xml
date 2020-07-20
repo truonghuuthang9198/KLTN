@@ -160,7 +160,27 @@
                     android:paddingLeft="5dp"
                     android:textSize="15sp"></EditText>
             </com.google.android.material.textfield.TextInputLayout>
-
+            <RadioGroup
+                android:id="@+id/radio_group_sex"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="14dp">
+                <RadioButton
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"
+                    android:buttonTint="@color/colorPrimary"
+                    android:layout_width="100dp"
+                    android:layout_height="25dp"
+                    android:text="Nam"></RadioButton>
+                <RadioButton
+                    android:layout_gravity="center"
+                    android:layout_width="100dp"
+                    android:buttonTint="@color/colorPrimary"
+                    android:layout_height="25dp"
+                    android:text="Nữ"></RadioButton>
+            </RadioGroup>
             <Button
                 android:id="@+id/btn_dangky"
                 android:layout_width="280dp"

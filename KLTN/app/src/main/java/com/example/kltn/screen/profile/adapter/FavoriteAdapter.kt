@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
+import com.example.kltn.screen.FormatData
 import com.example.kltn.screen.home.model.BookModel
 import com.example.kltn.screen.profile.model.FavoriteModel
 import com.squareup.picasso.Picasso
@@ -41,10 +42,7 @@ class FavoriteAdapter internal constructor(var context: Context?, var favoriteMo
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
         val current = favoriteModel[position]
         holder.titleBook_favorite.text = current.tenSach
-        val localVN = Locale("vi","VN")
-        val numberFormat = NumberFormat.getCurrencyInstance(localVN)
-        val giatienfm =numberFormat.format(current.giaGiamDS)
-        holder.priceBook_favorite.text = giatienfm
+        holder.priceBook_favorite.text = FormatData.formatMoneyVND(current.giaGiamDS)
         Picasso.get().load(current.hinhAnh).into(holder.imageBook_favorite)
         holder.btnDelete.setOnClickListener {
 

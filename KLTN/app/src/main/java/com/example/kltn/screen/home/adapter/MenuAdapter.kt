@@ -67,25 +67,4 @@ class MenuAdapter internal constructor(var context: Context?, var MenuModel: Arr
         return false
     }
 
-    private fun changeStatusBottomNavigation()
-    {
-        val fragmentTransaction: FragmentTransaction = (context as FragmentActivity).supportFragmentManager.beginTransaction()
-        val curFrag: Fragment? =
-            (context as FragmentActivity).supportFragmentManager.getPrimaryNavigationFragment()
-        if (curFrag != null) {
-            fragmentTransaction.detach(curFrag)
-        }
-
-        var fragment: Fragment? = (context as FragmentActivity).supportFragmentManager.findFragmentByTag("SuggestFragment")
-        if (fragment == null) {
-            fragment = SuggestFragment()
-            fragmentTransaction.add(R.id.frameLayout,fragment, "SuggestFragment")
-        } else {
-            fragmentTransaction.attach(fragment)
-        }
-
-        fragmentTransaction.setPrimaryNavigationFragment(fragment)
-        fragmentTransaction.setReorderingAllowed(true)
-        fragmentTransaction.commitNowAllowingStateLoss()
-    }
 }

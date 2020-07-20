@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
+import com.example.kltn.screen.FormatData
 import com.example.kltn.screen.home.model.BookModel
 import com.squareup.picasso.Picasso
 import java.text.NumberFormat
@@ -41,11 +42,9 @@ class ShowMoreDealAdapter internal constructor(var showMoreBookModel: ArrayList<
 
         holder.salebook.text = giamgiahandle.toString()+"%"
         holder.titleBook.text = current.tenSach
-        val localVN = Locale("vi","VN")
-        val numberFormat = NumberFormat.getCurrencyInstance(localVN)
-        val priceReducedfm =numberFormat.format(current.giaGiamDS)
+        val priceReducedfm = FormatData.formatMoneyVND(current.giaGiamDS)
         holder.priceReducedBook.text = priceReducedfm
-        val priceBookfm =numberFormat.format(current.giaban)
+        val priceBookfm =FormatData.formatMoneyVND(current.giaban)
         holder.priceBook.text = priceBookfm
         holder.priceBook.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
         Picasso.get().load(current.hinhAnh).into(holder.imgBookDeal)

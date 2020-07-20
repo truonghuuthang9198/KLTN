@@ -17,10 +17,13 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.MainActivity
 import com.example.kltn.R
+import com.example.kltn.screen.FormatData.Companion.formatMoneyVND
 import com.example.kltn.screen.cart.CartFragment
 import com.example.kltn.screen.cart.model.CartModel
 import com.example.kltn.screen.cart.roomdatabase.CartViewModel
 import com.squareup.picasso.Picasso
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -59,7 +62,7 @@ class CartAdapter internal constructor(var context: Context?,var listCart: Array
         val localVN = Locale("vi","VN")
         val numberFormat = NumberFormat.getCurrencyInstance(localVN)
         val giatienfm =numberFormat.format(current.giaTien)
-        holder.giatien.text = giatienfm
+        holder.giatien.text = formatMoneyVND(current.giaTien)
         holder.btnCong.setOnClickListener {
             soluong+=1
             current.soLuong = soluong

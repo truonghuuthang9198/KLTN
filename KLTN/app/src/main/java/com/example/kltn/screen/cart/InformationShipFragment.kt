@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,15 +15,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
 import com.example.kltn.screen.cart.adapter.AddressShipAdapter
 import com.example.kltn.screen.cart.model.AddressShipModel
+import com.example.kltn.screen.event.OnActionData
+import com.example.kltn.screen.home.model.FilterModel
+import com.example.kltn.screen.profile.AddNewAddressFragment
 import com.example.kltn.screen.profile.adapter.ManangerAddressAdapter
 import com.example.kltn.screen.profile.model.ManangerAddressModel
 import com.example.kltn.screen.profile.model.SendArrayAddress
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance
-import com.example.kltn.screen.retrofit.reponse.ManagerAddressRespone
+import com.example.kltn.screen.retrofit.reponse.ManangerAddressResponse
 import com.google.android.material.textfield.TextInputEditText
 import com.google.common.eventbus.Subscribe
 import de.greenrobot.event.EventBus
+import kotlinx.android.synthetic.main.custom_dialog_login.*
+import kotlinx.android.synthetic.main.custom_dialog_login.btn_huy_dialog_login
+import kotlinx.android.synthetic.main.custom_dialog_login.btn_ok_dialog_login
+import kotlinx.android.synthetic.main.dialog_check_addressship.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,8 +43,13 @@ class InformationShipFragment : Fragment() {
     lateinit var recyclerviewShip: RecyclerView
     lateinit var addressAdapter: AddressShipAdapter
     lateinit var tv_ghichukhachhang: TextInputEditText
+    lateinit var btn_add_address_other: LinearLayout
     lateinit var chk_box_ghichu: CheckBox
-//    override fun onResume() {
+    private var onActionData: OnActionData<ManangerAddressModel>? = null
+    lateinit var manangerAddressModel: ManangerAddressModel
+    lateinit var arrayList: ArrayList<ManangerAddressModel>
+
+    //    override fun onResume() {
 //        super.onResume()
 //        EventBus.getDefault().register(this)
 //    }
@@ -49,21 +62,24 @@ class InformationShipFragment : Fragment() {
         btnBackShip = view.findViewById(R.id.btn_back_information_ship)
         btnGiaoHang = view.findViewById(R.id.btn_giaohang_information_ship)
         recyclerviewShip = view.findViewById(R.id.reyclerview_address_ship)
+        btn_add_address_other = view.findViewById(R.id.btn_add_address_other)
         tv_ghichukhachhang = view.findViewById(R.id.tv_ghichukhachhang)
         chk_box_ghichu = view.findViewById(R.id.chk_box_ghichu)
         tv_ghichukhachhang.visibility = View.GONE
         var checked = 0
         chk_box_ghichu.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { compoundButton, b ->
-            if (checked ==0) {
+            if (checked == 0) {
                 tv_ghichukhachhang.visibility = View.VISIBLE
                 checked = 1
-            }
-            else {
+            } else {
                 tv_ghichukhachhang.visibility = View.GONE
                 checked = 0
             }
 
         })
+        btn_add_address_other.setOnClickListener {
+            loadFragment(AddNewAddressFragment(), "AddNewAddressFragment")
+        }
 
         btnBackShip.setOnClickListener {
             if (fragmentManager!!.backStackEntryCount > 0) {
@@ -71,11 +87,13 @@ class InformationShipFragment : Fragment() {
             }
         }
         btnGiaoHang.setOnClickListener {
-            loadFragment(InformationPayFragment(),"InformationPayFragment")
+            setUpDialogCheck()
         }
-        setUpRecyclerview()
+        setUpTestRecyclerview()
+        //setUpRecyclerview()
         return view
     }
+
     private fun loadFragment(fragment: Fragment?, tag: String): Boolean {
         if (fragment != null) {
             (context as FragmentActivity).supportFragmentManager
@@ -87,8 +105,8 @@ class InformationShipFragment : Fragment() {
         }
         return false
     }
-    fun setUpRecyclerview()
-    {
+
+    fun setUpRecyclerview() {
         recyclerviewShip.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         val arrayList = ArrayList<ManangerAddressModel>()
@@ -96,34 +114,114 @@ class InformationShipFragment : Fragment() {
         var token = pref.getString("Token", "")
         val service = RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
         val call = service?.getListAddress("Bearer " + token)
-        call?.enqueue(object : Callback<List<ManagerAddressRespone>> {
-            override fun onFailure(call: Call<List<ManagerAddressRespone>>, t: Throwable) {
+        call?.enqueue(object : Callback<List<ManangerAddressResponse>> {
+            override fun onFailure(call: Call<List<ManangerAddressResponse>>, t: Throwable) {
                 Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
             }
 
             override fun onResponse(
-                call: Call<List<ManagerAddressRespone>>,
-                response: Response<List<ManagerAddressRespone>>
+                call: Call<List<ManangerAddressResponse>>,
+                response: Response<List<ManangerAddressResponse>>
             ) {
                 if (response.isSuccessful) {
                     response.body()!!.forEach {
-                        arrayList.add(
-                            ManangerAddressModel(
-                                "Lê Hoàng",
-                                "Phúc",
-                                it.diaChi,
-                                it.soDienThoai,"Địa chỉ khác"
-                            )
-                        )
-                        addressAdapter = AddressShipAdapter(context,arrayList)
-                        recyclerviewShip.adapter = addressAdapter
+//                        arrayList.add(
+//                            ManangerAddressModel(
+//                                0,
+//                                "Lê Hoàng",
+//                                "Phúc",
+//                                it.soDienThoai,
+//                                "Sóc Trăng",
+//                                "Huyện Châu Thành",
+//                                "Xã An Hiệp",
+//                                "36D Bưng Tróp A",
+//                                1
+//                            )
+//                        )
                     }
+                    onActionData = object : OnActionData<ManangerAddressModel> {
+                        override fun onAction(data: ManangerAddressModel) {
+                            manangerAddressModel = data
+                        }
+                    }
+                    addressAdapter = AddressShipAdapter(context, arrayList, onActionData!!)
+                    recyclerviewShip.adapter = addressAdapter
                 }
             }
         })
 
     }
 
+    private fun setUpTestRecyclerview() {
+        recyclerviewShip.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        arrayList = ArrayList<ManangerAddressModel>()
+//        arrayList.add(
+//            ManangerAddressModel(
+//                0,
+//                "Trương Hữu",
+//                "Thắng",
+//                "0384180187",
+//                "Sóc Trăng",
+//                "Huyện Châu Thành",
+//                "Xã An Hiệp",
+//                "36D Bưng Tróp A",
+//                1
+//            )
+//        )
+//        arrayList.add(
+//            ManangerAddressModel(
+//                1,
+//                "Ngô Thanh",
+//                "Dũng",
+//                "0384180190",
+//                "Đồng Nai",
+//                "Huyện Vĩnh Cửu",
+//                "Xã Thạnh Phú",
+//                "40 Ấp 4",
+//                1
+//            )
+//        )
+        arrayList.first().chose = true
 
+        onActionData = object : OnActionData<ManangerAddressModel> {
+            override fun onAction(data: ManangerAddressModel) {
+                arrayList.forEach {
+                    it.chose = it.id == data.id
+                }
+            }
+        }
+        addressAdapter = AddressShipAdapter(context, arrayList, onActionData!!)
+        recyclerviewShip.adapter = addressAdapter
+    }
+
+    private fun setUpDialogCheck() {
+        val customView =
+            LayoutInflater.from(context).inflate(R.layout.dialog_check_addressship, null, false)
+        val dialog = AlertDialog.Builder(context!!).setView(customView).create()
+
+        var isChosse: Boolean = false
+        arrayList.forEach {
+            if (it.chose) {
+                isChosse = true
+                dialog.show()
+                dialog.tv_addressship.text =
+                    it.address + ", " + it.xa + ", " + it.quan + ", " + it.tinh + ", Việt Nam"
+                dialog.btn_huy_dialog_login.setOnClickListener {
+                    dialog.dismiss()
+                }
+                dialog.btn_ok_dialog_login.setOnClickListener {
+                    loadFragment(InformationPayFragment(), "InformationPayFragment")
+                    dialog.dismiss()
+                }
+            }
+        }
+        if(!isChosse){
+            Toast.makeText(activity, "Vui lòng chọn địa chỉ thanh toán", Toast.LENGTH_LONG).show()
+
+        }
+
+    }
 }
+
 
