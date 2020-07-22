@@ -210,5 +210,3 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         ft.commit()
     }
 }
-
-

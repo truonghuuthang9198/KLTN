@@ -120,13 +120,13 @@
                     app:layout_constraintTop_toTopOf="@+id/tv_priceorigin_showdetail"></TextView>
 
                 <ImageView
-                    android:id="@+id/imageView9"
+                    android:id="@+id/img_tim"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginRight="10dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_favorite_border_black_24dp"
+                    android:src="@drawable/ic_favorite_empty"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/title_book"></ImageView>
             </androidx.constraintlayout.widget.ConstraintLayout>
