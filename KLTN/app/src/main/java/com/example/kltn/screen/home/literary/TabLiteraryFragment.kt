@@ -1,4 +1,4 @@
-package com.example.kltn.screen.home.sgk
+package com.example.kltn.screen.home.literary
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,25 +8,24 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
-import com.example.kltn.screen.home.adapter.SGKAdapter
+import com.example.kltn.screen.home.adapter.LiteraryAdapter
 import com.example.kltn.screen.home.model.BookModel
-import com.example.kltn.screen.home.model.SGKModel
 
-class ChildSGKFragment(val tabId: Int) : Fragment() {
-    lateinit var recycleviewSGK: RecyclerView
-    lateinit var sgkAdapter: SGKAdapter
+class TabLiteraryFragment(val tabId: Int) : Fragment() {
+    lateinit var recycleviewLiterary: RecyclerView
+    lateinit var literaryAdapter: LiteraryAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_child_sgk, container, false)
-        recycleviewSGK = view!!.findViewById<RecyclerView>(R.id.recyclerview_sgk)
+        val view = inflater.inflate(R.layout.tab_fragment_literary, container, false)
+        recycleviewLiterary = view!!.findViewById<RecyclerView>(R.id.recyclerview_literary)
         setUpRecyclerView()
         return view
     }
 
     fun setUpRecyclerView() {
-        recycleviewSGK.layoutManager = LinearLayoutManager(
+        recycleviewLiterary.layoutManager = LinearLayoutManager(
             activity,
             LinearLayoutManager.HORIZONTAL, false
         )
@@ -318,9 +317,8 @@ class ChildSGKFragment(val tabId: Int) : Fragment() {
                 listTab0.add(it)
             }
         }
-        sgkAdapter = SGKAdapter(listTab0)
-        recycleviewSGK.adapter = sgkAdapter
-
+        literaryAdapter = LiteraryAdapter(listTab0)
+        recycleviewLiterary.adapter = literaryAdapter
     }
 
 }

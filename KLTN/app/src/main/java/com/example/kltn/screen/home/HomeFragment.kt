@@ -24,9 +24,12 @@ import com.example.kltn.screen.event.OnActionNotify
 import com.example.kltn.screen.home.adapter.MenuAdapter
 import com.example.kltn.screen.home.bestbook.BestBookFragment
 import com.example.kltn.screen.home.children.ChildrenBookFragment
-import com.example.kltn.screen.home.deals.DealFragment
+import com.example.kltn.screen.home.deal.DealFragment
+import com.example.kltn.screen.home.economic.EconomicFragment
 import com.example.kltn.screen.home.model.MenuModel
-import com.example.kltn.screen.home.sgk.SGKFragment
+import com.example.kltn.screen.home.literary.LiteraryFragment
+import com.example.kltn.screen.home.psychological_skills.PsychologicalSkillsFragment
+import com.example.kltn.screen.home.stationery.StationeryFragment
 import com.example.kltn.screen.profile.model.SendArrayAddress
 import de.greenrobot.event.EventBus
 
@@ -69,13 +72,27 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
             loadFragmentCategory(CategoryFragment(), "CategoryFragment")
         }
         loadFragmentDeal(DealFragment())
-        loadFragmentSGK(SGKFragment())
+        loadFragmentLiterary(LiteraryFragment())
         loadFragmentBestBook(BestBookFragment())
         loadFragmentChildrenBook(ChildrenBookFragment())
+        loadFragmentEconomic(EconomicFragment())
+        loadFragmentStationery(StationeryFragment())
+        loadFragmentPsychologicalSkill(PsychologicalSkillsFragment())
         recyclerviewMenu = view!!.findViewById(R.id.recyclerview_menu)
         setUpRecyclerView()
         imageSliderImplementation()
         return view
+    }
+
+    private fun loadFragmentStationery(fragment: Fragment?): Boolean {
+        if (fragment != null) {
+            fragmentManager!!
+                .beginTransaction()
+                .replace(R.id.frame_stationery, fragment)
+                .commit()
+            return true
+        }
+        return false
     }
 
     private fun loadFragmentDeal(fragment: Fragment?): Boolean {
@@ -88,12 +105,33 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         }
         return false
     }
-
-    private fun loadFragmentSGK(fragment: Fragment?): Boolean {
+    private fun loadFragmentEconomic(fragment: Fragment?): Boolean {
         if (fragment != null) {
             fragmentManager!!
                 .beginTransaction()
-                .replace(R.id.frame_SGK, fragment)
+                .replace(R.id.frame_economic, fragment)
+                .commit()
+            return true
+        }
+        return false
+    }
+
+    private fun loadFragmentPsychologicalSkill(fragment: Fragment?): Boolean {
+        if (fragment != null) {
+            fragmentManager!!
+                .beginTransaction()
+                .replace(R.id.frame_psychologicalSkills, fragment)
+                .commit()
+            return true
+        }
+        return false
+    }
+
+    private fun loadFragmentLiterary(fragment: Fragment?): Boolean {
+        if (fragment != null) {
+            fragmentManager!!
+                .beginTransaction()
+                .replace(R.id.frame_literary, fragment)
                 .commit()
             return true
         }
@@ -115,7 +153,7 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         if (fragment != null) {
             fragmentManager!!
                 .beginTransaction()
-                .replace(R.id.frame_ChildrenBook, fragment)
+                .replace(R.id.frame_childrenBook, fragment)
                 .commit()
             return true
         }
@@ -162,7 +200,7 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         EventBus.getDefault().post(newEvent)
         onActionNotify = object : OnActionNotify {
             override fun onActionNotify() {
-                sendData?.ChangeStateSuggest(1)
+                sendData?.ChangeStateBottomNavigation(1)
 //                  sendData?.ChangeStateSuggest()
 //                val mainActivity = HomeFragment()
 //                val bundle = Bundle()

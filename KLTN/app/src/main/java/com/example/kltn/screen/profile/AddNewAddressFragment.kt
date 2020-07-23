@@ -121,8 +121,10 @@ class AddNewAddressFragment() : Fragment(), Parcelable, CityDialog.OnInputSelect
                     response: Response<AddAddressResponse>
                 ) {
                     if (response.isSuccessful) {
+                        loadFragment(ManangerAddressFragment())
                         Toast.makeText(context, "Thêm địa chỉ thành công", Toast.LENGTH_LONG)
                             .show()
+
                     } else {
                         Toast.makeText(context, "Thêm thất bại", Toast.LENGTH_LONG).show()
                     }
@@ -180,17 +182,6 @@ class AddNewAddressFragment() : Fragment(), Parcelable, CityDialog.OnInputSelect
         return view
     }
 
-
-    fun getSaltString(): String? {
-        val SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
-        val salt = StringBuilder()
-        val rnd = Random()
-        while (salt.length < 4) { // length of the random string.
-            val index = (rnd.nextFloat() * SALTCHARS.length) as Int
-            salt.append(SALTCHARS[index])
-        }
-        return salt.toString()
-    }
 
     private fun loadFragment(fragment: Fragment?): Boolean {
         if (fragment != null) {

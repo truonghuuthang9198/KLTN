@@ -13,7 +13,8 @@ import com.example.kltn.screen.home.model.CategoryDetailModel
 
 class CategoryDetailAdapter internal constructor(
     var context: Context?,
-    var CategoryDetailModel: ArrayList<CategoryDetailModel>
+    var CategoryDetailModel: ArrayList<CategoryDetailModel>,
+    var maCT:String
 ) : RecyclerView.Adapter<CategoryDetailAdapter.CategoryDetailViewHolder>() {
     inner class CategoryDetailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val titleCategory: TextView = itemView.findViewById(R.id.tv_category_detail)
@@ -36,5 +37,8 @@ class CategoryDetailAdapter internal constructor(
     override fun onBindViewHolder(holder: CategoryDetailViewHolder, position: Int) {
         val current = CategoryDetailModel[position]
         holder.titleCategory.text = current.title
+        holder.itemView.setOnClickListener {
+
+        }
     }
 }

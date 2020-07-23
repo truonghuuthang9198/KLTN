@@ -1,4 +1,4 @@
-package com.example.kltn.screen.home.deals
+package com.example.kltn.screen.home.deal
 
 import android.os.Bundle
 import android.util.SparseArray
@@ -34,8 +34,8 @@ class ShowMoreDealFragment() : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_show_more_deal, container, false)
-        tabLayout = view.findViewById<TabLayout>(R.id.tab_theloai)
-        viewPager = view.findViewById<ViewPager>(R.id.viewpager_show_more_deal)
+        tabLayout = view.findViewById<TabLayout>(R.id.tab_showmore_deal)
+        viewPager = view.findViewById<ViewPager>(R.id.viewpager_showmore_deal)
         btnBack = view.findViewById(R.id.btn_back_showmore)
         btnBack.setOnClickListener {
             if (fragmentManager!!.backStackEntryCount > 0) {
@@ -68,7 +68,7 @@ class ShowMoreDealFragment() : Fragment() {
         private val mFragmentList: SparseArray<Fragment> = SparseArray()
 
         override fun getItem(position: Int): Fragment {
-            return ChildShowMoreDealFragment(listTemp[position].id)
+            return TabShowMoreDealFragment(listTemp[position].id)
         }
 
         override fun getCount(): Int {

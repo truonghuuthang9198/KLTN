@@ -1,45 +1,34 @@
-package com.example.kltn.screen.home.deals
+package com.example.kltn.screen.home.bestbook
 
-import com.example.kltn.screen.retrofit.reponse.SachResponse
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
-import com.example.kltn.screen.home.adapter.DealAdapter
+import com.example.kltn.screen.home.adapter.BestBookAdapter
 import com.example.kltn.screen.home.model.BookModel
-import com.example.kltn.screen.retrofit.GetDataService
-import com.example.kltn.screen.retrofit.RetrofitClientInstance
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-/**
- * A simple [Fragment] subclass.
- */
-class ChildDealFragment(val tabId: Int) : Fragment() {
-    lateinit var recycleviewDeal: RecyclerView
-    lateinit var dealAdapter: DealAdapter
+class TabBestBookFragment(val tabId: Int) : Fragment() {
+    lateinit var recycleviewBestBook: RecyclerView
+    lateinit var bestbookAdapter: BestBookAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_child_deal, container, false)
-        recycleviewDeal = view!!.findViewById<RecyclerView>(R.id.recyclerview_deal)
-        recycleviewDeal.layoutManager = LinearLayoutManager(
-            activity,
-            LinearLayoutManager.HORIZONTAL, false
-        )
-        loadListSach()
-        //setUpRecyclerView()
+        val view = inflater.inflate(R.layout.tab_fragment_bestbook, container, false)
+        recycleviewBestBook = view!!.findViewById<RecyclerView>(R.id.recyclerview_bestbook)
+        setUpRecyclerView()
         return view
     }
 
     fun setUpRecyclerView() {
+        recycleviewBestBook.layoutManager = LinearLayoutManager(
+            activity,
+            LinearLayoutManager.HORIZONTAL, false
+        )
         val arrayList = ArrayList<BookModel>()
         val listTab0 = ArrayList<BookModel>()
         arrayList.add(
@@ -61,7 +50,8 @@ class ChildDealFragment(val tabId: Int) : Fragment() {
                 2,
                 "188 Trang",
                 "Sket Dance - Quái Kiệt Học Đường - Tập 30",
-                "Còn hàng", 2
+                "Còn hàng",
+                1
             )
         )
         arrayList.add(
@@ -86,7 +76,7 @@ class ChildDealFragment(val tabId: Int) : Fragment() {
                 "304 Trang",
                 "Mr. Lemoncello's All-Star Breakout Game (Mr. Lemoncello'S Library)",
                 "Còn hàng",
-                2
+                3
             )
         )
         arrayList.add(
@@ -109,99 +99,17 @@ class ChildDealFragment(val tabId: Int) : Fragment() {
                 "188 Trang",
                 "Sorcery of Thorns",
                 "Còn hàng",
-                3
+                2
             )
         )
-//        arrayList.add(
-//            DealsModel(1,0,R.drawable.vd3_sach,"Get Set Go: Mathematics Equals",36400.00,52000.00)
-//        )
-//        arrayList.add(
-//            DealsModel(2,0,R.drawable.vd3_sach,"Bí Mật Hành Trình Tình Yêu",30400.00,48000.00)
-//        )
-//        arrayList.add(
-//            DealsModel(3,0,R.drawable.vd3_sach,"Dạy Tiếng Anh Xu Hướng Mới",33330.00,56000.00)
-//        )
-//        arrayList.add(
-//            DealsModel(0,1,R.drawable.vd3_sach,"Dạy Trẻ Biết Đọc Sớm",53720.00,79000.00)
-//        )
-//        arrayList.add(
-//            DealsModel(1,1,R.drawable.vd3_sach,"Get Set Go: Mathematics Equals",36000.00,52000.00)
-//        )
-//        arrayList.add(
-//            DealsModel(2,1,R.drawable.vd3_sach,"Bí Mật Hành Trình Tình Yêu",30400.00,48000.00)
-//        )
-//        arrayList.add(
-//            DealsModel(3,1,R.drawable.vd3_sach,"Dạy Tiếng Anh Xu Hướng Mới",33400.00,56000.00)
-//        )
+
         arrayList.forEach {
             if (it.tabId == tabId) {
                 listTab0.add(it)
             }
         }
-        dealAdapter = DealAdapter(listTab0)
-        recycleviewDeal.adapter = dealAdapter
+        bestbookAdapter = BestBookAdapter(listTab0)
+        recycleviewBestBook.adapter = bestbookAdapter
     }
 
-    private fun loadListSach() {
-        val service = RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
-        val call = service?.getListSach()
-        call?.enqueue(object : Callback<List<SachResponse>> {
-            override fun onFailure(call: Call<List<SachResponse>>, t: Throwable) {
-                Log.d("ThangTruong", t.message)
-            }
-
-            override fun onResponse(
-                call: Call<List<SachResponse>>,
-                response: Response<List<SachResponse>>
-            ) {
-                listSach(response.body()!!)
-                Log.d("ThangTruong", response.body().toString())
-
-            }
-        })
-
-    }
-
-    private fun listSach(response: List<SachResponse>) {
-        var id = 0
-        var tabid = 0
-        val listSachAdapter = ArrayList<BookModel>()
-        response.forEach {
-            listSachAdapter.add(
-                BookModel(
-                    id,
-                    tabid,
-                    it.ghiChu,
-                    it.giaBan,
-                    it.giamGia,
-                    it.hinhAnh,
-                    it.kichThuoc,
-                    it.loaiBia,
-                    it.congTyPhatHanh.tenCongTy,
-                    it.maSach,
-                    it.tacGia.tenTacGia,
-                    it.theLoai.tenTheLoai,
-                    it.ngayXuatBan,
-                    it.nhaXuatBan.tenNhaXuatBan,
-                    it.soLuong,
-                    it.soTrang,
-                    it.tenSach,
-                    it.tinhTrang,
-                    it.soSao
-                )
-            )
-            id++
-            if (id >= 5 && tabid <= 2) {
-                tabid++
-            }
-        }
-        val listAddInTab = ArrayList<BookModel>()
-        listSachAdapter.forEach {
-            if (tabId == it.tabId) {
-                listAddInTab.add(it)
-            }
-        }
-        dealAdapter = DealAdapter(listAddInTab)
-        recycleviewDeal.adapter = dealAdapter
-    }
 }

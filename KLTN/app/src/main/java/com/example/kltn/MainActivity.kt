@@ -166,13 +166,17 @@ class MainActivity : AppCompatActivity(), SendData {
         }
     }
 
-    override fun ChangeStateSuggest(state: Int) {
+    override fun ChangeStateBottomNavigation(state: Int) {
         if (state == 1) {
             navView.selectedItemId = R.id.navigation_suggest
         }
-        else
+        else if(state == 2)
         {
             navView.selectedItemId = R.id.navigation_profile
+        }
+        else
+        {
+            navView.selectedItemId = R.id.navigation_home
         }
     }
 

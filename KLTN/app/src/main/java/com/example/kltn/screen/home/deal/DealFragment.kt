@@ -1,31 +1,37 @@
-package com.example.kltn.screen.home.children
+package com.example.kltn.screen.home.deal
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.kltn.R
-import com.example.kltn.screen.home.bestbook.TabBestBookFragment
 import com.google.android.material.tabs.TabLayout
 
-class ChildrenBookFragment : Fragment() {
+/**
+ * A simple [Fragment] subclass.
+ */
+class DealFragment() : Fragment() {
+    lateinit var btnShowMore: Button
     private var tabLayout: TabLayout? = null
     private var viewPager: ViewPager? = null
-    lateinit var btn_showmore_children_book: Button
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view =  inflater.inflate(R.layout.fragment_children_book, container, false)
-        tabLayout = view.findViewById<TabLayout>(R.id.tab_children_book)
-        viewPager = view.findViewById<ViewPager>(R.id.viewpager_children_book)
-        btn_showmore_children_book = view.findViewById(R.id.btn_showmore_children_book)
+        val view =  inflater.inflate(R.layout.fragment_deals, container, false)
+        tabLayout = view.findViewById<TabLayout>(R.id.tab_deals)
+        viewPager = view.findViewById<ViewPager>(R.id.viewpager_deal)
+        btnShowMore = view.findViewById(R.id.btn_showmore_deal)
         setStatePageAdapter()
+        btnShowMore.setOnClickListener()
+        {
+            loadFragment(ShowMoreDealFragment())
+        }
         return view
     }
     inner class MyViewPageStateAdapter(fm: FragmentManager): FragmentStatePagerAdapter(fm){
@@ -44,7 +50,7 @@ class ChildrenBookFragment : Fragment() {
             return fragmentTitleList.get(position)
         }
 
-        fun addFragment(fragment: Fragment, title:String){
+        fun addFragment(fragment:Fragment,title:String){
             fragmentList.add(fragment)
             fragmentTitleList.add(title)
 
@@ -52,11 +58,20 @@ class ChildrenBookFragment : Fragment() {
     }
     private fun setStatePageAdapter(){
         val myViewPageStateAdapter: MyViewPageStateAdapter = MyViewPageStateAdapter(activity!!.supportFragmentManager)
-        myViewPageStateAdapter.addFragment(TabBestBookFragment(0),"Sách Thiếu Nhi Giá Tốt")
-        myViewPageStateAdapter.addFragment(TabBestBookFragment(1),"Truyện Đọc Thiếu Nhi")
+        myViewPageStateAdapter.addFragment(TabDealFragment(0),"Deal Hot Theo Ngày")
+        myViewPageStateAdapter.addFragment(TabDealFragment(1),"Sách HOT - Giảm sốc")
         viewPager!!.adapter=myViewPageStateAdapter
-        viewPager!!.offscreenPageLimit = 2
         tabLayout!!.setupWithViewPager(viewPager,true)
-
+    }
+    private fun loadFragment(fragment: Fragment?): Boolean {
+        if (fragment != null) {
+            activity!!.supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.frame_layout, fragment,"ShowMoreDealFragment")
+                .addToBackStack(null)
+                .commit()
+            return true
+        }
+        return false
     }
 }

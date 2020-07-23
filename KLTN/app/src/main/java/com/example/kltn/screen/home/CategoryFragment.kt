@@ -58,20 +58,20 @@ class CategoryFragment : Fragment() {
         arrayListSachTN.add(CategoryDetailModel("Sách Thiếu Nhi"))
         arrayListSachTN.add(CategoryDetailModel("Tiểu Sử - Hồi Ký"))
         if (arrayListCategory.isEmpty()) {
-            arrayListCategory.add(CategoryModel(0, "Sách Trong Nước",true))
-            arrayListCategory.add(CategoryModel(1, "FOREIGN BOOKS"))
-            arrayListCategory.add(CategoryModel(2, "VPP - Dụng Cụ Học Sinh"))
-            arrayListCategory.add(CategoryModel(3, "Tuyển Tập"))
-            arrayListCategory.add(CategoryModel(4, "Sách Theo Nhà Cung Cấp"))
-            arrayListCategory.add(CategoryModel(5, "Khuyên Đọc"))
+            arrayListCategory.add(CategoryModel(0, "CT001","Sách Trong Nước",true))
+            arrayListCategory.add(CategoryModel(1, "CT002","FOREIGN BOOKS"))
+            arrayListCategory.add(CategoryModel(2, "CT003","VPP - Dụng Cụ Học Sinh"))
+            arrayListCategory.add(CategoryModel(3, "CT004","Tuyển Tập"))
+            arrayListCategory.add(CategoryModel(4, "CT005","Sách Theo Nhà Cung Cấp"))
+            arrayListCategory.add(CategoryModel(5, "CT006","Khuyên Đọc"))
         }
-        categoryDetailAdapter = CategoryDetailAdapter(context, arrayListSachTN)
+        categoryDetailAdapter = CategoryDetailAdapter(context, arrayListSachTN,arrayListCategory[0].maCategory)
         recyclerViewCategoryDetail.adapter = categoryDetailAdapter
         onActionData = object : OnActionData<CategoryModel> {
             override fun onAction(data: CategoryModel) {
                 when (data.id) {
                     0 -> {
-                        categoryDetailAdapter = CategoryDetailAdapter(activity!!, arrayListSachTN)
+                        categoryDetailAdapter = CategoryDetailAdapter(activity!!, arrayListSachTN,data.maCategory)
                         recyclerViewCategoryDetail.adapter = categoryDetailAdapter
                     }
                     2 -> {

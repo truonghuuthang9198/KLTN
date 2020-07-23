@@ -11,9 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.DetailActivity
 import com.example.kltn.R
 import com.example.kltn.screen.FormatData
-import com.example.kltn.screen.home.model.BestBookModel
 import com.example.kltn.screen.home.model.BookModel
-import com.example.kltn.screen.home.model.SGKModel
+
 import com.squareup.picasso.Picasso
 import java.text.NumberFormat
 import java.util.*

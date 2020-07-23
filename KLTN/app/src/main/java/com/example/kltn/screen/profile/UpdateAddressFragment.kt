@@ -5,17 +5,16 @@ import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import com.example.kltn.R
 import com.example.kltn.screen.profile.adapter.ManangerAddressAdapter
 import com.example.kltn.screen.profile.model.ManangerAddressModel
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance
+import com.example.kltn.screen.retrofit.address_handle.CityDialog
 import com.example.kltn.screen.retrofit.model.AddAddressModel
+import com.example.kltn.screen.retrofit.model.CityModel
 import com.example.kltn.screen.retrofit.reponse.ManangerAddressResponse
 import com.example.kltn.screen.retrofit.reponse.UpdateAddressResponse
 import retrofit2.Call
@@ -23,17 +22,34 @@ import retrofit2.Callback
 import retrofit2.Response
 
 @Suppress("DEPRECATION")
-class UpdateAddressFragment(var data: ManangerAddressModel) : Fragment() {
+class UpdateAddressFragment(var data: ManangerAddressModel) : Fragment(),CityDialog.OnInputSelected {
     lateinit var btnBack_Address: ImageView
     lateinit var edt_ho_update_address: EditText
     lateinit var edt_ten_update_address: EditText
     lateinit var edt_sdt_update_address: EditText
-    lateinit var edt_tinh_address: EditText
-    lateinit var edt_quan_update_address: EditText
-    lateinit var edt_xaphuong_address: EditText
+    lateinit var edt_tinh_address: TextView
+    lateinit var edt_quan_update_address: TextView
+    lateinit var edt_xaphuong_address: TextView
     lateinit var edt_diachinha_update_address: EditText
     lateinit var btn_save_update_address: Button
     lateinit var btn_delete_update_address: Button
+    private var idtitleCity: Int = 0
+    private var idtitleDistrict: Int = 0
+
+    override fun sendInput(cityModel: CityModel, type: Int) {
+        if (type == 1) {
+            this.edt_tinh_address.text = cityModel.cityname
+            this.edt_quan_update_address.text = null
+            this.edt_xaphuong_address.text = null
+            idtitleCity = cityModel.id
+        } else if (type == 2) {
+            this.edt_quan_update_address.text = cityModel.cityname
+            this.edt_xaphuong_address.text = null
+            idtitleDistrict = cityModel.id
+        } else {
+            this.edt_xaphuong_address.text = cityModel.cityname
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,6 +64,9 @@ class UpdateAddressFragment(var data: ManangerAddressModel) : Fragment() {
         edt_xaphuong_address = view.findViewById(R.id.edt_xaphuong_address)
         edt_diachinha_update_address = view.findViewById(R.id.edt_diachinha_update_address)
         btn_save_update_address = view.findViewById(R.id.btn_save_update_address)
+        val fm = activity?.supportFragmentManager
+
+
         btn_save_update_address.setOnClickListener {
             val addAddressModel = AddAddressModel(
                 data.maSo,
@@ -98,6 +117,49 @@ class UpdateAddressFragment(var data: ManangerAddressModel) : Fragment() {
         btn_delete_update_address.setOnClickListener {
 
         }
+        edt_tinh_address.setOnClickListener {
+            val diaLogCity = CityDialog(1, idtitleCity)
+            if (diaLogCity.isAdded) {
+                diaLogCity.showsDialog
+            } else {
+                if (fm != null) {
+                    diaLogCity.setTargetFragment(this@UpdateAddressFragment, 1)
+                    fm?.let { it1 -> diaLogCity.show(it1, "CityDialog") }
+                }
+            }
+
+        }
+        edt_quan_update_address.setOnClickListener {
+            if (edt_tinh_address.text.isEmpty()) {
+                Toast.makeText(context, "Vui lòng chọn thành phố", Toast.LENGTH_LONG).show()
+            } else {
+                val diaLogCity = CityDialog(2, idtitleCity)
+                if (diaLogCity.isAdded) {
+                    diaLogCity.showsDialog
+                } else {
+                    if (fm != null) {
+                        diaLogCity.setTargetFragment(this@UpdateAddressFragment, 1)
+                        fm?.let { it1 -> diaLogCity.show(it1, "CityDialog") }
+                    }
+                }
+            }
+        }
+        edt_xaphuong_address.setOnClickListener {
+            if (edt_quan_update_address.text.isEmpty()) {
+                Toast.makeText(context, "Vui lòng chọn quận/huyện", Toast.LENGTH_LONG).show()
+            } else {
+                val diaLogCity = CityDialog(3, idtitleDistrict)
+                if (diaLogCity.isAdded) {
+                    diaLogCity.showsDialog
+                } else {
+                    if (fm != null) {
+                        diaLogCity.setTargetFragment(this@UpdateAddressFragment, 1)
+                        fm?.let { it1 -> diaLogCity.show(it1, "CityDialog") }
+                    }
+                }
+            }
+        }
+
         return view
     }
 }

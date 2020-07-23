@@ -8,12 +8,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
-import com.example.kltn.screen.home.deals.ShowMoreDealFragment
+import com.example.kltn.screen.home.deal.ShowMoreDealFragment
 import com.example.kltn.screen.home.model.MenuModel
-import com.example.kltn.screen.suggest.SuggestFragment
 import com.example.kltn.screen.event.EventFireUtil
 import com.example.kltn.screen.event.OnActionNotify
 import com.example.kltn.screen.home.CategoryFragment

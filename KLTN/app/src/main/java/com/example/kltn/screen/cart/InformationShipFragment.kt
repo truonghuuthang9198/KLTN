@@ -89,8 +89,8 @@ class InformationShipFragment : Fragment() {
         btnGiaoHang.setOnClickListener {
             setUpDialogCheck()
         }
-        setUpTestRecyclerview()
-        //setUpRecyclerview()
+        //setUpTestRecyclerview()
+        setUpRecyclerview()
         return view
     }
 
@@ -107,9 +107,9 @@ class InformationShipFragment : Fragment() {
     }
 
     fun setUpRecyclerview() {
+        arrayList = ArrayList<ManangerAddressModel>()
         recyclerviewShip.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        val arrayList = ArrayList<ManangerAddressModel>()
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
         var token = pref.getString("Token", "")
         val service = RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
@@ -124,24 +124,30 @@ class InformationShipFragment : Fragment() {
                 response: Response<List<ManangerAddressResponse>>
             ) {
                 if (response.isSuccessful) {
-                    response.body()!!.forEach {
-//                        arrayList.add(
-//                            ManangerAddressModel(
-//                                0,
-//                                "Lê Hoàng",
-//                                "Phúc",
-//                                it.soDienThoai,
-//                                "Sóc Trăng",
-//                                "Huyện Châu Thành",
-//                                "Xã An Hiệp",
-//                                "36D Bưng Tróp A",
-//                                1
-//                            )
-//                        )
+                    response.body()!!.forEachIndexed { index, manangerAddressResponse ->
+                        arrayList.add(
+                            ManangerAddressModel(
+                                index,
+                                manangerAddressResponse.maSo,
+                                manangerAddressResponse.maKhachHang,
+                                manangerAddressResponse.ho,
+                                manangerAddressResponse.ten,
+                                manangerAddressResponse.soDienThoai,
+                                manangerAddressResponse.thanhPho,
+                                manangerAddressResponse.quan,
+                                manangerAddressResponse.phuong,
+                                manangerAddressResponse.diaChi,
+                                1
+                            )
+                        )
                     }
+                    arrayList.first().chose = true
+
                     onActionData = object : OnActionData<ManangerAddressModel> {
                         override fun onAction(data: ManangerAddressModel) {
-                            manangerAddressModel = data
+                            arrayList.forEach {
+                                it.chose = it.id == data.id
+                            }
                         }
                     }
                     addressAdapter = AddressShipAdapter(context, arrayList, onActionData!!)
@@ -216,9 +222,8 @@ class InformationShipFragment : Fragment() {
                 }
             }
         }
-        if(!isChosse){
+        if (!isChosse) {
             Toast.makeText(activity, "Vui lòng chọn địa chỉ thanh toán", Toast.LENGTH_LONG).show()
-
         }
 
     }

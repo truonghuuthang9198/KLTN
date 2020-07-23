@@ -9,7 +9,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.kltn.R
-import com.example.kltn.screen.home.sgk.ChildSGKFragment
 import com.google.android.material.tabs.TabLayout
 
 class BestBookFragment : Fragment() {
@@ -49,9 +48,9 @@ class BestBookFragment : Fragment() {
     }
     private fun setStatePageAdapter(){
         val myViewPageStateAdapter: MyViewPageStateAdapter = MyViewPageStateAdapter(activity!!.supportFragmentManager)
-        myViewPageStateAdapter.addFragment(ChildBestBookFragment(0),"Business, Finance & Management")
-        myViewPageStateAdapter.addFragment(ChildBestBookFragment(1),"Personal Development")
-        myViewPageStateAdapter.addFragment(ChildBestBookFragment(2),"Children's Book")
+        myViewPageStateAdapter.addFragment(TabBestBookFragment(0),"Business, Finance & Management")
+        myViewPageStateAdapter.addFragment(TabBestBookFragment(1),"Personal Development")
+        myViewPageStateAdapter.addFragment(TabBestBookFragment(2),"Children's Book")
         viewPager!!.adapter=myViewPageStateAdapter
         viewPager!!.offscreenPageLimit = 3
         tabLayout!!.setupWithViewPager(viewPager,true)

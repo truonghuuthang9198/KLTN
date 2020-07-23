@@ -7,12 +7,12 @@
     tools:context=".screen.home.deal.DealFragment">
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/title_stationery"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="10dp"
-        android:text="BOOK DEALS"
+        android:text="VĂN PHÒNG PHẨM"
         android:textColor="#000000"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -21,43 +21,43 @@
         app:layout_constraintTop_toTopOf="parent"></TextView>
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_deals"
+        android:id="@+id/tab_stationery"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="8dp"
-        android:animateLayoutChanges="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintTop_toBottomOf="@+id/title_stationery"
         app:tabBackground="@drawable/custom_tablayout"
         app:tabIndicatorColor="@null"
         app:tabMode="scrollable"
         app:tabPaddingStart="10dp"
         app:tabSelectedTextColor="#FFB90F"
         app:tabTextColor="#000000">
+
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewpager_deal"
+        android:id="@+id/viewpager_stationery"
         android:layout_width="match_parent"
         android:layout_height="280dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tab_deals"></androidx.viewpager.widget.ViewPager>
+        app:layout_constraintTop_toBottomOf="@+id/tab_stationery"></androidx.viewpager.widget.ViewPager>
 
     <Button
-        android:id="@+id/btn_showmore_deal"
+        android:id="@+id/btn_showmore_stationery"
         android:layout_width="180dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:background="@drawable/custom_button_dangnhap"
         android:text="Xem thêm"
-        android:textSize="16sp"
-        android:layout_marginBottom="8dp"
         android:textAllCaps="false"
+        android:textSize="16sp"
         android:textColor="#FFFFFF"
+        android:layout_marginBottom="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewpager_deal" />
+        app:layout_constraintTop_toBottomOf="@+id/viewpager_stationery" />
 </androidx.constraintlayout.widget.ConstraintLayout>

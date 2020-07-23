@@ -1,30 +1,26 @@
-package com.example.kltn.screen.home.children
+package com.example.kltn.screen.home.literary
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.kltn.R
-import com.example.kltn.screen.home.bestbook.TabBestBookFragment
 import com.google.android.material.tabs.TabLayout
 
-class ChildrenBookFragment : Fragment() {
+class LiteraryFragment : Fragment() {
     private var tabLayout: TabLayout? = null
     private var viewPager: ViewPager? = null
-    lateinit var btn_showmore_children_book: Button
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view =  inflater.inflate(R.layout.fragment_children_book, container, false)
-        tabLayout = view.findViewById<TabLayout>(R.id.tab_children_book)
-        viewPager = view.findViewById<ViewPager>(R.id.viewpager_children_book)
-        btn_showmore_children_book = view.findViewById(R.id.btn_showmore_children_book)
+        val view =  inflater.inflate(R.layout.fragment_literary, container, false)
+        tabLayout = view.findViewById<TabLayout>(R.id.tab_literary)
+        viewPager = view.findViewById<ViewPager>(R.id.viewpager_literary)
         setStatePageAdapter()
         return view
     }
@@ -52,11 +48,11 @@ class ChildrenBookFragment : Fragment() {
     }
     private fun setStatePageAdapter(){
         val myViewPageStateAdapter: MyViewPageStateAdapter = MyViewPageStateAdapter(activity!!.supportFragmentManager)
-        myViewPageStateAdapter.addFragment(TabBestBookFragment(0),"Sách Thiếu Nhi Giá Tốt")
-        myViewPageStateAdapter.addFragment(TabBestBookFragment(1),"Truyện Đọc Thiếu Nhi")
+        myViewPageStateAdapter.addFragment(TabLiteraryFragment(0),"Văn Học - Giá Tốt")
+        myViewPageStateAdapter.addFragment(TabLiteraryFragment(1),"Truyện ngắn - Tản Văn")
+        myViewPageStateAdapter.addFragment(TabLiteraryFragment(2),"Ngôn Tình")
         viewPager!!.adapter=myViewPageStateAdapter
-        viewPager!!.offscreenPageLimit = 2
+        viewPager!!.offscreenPageLimit = 3
         tabLayout!!.setupWithViewPager(viewPager,true)
-
     }
 }

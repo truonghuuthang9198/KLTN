@@ -1,28 +1,34 @@
-package com.example.kltn.screen.home.sgk
+package com.example.kltn.screen.home.stationery
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.kltn.R
-import com.example.kltn.screen.home.deals.ChildDealFragment
 import com.google.android.material.tabs.TabLayout
 
-class SGKFragment : Fragment() {
+class StationeryFragment() : Fragment() {
+    lateinit var btnShowMore: Button
     private var tabLayout: TabLayout? = null
     private var viewPager: ViewPager? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view =  inflater.inflate(R.layout.fragment_sgk, container, false)
-        tabLayout = view.findViewById<TabLayout>(R.id.tab_sgk)
-        viewPager = view.findViewById<ViewPager>(R.id.viewpager_sgk)
+        val view =  inflater.inflate(R.layout.fragment_stationery, container, false)
+        tabLayout = view.findViewById<TabLayout>(R.id.tab_stationery)
+        viewPager = view.findViewById<ViewPager>(R.id.viewpager_stationery)
+        btnShowMore = view.findViewById(R.id.btn_showmore_stationery)
         setStatePageAdapter()
+        btnShowMore.setOnClickListener()
+        {
+//            loadFragment(ShowMoreDealFragment())
+        }
         return view
     }
     inner class MyViewPageStateAdapter(fm: FragmentManager): FragmentStatePagerAdapter(fm){
@@ -49,11 +55,21 @@ class SGKFragment : Fragment() {
     }
     private fun setStatePageAdapter(){
         val myViewPageStateAdapter: MyViewPageStateAdapter = MyViewPageStateAdapter(activity!!.supportFragmentManager)
-        myViewPageStateAdapter.addFragment(ChildSGKFragment(0),"SÁCH GIÁO KHOA CẤP 1")
-        myViewPageStateAdapter.addFragment(ChildSGKFragment(1),"SÁCH GIÁO KHOA CẤP 2")
-        myViewPageStateAdapter.addFragment(ChildSGKFragment(2),"SÁCH GIÁO KHOA CẤP 3")
+        myViewPageStateAdapter.addFragment(TabStationeryFragment(0),"VPP Giá Tốt")
+        myViewPageStateAdapter.addFragment(TabStationeryFragment(1),"Bìa - File Hồ Sơ")
+        viewPager!!.offscreenPageLimit =2
         viewPager!!.adapter=myViewPageStateAdapter
         tabLayout!!.setupWithViewPager(viewPager,true)
-
     }
+//    private fun loadFragment(fragment: Fragment?): Boolean {
+//        if (fragment != null) {
+//            activity!!.supportFragmentManager
+//                .beginTransaction()
+//                .replace(R.id.frame_layout, fragment,"ShowMoreDealFragment")
+//                .addToBackStack(null)
+//                .commit()
+//            return true
+//        }
+//        return false
+//    }
 }

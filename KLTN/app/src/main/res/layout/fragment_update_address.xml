@@ -90,21 +90,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_ten_update_address"></EditText>
 
-    <EditText
+    <TextView
         android:id="@+id/edt_tinh_address"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_margin="12dp"
         android:background="@drawable/custom_edit_text"
         android:hint="Thành phố*"
+        android:textColor="#000000"
         android:drawableRight="@drawable/ic_expand_more"
         android:padding="6dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_sdt_update_address"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/edt_sdt_update_address"></TextView>
 
-    <EditText
+    <TextView
         android:id="@+id/edt_quan_update_address"
         android:layout_width="match_parent"
         android:layout_height="35dp"
@@ -112,13 +113,14 @@
         android:background="@drawable/custom_edit_text"
         android:drawableRight="@drawable/ic_expand_more"
         android:hint="Quận huyện*"
+        android:textColor="#000000"
         android:padding="6dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_tinh_address"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/edt_tinh_address"></TextView>
 
-    <EditText
+    <TextView
         android:id="@+id/edt_xaphuong_address"
         android:layout_width="match_parent"
         android:layout_height="35dp"
@@ -127,10 +129,11 @@
         android:drawableRight="@drawable/ic_expand_more"
         android:hint="Xã phường*"
         android:padding="6dp"
+        android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_quan_update_address"></EditText>
+        app:layout_constraintTop_toBottomOf="@+id/edt_quan_update_address"></TextView>
 
     <EditText
         android:id="@+id/edt_diachinha_update_address"

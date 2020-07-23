@@ -1,6 +1,7 @@
 package com.example.kltn.screen.cart
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -12,23 +13,23 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
 import com.example.kltn.screen.FormatData
-import com.example.kltn.screen.cart.adapter.CartAdapter
 import com.example.kltn.screen.cart.adapter.CheckListBillAdapter
 import com.example.kltn.screen.cart.model.CartModel
 import com.example.kltn.screen.cart.model.CheckBillModel
 import com.example.kltn.screen.cart.roomdatabase.CartViewModel
 import com.example.kltn.screen.firebase.ChiTietHDModel
 import com.example.kltn.screen.firebase.HoaDonModel
+import com.example.kltn.screen.home.SendData
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.custom_dialog_login.*
 
-import java.text.NumberFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
 @Suppress("DEPRECATION")
@@ -39,6 +40,7 @@ class CheckBillFragment : Fragment() {
     lateinit var checkListBillAdapter: CheckListBillAdapter
     lateinit var btnBack: ImageView
     lateinit var btnCheckBill: Button
+    var sendData: SendData? = null
     val arrayListCheckBill = ArrayList<CheckBillModel>()
     @SuppressLint("NewApi")
     override fun onCreateView(
@@ -53,7 +55,7 @@ class CheckBillFragment : Fragment() {
         btnCheckBill = view.findViewById(R.id.btn_checkbill_ok)
         setUpRecyclerView()
         btnCheckBill.setOnClickListener {
-            addBillToFireBase()
+            setUpAlertDiaLog()
         }
         btnBack.setOnClickListener {
             if (fragmentManager!!.backStackEntryCount > 0) {
@@ -96,12 +98,10 @@ class CheckBillFragment : Fragment() {
         var tongtienHD: Double = 0.0
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
         var makh = pref.getString("MaKH","")
-        var maCTHD = "CTHD000" + stt.toString()
         arrayListCheckBill.forEach {
-            arrayList.add(ChiTietHDModel(maCTHD, it.maSach, it.soLuong, it.giaTien))
+            arrayList.add(ChiTietHDModel(it.maSach, it.soLuong, it.giaTien))
             tongtienHD += (it.soLuong * it.giaTien)
             stt++
-            maCTHD = "CTHD000" + stt
         }
         val database = FirebaseDatabase.getInstance().getReference("Bills")
         val billId = database.push().key
@@ -113,9 +113,33 @@ class CheckBillFragment : Fragment() {
             arrayList
         )
         database.child(billId!!).setValue(hoaDon).addOnCompleteListener {
-            Toast.makeText(activity!!,"Push thanh cong",Toast.LENGTH_LONG).show()
+            Toast.makeText(context,"Đơn hàng của bạn đã được gửi đi !!!",Toast.LENGTH_LONG).show()
         }
+    }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun setUpAlertDiaLog() {
+        val customView =
+            LayoutInflater.from(context).inflate(R.layout.custom_dialog_ok, null, false)
+        val dialog = AlertDialog.Builder(context!!).setView(customView).create()
+        dialog.show()
+        dialog.btn_huy_dialog_login.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.btn_ok_dialog_login.setOnClickListener {
+            addBillToFireBase()
+            sendData?.ChangeStateBottomNavigation(3)
+            dialog.dismiss()
+        }
+    }
+
+    override fun onAttach(activity: Activity) {
+        super.onAttach(activity)
+        try {
+            sendData = activity as SendData
+        } catch (e: ClassCastException) {
+            throw ClassCastException("$activity must implement onSomeEventListener")
+        }
     }
 
 }

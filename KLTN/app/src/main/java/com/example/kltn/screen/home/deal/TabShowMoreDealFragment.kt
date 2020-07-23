@@ -1,7 +1,6 @@
-package com.example.kltn.screen.home.deals
+package com.example.kltn.screen.home.deal
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +18,7 @@ import com.example.kltn.screen.home.model.BookModel
 import com.example.kltn.screen.home.model.FilterModel
 import com.example.kltn.screen.event.OnActionData
 
-class ChildShowMoreDealFragment(val tabId: Int) : Fragment() {
+class TabShowMoreDealFragment(val tabId: Int) : Fragment() {
     lateinit var recyclerViewSMDeal: RecyclerView
     lateinit var recyclerViewFilter: RecyclerView
     lateinit var showMoreDealAdapter: ShowMoreDealAdapter
