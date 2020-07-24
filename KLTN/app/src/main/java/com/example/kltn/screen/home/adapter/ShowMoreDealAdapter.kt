@@ -39,7 +39,6 @@ class ShowMoreDealAdapter internal constructor(var showMoreBookModel: ArrayList<
     override fun onBindViewHolder(holder: ShowMoreDealViewHolder, position: Int) {
         val current = showMoreBookModel[position]
         val giamgiahandle = Math.round(current.giamGia*100)
-
         holder.salebook.text = giamgiahandle.toString()+"%"
         holder.titleBook.text = current.tenSach
         val priceReducedfm = FormatData.formatMoneyVND(current.giaGiamDS)

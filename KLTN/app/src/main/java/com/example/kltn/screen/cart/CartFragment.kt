@@ -64,7 +64,7 @@ class CartFragment : Fragment() {
         btnThanhToan = view!!.findViewById(R.id.btn_thanhtoan_cart)
         btnThanhToan.setOnClickListener {
             val pref = PreferenceManager.getDefaultSharedPreferences(context)
-            var token = pref.getString("Token", "")
+            var token = pref.getString("TokenLocal", "")
             if (token == "") {
                 setUpBottomSheetDiaLog()
             } else {

@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity(), SendData {
         //checkFragmentExist()
         val ft = this.supportFragmentManager.beginTransaction()
         val pref = PreferenceManager.getDefaultSharedPreferences(this)
-        var token = pref.getString("Token","")
+        var token = pref.getString("TokenLocal","")
         Log.d("Thang",token.toString())
         when (menuItem) {
             R.id.navigation_home -> if (homeFragment != null && homeFragment?.isAdded!!) {

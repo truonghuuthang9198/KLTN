@@ -9,17 +9,19 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
+import com.example.kltn.screen.event.EventFireUtil
+import com.example.kltn.screen.event.OnActionData
 import com.example.kltn.screen.home.model.CategoryDetailModel
+import com.example.kltn.screen.home.model.CategoryModel
 
 class CategoryDetailAdapter internal constructor(
     var context: Context?,
     var CategoryDetailModel: ArrayList<CategoryDetailModel>,
-    var maCT:String
+    var onActionData: OnActionData<CategoryDetailModel>
 ) : RecyclerView.Adapter<CategoryDetailAdapter.CategoryDetailViewHolder>() {
     inner class CategoryDetailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val titleCategory: TextView = itemView.findViewById(R.id.tv_category_detail)
     }
-
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryDetailViewHolder {
         val Context = parent.context
@@ -38,7 +40,7 @@ class CategoryDetailAdapter internal constructor(
         val current = CategoryDetailModel[position]
         holder.titleCategory.text = current.title
         holder.itemView.setOnClickListener {
-
+            EventFireUtil.fireEvent(onActionData,current)
         }
     }
 }

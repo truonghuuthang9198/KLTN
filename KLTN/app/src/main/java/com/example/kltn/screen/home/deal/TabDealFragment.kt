@@ -155,8 +155,6 @@ class TabDealFragment(val tabId: Int) : Fragment() {
                 response: Response<List<SachResponse>>
             ) {
                 listSach(response.body()!!)
-                Log.d("ThangTruong", response.body().toString())
-
             }
         })
 

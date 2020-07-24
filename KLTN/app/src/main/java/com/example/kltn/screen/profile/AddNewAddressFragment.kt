@@ -91,6 +91,8 @@ class AddNewAddressFragment() : Fragment(), Parcelable, CityDialog.OnInputSelect
         btn_save_addnew_address = view.findViewById(R.id.btn_save_addnew_address)
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
         var makh = pref.getString("MaKH", "")
+        Log.d("MaKH",makh.toString())
+        var token = pref.getString("TokenLocal", "")
         btn_save_addnew_address.setOnClickListener {
             val rd = Random()
             val soDC = rd.nextInt(101)
@@ -106,8 +108,6 @@ class AddNewAddressFragment() : Fragment(), Parcelable, CityDialog.OnInputSelect
                 edt_phuong_addnew_address.text.toString(),
                 1
             )
-            val pref = PreferenceManager.getDefaultSharedPreferences(context)
-            var token = pref.getString("Token", "")
             val service =
                 RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
             val call = service?.addAddressNew("Bearer " + token, addAddressModel)

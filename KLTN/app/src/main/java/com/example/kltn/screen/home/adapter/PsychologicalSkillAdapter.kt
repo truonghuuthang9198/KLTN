@@ -22,6 +22,7 @@ class PsychologicalSkillAdapter internal constructor(var listPsychologicalSkill:
         val priceReducedBook: TextView = itemView.findViewById(R.id.priceReduced_book_sgk)
         val priceBook: TextView = itemView.findViewById(R.id.price_book_sgk)
         val imgBookDeal: ImageView = itemView.findViewById(R.id.img_book_sgk)
+        val salebook: TextView = itemView.findViewById(R.id.tv_salebook_sgk)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PsychologicalSkillViewHolder {
         val Context = parent.context
@@ -42,6 +43,8 @@ class PsychologicalSkillAdapter internal constructor(var listPsychologicalSkill:
 
     override fun onBindViewHolder(holder: PsychologicalSkillViewHolder, position: Int) {
         val current = listPsychologicalSkill[position]
+        val giamgiahandle = Math.round(current.giamGia*100)
+        holder.salebook.text = giamgiahandle.toString()+"%"
         holder.titleBook.text = current.tenSach
         val priceReducedfm = FormatData.formatMoneyVND(current.giaGiamDS)
         holder.priceReducedBook.text = priceReducedfm

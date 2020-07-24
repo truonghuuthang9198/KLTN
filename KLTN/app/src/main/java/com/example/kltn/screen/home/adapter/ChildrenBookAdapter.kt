@@ -25,6 +25,7 @@ class ChildrenBookAdapter internal constructor(var ChildrenBookModel: ArrayList<
         val priceReducedBook: TextView = itemView.findViewById(R.id.priceReduced_bestbook)
         val priceBook: TextView = itemView.findViewById(R.id.price_bestbook)
         val imgBookDeal: ImageView = itemView.findViewById(R.id.img_bestbook)
+        val salebook: TextView = itemView.findViewById(R.id.tv_salebook_bestbook)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChildBookViewHolder {
         val Context = parent.context
@@ -45,6 +46,8 @@ class ChildrenBookAdapter internal constructor(var ChildrenBookModel: ArrayList<
 
     override fun onBindViewHolder(holder: ChildBookViewHolder, position: Int) {
         val current = ChildrenBookModel[position]
+        val giamgiahandle = Math.round(current.giamGia*100)
+        holder.salebook.text = giamgiahandle.toString()+"%"
         holder.titleBook.text = current.tenSach
         holder.priceReducedBook.text = FormatData.formatMoneyVND(current.giaGiamDS)
         val priceBookfm =FormatData.formatMoneyVND(current.giaban)

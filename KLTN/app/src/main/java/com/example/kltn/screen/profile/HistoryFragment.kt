@@ -51,7 +51,7 @@ class HistoryFragment : Fragment() {
     {
         val arrayList = ArrayList<HistoryBillModel>()
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
-        var token = pref.getString("Token","")
+        var token = pref.getString("TokenLocal","")
         val service = RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
         val call = service?.getListHistory("Bearer "+token)
         call?.enqueue(object : Callback<List<HistoryResponse>> {

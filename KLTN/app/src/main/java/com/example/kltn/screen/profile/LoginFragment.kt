@@ -87,7 +87,7 @@ class LoginFragment : Fragment() {
                         //Lưu token vào local
                         val pref = PreferenceManager.getDefaultSharedPreferences(activity!!)
                         val edit = pref.edit()
-                        edit.putString("Token",response.body()!!.token)
+                        edit.putString("TokenLocal",response.body()!!.token)
                         edit.putString("MaKH",response.body()!!.maKhachHang)
                         edit.apply()
                        //Gửi id thiết bị lên sever

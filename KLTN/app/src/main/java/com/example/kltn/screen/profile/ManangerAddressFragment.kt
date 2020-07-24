@@ -70,7 +70,7 @@ class ManangerAddressFragment : Fragment() {
     fun setUpRecyclerview() {
         val arrayList = ArrayList<ManangerAddressModel>()
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
-        var token = pref.getString("Token", "")
+        var token = pref.getString("TokenLocal", "")
         val service = RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
         val call = service?.getListAddress("Bearer " + token)
         call?.enqueue(object : Callback<List<ManangerAddressResponse>> {

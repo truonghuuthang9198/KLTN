@@ -46,4 +46,8 @@ interface GetDataService {
 
     @PUT("SoDiaChi")
     fun updateAddress(@Header("Authorization") token: String,@Body addAddressModel: AddAddressModel):Call<UpdateAddressResponse>
+
+    @GET("DanhMuc")
+    fun getListCategory(): Call<List<CategoryResponse>>
+
 }

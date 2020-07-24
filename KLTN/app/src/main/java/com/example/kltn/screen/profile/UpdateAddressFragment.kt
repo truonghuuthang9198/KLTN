@@ -81,7 +81,7 @@ class UpdateAddressFragment(var data: ManangerAddressModel) : Fragment(),CityDia
                 1
             )
             val pref = PreferenceManager.getDefaultSharedPreferences(context)
-            var token = pref.getString("Token", "")
+            var token = pref.getString("TokenLocal", "")
             val service =
                 RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
             val call = service?.updateAddress("Bearer " + token, addAddressModel)

@@ -70,7 +70,7 @@ class FavoriteFragment : Fragment() {
 //            )
 //        )
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
-        var token = pref.getString("Token","")
+        var token = pref.getString("TokenLocal","")
         val service = RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
         val call = service?.getListFavorite("Bearer "+token)
         call?.enqueue(object : Callback<List<FavoriteResponse>> {

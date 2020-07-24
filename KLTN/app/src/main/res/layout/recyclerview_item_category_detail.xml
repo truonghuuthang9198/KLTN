@@ -20,8 +20,8 @@
 
     <ImageView
         android:id="@+id/img_category_detail"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
         android:src="@drawable/ic_next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
