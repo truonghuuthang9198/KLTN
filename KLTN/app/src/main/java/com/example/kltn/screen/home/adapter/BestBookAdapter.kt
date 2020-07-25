@@ -54,6 +54,5 @@ class BestBookAdapter internal constructor(var BestBookModel: ArrayList<BookMode
         holder.priceBook.text = FormatData.formatMoneyVND(current.giaban)
         holder.priceBook.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
         Picasso.get().load(current.hinhAnh).into(holder.imgBookDeal)
-
     }
 }

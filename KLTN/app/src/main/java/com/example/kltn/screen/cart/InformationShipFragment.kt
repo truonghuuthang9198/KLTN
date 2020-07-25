@@ -49,10 +49,6 @@ class InformationShipFragment : Fragment() {
     lateinit var manangerAddressModel: ManangerAddressModel
     lateinit var arrayList: ArrayList<ManangerAddressModel>
 
-    //    override fun onResume() {
-//        super.onResume()
-//        EventBus.getDefault().register(this)
-//    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -94,6 +90,18 @@ class InformationShipFragment : Fragment() {
         return view
     }
 
+    private fun loadFragmentNotBackStack(fragment: Fragment?, tag: String): Boolean {
+        if (fragment != null) {
+            (context as FragmentActivity).supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.frame_layout, fragment, tag)
+                .commit()
+            return true
+        }
+        return false
+    }
+
+
     private fun loadFragment(fragment: Fragment?, tag: String): Boolean {
         if (fragment != null) {
             (context as FragmentActivity).supportFragmentManager
@@ -111,7 +119,7 @@ class InformationShipFragment : Fragment() {
         recyclerviewShip.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
-        var token = pref.getString("Token", "")
+        var token = pref.getString("TokenLocal", "")
         val service = RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
         val call = service?.getListAddress("Bearer " + token)
         call?.enqueue(object : Callback<List<ManangerAddressResponse>> {
@@ -137,7 +145,7 @@ class InformationShipFragment : Fragment() {
                                 manangerAddressResponse.quan,
                                 manangerAddressResponse.phuong,
                                 manangerAddressResponse.diaChi,
-                                1
+                                manangerAddressResponse.loaiDiaChi
                             )
                         )
                     }
@@ -158,48 +166,6 @@ class InformationShipFragment : Fragment() {
 
     }
 
-    private fun setUpTestRecyclerview() {
-        recyclerviewShip.layoutManager =
-            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        arrayList = ArrayList<ManangerAddressModel>()
-//        arrayList.add(
-//            ManangerAddressModel(
-//                0,
-//                "Trương Hữu",
-//                "Thắng",
-//                "0384180187",
-//                "Sóc Trăng",
-//                "Huyện Châu Thành",
-//                "Xã An Hiệp",
-//                "36D Bưng Tróp A",
-//                1
-//            )
-//        )
-//        arrayList.add(
-//            ManangerAddressModel(
-//                1,
-//                "Ngô Thanh",
-//                "Dũng",
-//                "0384180190",
-//                "Đồng Nai",
-//                "Huyện Vĩnh Cửu",
-//                "Xã Thạnh Phú",
-//                "40 Ấp 4",
-//                1
-//            )
-//        )
-        arrayList.first().chose = true
-
-        onActionData = object : OnActionData<ManangerAddressModel> {
-            override fun onAction(data: ManangerAddressModel) {
-                arrayList.forEach {
-                    it.chose = it.id == data.id
-                }
-            }
-        }
-        addressAdapter = AddressShipAdapter(context, arrayList, onActionData!!)
-        recyclerviewShip.adapter = addressAdapter
-    }
 
     private fun setUpDialogCheck() {
         val customView =

@@ -51,6 +51,7 @@ class AddressShipAdapter internal constructor(var context: Context?, var address
         }
         holder.radioButton.isChecked = (lastSelectedPosition == position)
         holder.radioButton.setOnClickListener {
+            EventFireUtil.fireEvent(onActionData, current)
             lastSelectedPosition = position
             notifyDataSetChanged()
         }

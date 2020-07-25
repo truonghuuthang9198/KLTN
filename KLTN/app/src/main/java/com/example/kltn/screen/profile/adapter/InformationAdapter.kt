@@ -45,7 +45,7 @@ class InformationAdapter internal constructor(var context: Context?, var Informa
                     loadFragment(HistoryFragment(),"HistoryFragment")
                 }
                 3 -> {
-                    loadFragment(FavoriteFragment(), "ShowMoreDealFragment")
+                    loadFragment(FavoriteFragment(), "FavoriteFragment")
                 }
                 4 -> {
 

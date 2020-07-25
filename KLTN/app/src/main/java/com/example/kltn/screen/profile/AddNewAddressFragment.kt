@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import com.example.kltn.R
+import com.example.kltn.screen.cart.InformationShipFragment
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance
 import com.example.kltn.screen.retrofit.address_handle.CityDialog
@@ -42,6 +43,11 @@ class AddNewAddressFragment() : Fragment(), Parcelable, CityDialog.OnInputSelect
     private var idtitleCity: Int = 0
     private var idtitleDistrict: Int = 0
 
+    constructor(parcel: Parcel) : this() {
+        idtitleCity = parcel.readInt()
+        idtitleDistrict = parcel.readInt()
+    }
+
 
     override fun sendInput(cityModel: CityModel, type: Int) {
         if (type == 1) {
@@ -58,9 +64,6 @@ class AddNewAddressFragment() : Fragment(), Parcelable, CityDialog.OnInputSelect
         }
     }
 
-    constructor(parcel: Parcel) : this() {
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -91,9 +94,17 @@ class AddNewAddressFragment() : Fragment(), Parcelable, CityDialog.OnInputSelect
         btn_save_addnew_address = view.findViewById(R.id.btn_save_addnew_address)
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
         var makh = pref.getString("MaKH", "")
-        Log.d("MaKH",makh.toString())
+        Log.d("MaKH", makh.toString())
         var token = pref.getString("TokenLocal", "")
         btn_save_addnew_address.setOnClickListener {
+            var loaiDiaChi = 1
+            if (ckb_diachigiaohangmacdinh_addnew_address.isChecked == true && ckb_diachithanhtoanmacdinh_addnew_address.isChecked == false) {
+                loaiDiaChi = 1
+            } else if (ckb_diachithanhtoanmacdinh_addnew_address.isChecked == true && ckb_diachigiaohangmacdinh_addnew_address.isChecked == false) {
+                loaiDiaChi = 2
+            } else {
+                loaiDiaChi = 3
+            }
             val rd = Random()
             val soDC = rd.nextInt(101)
             val addAddressModel = AddAddressModel(
@@ -106,7 +117,7 @@ class AddNewAddressFragment() : Fragment(), Parcelable, CityDialog.OnInputSelect
                 edt_tinh_addnew_address.text.toString(),
                 edt_quan_addnew_address.text.toString(),
                 edt_phuong_addnew_address.text.toString(),
-                1
+                loaiDiaChi
             )
             val service =
                 RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
@@ -121,9 +132,11 @@ class AddNewAddressFragment() : Fragment(), Parcelable, CityDialog.OnInputSelect
                     response: Response<AddAddressResponse>
                 ) {
                     if (response.isSuccessful) {
-                        loadFragment(ManangerAddressFragment())
                         Toast.makeText(context, "Thêm địa chỉ thành công", Toast.LENGTH_LONG)
                             .show()
+                        if (fragmentManager!!.backStackEntryCount > 0) {
+                            fragmentManager!!.popBackStack()
+                        }
 
                     } else {
                         Toast.makeText(context, "Thêm thất bại", Toast.LENGTH_LONG).show()
@@ -195,13 +208,13 @@ class AddNewAddressFragment() : Fragment(), Parcelable, CityDialog.OnInputSelect
         return false
     }
 
-
-    override fun writeToParcel(dest: Parcel?, flags: Int) {
-        TODO("Not yet implemented")
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(idtitleCity)
+        parcel.writeInt(idtitleDistrict)
     }
 
     override fun describeContents(): Int {
-        TODO("Not yet implemented")
+        return 0
     }
 
     companion object CREATOR : Parcelable.Creator<AddNewAddressFragment> {

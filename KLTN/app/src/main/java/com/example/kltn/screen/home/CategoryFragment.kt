@@ -93,6 +93,11 @@ class CategoryFragment : Fragment() {
                     }
                 }
 
+//                onActionDataDetailCategory = object : OnActionData<CategoryDetailModel>{
+//                    override fun onAction(data: CategoryDetailModel) {
+//                    }
+//                }
+//
 //                arrayListCategory[0].choose = true
 //                val arrayListSachTNDefault = ArrayList<CategoryDetailModel>()
 //                response.body()!![0].theLoais.forEach {

@@ -38,7 +38,6 @@ class ShowMoreBestBookFragment(val maCategory: String, val maTL: String) : Fragm
     private var onActionData: OnActionData<FilterTheLoaiModel>? = null
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,15 +45,7 @@ class ShowMoreBestBookFragment(val maCategory: String, val maTL: String) : Fragm
 
         val view = inflater.inflate(R.layout.fragment_showmore_bestbook, container, false)
         var check = 0
-        recyclerViewSM = view.findViewById(R.id.recyclerview_show_more_book)
-        constraint = view.findViewById(R.id.constraint_visible_showmore)
-        btnFilter = view.findViewById(R.id.btn_filter_category)
-        titleFilter = view.findViewById(R.id.title_filter_book)
-        btn_back_showmore = view.findViewById(R.id.btn_back_showmore)
-        btn_back_home_showmore = view.findViewById(R.id.btn_back_home_showmore)
-        constraint.visibility = View.GONE
-        recyclerViewFilter = view.findViewById(R.id.recyclerview_filter_category)
-        recyclerViewFilter.visibility = View.GONE
+        setUpView(view)
         setupRecyclerviewFilter()
         btn_back_showmore.setOnClickListener {
             if (fragmentManager!!.backStackEntryCount > 0) {
@@ -83,6 +74,18 @@ class ShowMoreBestBookFragment(val maCategory: String, val maTL: String) : Fragm
         }
         setUpRecyclerView()
         return view
+    }
+
+    fun setUpView(view: View) {
+        recyclerViewSM = view.findViewById(R.id.recyclerview_show_more_book)
+        constraint = view.findViewById(R.id.constraint_visible_showmore)
+        btnFilter = view.findViewById(R.id.btn_filter_category)
+        titleFilter = view.findViewById(R.id.title_filter_book)
+        btn_back_showmore = view.findViewById(R.id.btn_back_showmore)
+        btn_back_home_showmore = view.findViewById(R.id.btn_back_home_showmore)
+        constraint.visibility = View.GONE
+        recyclerViewFilter = view.findViewById(R.id.recyclerview_filter_category)
+        recyclerViewFilter.visibility = View.GONE
     }
 
     fun setUpRecyclerView() {
@@ -131,8 +134,7 @@ class ShowMoreBestBookFragment(val maCategory: String, val maTL: String) : Fragm
                         }
 
                         arrrayListFilter.forEach {
-                            if (it.maTheLoai == maTL)
-                            {
+                            if (it.maTheLoai == maTL) {
                                 titleFilter.text = it.tenTheLoai
                                 it.choose = true
                             }

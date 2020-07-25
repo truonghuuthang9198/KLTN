@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
         android:gravity="center"
-        android:text="Đơn hàng của bạn đang được kiểm duyệt ! "
+        android:text="Vui lòng kiểm tra kĩ đơn hàng !!! "
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"

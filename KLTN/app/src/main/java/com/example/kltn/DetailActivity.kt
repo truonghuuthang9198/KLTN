@@ -23,6 +23,10 @@ import com.example.kltn.screen.home.model.BookModel
 import com.example.kltn.screen.profile.adapter.FavoriteAdapter
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance
+import com.example.kltn.screen.retrofit.model.AddFavoriteRequest
+import com.example.kltn.screen.retrofit.reponse.AddFavoriteResponse
+import com.example.kltn.screen.retrofit.reponse.DeleteAddressResponse
+import com.example.kltn.screen.retrofit.reponse.DeleteFavoriteResponse
 import com.example.kltn.screen.retrofit.reponse.FavoriteResponse
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
@@ -161,22 +165,25 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
             this.startActivity(intent)
         }
 
+
+        var checkImageFavorite: Boolean = false
         val pref = PreferenceManager.getDefaultSharedPreferences(this)
-        var token = pref.getString("Token","")
+        var token = pref.getString("TokenLocal", "")
         val service = RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
-        val call = service?.getListFavorite("Bearer "+token)
+        val call = service?.getListFavorite("Bearer " + token)
         call?.enqueue(object : Callback<List<FavoriteResponse>> {
             override fun onFailure(call: Call<List<FavoriteResponse>>, t: Throwable) {
                 Toast.makeText(this@DetailActivity, t.message, Toast.LENGTH_LONG).show()
             }
+
             override fun onResponse(
                 call: Call<List<FavoriteResponse>>,
                 response: Response<List<FavoriteResponse>>
             ) {
-                if ( response.isSuccessful) {
+                if (response.isSuccessful) {
                     response.body()?.forEach {
-                        if(it.maSach == bookModel.maSach)
-                        {
+                        if (it.maSach == bookModel.maSach) {
+                            checkImageFavorite = true
                             img_tim.setImageResource(R.drawable.ic_favorite_fill)
                         }
                     }
@@ -184,6 +191,56 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
             }
         })
 
+        img_tim.setOnClickListener {
+            if (checkImageFavorite == true) {
+                val maKH = pref.getString("MaKH", "")
+                val service =
+                    RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
+                val call = service?.deleteFavorite("Bearer " + token, maKH!!, bookModel.maSach)
+                call?.enqueue(object : Callback<DeleteFavoriteResponse> {
+                    override fun onFailure(call: Call<DeleteFavoriteResponse>, t: Throwable) {
+                        Toast.makeText(this@DetailActivity, t.message, Toast.LENGTH_LONG).show()
+                    }
+
+                    override fun onResponse(
+                        call: Call<DeleteFavoriteResponse>,
+                        response: Response<DeleteFavoriteResponse>
+                    ) {
+                        Toast.makeText(
+                            this@DetailActivity,
+                            response.body()!!.message,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                })
+                img_tim.setImageResource(R.drawable.ic_favorite_empty)
+                checkImageFavorite = false
+            } else {
+                val maKH = pref.getString("MaKH", "")
+                val addFavoriteRequest = AddFavoriteRequest(maKH!!, bookModel.maSach)
+                val service =
+                    RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
+                val call = service?.addBookFavorite("Bearer " + token, addFavoriteRequest)
+                call?.enqueue(object : Callback<AddFavoriteResponse> {
+                    override fun onFailure(call: Call<AddFavoriteResponse>, t: Throwable) {
+                        Toast.makeText(this@DetailActivity, t.message, Toast.LENGTH_LONG).show()
+                    }
+
+                    override fun onResponse(
+                        call: Call<AddFavoriteResponse>,
+                        response: Response<AddFavoriteResponse>
+                    ) {
+                        Toast.makeText(
+                            this@DetailActivity,
+                            response.body()!!.message,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                })
+                checkImageFavorite = true
+                img_tim.setImageResource(R.drawable.ic_favorite_fill)
+            }
+        }
     }
 
     private fun setUpBottomSheetDiaLog() {

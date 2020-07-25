@@ -1,8 +1,6 @@
 package com.example.kltn.screen.retrofit
 
-import com.example.kltn.screen.retrofit.model.AddAddressModel
-import com.example.kltn.screen.retrofit.model.LoginModel
-import com.example.kltn.screen.retrofit.model.RegisterModel
+import com.example.kltn.screen.retrofit.model.*
 import com.example.kltn.screen.retrofit.reponse.*
 import retrofit2.Call
 import retrofit2.http.*
@@ -35,6 +33,12 @@ interface GetDataService {
     @GET("YeuThich")
     fun getListFavorite(@Header("Authorization") token: String): Call<List<FavoriteResponse>>
 
+    @POST("YeuThich")
+    fun addBookFavorite(@Header("Authorization") token: String,@Body addFavoriteRequest: AddFavoriteRequest): Call<AddFavoriteResponse>
+
+    @DELETE("YeuThich")
+    fun deleteFavorite(@Header("Authorization") token: String,@Query("id") id:String,@Query("id_masach") id_masach:String): Call<DeleteFavoriteResponse>
+
     @GET("LichSuMuaHang")
     fun getListHistory(@Header("Authorization") token: String): Call<List<HistoryResponse>>
 
@@ -49,5 +53,12 @@ interface GetDataService {
 
     @GET("DanhMuc")
     fun getListCategory(): Call<List<CategoryResponse>>
+
+    @DELETE("SoDiaChi")
+    fun deleteAddress(@Header("Authorization") token: String,@Query("id") id:String): Call<DeleteAddressResponse>
+
+
+
+
 
 }

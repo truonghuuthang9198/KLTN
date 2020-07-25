@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
 import com.example.kltn.screen.home.model.BookModel
 import com.example.kltn.screen.suggest.adapter.SuggestAdapter
-import com.example.kltn.screen.suggest.model.SuggestModel
 import com.google.common.eventbus.Subscribe
 import de.greenrobot.event.EventBus
 

@@ -8,14 +8,13 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import com.example.kltn.R
-import com.example.kltn.screen.profile.adapter.ManangerAddressAdapter
 import com.example.kltn.screen.profile.model.ManangerAddressModel
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance
 import com.example.kltn.screen.retrofit.address_handle.CityDialog
 import com.example.kltn.screen.retrofit.model.AddAddressModel
 import com.example.kltn.screen.retrofit.model.CityModel
-import com.example.kltn.screen.retrofit.reponse.ManangerAddressResponse
+import com.example.kltn.screen.retrofit.reponse.DeleteAddressResponse
 import com.example.kltn.screen.retrofit.reponse.UpdateAddressResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -33,6 +32,8 @@ class UpdateAddressFragment(var data: ManangerAddressModel) : Fragment(),CityDia
     lateinit var edt_diachinha_update_address: EditText
     lateinit var btn_save_update_address: Button
     lateinit var btn_delete_update_address: Button
+    lateinit var ckb_diachigiaohangmacdinh_update_address: CheckBox
+    lateinit var ckb_diachithanhtoanmacdinh_update_address:CheckBox
     private var idtitleCity: Int = 0
     private var idtitleDistrict: Int = 0
 
@@ -64,10 +65,39 @@ class UpdateAddressFragment(var data: ManangerAddressModel) : Fragment(),CityDia
         edt_xaphuong_address = view.findViewById(R.id.edt_xaphuong_address)
         edt_diachinha_update_address = view.findViewById(R.id.edt_diachinha_update_address)
         btn_save_update_address = view.findViewById(R.id.btn_save_update_address)
+        ckb_diachigiaohangmacdinh_update_address = view.findViewById(R.id.ckb_diachigiaohangmacdinh_update_address)
+        ckb_diachithanhtoanmacdinh_update_address = view.findViewById(R.id.ckb_diachithanhtoanmacdinh_update_address)
+
         val fm = activity?.supportFragmentManager
+        if (data.checkaddress == 1)
+        {
+            ckb_diachigiaohangmacdinh_update_address.isChecked = true
+        }
+        else if(data.checkaddress == 2)
+        {
+            ckb_diachithanhtoanmacdinh_update_address.isChecked = true
+        }
+        else
+        {
+            ckb_diachigiaohangmacdinh_update_address.isChecked = true
+            ckb_diachithanhtoanmacdinh_update_address.isChecked = true
+        }
 
 
         btn_save_update_address.setOnClickListener {
+            var loaiDiaChi = 1
+            if(ckb_diachigiaohangmacdinh_update_address.isChecked == true && ckb_diachithanhtoanmacdinh_update_address.isChecked == false)
+            {
+                loaiDiaChi = 1
+            }
+            else if(ckb_diachithanhtoanmacdinh_update_address.isChecked == true && ckb_diachigiaohangmacdinh_update_address.isChecked == false)
+            {
+                loaiDiaChi = 2
+            }
+            else
+            {
+                loaiDiaChi = 3
+            }
             val addAddressModel = AddAddressModel(
                 data.maSo,
                 data.maKH,
@@ -78,7 +108,7 @@ class UpdateAddressFragment(var data: ManangerAddressModel) : Fragment(),CityDia
                 edt_tinh_address.text.toString(),
                 edt_quan_update_address.text.toString(),
                 edt_xaphuong_address.text.toString(),
-                1
+                loaiDiaChi
             )
             val pref = PreferenceManager.getDefaultSharedPreferences(context)
             var token = pref.getString("TokenLocal", "")
@@ -101,7 +131,36 @@ class UpdateAddressFragment(var data: ManangerAddressModel) : Fragment(),CityDia
                 }
             })
         }
+
         btn_delete_update_address = view.findViewById(R.id.btn_delete_update_address)
+        btn_delete_update_address.setOnClickListener {
+            val pref = PreferenceManager.getDefaultSharedPreferences(context)
+            var token = pref.getString("TokenLocal", "")
+            val service =
+                RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
+            val call = service?.deleteAddress("Bearer " + token, data.maSo)
+            call?.enqueue(object : Callback<DeleteAddressResponse> {
+                override fun onFailure(call: Call<DeleteAddressResponse>, t: Throwable) {
+                    Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
+                }
+
+                override fun onResponse(
+                    call: Call<DeleteAddressResponse>,
+                    response: Response<DeleteAddressResponse>
+                ) {
+                    if(response.body()!!.statusCode == 200) {
+                        Toast.makeText(context, "Xoá thành công", Toast.LENGTH_LONG).show()
+                        if (fragmentManager!!.backStackEntryCount > 0) {
+                            fragmentManager!!.popBackStack()
+                        }
+                    }
+                    else
+                    {
+                        Toast.makeText(context,"Xoá thất bại",Toast.LENGTH_LONG).show()
+                    }
+                }
+            })
+        }
         btnBack_Address.setOnClickListener {
             if (fragmentManager!!.backStackEntryCount > 0) {
                 fragmentManager!!.popBackStack()
@@ -114,9 +173,6 @@ class UpdateAddressFragment(var data: ManangerAddressModel) : Fragment(),CityDia
         edt_quan_update_address.setText(data.quan)
         edt_xaphuong_address.setText(data.xa)
         edt_diachinha_update_address.setText(data.address)
-        btn_delete_update_address.setOnClickListener {
-
-        }
         edt_tinh_address.setOnClickListener {
             val diaLogCity = CityDialog(1, idtitleCity)
             if (diaLogCity.isAdded) {

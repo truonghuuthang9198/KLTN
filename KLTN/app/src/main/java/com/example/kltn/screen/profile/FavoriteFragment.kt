@@ -18,6 +18,7 @@ import com.example.kltn.screen.profile.adapter.InformationAdapter
 import com.example.kltn.screen.profile.model.FavoriteModel
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance
+import com.example.kltn.screen.retrofit.reponse.DeleteFavoriteResponse
 import com.example.kltn.screen.retrofit.reponse.FavoriteResponse
 import com.example.kltn.screen.retrofit.reponse.LoginResponse
 import retrofit2.Call
@@ -45,30 +46,9 @@ class FavoriteFragment : Fragment() {
         }
         return view
     }
-
+    
     fun addList() {
         var arrayListFavorite: ArrayList<BookModel> = ArrayList<BookModel>()
-//        arrayListFavorite.add(
-//            FavoriteModel(
-//                R.drawable.vd3_sach,
-//                "The fellowship of the Ring (The Lord of The Rings,Book1)",
-//                26000.00
-//            )
-//        )
-//        arrayListFavorite.add(
-//            FavoriteModel(
-//                R.drawable.vd3_sach,
-//                "The fellowship of the Ring (The Lord of The Rings,Book1)",
-//                26000.00
-//            )
-//        )
-//        arrayListFavorite.add(
-//            FavoriteModel(
-//                R.drawable.vd3_sach,
-//                "The fellowship of the Ring (The Lord of The Rings,Book1)",
-//                26000.00
-//            )
-//        )
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
         var token = pref.getString("TokenLocal","")
         val service = RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
