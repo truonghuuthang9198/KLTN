@@ -11,33 +11,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import com.example.kltn.screen.FormatData
 import com.example.kltn.screen.FormatData.Companion.convertDateFormat
 import com.example.kltn.screen.cart.model.CartModel
-import com.example.kltn.screen.cart.roomdatabase.CartViewModel
+import com.example.kltn.screen.cart.roomcart.CartViewModel
 import com.example.kltn.screen.home.model.BookModel
-import com.example.kltn.screen.profile.adapter.FavoriteAdapter
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance
 import com.example.kltn.screen.retrofit.model.AddFavoriteRequest
 import com.example.kltn.screen.retrofit.reponse.AddFavoriteResponse
-import com.example.kltn.screen.retrofit.reponse.DeleteAddressResponse
 import com.example.kltn.screen.retrofit.reponse.DeleteFavoriteResponse
 import com.example.kltn.screen.retrofit.reponse.FavoriteResponse
+import com.example.kltn.screen.suggest.model.SuggestModel
+import com.example.kltn.screen.suggest.roomsuggest.SuggestViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.bottomsheet_dialog_addcart.*
+import kotlinx.android.synthetic.main.custom_dialog_login.*
 import kotlinx.android.synthetic.main.custom_toolbar.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.text.NumberFormat
 import java.text.SimpleDateFormat
-import java.util.*
 
 
 class DetailActivity() : AppCompatActivity(), Parcelable {
@@ -59,7 +57,10 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
     lateinit var tv_showdetail_ghichu: TextView
     lateinit var giamgia: TextView
     lateinit var img_tim: ImageView
+    lateinit var progressBarHolder: ProgressBar
     private lateinit var cartViewModel: CartViewModel
+    private lateinit var suggestViewModel: SuggestViewModel
+
 
 
     constructor(parcel: Parcel) : this() {
@@ -70,6 +71,8 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.show_detail_book)
 
+        progressBarHolder = findViewById(R.id.progressBarHolder)
+        progressBarHolder.visibility = View.VISIBLE
         ratingBar = findViewById<RatingBar>(R.id.rating)
         img_tim = findViewById(R.id.img_tim)
         btnMoveCart = findViewById(R.id.btn_move_cart)
@@ -95,8 +98,36 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         setDialogFullScreen()
 
         cartViewModel = ViewModelProviders.of(this).get(CartViewModel::class.java)
+        suggestViewModel = ViewModelProviders.of(this).get(SuggestViewModel::class.java)
         val intent = getIntent()
         bookModel = intent.getParcelableExtra<BookModel>("deal")
+
+        val suggestModel = SuggestModel(bookModel.maTL)
+        if (suggestViewModel.countKeySuggest() <=3) {
+            if (suggestViewModel.checkSuggestList(bookModel.maTL) == null) {
+                suggestViewModel.insertItemSuggest(suggestModel)
+            }
+        }
+        else
+        {
+            if (suggestViewModel.checkSuggestList(bookModel.maTL) == null) {
+                suggestViewModel.insertItemSuggest(suggestModel)
+                var arrayListSuggest = ArrayList<SuggestModel>()
+                arrayListSuggest = suggestViewModel.getList() as ArrayList<SuggestModel>
+                val suggestModelRemove: SuggestModel = arrayListSuggest[arrayListSuggest.size-1]
+                suggestViewModel.deleteItemSuggest(suggestModelRemove)
+            }
+        }
+
+//            } else {
+
+//
+//            }
+
+
+
+
+
         titlebook.text = bookModel.tenSach
         //---send data to information product-------------------
         btn_showdetail_xemthem.setOnClickListener {
@@ -180,6 +211,7 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
                 call: Call<List<FavoriteResponse>>,
                 response: Response<List<FavoriteResponse>>
             ) {
+                progressBarHolder.visibility = View.GONE
                 if (response.isSuccessful) {
                     response.body()?.forEach {
                         if (it.maSach == bookModel.maSach) {
@@ -192,54 +224,78 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         })
 
         img_tim.setOnClickListener {
-            if (checkImageFavorite == true) {
-                val maKH = pref.getString("MaKH", "")
-                val service =
-                    RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
-                val call = service?.deleteFavorite("Bearer " + token, maKH!!, bookModel.maSach)
-                call?.enqueue(object : Callback<DeleteFavoriteResponse> {
-                    override fun onFailure(call: Call<DeleteFavoriteResponse>, t: Throwable) {
-                        Toast.makeText(this@DetailActivity, t.message, Toast.LENGTH_LONG).show()
-                    }
-
-                    override fun onResponse(
-                        call: Call<DeleteFavoriteResponse>,
-                        response: Response<DeleteFavoriteResponse>
-                    ) {
-                        Toast.makeText(
-                            this@DetailActivity,
-                            response.body()!!.message,
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
-                })
-                img_tim.setImageResource(R.drawable.ic_favorite_empty)
-                checkImageFavorite = false
-            } else {
-                val maKH = pref.getString("MaKH", "")
-                val addFavoriteRequest = AddFavoriteRequest(maKH!!, bookModel.maSach)
-                val service =
-                    RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
-                val call = service?.addBookFavorite("Bearer " + token, addFavoriteRequest)
-                call?.enqueue(object : Callback<AddFavoriteResponse> {
-                    override fun onFailure(call: Call<AddFavoriteResponse>, t: Throwable) {
-                        Toast.makeText(this@DetailActivity, t.message, Toast.LENGTH_LONG).show()
-                    }
-
-                    override fun onResponse(
-                        call: Call<AddFavoriteResponse>,
-                        response: Response<AddFavoriteResponse>
-                    ) {
-                        Toast.makeText(
-                            this@DetailActivity,
-                            response.body()!!.message,
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
-                })
-                checkImageFavorite = true
-                img_tim.setImageResource(R.drawable.ic_favorite_fill)
+            if(token == "")
+            {
+                setUpAlertDiaLog()
             }
+            else {
+                progressBarHolder.visibility = View.VISIBLE
+                if (checkImageFavorite == true) {
+                    val maKH = pref.getString("MaKH", "")
+                    val service =
+                        RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
+                    val call = service?.deleteFavorite("Bearer " + token, maKH!!, bookModel.maSach)
+                    call?.enqueue(object : Callback<DeleteFavoriteResponse> {
+                        override fun onFailure(call: Call<DeleteFavoriteResponse>, t: Throwable) {
+                            Toast.makeText(this@DetailActivity, t.message, Toast.LENGTH_LONG).show()
+                        }
+
+                        override fun onResponse(
+                            call: Call<DeleteFavoriteResponse>,
+                            response: Response<DeleteFavoriteResponse>
+                        ) {
+                            progressBarHolder.visibility = View.GONE
+                            Toast.makeText(
+                                this@DetailActivity,
+                                response.body()!!.message,
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    })
+                    img_tim.setImageResource(R.drawable.ic_favorite_empty)
+                    checkImageFavorite = false
+                } else {
+                    val maKH = pref.getString("MaKH", "")
+                    val addFavoriteRequest = AddFavoriteRequest(maKH!!, bookModel.maSach)
+                    val service =
+                        RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
+                    val call = service?.addBookFavorite("Bearer " + token, addFavoriteRequest)
+                    call?.enqueue(object : Callback<AddFavoriteResponse> {
+                        override fun onFailure(call: Call<AddFavoriteResponse>, t: Throwable) {
+                            Toast.makeText(this@DetailActivity, t.message, Toast.LENGTH_LONG).show()
+                        }
+
+                        override fun onResponse(
+                            call: Call<AddFavoriteResponse>,
+                            response: Response<AddFavoriteResponse>
+                        ) {
+                            progressBarHolder.visibility = View.GONE
+                            Toast.makeText(
+                                this@DetailActivity,
+                                response.body()!!.message,
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    })
+                    checkImageFavorite = true
+                    img_tim.setImageResource(R.drawable.ic_favorite_fill)
+                }
+            }
+        }
+    }
+    private fun setUpAlertDiaLog() {
+        val customView =
+            LayoutInflater.from(this).inflate(R.layout.custom_dialog_login, null, false)
+        val dialog = AlertDialog.Builder(this).setView(customView).create()
+        dialog.show()
+        dialog.btn_huy_dialog_login.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.btn_ok_dialog_login.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("check", 2)
+            this.startActivity(intent)
+            dialog.dismiss()
         }
     }
 
@@ -288,12 +344,4 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         }
     }
 
-    fun reLoadFragment() {
-        var frg: Fragment? = null
-        frg = this.supportFragmentManager.findFragmentByTag("HomeFragment")
-        val ft: FragmentTransaction = this.getSupportFragmentManager().beginTransaction()
-        ft.detach(frg!!)
-        ft.attach(frg!!)
-        ft.commit()
-    }
 }

@@ -10,8 +10,7 @@ import com.example.kltn.R
 import kotlinx.android.synthetic.main.slide_poster_home.view.*
 
 class SlideAdapter(private val context: Context?) : PagerAdapter() {
-
-
+    private var custom_position:Int=0
     private var inflater: LayoutInflater? = null
     private val images = arrayOf(
         R.drawable.poster_1,
@@ -37,12 +36,10 @@ class SlideAdapter(private val context: Context?) : PagerAdapter() {
     }
 
     override fun getCount(): Int {
-
         return images.size
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-
         inflater = context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater!!.inflate(R.layout.slide_poster_home, null)
         view.imageView_slide.setImageResource(images[position])

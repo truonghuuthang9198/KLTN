@@ -57,8 +57,6 @@ interface GetDataService {
     @DELETE("SoDiaChi")
     fun deleteAddress(@Header("Authorization") token: String,@Query("id") id:String): Call<DeleteAddressResponse>
 
-
-
-
-
+    @GET("Sach/{id}")
+    fun getSachTheoTL(@Path("id") id: String): Call<List<SachResponse>>
 }

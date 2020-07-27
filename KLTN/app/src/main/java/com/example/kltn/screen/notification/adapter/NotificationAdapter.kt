@@ -19,9 +19,10 @@ class NotificationAdapter internal constructor(var context: Context?,var Notific
 
     inner class NotificationViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
     {
-        val imgNotification: ImageView = itemView.findViewById(R.id.img_notification)
-        val nameNotification: TextView = itemView.findViewById(R.id.tv_notification_name)
-        val btnMore: ImageView = itemView.findViewById(R.id.btn_more_notification)
+        val titleNotification: TextView = itemView.findViewById(R.id.title_notification)
+        val contentNotification: TextView = itemView.findViewById(R.id.content_notification)
+        val dateNotification: TextView = itemView.findViewById(R.id.date_notification)
+
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -31,18 +32,12 @@ class NotificationAdapter internal constructor(var context: Context?,var Notific
     }
 
     override fun getItemCount() = NotificationModel.size
-    @SuppressLint("NewApi")
+
     override fun onBindViewHolder(holder: NotificationViewHolder, position: Int) {
 
         val current = NotificationModel[position]
-        holder.imgNotification.setImageResource(current.image)
-        holder.nameNotification.text = current.nameNotification
-        holder.btnMore.setOnClickListener {
-            val customView = LayoutInflater.from(context).inflate(R.layout.bottomsheet_dialog_notification, null, false)
-            val dialog = BottomSheetDialog(context!!)
-            dialog.setContentView(customView)
-            dialog.create()
-            dialog.show()
-        }
+        holder.titleNotification.text = current.title
+        holder.contentNotification.text = current.content
+        holder.dateNotification.text = current.date
     }
 }

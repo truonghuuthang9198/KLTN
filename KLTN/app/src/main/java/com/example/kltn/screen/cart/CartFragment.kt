@@ -18,7 +18,7 @@ import com.example.kltn.R
 import com.example.kltn.screen.FormatData.Companion.formatMoneyVND
 import com.example.kltn.screen.cart.adapter.CartAdapter
 import com.example.kltn.screen.cart.model.CartModel
-import com.example.kltn.screen.cart.roomdatabase.CartViewModel
+import com.example.kltn.screen.cart.roomcart.CartViewModel
 import com.example.kltn.screen.home.SendData
 import kotlinx.android.synthetic.main.custom_dialog_login.*
 import kotlin.collections.ArrayList

@@ -15,6 +15,7 @@ import com.example.kltn.R
 import com.example.kltn.screen.event.OnActionData
 import com.example.kltn.screen.home.adapter.FilterAdapter
 import com.example.kltn.screen.home.adapter.FilterCategoryAdapter
+import com.example.kltn.screen.home.adapter.ShowMoreBookAdapter
 import com.example.kltn.screen.home.adapter.ShowMoreDealAdapter
 import com.example.kltn.screen.home.model.BookModel
 import com.example.kltn.screen.home.model.FilterModel
@@ -22,6 +23,7 @@ import com.example.kltn.screen.home.model.FilterTheLoaiModel
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance
 import com.example.kltn.screen.retrofit.reponse.CategoryResponse
+import com.example.kltn.screen.retrofit.reponse.SachResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -72,7 +74,7 @@ class ShowMoreBestBookFragment(val maCategory: String, val maTL: String) : Fragm
                 constraint.visibility = View.GONE
             }
         }
-        setUpRecyclerView()
+        selectTheLoai(maTL)
         return view
     }
 
@@ -86,15 +88,13 @@ class ShowMoreBestBookFragment(val maCategory: String, val maTL: String) : Fragm
         constraint.visibility = View.GONE
         recyclerViewFilter = view.findViewById(R.id.recyclerview_filter_category)
         recyclerViewFilter.visibility = View.GONE
-    }
-
-    fun setUpRecyclerView() {
         recyclerViewSM.layoutManager = LinearLayoutManager(
             activity,
             LinearLayoutManager.HORIZONTAL, false
         )
         recyclerViewSM.layoutManager = GridLayoutManager(activity, 2)
     }
+
 
     private fun setupRecyclerviewFilter() {
         recyclerViewFilter.layoutManager = LinearLayoutManager(
@@ -130,6 +130,7 @@ class ShowMoreBestBookFragment(val maCategory: String, val maTL: String) : Fragm
                         onActionData = object : OnActionData<FilterTheLoaiModel> {
                             override fun onAction(data: FilterTheLoaiModel) {
                                 titleFilter.text = data.tenTheLoai
+                                selectTheLoai(data.maTheLoai)
                             }
                         }
 
@@ -147,7 +148,57 @@ class ShowMoreBestBookFragment(val maCategory: String, val maTL: String) : Fragm
                 }
             }
         })
+    }
 
+    fun selectTheLoai(theloai: String) {
+
+        val service =
+            RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
+        val call = service?.getSachTheoTL(theloai)
+        call?.enqueue(object : Callback<List<SachResponse>> {
+            override fun onFailure(call: Call<List<SachResponse>>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<List<SachResponse>>,
+                response: Response<List<SachResponse>>
+            ) {
+                setUpRecyclerviewBook(response)
+            }
+        })
+    }
+
+    fun setUpRecyclerviewBook(response: Response<List<SachResponse>>) {
+        val listBook = ArrayList<BookModel>()
+        response.body()!!.forEachIndexed { index, it ->
+            listBook.add(
+                BookModel(
+                    index,
+                    0,
+                    it.ghiChu,
+                    it.giaBan,
+                    it.giamGia,
+                    it.hinhAnh,
+                    it.kichThuoc,
+                    it.loaiBia,
+                    it.congTyPhatHanh.tenCongTy,
+                    it.maSach,
+                    it.tacGia.tenTacGia,
+                    it.theLoai.tenTheLoai,
+                    it.theLoai.maTheLoai,
+                    it.ngayXuatBan,
+                    it.nhaXuatBan.tenNhaXuatBan,
+                    it.soLuong,
+                    it.soTrang,
+                    it.tenSach,
+                    it.tinhTrang,
+                    it.soSao
+                )
+            )
+        }
+        val adapter = ShowMoreDealAdapter(listBook)
+        recyclerViewSM.adapter = adapter
     }
 
 }

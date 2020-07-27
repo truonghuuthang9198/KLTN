@@ -17,6 +17,7 @@ data class BookModel(
     val maSach: String,
     val maTacGia: String,
     val maTheLoai: String,
+    val maTL:String,
     val ngayXuatBan: String,
     val maNhaXuatBan: String,
     val soLuong: Int,

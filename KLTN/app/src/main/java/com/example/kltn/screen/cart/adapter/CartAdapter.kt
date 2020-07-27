@@ -1,8 +1,6 @@
 package com.example.kltn.screen.cart.adapter
 
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -15,15 +13,12 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kltn.MainActivity
 import com.example.kltn.R
 import com.example.kltn.screen.FormatData.Companion.formatMoneyVND
 import com.example.kltn.screen.cart.CartFragment
 import com.example.kltn.screen.cart.model.CartModel
-import com.example.kltn.screen.cart.roomdatabase.CartViewModel
+import com.example.kltn.screen.cart.roomcart.CartViewModel
 import com.squareup.picasso.Picasso
-import java.text.DecimalFormat
-import java.text.DecimalFormatSymbols
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList

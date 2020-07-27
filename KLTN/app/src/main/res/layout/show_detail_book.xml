@@ -133,7 +133,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout2"
+                android:id="@+id/constraint_ship"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -205,6 +205,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:visibility="gone"
                 android:id="@+id/constraintLayout3"
                 android:layout_width="match_parent"
                 android:layout_height="330dp"
@@ -214,7 +215,7 @@
                 android:textColor="#000000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+                app:layout_constraintTop_toBottomOf="@+id/constraint_ship">
 
 
                 <TextView
@@ -365,7 +366,9 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_comment_null"
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="270dp"
                 android:layout_marginTop="8dp"
                 android:background="#FFFFFF"
@@ -375,7 +378,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
 
                 <TextView
-                    android:id="@+id/khach_hang_nx"
+                    android:id="@+id/khach_hang_nx_null"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
@@ -388,26 +391,26 @@
                     app:layout_constraintTop_toTopOf="parent"></TextView>
 
                 <View
-                    android:id="@+id/view1"
+                    android:id="@+id/view1_null"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="#A4A4A4"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/khach_hang_nx"></View>
+                    app:layout_constraintTop_toBottomOf="@id/khach_hang_nx_null"></View>
 
                 <ImageView
-                    android:id="@+id/img_add_comment"
+                    android:id="@+id/img_add_comment_null"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="8dp"
                     android:src="@drawable/ic_insert_comment"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view1"></ImageView>
+                    app:layout_constraintTop_toBottomOf="@+id/view1_null"></ImageView>
 
                 <TextView
-                    android:id="@+id/chua_co_cmt"
+                    android:id="@+id/chua_co_cmt_null"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -416,7 +419,113 @@
                     android:textColor="#000000"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/img_add_comment"></TextView>
+                    app:layout_constraintTop_toBottomOf="@+id/img_add_comment_null"></TextView>
+                <Button
+                    android:id="@+id/btn_add_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginTop="12dp"
+                    android:text="Viết nhận xét của bạn"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="#FFA500"
+                    android:textAllCaps="false"
+                    android:background="@drawable/custom_button_add_comment"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/chua_co_cmt_null"></Button>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="270dp"
+                android:layout_marginTop="8dp"
+                android:background="#FFFFFF"
+                android:padding="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+
+                <TextView
+                    android:id="@+id/khach_hang_nx_nonull"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="KHÁCH HÀNG NHẬN XÉT (29 ĐÁNH GIÁ)"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"></TextView>
+
+                <View
+                    android:id="@+id/view1_nonull"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#A4A4A4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/khach_hang_nx_nonull"></View>
+                <LinearLayout
+                    android:id="@+id/linear_comment_nonull"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view1_nonull">
+                    <LinearLayout
+                        android:layout_weight="6"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_marginTop="8dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="4.8"
+                            android:paddingLeft="17dp"
+                            android:layout_gravity="center"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:textColor="#000000"
+                            android:textSize="28sp"></TextView>
+                        <RatingBar
+                            android:id="@+id/rating_comment"
+                            style="?android:attr/ratingBarStyleSmall"
+                            android:progressBackgroundTint="#000000"
+                            android:progressTint="@color/colorPrimary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="18dp"
+                            android:layout_gravity="center"
+                            android:isIndicator="true"
+                            android:layout_marginTop="4dp"
+                            android:numStars="5"
+                            android:rating="3.5"
+                            android:stepSize="0.5"
+                            android:scaleX="1.3"
+                            android:scaleY="1.3"
+                            android:transformPivotX="0dp"
+                            android:transformPivotY="0dp"/>
+                        <TextView
+                            android:layout_marginTop="4dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="29 đánh giá"
+                            android:paddingLeft="30dp"
+                            android:gravity="center"></TextView>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_weight="4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </LinearLayout>
+                </LinearLayout>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -431,7 +540,7 @@
                     android:background="@drawable/custom_button_add_comment"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/chua_co_cmt"></Button>
+                    app:layout_constraintTop_toBottomOf="@+id/linear_comment_nonull"></Button>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
@@ -472,4 +581,17 @@
                 android:textColor="#FFFFFF"></Button>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <ProgressBar
+        android:id="@+id/progressBarHolder"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:background="#F2F2F2"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/oranges"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

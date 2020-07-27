@@ -5,7 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -35,6 +37,7 @@ class CategoryFragment : Fragment() {
     lateinit var backButtonCategory: ImageView
     lateinit var recyclerViewCategoryDetail: RecyclerView
     lateinit var categoryDetailAdapter: CategoryDetailAdapter
+    lateinit var progressBarHolder: ProgressBar
     private var onActionData: OnActionData<CategoryModel>? = null
     private var onActionDataDetailCategory: OnActionData<CategoryDetailModel>? = null
 
@@ -53,6 +56,7 @@ class CategoryFragment : Fragment() {
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         recyclerViewTopic.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        progressBarHolder = view.findViewById(R.id.progressBarHolder)
         backButtonCategory = view.findViewById(R.id.btn_back_category)
         backButtonCategory.setOnClickListener {
             if (fragmentManager!!.backStackEntryCount > 0) {
@@ -69,6 +73,7 @@ class CategoryFragment : Fragment() {
 
 
     fun setUpRecyclerview() {
+        progressBarHolder.visibility = View.VISIBLE
         val service =
             RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
         val call = service?.getListCategory()
@@ -91,6 +96,7 @@ class CategoryFragment : Fragment() {
                             )
                         )
                     }
+
                 }
 
 //                onActionDataDetailCategory = object : OnActionData<CategoryDetailModel>{
@@ -141,6 +147,7 @@ class CategoryFragment : Fragment() {
                         }
                     }
                 }
+                progressBarHolder.visibility = View.GONE
                 categoryAdapter = CategoryAdapter(context, arrayListCategory, onActionData!!)
                 recyclerViewTopic.adapter = categoryAdapter
             }

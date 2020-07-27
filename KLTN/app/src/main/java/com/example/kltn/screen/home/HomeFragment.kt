@@ -10,14 +10,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.example.kltn.R
 import com.example.kltn.SearchActivity
 import com.example.kltn.screen.event.OnActionNotify
@@ -26,11 +29,12 @@ import com.example.kltn.screen.home.bestbook.BestBookFragment
 import com.example.kltn.screen.home.children.ChildrenBookFragment
 import com.example.kltn.screen.home.deal.DealFragment
 import com.example.kltn.screen.home.economic.EconomicFragment
-import com.example.kltn.screen.home.model.MenuModel
 import com.example.kltn.screen.home.literary.LiteraryFragment
+import com.example.kltn.screen.home.model.MenuModel
 import com.example.kltn.screen.home.psychological_skills.PsychologicalSkillsFragment
 import com.example.kltn.screen.home.stationery.StationeryFragment
 import com.example.kltn.screen.profile.model.SendArrayAddress
+import com.facebook.FacebookSdk.getApplicationContext
 import de.greenrobot.event.EventBus
 
 
@@ -45,6 +49,10 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
     lateinit var editSearchView: SearchView
     lateinit var viewpager: ViewPager
     private var onActionNotify: OnActionNotify? = null
+    lateinit var slideDots:LinearLayout
+    private var dotsCount:Int = 0
+    private lateinit var dots: Array<ImageView?>
+
     var sendData: SendData? = null
 
     override fun onAttach(activity: Activity) {
@@ -64,8 +72,12 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         btnCategory = view.findViewById(R.id.img_danhmuc)
         editSearchView = view.findViewById(R.id.search_view_home)
+        slideDots = view.findViewById(R.id.slideDots)
         viewpager = view.findViewById(R.id.design_potter)
         editSearchView.setOnQueryTextListener(this)
+
+
+
         closeKeyboardFromFragment()
 
         btnCategory.setOnClickListener {
@@ -105,6 +117,7 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         }
         return false
     }
+
     private fun loadFragmentEconomic(fragment: Fragment?): Boolean {
         if (fragment != null) {
             fragmentManager!!
@@ -163,6 +176,62 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
     private fun imageSliderImplementation() {
         val adapter = SlideAdapter(context)
         viewpager.adapter = adapter
+        dotsCount = adapter.count
+        dots = arrayOfNulls(dotsCount)
+
+        for (i in 0 until dotsCount) {
+            dots[i] = ImageView(context)
+            dots[i]?.setImageDrawable(
+                ContextCompat.getDrawable(
+                    getApplicationContext(),
+                    R.drawable.nonactive_dot
+                )
+            )
+            val params = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            params.setMargins(8, 0, 8, 0)
+            slideDots.addView(dots[i], params)
+        }
+
+
+        dots[0]?.setImageDrawable(
+            ContextCompat.getDrawable(
+                getApplicationContext(),
+                R.drawable.active_dot
+            )
+        )
+
+        viewpager.addOnPageChangeListener(object : OnPageChangeListener {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+            }
+
+            override fun onPageSelected(position: Int) {
+                if(dotsCount>6)
+                    dotsCount = 0
+                for (i in 0 until dotsCount) {
+                    dots[i]?.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            getApplicationContext(),
+                            R.drawable.nonactive_dot
+                        )
+                    )
+                }
+                dots[position]?.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        getApplicationContext(),
+                        R.drawable.active_dot
+                    )
+                )
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {}
+        })
     }
 
 

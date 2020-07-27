@@ -18,7 +18,7 @@ import com.example.kltn.screen.FormatData
 import com.example.kltn.screen.event.EventFireUtil
 import com.example.kltn.screen.event.OnActionData
 import com.example.kltn.screen.home.model.BookModel
-import com.example.kltn.screen.profile.model.FavoriteModel
+
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance
 import com.example.kltn.screen.retrofit.reponse.DeleteFavoriteResponse
@@ -31,7 +31,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class FavoriteAdapter internal constructor(var context: Context?, var favoriteModel: ArrayList<BookModel>) :
+class FavoriteAdapter internal constructor(var context: Context?, var favoriteModel: ArrayList<BookModel>, var onActionData: OnActionData<BookModel>) :
     RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
     inner class FavoriteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageBook_favorite: ImageView = itemView.findViewById(R.id.img_book_favorite)
@@ -56,20 +56,13 @@ class FavoriteAdapter internal constructor(var context: Context?, var favoriteMo
         holder.priceBook_favorite.text = FormatData.formatMoneyVND(current.giaGiamDS)
         Picasso.get().load(current.hinhAnh).into(holder.imageBook_favorite)
         holder.btnDelete.setOnClickListener {
-            deleteFavorite(current.maSach)
+            EventFireUtil.fireEvent(onActionData,current)
         }
         holder.btnMuaNgay.setOnClickListener{
 
         }
     }
-    fun reLoadFragment() {
-        var frg: Fragment? = null
-        frg =(context as FragmentActivity).getSupportFragmentManager().findFragmentByTag("FavoriteFragment")
-        val ft: FragmentTransaction = (context as FragmentActivity).getSupportFragmentManager().beginTransaction()
-        ft.detach(frg!!)
-        ft.attach(frg!!)
-        ft.commit()
-    }
+
 
     private fun loadFragment(fragment: Fragment?, tag: String): Boolean {
         if (fragment != null) {
@@ -81,31 +74,5 @@ class FavoriteAdapter internal constructor(var context: Context?, var favoriteMo
             return true
         }
         return false
-    }
-    private fun deleteFavorite(maSach:String)
-    {
-        val pref = PreferenceManager.getDefaultSharedPreferences(context)
-        var token = pref.getString("TokenLocal", "")
-        val maKH = pref.getString("MaKH","")
-        val service =
-            RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
-        val call = service?.deleteFavorite("Bearer " + token, maKH!!, maSach)
-        call?.enqueue(object : Callback<DeleteFavoriteResponse> {
-            override fun onFailure(call: Call<DeleteFavoriteResponse>, t: Throwable) {
-                Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
-            }
-
-            override fun onResponse(
-                call: Call<DeleteFavoriteResponse>,
-                response: Response<DeleteFavoriteResponse>
-            ) {
-                Toast.makeText(
-                    context,
-                    response.body()!!.message,
-                    Toast.LENGTH_LONG
-                ).show()
-                reLoadFragment()
-            }
-        })
     }
 }

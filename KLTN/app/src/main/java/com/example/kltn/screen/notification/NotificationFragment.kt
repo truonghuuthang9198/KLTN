@@ -34,9 +34,7 @@ class NotificationFragment : Fragment() {
             LinearLayoutManager.VERTICAL,false)
         val arrayList = ArrayList<NotificationModel>()
         arrayList.add(
-            NotificationModel(
-                R.drawable.vd3_sach,"Truong Huu Thang"
-            )
+            NotificationModel("FAHASA Tặng bạn Mã Giới Thiệu","MÃ GIỚI THIỆU FAHASA của bạn là: uEb2Fc","12/04/2020")
         )
         notificationAdapter = NotificationAdapter(context,arrayList)
         recycleviewNotification.adapter = notificationAdapter

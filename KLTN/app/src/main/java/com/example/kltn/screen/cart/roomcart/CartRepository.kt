@@ -1,6 +1,5 @@
-package com.example.kltn.screen.cart.roomdatabase
+package com.example.kltn.screen.cart.roomcart
 
-import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import com.example.kltn.screen.cart.model.CartModel
 

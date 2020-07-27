@@ -13,7 +13,6 @@ import com.example.kltn.R
 import com.example.kltn.screen.home.model.BookModel
 import com.example.kltn.screen.profile.adapter.FavoriteAdapter
 import com.example.kltn.screen.profile.adapter.HistoryBillAdapter
-import com.example.kltn.screen.profile.model.FavoriteModel
 import com.example.kltn.screen.profile.model.HistoryBillModel
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance

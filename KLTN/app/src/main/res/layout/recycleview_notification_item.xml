@@ -1,35 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="90dp"
-    android:layout_marginTop="10dp"
-    android:orientation="horizontal">
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/img_notification"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:src="@drawable/vd3_sach"
-        android:layout_centerVertical="true"></de.hdodenhof.circleimageview.CircleImageView>
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="#FFFFFF"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
-        android:id="@+id/tv_notification_name"
-        android:layout_width="260dp"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="6dp"
-        android:layout_toRightOf="@id/img_notification"
-        android:textColor="#000000" />
+        android:id="@+id/title_notification"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="FAHASA Tặng Bạn Mã Giới Thiệu"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toStartOf="@+id/date_notification"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></TextView>
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/btn_more_notification"
-        android:layout_width="20dp"
-        android:layout_height="30dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@id/tv_notification_name"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/ic_more_notification"></de.hdodenhof.circleimageview.CircleImageView>
-</RelativeLayout>
+    <TextView
+        android:id="@+id/date_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12/04/2020"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></TextView>
+    <TextView
+        android:id="@+id/content_notification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="6dp"
+        android:text="MÃ GIỚI THIỆU FAHASA của bạn là: uEb2Fc"
+        app:layout_constraintTop_toBottomOf="@id/date_notification"></TextView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

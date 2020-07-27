@@ -7,10 +7,12 @@ import android.preference.PreferenceManager
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProviders
 import com.example.kltn.screen.cart.CartFragment
 import com.example.kltn.screen.event.OnActionNotify
 import com.example.kltn.screen.home.HomeFragment
@@ -23,6 +25,7 @@ import com.example.kltn.screen.retrofit.RetrofitClientInstance
 import com.example.kltn.screen.retrofit.reponse.CheckLoginResponse
 import com.example.kltn.screen.retrofit.reponse.LoginResponse
 import com.example.kltn.screen.suggest.SuggestFragment
+import com.example.kltn.screen.suggest.roomsuggest.SuggestViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import retrofit2.Call
 import retrofit2.Callback
@@ -37,13 +40,18 @@ class MainActivity : AppCompatActivity(), SendData {
     private var cartFragment: CartFragment? = null
     private var suggestFragment: SuggestFragment? = null
     private var informationFragment: InformationFragment? = null
+
+    lateinit var suggestViewModel: SuggestViewModel
     lateinit var navView: BottomNavigationView
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setDialogFullScreen()
+        suggestViewModel = ViewModelProviders.of(this).get(SuggestViewModel::class.java)
+        suggestViewModel.delelteAll()
         navView = findViewById(R.id.nav_view)
         navView.setOnNavigationItemSelectedListener { menuItem ->
             showFragmentForMenuItem(menuItem.itemId)
@@ -53,7 +61,13 @@ class MainActivity : AppCompatActivity(), SendData {
         val check = intent.getIntExtra("check", -1)
         if (check == 1) {
             navView.selectedItemId = R.id.navigation_cart
-        } else {
+        }
+        else if(check == 2)
+        {
+            navView.selectedItemId = R.id.navigation_profile
+        }
+        else
+        {
             navView.selectedItemId = R.id.navigation_home
         }
     }

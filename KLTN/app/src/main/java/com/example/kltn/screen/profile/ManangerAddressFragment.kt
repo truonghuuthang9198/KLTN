@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -30,6 +31,7 @@ class ManangerAddressFragment : Fragment() {
     lateinit var recyclerViewAddAddress: RecyclerView
     lateinit var btn_add_address: Button
     lateinit var manangerAddressAdapter: ManangerAddressAdapter
+    lateinit var progressBarHolder: ProgressBar
     private var onActionData: OnActionData<ManangerAddressModel>? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,8 +40,10 @@ class ManangerAddressFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_mananger_address, container, false)
         recyclerViewAddAddress = view.findViewById(R.id.recyclerview_address)
+        progressBarHolder = view.findViewById(R.id.progressBarHolder)
         btnBack_Address = view.findViewById(R.id.btn_back_add_address)
         btn_add_address = view.findViewById(R.id.btn_addnew_address)
+
         recyclerViewAddAddress.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         btnBack_Address = view.findViewById(R.id.btn_back_add_address)
@@ -68,6 +72,7 @@ class ManangerAddressFragment : Fragment() {
     }
 
     fun setUpRecyclerview() {
+        progressBarHolder.visibility = View.VISIBLE
         val arrayList = ArrayList<ManangerAddressModel>()
         val pref = PreferenceManager.getDefaultSharedPreferences(context)
         var token = pref.getString("TokenLocal", "")
@@ -82,6 +87,7 @@ class ManangerAddressFragment : Fragment() {
                 call: Call<List<ManangerAddressResponse>>,
                 response: Response<List<ManangerAddressResponse>>
             ) {
+                progressBarHolder.visibility = View.GONE
                 if (response.isSuccessful) {
                     response.body()!!.forEachIndexed { index, managerAddressRespone ->
                         arrayList.add(

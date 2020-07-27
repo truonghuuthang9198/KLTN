@@ -46,7 +46,7 @@ class ShowMoreDealFragment() : Fragment() {
 //        setStatePageAdapter()
         val list: ArrayList<TabItemModel> = ArrayList()
         list.add(TabItemModel(0, "Tất Cả"))
-        list.add(TabItemModel(1, "Childrens Book"))
+        list.add(TabItemModel(1, "Văn Phòng Phẩm"))
         list.add(TabItemModel(2, "Thiếu Nhi"))
         list.add(TabItemModel(3, "Tâm Lý Kỹ - Năng Sống"))
         list.add(TabItemModel(4, "Văn Học"))

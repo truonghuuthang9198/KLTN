@@ -45,8 +45,8 @@ class FilterCategoryAdapter internal constructor(
             FilterModel.forEach {
                 it.choose = it.id == current.id
                 notifyDataSetChanged()
-                EventFireUtil.fireEvent(onActionData, current)
             }
+            EventFireUtil.fireEvent(onActionData, current)
         }
 
         if (current.choose) {

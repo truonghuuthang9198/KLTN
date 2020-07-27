@@ -8,30 +8,44 @@
     tools:context="com.example.kltn.screen.home.HomeFragment">
 
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/design_potter"
                 android:layout_width="match_parent"
                 android:layout_height="210dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                ></androidx.viewpager.widget.ViewPager>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></androidx.viewpager.widget.ViewPager>
+
+            <LinearLayout
+                android:id="@+id/slideDots"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintStart_toStartOf="@+id/design_potter"
+                app:layout_constraintEnd_toEndOf="@+id/design_potter"
+                app:layout_constraintBottom_toBottomOf="@+id/design_potter"></LinearLayout>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:orientation="horizontal"
                 android:focusableInTouchMode="true"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -58,6 +72,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/img_danhmuc"
                     app:layout_constraintTop_toTopOf="parent">
+
                     <androidx.appcompat.widget.SearchView
                         android:id="@+id/search_view_home"
                         android:layout_width="match_parent"
@@ -125,6 +140,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/frame_bestBook"></FrameLayout>
+
             <FrameLayout
                 android:id="@+id/frame_stationery"
                 android:layout_width="match_parent"
@@ -136,6 +152,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/frame_childrenBook"></FrameLayout>
+
             <FrameLayout
                 android:id="@+id/frame_psychologicalSkills"
                 android:layout_width="match_parent"
@@ -147,6 +164,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/frame_stationery"></FrameLayout>
+
             <FrameLayout
                 android:id="@+id/frame_economic"
                 android:layout_width="match_parent"

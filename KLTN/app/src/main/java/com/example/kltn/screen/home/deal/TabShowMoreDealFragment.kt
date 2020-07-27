@@ -40,11 +40,7 @@ class TabShowMoreDealFragment(val tabId: Int) : Fragment() {
 //            return receipe
 //        }
 //
-//    }
-////
-//    companion object {
-//        var arrayListFilter: ArrayList<FilterModel> = ArrayList<FilterModel>()
-//    }
+//
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

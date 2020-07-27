@@ -1,28 +1,16 @@
 package com.example.kltn.screen.cart.adapter
 
 import android.content.Context
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.widget.AppCompatImageView
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
-import com.example.kltn.screen.FormatData
 import com.example.kltn.screen.FormatData.Companion.formatMoneyVND
-import com.example.kltn.screen.cart.CartFragment
-import com.example.kltn.screen.cart.model.CartModel
 import com.example.kltn.screen.cart.model.CheckBillModel
-import com.example.kltn.screen.cart.roomdatabase.CartViewModel
 import com.squareup.picasso.Picasso
-import java.text.NumberFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
 class CheckListBillAdapter internal constructor(var context: Context?, var listBill: ArrayList<CheckBillModel>)

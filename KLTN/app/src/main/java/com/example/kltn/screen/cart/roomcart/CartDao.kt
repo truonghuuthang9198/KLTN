@@ -1,4 +1,4 @@
-package com.example.kltn.screen.cart.roomdatabase
+package com.example.kltn.screen.cart.roomcart
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
@@ -26,5 +26,6 @@ interface CartDao {
 
     @Query("select * from cart_table where maSach= :pMaSach")
     fun checkExistList(pMaSach: String): CartModel
+
 
 }
