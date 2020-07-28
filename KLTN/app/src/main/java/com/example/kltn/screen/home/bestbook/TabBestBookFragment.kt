@@ -31,6 +31,28 @@ class TabBestBookFragment(val tabId: Int) : Fragment() {
         )
         val arrayList = ArrayList<BookModel>()
         val listTab0 = ArrayList<BookModel>()
+        arrayList.add(
+            BookModel(
+                1,
+                0,
+                "qqqqq",
+                20000.00,
+                0.5,
+                "qqqqqqqqqq",
+                "2x3",
+                "Bìa cứng",
+                "Công ty",
+                "0099887766",
+                "Thắng Trương",
+                "Tiểu Thuyết",
+                "TL001",
+                "20/2/2020",
+                "Nhà xuất bản Kim Đồng",
+                2,
+                "200 Trang",
+                "Đăc nhân tâm", "Còn hàng", 4
+            )
+        )
 
         arrayList.forEach {
             if (it.tabId == tabId) {

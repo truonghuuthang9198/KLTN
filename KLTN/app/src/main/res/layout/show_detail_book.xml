@@ -8,14 +8,15 @@
     <include
         android:id="@+id/toolbar"
         layout="@layout/custom_toolbar"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"></include>
+        app:layout_constraintTop_toTopOf="parent"></include>
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
@@ -41,8 +42,8 @@
                     android:id="@+id/img_detail_book"
                     android:layout_width="150dp"
                     android:layout_height="200dp"
-                    android:src="@drawable/vd3_sach"
                     android:scaleType="centerCrop"
+                    android:src="@drawable/vd3_sach"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"></ImageView>
@@ -63,36 +64,37 @@
                 <RatingBar
                     android:id="@+id/rating"
                     style="?android:attr/ratingBarStyleSmall"
-                    android:progressBackgroundTint="#000000"
-                    android:progressTint="@color/colorPrimary"
                     android:layout_width="wrap_content"
                     android:layout_height="18dp"
-                    android:isIndicator="true"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
+                    android:isIndicator="true"
                     android:numStars="5"
+                    android:progressBackgroundTint="#000000"
+                    android:progressTint="@color/colorPrimary"
                     android:rating="3.5"
-                    android:stepSize="0.5"
                     android:scaleX="1.3"
                     android:scaleY="1.3"
+                    android:stepSize="0.5"
                     android:transformPivotX="0dp"
                     android:transformPivotY="0dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/title_book" />
+
                 <TextView
                     android:id="@+id/tv_priceBook_showdetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
-                    app:layout_goneMarginBottom="8dp"
-                    android:text="64.000 đ"
                     android:layout_marginBottom="8dp"
+                    android:text="64.000 đ"
                     android:textColor="@color/colorPrimary"
                     android:textSize="20dp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rating"></TextView>
+                    app:layout_constraintTop_toBottomOf="@+id/rating"
+                    app:layout_goneMarginBottom="8dp"></TextView>
 
                 <TextView
                     android:id="@+id/tv_priceorigin_showdetail"
@@ -205,7 +207,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:visibility="gone"
                 android:id="@+id/constraintLayout3"
                 android:layout_width="match_parent"
                 android:layout_height="330dp"
@@ -225,7 +226,7 @@
                     android:padding="5dp"
                     android:text="@string/thong_tin_sp"
                     android:textColor="#000000"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -365,14 +366,15 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_showdetail_ghichu"></Button>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraint_comment_null"
                 android:layout_width="match_parent"
-                android:visibility="gone"
                 android:layout_height="270dp"
                 android:layout_marginTop="8dp"
                 android:background="#FFFFFF"
                 android:padding="8dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
@@ -420,31 +422,33 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/img_add_comment_null"></TextView>
+
                 <Button
                     android:id="@+id/btn_add_comment"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginStart="12dp"
-                    android:layout_marginEnd="12dp"
                     android:layout_marginTop="12dp"
-                    android:text="Viết nhận xét của bạn"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:textColor="#FFA500"
-                    android:textAllCaps="false"
+                    android:layout_marginEnd="12dp"
                     android:background="@drawable/custom_button_add_comment"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:gravity="center"
+                    android:text="Viết nhận xét của bạn"
+                    android:textAllCaps="false"
+                    android:textColor="#FFA500"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/chua_co_cmt_null"></Button>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_comment_nonull"
                 android:layout_width="match_parent"
-                android:layout_height="270dp"
+                android:layout_height="320dp"
                 android:layout_marginTop="8dp"
                 android:background="#FFFFFF"
                 android:padding="8dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
@@ -456,7 +460,7 @@
                     android:padding="5dp"
                     android:text="KHÁCH HÀNG NHẬN XÉT (29 ĐÁNH GIÁ)"
                     android:textColor="#000000"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -470,82 +474,321 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/khach_hang_nx_nonull"></View>
+
                 <LinearLayout
                     android:id="@+id/linear_comment_nonull"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/view1_nonull">
+
                     <LinearLayout
-                        android:layout_weight="6"
-                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_weight="6"
+                        android:orientation="vertical">
+
                         <TextView
-                            android:layout_marginTop="8dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="4.8"
-                            android:paddingLeft="17dp"
                             android:layout_gravity="center"
-                            android:textStyle="bold"
                             android:gravity="center"
+                            android:paddingLeft="17dp"
+                            android:text="4.8"
                             android:textColor="#000000"
-                            android:textSize="28sp"></TextView>
+                            android:textSize="28sp"
+                            android:textStyle="bold"></TextView>
+
                         <RatingBar
                             android:id="@+id/rating_comment"
                             style="?android:attr/ratingBarStyleSmall"
-                            android:progressBackgroundTint="#000000"
-                            android:progressTint="@color/colorPrimary"
                             android:layout_width="wrap_content"
                             android:layout_height="18dp"
                             android:layout_gravity="center"
-                            android:isIndicator="true"
                             android:layout_marginTop="4dp"
+                            android:isIndicator="true"
                             android:numStars="5"
+                            android:progressBackgroundTint="#000000"
+                            android:progressTint="@color/colorPrimary"
                             android:rating="3.5"
-                            android:stepSize="0.5"
                             android:scaleX="1.3"
                             android:scaleY="1.3"
+                            android:stepSize="0.5"
                             android:transformPivotX="0dp"
-                            android:transformPivotY="0dp"/>
+                            android:transformPivotY="0dp" />
+
                         <TextView
-                            android:layout_marginTop="4dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="6dp"
+                            android:gravity="center"
+                            android:paddingLeft="30dp"
+                            android:text="29 đánh giá"
+                            android:textColor="@color/black"></TextView>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_weight="4"
+                        android:orientation="vertical">
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="29 đánh giá"
-                            android:paddingLeft="30dp"
-                            android:gravity="center"></TextView>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_weight="4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                            android:orientation="horizontal">
 
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:gravity="center"
+                                android:text="5 sao"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"></TextView>
+
+                            <ProgressBar
+                                android:id="@+id/progressBar_5star"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="6dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="4dp"
+                                android:layout_weight="1"
+                                android:indeterminate="false"
+                                android:max="100"
+                                android:progress="1"
+                                android:progressDrawable="@drawable/custom_progressbar"
+                                android:secondaryProgress="50" />
+
+                            <TextView
+                                android:id="@+id/phantram_progress_5star"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:gravity="center"
+                                android:paddingRight="12dp"
+                                android:text="50%"
+                                android:textAlignment="textEnd"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"
+                                tools:ignore="RtlCompat"></TextView>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:gravity="center"
+                                android:text="4 sao"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"></TextView>
+
+                            <ProgressBar
+                                android:id="@+id/progressBar_4star"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="6dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="4dp"
+                                android:layout_weight="1"
+                                android:indeterminate="false"
+                                android:max="100"
+
+                                android:progress="1"
+                                android:progressDrawable="@drawable/custom_progressbar"
+                                android:secondaryProgress="20"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/phantram_progress_4star"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:gravity="center"
+                                android:paddingRight="12dp"
+                                android:text="10%"
+                                android:textAlignment="textEnd"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"
+                                tools:ignore="RtlCompat"></TextView>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:gravity="center"
+                                android:text="3 sao"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"></TextView>
+
+                            <ProgressBar
+                                android:id="@+id/progressBar_3star"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="6dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="4dp"
+                                android:layout_weight="1"
+                                android:indeterminate="false"
+                                android:max="100"
+                                android:progress="1"
+                                android:progressDrawable="@drawable/custom_progressbar"
+                                android:secondaryProgress="20"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/phantram_progress_3star"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:gravity="center"
+                                android:paddingRight="12dp"
+                                android:text="10%"
+                                android:textAlignment="textEnd"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"
+                                tools:ignore="RtlCompat"></TextView>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:gravity="center"
+                                android:text="2 sao"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"></TextView>
+
+                            <ProgressBar
+                                android:id="@+id/progressBar_2star"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="6dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="4dp"
+                                android:layout_weight="1"
+                                android:indeterminate="false"
+                                android:max="100"
+                                android:progressDrawable="@drawable/custom_progressbar"
+                                android:secondaryProgress="0"
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/phantram_progress_2star"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:gravity="center"
+                                android:paddingRight="12dp"
+                                android:text="0%"
+                                android:textAlignment="textEnd"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"
+                                tools:ignore="RtlCompat"></TextView>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:gravity="center"
+                                android:text="1 sao"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"></TextView>
+
+                            <ProgressBar
+                                android:id="@+id/progressBar_1star"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="6dp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="4dp"
+                                android:layout_weight="1"
+                                android:indeterminate="false"
+                                android:max="100"
+                                android:progressDrawable="@drawable/custom_progressbar"
+                                android:secondaryProgress="0"
+
+                                android:textColor="@color/black" />
+
+                            <TextView
+                                android:id="@+id/phantram_progress_1star"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:gravity="center"
+                                android:paddingRight="12dp"
+                                android:text="0%"
+                                android:textAlignment="textEnd"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"
+                                tools:ignore="RtlCompat"></TextView>
+                        </LinearLayout>
                     </LinearLayout>
+
                 </LinearLayout>
+
                 <Button
+                    android:id="@+id/btn_addcomment_nonull"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginStart="12dp"
-                    android:layout_marginEnd="12dp"
                     android:layout_marginTop="12dp"
-                    android:text="Viết nhận xét của bạn"
-                    android:gravity="center"
-                    android:textStyle="bold"
-                    android:textColor="#FFA500"
-                    android:textAllCaps="false"
+                    android:layout_marginEnd="12dp"
                     android:background="@drawable/custom_button_add_comment"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:gravity="center"
+                    android:text="Viết nhận xét của bạn"
+                    android:textAllCaps="false"
+                    android:textColor="#FFA500"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linear_comment_nonull"></Button>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_addcomment_nonull"
+                    tools:layout_editor_absoluteX="8dp"></androidx.recyclerview.widget.RecyclerView>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -561,37 +804,39 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <Button
-                android:layout_weight="1"
                 android:id="@+id/btn_add_product_to_cart"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_weight="1"
                 android:background="@drawable/custom_button_addcart"
                 android:text="Thêm vào giỏ hàng"
                 android:textAllCaps="false"
                 android:textColor="#FFB90F"></Button>
 
             <Button
-                android:layout_weight="1"
                 android:id="@+id/btn_move_cart"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_weight="1"
                 android:background="@drawable/custom_button_muangay"
                 android:text="Mua ngay"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"></Button>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <ProgressBar
         android:id="@+id/progressBarHolder"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
-        android:background="#F2F2F2"
+        android:background="#00000000"
         android:indeterminate="true"
+        android:visibility="gone"
         android:indeterminateTint="@color/oranges"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

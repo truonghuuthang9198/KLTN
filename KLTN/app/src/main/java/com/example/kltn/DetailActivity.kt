@@ -13,6 +13,7 @@ import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProviders
 import com.example.kltn.screen.FormatData
 import com.example.kltn.screen.FormatData.Companion.convertDateFormat
@@ -58,6 +59,8 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
     lateinit var giamgia: TextView
     lateinit var img_tim: ImageView
     lateinit var progressBarHolder: ProgressBar
+    lateinit var constraint_comment_null: ConstraintLayout
+    lateinit var constraint_comment_nonull: ConstraintLayout
     private lateinit var cartViewModel: CartViewModel
     private lateinit var suggestViewModel: SuggestViewModel
 
@@ -70,6 +73,9 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.show_detail_book)
+
+        constraint_comment_nonull = findViewById(R.id.constraint_comment_nonull)
+        constraint_comment_null = findViewById(R.id.constraint_comment_null)
 
         progressBarHolder = findViewById(R.id.progressBarHolder)
         progressBarHolder.visibility = View.VISIBLE
