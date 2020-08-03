@@ -12,8 +12,8 @@ import com.example.kltn.screen.profile.model.ManangerAddressModel
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance
 import com.example.kltn.screen.retrofit.address_handle.CityDialog
-import com.example.kltn.screen.retrofit.model.AddAddressModel
-import com.example.kltn.screen.retrofit.model.CityModel
+import com.example.kltn.screen.retrofit.request.AddAddressRequest
+import com.example.kltn.screen.retrofit.address_handle.CityModel
 import com.example.kltn.screen.retrofit.reponse.DeleteAddressResponse
 import com.example.kltn.screen.retrofit.reponse.UpdateAddressResponse
 import retrofit2.Call
@@ -98,7 +98,7 @@ class UpdateAddressFragment(var data: ManangerAddressModel) : Fragment(),CityDia
             {
                 loaiDiaChi = 3
             }
-            val addAddressModel = AddAddressModel(
+            val addAddressModel = AddAddressRequest(
                 data.maSo,
                 data.maKH,
                 edt_diachinha_update_address.text.toString(),

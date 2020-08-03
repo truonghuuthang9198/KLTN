@@ -1,4 +1,4 @@
-package com.example.kltn.screen.retrofit.model
+package com.example.kltn.screen.retrofit.address_handle
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +10,7 @@ import com.example.kltn.screen.event.EventFireUtil
 import com.example.kltn.screen.event.OnActionData
 import kotlin.collections.ArrayList
 
-class CityAdapter internal constructor(val listCity: ArrayList<CityModel>,var onActionData: OnActionData<CityModel>): RecyclerView.Adapter<CityAdapter.CityViewHolder>(){
+class CityAdapter internal constructor(val listCity: ArrayList<CityModel>, var onActionData: OnActionData<CityModel>): RecyclerView.Adapter<CityAdapter.CityViewHolder>(){
     inner class CityViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
     {
         val nameCity: TextView = itemView.findViewById(R.id.tv_city_name)

@@ -47,6 +47,7 @@ class TabDealFragment(val tabId: Int) : Fragment() {
 
 
 
+
     private fun loadListSach() {
         progressBarHolder.visibility = View.VISIBLE
         val service = RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)

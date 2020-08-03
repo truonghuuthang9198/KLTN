@@ -9,20 +9,26 @@
     <application
         android:name=".OneSingalSendMessage"
         android:allowBackup="true"
-        android:networkSecurityConfig="@xml/security"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/security"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".InformationProductActivity"></activity>
+        <activity android:name=".payment.ConfirmationActivity"></activity>
+        <activity android:name=".payment.PaypalPaymentActivity">
+
+        </activity>
+        <activity android:name=".screen.AddCommentActivity" />
+        <activity android:name=".InformationProductActivity" />
         <activity android:name=".DetailActivity" />
-        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".screen.ShowCommentActivity"/>
         <activity
             android:name=".MainActivity"
-            android:windowSoftInputMode="stateHidden"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,7 +39,6 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"

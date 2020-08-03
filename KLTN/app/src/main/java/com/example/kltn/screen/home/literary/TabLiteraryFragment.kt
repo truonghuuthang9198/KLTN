@@ -36,25 +36,7 @@ class TabLiteraryFragment(val tabId: Int) : Fragment() {
         )
         progressBarHolder = view.findViewById(R.id.progressBarHolder)
         loadListSach()
-        //setUpRecyclerView()
         return view
-    }
-
-    fun setUpRecyclerView() {
-        recycleviewLiterary.layoutManager = LinearLayoutManager(
-            activity,
-            LinearLayoutManager.HORIZONTAL, false
-        )
-        val arrayList = ArrayList<BookModel>()
-        val listTab0 = ArrayList<BookModel>()
-
-        arrayList.forEach {
-            if (it.tabId == tabId) {
-                listTab0.add(it)
-            }
-        }
-        literaryAdapter = LiteraryAdapter(listTab0)
-        recycleviewLiterary.adapter = literaryAdapter
     }
 
     private fun loadListSach() {

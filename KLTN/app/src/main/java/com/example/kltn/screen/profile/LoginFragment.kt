@@ -18,7 +18,7 @@ import android.widget.Toast
 import com.example.kltn.R
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance
-import com.example.kltn.screen.retrofit.model.LoginModel
+import com.example.kltn.screen.retrofit.request.LoginRequest
 import com.example.kltn.screen.retrofit.reponse.LoginResponse
 import com.facebook.*
 import com.facebook.login.LoginManager
@@ -72,7 +72,7 @@ class LoginFragment : Fragment() {
             val tendn = edit_email_sdt.text.toString()
             val mk = edit_password.text.toString()
             //----Login----------------------
-            val checklogin = LoginModel(tendn,mk)
+            val checklogin = LoginRequest(tendn,mk)
             val service = RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
             val call = service?.login(checklogin)
             call?.enqueue(object : Callback<LoginResponse> {

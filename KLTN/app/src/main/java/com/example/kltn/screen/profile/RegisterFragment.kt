@@ -1,7 +1,6 @@
 package com.example.kltn.screen.profile
 
 import android.os.Bundle
-import android.preference.PreferenceManager
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +9,7 @@ import android.widget.*
 import com.example.kltn.R
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance
-import com.example.kltn.screen.retrofit.model.RegisterModel
-import com.example.kltn.screen.retrofit.reponse.LoginResponse
+import com.example.kltn.screen.retrofit.request.RegisterRequest
 import com.example.kltn.screen.retrofit.reponse.RegisterResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -46,7 +44,7 @@ class RegisterFragment : Fragment() {
         btn_dangky.setOnClickListener {
             val intSelectButton: Int = radioGroup!!.checkedRadioButtonId
             radioButton = view.findViewById(intSelectButton)
-            val registerModel = RegisterModel(
+            val registerModel = RegisterRequest(
                 edit_email_dangki.text.toString(),
                 edit_password_dangki.text.toString(),
                 edit_ho_ten_dangki.text.toString(),

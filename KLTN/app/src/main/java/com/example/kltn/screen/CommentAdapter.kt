@@ -14,6 +14,7 @@ import com.example.kltn.R
 import com.example.kltn.screen.home.model.BookModel
 import com.squareup.picasso.Picasso
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -39,7 +40,10 @@ class CommentAdapter internal constructor(var listComment: ArrayList<CommentMode
     override fun onBindViewHolder(holder: CommentViewHolder, position: Int) {
         val current = listComment[position]
         holder.tvNameCommet.text = current.name
-        holder.tvDate.text = current.date
+        holder.tvDate.text = FormatData.convertDateFormat(current.date,
+            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"),
+            SimpleDateFormat("dd/MM/yyyy")
+        )
         holder.star.rating = current.star.toFloat()
         holder.tvContentComment.text = current.content
     }

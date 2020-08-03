@@ -1,4 +1,4 @@
-package com.example.kltn.screen.retrofit.model
+package com.example.kltn.screen.retrofit.address_handle
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

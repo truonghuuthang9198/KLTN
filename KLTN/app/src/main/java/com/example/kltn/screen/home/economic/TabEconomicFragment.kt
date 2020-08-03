@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,18 +23,19 @@ import retrofit2.Response
 class TabEconomicFragment(val tabId: Int) : Fragment() {
     lateinit var recycleviewEconomic: RecyclerView
     lateinit var economicAdapter: EconomicAdapter
+    lateinit var progressBarHolder: ProgressBar
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.tab_fragment_economic, container, false)
-        recycleviewEconomic = view!!.findViewById<RecyclerView>(R.id.recyclerview_economic)
+        progressBarHolder = view.findViewById(R.id.progressBarHolder)
+        recycleviewEconomic = view.findViewById<RecyclerView>(R.id.recyclerview_economic)
         recycleviewEconomic.layoutManager = LinearLayoutManager(
             activity,
             LinearLayoutManager.HORIZONTAL, false
         )
-//        loadListSach()
-        setUpRecyclerView()
+        loadListSach()
         return view
     }
 
@@ -50,25 +52,25 @@ class TabEconomicFragment(val tabId: Int) : Fragment() {
         recycleviewEconomic.adapter = economicAdapter
     }
 
-//    private fun loadListSach() {
-//        val service = RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
-//        val call = service?.getListSach()
-//        call?.enqueue(object : Callback<List<SachResponse>> {
-//            override fun onFailure(call: Call<List<SachResponse>>, t: Throwable) {
-//                Log.d("ThangTruong", t.message)
-//            }
-//
-//            override fun onResponse(
-//                call: Call<List<SachResponse>>,
-//                response: Response<List<SachResponse>>
-//            ) {
-//                listSach(response.body()!!)
-//                Log.d("ThangTruong", response.body().toString())
-//
-//            }
-//        })
-//
-//    }
+    private fun loadListSach() {
+        progressBarHolder.visibility = View.VISIBLE
+        val service = RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
+        val call = service?.getSachTheoTL("TL002")
+        call?.enqueue(object : Callback<List<SachResponse>> {
+            override fun onFailure(call: Call<List<SachResponse>>, t: Throwable) {
+                Log.d("ThangTruong", t.message)
+            }
+
+            override fun onResponse(
+                call: Call<List<SachResponse>>,
+                response: Response<List<SachResponse>>
+            ) {
+                listSach(response.body()!!)
+                progressBarHolder.visibility = View.GONE
+            }
+        })
+
+    }
 
     private fun listSach(response: List<SachResponse>) {
         var id = 0
@@ -100,8 +102,10 @@ class TabEconomicFragment(val tabId: Int) : Fragment() {
                 )
             )
             id++
-            if (id >= 5 && tabid <= 2) {
-                tabid++
+            if (id%5 == 0) {
+                if(tabid<3) {
+                    tabid++
+                }
             }
         }
         val listAddInTab = ArrayList<BookModel>()

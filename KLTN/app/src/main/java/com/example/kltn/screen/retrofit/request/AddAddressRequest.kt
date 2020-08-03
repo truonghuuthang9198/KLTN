@@ -1,6 +1,6 @@
-package com.example.kltn.screen.retrofit.model
+package com.example.kltn.screen.retrofit.request
 
-data class AddAddressModel(
+data class AddAddressRequest(
     val maSo: String,
     val maKhachHang: String,
     val diaChi: String,

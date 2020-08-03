@@ -11,17 +11,12 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import com.example.kltn.R
-import com.example.kltn.screen.cart.InformationShipFragment
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance
 import com.example.kltn.screen.retrofit.address_handle.CityDialog
-import com.example.kltn.screen.retrofit.model.AddAddressModel
-import com.example.kltn.screen.retrofit.model.CityModel
-import com.example.kltn.screen.retrofit.model.LoginModel
+import com.example.kltn.screen.retrofit.request.AddAddressRequest
+import com.example.kltn.screen.retrofit.address_handle.CityModel
 import com.example.kltn.screen.retrofit.reponse.AddAddressResponse
-import com.example.kltn.screen.retrofit.reponse.LoginResponse
-import com.example.kltn.screen.retrofit.reponse.ManangerAddressResponse
-import com.onesignal.OneSignal
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -107,7 +102,7 @@ class AddNewAddressFragment() : Fragment(), Parcelable, CityDialog.OnInputSelect
             }
             val rd = Random()
             val soDC = rd.nextInt(101)
-            val addAddressModel = AddAddressModel(
+            val addAddressModel = AddAddressRequest(
                 soDC.toString(),
                 makh!!,
                 edt_diachinha_addnew_address.text.toString(),

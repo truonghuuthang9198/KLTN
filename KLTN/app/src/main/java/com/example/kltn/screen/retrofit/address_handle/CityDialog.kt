@@ -14,8 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance
-import com.example.kltn.screen.retrofit.model.CityAdapter
-import com.example.kltn.screen.retrofit.model.CityModel
 import com.example.kltn.screen.retrofit.reponse.CityResponse
 import com.example.kltn.screen.retrofit.reponse.DistrictResponse
 import com.example.kltn.screen.retrofit.reponse.WardResponse
@@ -33,7 +31,7 @@ class CityDialog(val type: Int,val idTitle: Int) : DialogFragment() {
     private var onActionData: OnActionData<CityModel>? = null
 
     interface OnInputSelected {
-        fun sendInput(cityModel: CityModel,type: Int)
+        fun sendInput(cityModel: CityModel, type: Int)
     }
 
     var mOnInputSelected: OnInputSelected? = null
@@ -125,7 +123,12 @@ class CityDialog(val type: Int,val idTitle: Int) : DialogFragment() {
     fun setUpRecyclerviewWard(response: Response<List<WardResponse>>) {
         val arrayListWard = ArrayList<CityModel>()
         response.body()!!.forEach {
-            arrayListWard.add(CityModel(it.iD, it.title))
+            arrayListWard.add(
+                CityModel(
+                    it.iD,
+                    it.title
+                )
+            )
         }
         onActionData = object : OnActionData<CityModel> {
             override fun onAction(data: CityModel) {
@@ -137,14 +140,23 @@ class CityDialog(val type: Int,val idTitle: Int) : DialogFragment() {
                 dismiss()
             }
         }
-        cityAdapter = CityAdapter(arrayListWard, onActionData!!)
+        cityAdapter =
+            CityAdapter(
+                arrayListWard,
+                onActionData!!
+            )
         recyclerviewCity.adapter = cityAdapter
     }
 
     fun setUpRecyclerviewCity(response: Response<CityResponse>) {
         val arrayListCity = ArrayList<CityModel>()
         response.body()!!.ltsItem.forEach {
-            arrayListCity.add(CityModel(it.iD, it.title))
+            arrayListCity.add(
+                CityModel(
+                    it.iD,
+                    it.title
+                )
+            )
         }
         onActionData = object : OnActionData<CityModel> {
             override fun onAction(data: CityModel) {
@@ -156,7 +168,11 @@ class CityDialog(val type: Int,val idTitle: Int) : DialogFragment() {
                 dismiss()
             }
         }
-        cityAdapter = CityAdapter(arrayListCity, onActionData!!)
+        cityAdapter =
+            CityAdapter(
+                arrayListCity,
+                onActionData!!
+            )
         recyclerviewCity.adapter = cityAdapter
     }
 
@@ -164,7 +180,12 @@ class CityDialog(val type: Int,val idTitle: Int) : DialogFragment() {
     {
         val arrayListDistrict = ArrayList<CityModel>()
         response.body()!!.forEach {
-            arrayListDistrict.add(CityModel(it.iD, it.title))
+            arrayListDistrict.add(
+                CityModel(
+                    it.iD,
+                    it.title
+                )
+            )
         }
         onActionData = object : OnActionData<CityModel> {
             override fun onAction(data: CityModel) {
@@ -176,7 +197,11 @@ class CityDialog(val type: Int,val idTitle: Int) : DialogFragment() {
                 dismiss()
             }
         }
-        cityAdapter = CityAdapter(arrayListDistrict, onActionData!!)
+        cityAdapter =
+            CityAdapter(
+                arrayListDistrict,
+                onActionData!!
+            )
         recyclerviewCity.adapter = cityAdapter
     }
 

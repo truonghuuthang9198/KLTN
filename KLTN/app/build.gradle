@@ -132,4 +132,7 @@ dependencies {
     implementation 'com.onesignal:OneSignal:[3.15.0, 3.99.99]'
 
     implementation 'de.greenrobot:eventbus:2.4.0'
+
+    // Payment
+    implementation 'com.paypal.sdk:paypal-android-sdk:2.16.0'
 }

@@ -40,18 +40,15 @@ class MainActivity : AppCompatActivity(), SendData {
     private var cartFragment: CartFragment? = null
     private var suggestFragment: SuggestFragment? = null
     private var informationFragment: InformationFragment? = null
-
     lateinit var suggestViewModel: SuggestViewModel
     lateinit var navView: BottomNavigationView
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setDialogFullScreen()
-        suggestViewModel = ViewModelProviders.of(this).get(SuggestViewModel::class.java)
-        suggestViewModel.delelteAll()
+//        suggestViewModel = ViewModelProviders.of(this).get(SuggestViewModel::class.java)
+//        suggestViewModel.delelteAll()
         navView = findViewById(R.id.nav_view)
         navView.setOnNavigationItemSelectedListener { menuItem ->
             showFragmentForMenuItem(menuItem.itemId)

@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/btn_back_favorite"
+            android:id="@+id/btn_back_activity"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="8dp"
@@ -31,10 +31,10 @@
             android:textColor="#FFFFFF"
             android:textSize="20dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_back_favorite"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_back_activity"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btn_back_favorite"></TextView>
+            app:layout_constraintTop_toTopOf="@+id/btn_back_activity"></TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -65,6 +65,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tvSumStar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -94,6 +95,7 @@
                     android:transformPivotY="0dp" />
 
                 <TextView
+                    android:id="@+id/tvNumberReview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="6dp"
@@ -177,7 +179,6 @@
                         android:layout_weight="1"
                         android:indeterminate="false"
                         android:max="100"
-
                         android:progress="1"
                         android:progressDrawable="@drawable/custom_progressbar"
                         android:secondaryProgress="20"
@@ -291,6 +292,7 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/btn_add_comment_fragment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
@@ -353,6 +355,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="4dp"
+            android:nestedScrollingEnabled="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

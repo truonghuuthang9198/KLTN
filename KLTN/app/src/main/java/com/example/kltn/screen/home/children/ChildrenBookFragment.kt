@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.kltn.R
+import com.example.kltn.screen.home.bestbook.ShowMoreBestBookFragment
 import com.example.kltn.screen.home.bestbook.TabBestBookFragment
 import com.google.android.material.tabs.TabLayout
 
@@ -25,6 +27,9 @@ class ChildrenBookFragment : Fragment() {
         tabLayout = view.findViewById<TabLayout>(R.id.tab_children_book)
         viewPager = view.findViewById<ViewPager>(R.id.viewpager_children_book)
         btn_showmore_children_book = view.findViewById(R.id.btn_showmore_children_book)
+        btn_showmore_children_book.setOnClickListener {
+            loadFragment(ShowMoreBestBookFragment("DM001","TL003"))
+        }
         setStatePageAdapter()
         return view
     }
@@ -52,11 +57,22 @@ class ChildrenBookFragment : Fragment() {
     }
     private fun setStatePageAdapter(){
         val myViewPageStateAdapter: MyViewPageStateAdapter = MyViewPageStateAdapter(activity!!.supportFragmentManager)
-        myViewPageStateAdapter.addFragment(TabBestBookFragment(0),"Sách Thiếu Nhi Giá Tốt")
-        myViewPageStateAdapter.addFragment(TabBestBookFragment(1),"Truyện Đọc Thiếu Nhi")
+        myViewPageStateAdapter.addFragment(TabChildrenBookFragment(0),"Sách Thiếu Nhi Giá Tốt")
+        myViewPageStateAdapter.addFragment(TabChildrenBookFragment(1),"Truyện Đọc Thiếu Nhi")
         viewPager!!.adapter=myViewPageStateAdapter
         viewPager!!.offscreenPageLimit = 2
         tabLayout!!.setupWithViewPager(viewPager,true)
 
+    }
+    private fun loadFragment(fragment: Fragment?): Boolean {
+        if (fragment != null) {
+            (context as FragmentActivity).supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.frame_layout, fragment)
+                .addToBackStack(null)
+                .commit()
+            return true
+        }
+        return false
     }
 }

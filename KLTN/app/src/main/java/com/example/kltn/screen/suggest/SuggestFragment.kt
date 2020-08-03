@@ -60,8 +60,6 @@ class SuggestFragment : Fragment() {
         arrayListSuggest = suggestViewModel.getList() as ArrayList<SuggestModel>
         listBook = ArrayList<BookModel>()
         getListSuggest(arrayListSuggest[0].maTL)
-        suggestAdapter = SuggestAdapter(listBook)
-        recyclerviewSuggest.adapter = suggestAdapter
 
         Toast.makeText(
             activity!!, arrayListSuggest.toString(), Toast.LENGTH_LONG
@@ -108,6 +106,8 @@ class SuggestFragment : Fragment() {
                         )
                     )
                 }
+                suggestAdapter = SuggestAdapter(listBook)
+                recyclerviewSuggest.adapter = suggestAdapter
             }
         })
     }

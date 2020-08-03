@@ -1,6 +1,6 @@
 package com.example.kltn.screen.retrofit
 
-import com.example.kltn.screen.retrofit.model.*
+import com.example.kltn.screen.retrofit.request.*
 import com.example.kltn.screen.retrofit.reponse.*
 import retrofit2.Call
 import retrofit2.http.*
@@ -19,13 +19,13 @@ interface GetDataService {
     fun getListWard(@Path("id") id: Int): Call<List<WardResponse>>
 
     @POST("NguoiDung/authenticate")
-    fun login(@Body loginModel: LoginModel): Call<LoginResponse>
+    fun login(@Body loginRequest: LoginRequest): Call<LoginResponse>
 
     @GET("NguoiDung")
     fun getUserWithToken(@Header("Authorization") token: String): Call<CheckLoginResponse>
 
     @POST("KhachHang")
-    fun registerUser(@Body registerModel: RegisterModel): Call<RegisterResponse>
+    fun registerUser(@Body registerRequest: RegisterRequest): Call<RegisterResponse>
 
     @GET("Search/{id}")
     fun getListSearch(@Path("id") id: String): Call<List<SearchResponse>>
@@ -46,10 +46,10 @@ interface GetDataService {
     fun getListAddress(@Header("Authorization") token: String): Call<List<ManangerAddressResponse>>
 
     @POST("SoDiaChi")
-    fun addAddressNew(@Header("Authorization") token: String,@Body addAddressModel: AddAddressModel):Call<AddAddressResponse>
+    fun addAddressNew(@Header("Authorization") token: String,@Body addAddressRequest: AddAddressRequest):Call<AddAddressResponse>
 
     @PUT("SoDiaChi")
-    fun updateAddress(@Header("Authorization") token: String,@Body addAddressModel: AddAddressModel):Call<UpdateAddressResponse>
+    fun updateAddress(@Header("Authorization") token: String,@Body addAddressRequest: AddAddressRequest):Call<UpdateAddressResponse>
 
     @GET("DanhMuc")
     fun getListCategory(): Call<List<CategoryResponse>>
@@ -59,4 +59,7 @@ interface GetDataService {
 
     @GET("Sach/{id}")
     fun getSachTheoTL(@Path("id") id: String): Call<List<SachResponse>>
+
+    @GET("NhanXet/{id}")
+    fun getReviewSach(@Path("id") id:String):Call<ReviewResponse>
 }

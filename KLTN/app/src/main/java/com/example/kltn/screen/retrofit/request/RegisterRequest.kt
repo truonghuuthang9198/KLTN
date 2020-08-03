@@ -1,6 +1,6 @@
-package com.example.kltn.screen.retrofit.model
+package com.example.kltn.screen.retrofit.request
 
-data class RegisterModel(
+data class RegisterRequest(
     val maKhachHang: String,
     val matKhau: String,
     val tenKhachHang: String,
