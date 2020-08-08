@@ -49,17 +49,23 @@ interface GetDataService {
     fun addAddressNew(@Header("Authorization") token: String,@Body addAddressRequest: AddAddressRequest):Call<AddAddressResponse>
 
     @PUT("SoDiaChi")
-    fun updateAddress(@Header("Authorization") token: String,@Body addAddressRequest: AddAddressRequest):Call<UpdateAddressResponse>
+    fun updateAddress(@Header("Authorization") token: String,@Body updateAddressRequest: UpdateAddressRequest):Call<UpdateAddressResponse>
 
     @GET("DanhMuc")
     fun getListCategory(): Call<List<CategoryResponse>>
 
     @DELETE("SoDiaChi")
-    fun deleteAddress(@Header("Authorization") token: String,@Query("id") id:String): Call<DeleteAddressResponse>
+    fun deleteAddress(@Header("Authorization") token: String,@Query("id") id:Int): Call<DeleteAddressResponse>
 
     @GET("Sach/{id}")
     fun getSachTheoTL(@Path("id") id: String): Call<List<SachResponse>>
 
     @GET("NhanXet/{id}")
     fun getReviewSach(@Path("id") id:String):Call<ReviewResponse>
+
+    @POST("goiy")
+    fun getListSuggest(@Body suggestRequest: SuggestRequest): Call<List<SuggestResponse>>
+
+    @POST("NhanXet")
+    fun addComment(@Body commentRequest: CommentRequest):Call<CommentResponse>
 }

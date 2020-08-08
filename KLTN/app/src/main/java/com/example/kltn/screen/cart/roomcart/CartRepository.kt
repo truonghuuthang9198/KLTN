@@ -27,4 +27,8 @@ class  CartRepository(private val cartDao: CartDao){
     {
         return cartDao.checkExistList(pMaSach)
     }
+    fun deleteAll()
+    {
+        return cartDao.deleteAll()
+    }
 }

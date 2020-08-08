@@ -210,7 +210,6 @@
                 android:id="@+id/constraintLayout3"
                 android:layout_width="match_parent"
                 android:layout_height="330dp"
-
                 android:layout_marginTop="8dp"
                 android:background="#FFFFFF"
                 android:padding="12dp"
@@ -246,21 +245,23 @@
                     android:id="@+id/textView11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:text="SKU"
                     android:textColor="#000000"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_showdetail_masach"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/view"></TextView>
+                    app:layout_constraintTop_toTopOf="@+id/tv_showdetail_masach"></TextView>
 
                 <TextView
                     android:id="@+id/tv_showdetail_masach"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="120dp"
+                    android:layout_marginStart="120dp"
+                    android:layout_marginTop="8dp"
                     android:text="8935073084928"
                     android:textColor="#000000"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textView11"
-                    app:layout_constraintTop_toTopOf="@+id/textView11"></TextView>
+                    app:layout_constraintTop_toBottomOf="@+id/thong_tin_sp"></TextView>
 
                 <TextView
                     android:id="@+id/textView12"
@@ -269,16 +270,18 @@
                     android:layout_marginTop="8dp"
                     android:text="Công ty phát hành"
                     android:textColor="#000000"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_showdetail_ctyphathanh"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textView11"></TextView>
+                    app:layout_constraintTop_toTopOf="@+id/tv_showdetail_ctyphathanh"></TextView>
 
                 <TextView
                     android:id="@+id/tv_showdetail_ctyphathanh"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="CT00133"
                     android:textColor="#000000"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/tv_showdetail_masach"
                     app:layout_constraintTop_toBottomOf="@+id/tv_showdetail_masach"></TextView>
 
@@ -286,19 +289,20 @@
                     android:id="@+id/textView13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:text="Author"
                     android:textColor="#000000"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_showdetail_author"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textView12"></TextView>
+                    app:layout_constraintTop_toTopOf="@+id/tv_showdetail_author"></TextView>
 
                 <TextView
                     android:id="@+id/tv_showdetail_author"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="Trương Hữu Thắng"
                     android:textColor="#000000"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/tv_showdetail_ctyphathanh"
                     app:layout_constraintTop_toBottomOf="@+id/tv_showdetail_ctyphathanh"></TextView>
 
@@ -306,38 +310,41 @@
                     android:id="@+id/textView18"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:text="Nhà xuất bản"
                     android:textColor="#000000"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_showdetail_nhaxuatban"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textView13"></TextView>
+                    app:layout_constraintTop_toBottomOf="@+id/tv_showdetail_author"></TextView>
 
                 <TextView
                     android:id="@+id/tv_showdetail_nhaxuatban"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="NXB Kim Đồng"
                     android:textColor="#000000"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/tv_showdetail_author"
                     app:layout_constraintTop_toBottomOf="@+id/tv_showdetail_author"></TextView>
 
                 <TextView
+                    android:id="@+id/textView33"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:text="Ngày xuất bản"
                     android:textColor="#000000"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_showdetail_ngayxuatban"
                     app:layout_constraintStart_toStartOf="@+id/textView18"
-                    app:layout_constraintTop_toBottomOf="@+id/textView18"></TextView>
+                    app:layout_constraintTop_toTopOf="@+id/tv_showdetail_ngayxuatban"></TextView>
 
                 <TextView
                     android:id="@+id/tv_showdetail_ngayxuatban"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="2019"
                     android:textColor="#000000"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/tv_showdetail_author"
                     app:layout_constraintTop_toBottomOf="@+id/tv_showdetail_nhaxuatban"></TextView>
 

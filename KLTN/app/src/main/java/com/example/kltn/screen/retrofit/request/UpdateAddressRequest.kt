@@ -1,6 +1,7 @@
 package com.example.kltn.screen.retrofit.request
 
-data class AddAddressRequest(
+data class UpdateAddressRequest(
+    val maSo:Int,
     val maKhachHang: String,
     val diaChi: String,
     val soDienThoai: String,

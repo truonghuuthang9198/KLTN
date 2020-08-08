@@ -38,5 +38,9 @@ class CartViewModel(application: Application) : AndroidViewModel(application) {
     {
         return cartRepository.checkExistList(pMaSach)
     }
+    fun deleteAll()
+    {
+        return cartRepository.deleteAll()
+    }
 
 }

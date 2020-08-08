@@ -3,12 +3,17 @@ package com.example.kltn.payment
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.kltn.R
+import com.example.kltn.screen.FormatData
 import com.paypal.android.sdk.payments.*
 import org.json.JSONException
 import java.math.BigDecimal
@@ -16,8 +21,11 @@ import java.math.BigDecimal
 
 class PaypalPaymentActivity : AppCompatActivity() {
     lateinit var buttonPay: Button
-    lateinit var editTextAmount: EditText
+    lateinit var editTextAmount: TextView
     lateinit var paymentAmount: String
+    lateinit var tvMoneyVND:TextView
+    private var moneyUSD:Double = 0.0
+    private lateinit var diachi:String
 
     companion object {
         const val PAYPAL_REQUEST_CODE: Int = 1
@@ -32,21 +40,31 @@ class PaypalPaymentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_paypal_payment)
+        setDialogFullScreen()
         buttonPay = findViewById(R.id.buttonPay)
         editTextAmount = findViewById(R.id.editTextAmount)
+        tvMoneyVND = findViewById(R.id.tvMoneyVND)
+        val intent = getIntent()
+        diachi = intent.getStringExtra("diachi")
+        var money = intent.getDoubleExtra("money",0.0)
+        tvMoneyVND.text = FormatData.formatMoneyVND(money)
+        moneyUSD = Math.round((money/23200.00)*100.00)/100.00
+
+
+
+        editTextAmount.text = moneyUSD.toString() + " $"
 
         buttonPay.setOnClickListener {
-            paymentAmount = editTextAmount.getText().toString();
+
 
             //Creating a paypalpayment
             val payment: PayPalPayment = PayPalPayment(
-                BigDecimal(paymentAmount), "USD", "Payment",
+                BigDecimal(moneyUSD), "USD", "Payment",
                 PayPalPayment.PAYMENT_INTENT_SALE
             )
 
             //Creating Paypal Payment activity intent
             val intent = Intent(this, PaymentActivity::class.java)
-
             //putting the paypal configuration to the intent
             intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
 
@@ -86,7 +104,8 @@ class PaypalPaymentActivity : AppCompatActivity() {
                         startActivity(
                             Intent(this, ConfirmationActivity::class.java)
                                 .putExtra("PaymentDetails", paymentDetails)
-                                .putExtra("PaymentAmount", paymentAmount)
+                                .putExtra("PaymentAmount", moneyUSD)
+                                .putExtra("diachi",diachi)
                         )
                     } catch (e: JSONException) {
                         Log.e("paymentExample", "an extremely unlikely failure occurred: ", e)
@@ -100,6 +119,14 @@ class PaypalPaymentActivity : AppCompatActivity() {
                     "An invalid Payment or PayPalConfiguration was submitted. Please see the docs."
                 )
             }
+        }
+    }
+    private fun setDialogFullScreen() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            this.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+            this.window?.statusBarColor = this.resources.getColor(R.color.colorPrimary)
+            this.window?.decorView?.systemUiVisibility =
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
         }
     }
 }

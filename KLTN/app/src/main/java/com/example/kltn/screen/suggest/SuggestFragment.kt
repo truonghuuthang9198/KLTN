@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
@@ -21,6 +22,8 @@ import com.example.kltn.screen.home.model.BookModel
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance
 import com.example.kltn.screen.retrofit.reponse.SachResponse
+import com.example.kltn.screen.retrofit.reponse.SuggestResponse
+import com.example.kltn.screen.retrofit.request.SuggestRequest
 import com.example.kltn.screen.suggest.adapter.SuggestAdapter
 import com.example.kltn.screen.suggest.model.SuggestModel
 import com.example.kltn.screen.suggest.roomsuggest.SuggestViewModel
@@ -37,6 +40,7 @@ class SuggestFragment : Fragment() {
     lateinit var recyclerviewSuggest: RecyclerView
     lateinit var suggestAdapter: SuggestAdapter
     lateinit var suggestViewModel: SuggestViewModel
+    lateinit var tv_null_suggest:TextView
 
     companion object {
         var listBook : ArrayList<BookModel> = ArrayList<BookModel>()
@@ -54,12 +58,28 @@ class SuggestFragment : Fragment() {
             activity,
             LinearLayoutManager.VERTICAL, false
         )
+        tv_null_suggest = view.findViewById(R.id.tv_null_suggest)
         recyclerviewSuggest.layoutManager = GridLayoutManager(activity, 2)
         var arrayListSuggest = ArrayList<SuggestModel>()
         suggestViewModel = ViewModelProviders.of(this).get(SuggestViewModel::class.java)
         arrayListSuggest = suggestViewModel.getList() as ArrayList<SuggestModel>
         listBook = ArrayList<BookModel>()
-        getListSuggest(arrayListSuggest[0].maTL)
+//        val list : List<String> = arrayListSuggest as List<String>
+        if(suggestViewModel.countKeySuggest()==2)
+        {
+            tv_null_suggest.visibility = View.GONE
+            recyclerviewSuggest.visibility = View.VISIBLE
+            val list = mutableListOf<String>()
+            arrayListSuggest.forEach {
+                list.add(it.maTL)
+            }
+            val suggestResquest = SuggestRequest(list)
+            getListSuggest(suggestResquest)
+        }
+        else {
+            tv_null_suggest.visibility = View.VISIBLE
+            recyclerviewSuggest.visibility = View.GONE
+        }
 
         Toast.makeText(
             activity!!, arrayListSuggest.toString(), Toast.LENGTH_LONG
@@ -67,18 +87,18 @@ class SuggestFragment : Fragment() {
 
         return view
     }
-    fun getListSuggest(theloai: String){
+    fun getListSuggest(suggestResquest: SuggestRequest){
         val service =
             RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
-        val call = service?.getSachTheoTL(theloai)
-        call?.enqueue(object : Callback<List<SachResponse>> {
-            override fun onFailure(call: Call<List<SachResponse>>, t: Throwable) {
+        val call = service?.getListSuggest(suggestResquest)
+        call?.enqueue(object : Callback<List<SuggestResponse>> {
+            override fun onFailure(call: Call<List<SuggestResponse>>, t: Throwable) {
 
             }
 
             override fun onResponse(
-                call: Call<List<SachResponse>>,
-                response: Response<List<SachResponse>>
+                call: Call<List<SuggestResponse>>,
+                response: Response<List<SuggestResponse>>
             ) {
                 response.body()!!.forEachIndexed { index, it ->
                     listBook.add(
@@ -91,13 +111,13 @@ class SuggestFragment : Fragment() {
                             it.hinhAnh,
                             it.kichThuoc,
                             it.loaiBia,
-                            it.congTyPhatHanh.tenCongTy,
+                            it.tenCongTy,
                             it.maSach,
-                            it.tacGia.tenTacGia,
-                            it.theLoai.tenTheLoai,
-                            it.theLoai.maTheLoai,
-                            it.ngayXuatBan,
-                            it.nhaXuatBan.tenNhaXuatBan,
+                            it.tenTacGia,
+                            it.tenTheLoai,
+                            it.maTheLoai,
+                            it.ngayXuatBan.toString(),
+                            it.tenNhaXuatBan,
                             it.soLuong,
                             it.soTrang,
                             it.tenSach,
@@ -106,7 +126,7 @@ class SuggestFragment : Fragment() {
                         )
                     )
                 }
-                suggestAdapter = SuggestAdapter(listBook)
+                suggestAdapter = SuggestAdapter(context,listBook)
                 recyclerviewSuggest.adapter = suggestAdapter
             }
         })

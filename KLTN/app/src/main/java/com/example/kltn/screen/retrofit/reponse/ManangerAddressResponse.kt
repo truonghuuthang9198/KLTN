@@ -11,7 +11,7 @@ data class ManangerAddressResponse(
     @SerializedName("maKhachHang")
     val maKhachHang: String,
     @SerializedName("maSo")
-    val maSo: String,
+    val maSo: Int,
     @SerializedName("phuong")
     val phuong: String,
     @SerializedName("quan")

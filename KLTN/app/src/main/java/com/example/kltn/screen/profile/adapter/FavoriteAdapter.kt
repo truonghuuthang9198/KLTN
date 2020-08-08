@@ -1,6 +1,7 @@
 package com.example.kltn.screen.profile.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kltn.DetailActivity
 import com.example.kltn.R
 import com.example.kltn.screen.FormatData
 import com.example.kltn.screen.event.EventFireUtil
@@ -59,7 +61,9 @@ class FavoriteAdapter internal constructor(var context: Context?, var favoriteMo
             EventFireUtil.fireEvent(onActionData,current)
         }
         holder.btnMuaNgay.setOnClickListener{
-
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra("deal",current)
+            context?.startActivity(intent)
         }
     }
 

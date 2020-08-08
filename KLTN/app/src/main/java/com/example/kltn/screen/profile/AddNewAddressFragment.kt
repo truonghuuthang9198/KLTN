@@ -103,7 +103,6 @@ class AddNewAddressFragment() : Fragment(), Parcelable, CityDialog.OnInputSelect
             val rd = Random()
             val soDC = rd.nextInt(101)
             val addAddressModel = AddAddressRequest(
-                soDC.toString(),
                 makh!!,
                 edt_diachinha_addnew_address.text.toString(),
                 edt_sdt_addnew_address.text.toString(),

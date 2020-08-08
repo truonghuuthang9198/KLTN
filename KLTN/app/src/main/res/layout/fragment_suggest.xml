@@ -25,9 +25,23 @@
         android:id="@+id/recyclerview_suggest"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_suggest"></androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/tv_null_suggest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Bạn chưa có gợi ý nào vui lòng xem vài sản phẩm để chúng tôi gợi ý cho bạn"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="@+id/recyclerview_suggest"
+        app:layout_constraintTop_toBottomOf="@+id/title_suggest" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

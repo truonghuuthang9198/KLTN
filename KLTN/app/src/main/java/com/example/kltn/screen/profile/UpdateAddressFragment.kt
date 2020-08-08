@@ -16,6 +16,7 @@ import com.example.kltn.screen.retrofit.request.AddAddressRequest
 import com.example.kltn.screen.retrofit.address_handle.CityModel
 import com.example.kltn.screen.retrofit.reponse.DeleteAddressResponse
 import com.example.kltn.screen.retrofit.reponse.UpdateAddressResponse
+import com.example.kltn.screen.retrofit.request.UpdateAddressRequest
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -98,7 +99,7 @@ class UpdateAddressFragment(var data: ManangerAddressModel) : Fragment(),CityDia
             {
                 loaiDiaChi = 3
             }
-            val addAddressModel = AddAddressRequest(
+            val updateAddressRequest = UpdateAddressRequest(
                 data.maSo,
                 data.maKH,
                 edt_diachinha_update_address.text.toString(),
@@ -114,7 +115,7 @@ class UpdateAddressFragment(var data: ManangerAddressModel) : Fragment(),CityDia
             var token = pref.getString("TokenLocal", "")
             val service =
                 RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
-            val call = service?.updateAddress("Bearer " + token, addAddressModel)
+            val call = service?.updateAddress("Bearer " + token, updateAddressRequest)
             call?.enqueue(object : Callback<UpdateAddressResponse> {
                 override fun onFailure(call: Call<UpdateAddressResponse>, t: Throwable) {
                     Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()

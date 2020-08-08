@@ -193,17 +193,43 @@
                     app:layout_constraintTop_toTopOf="parent"></TextView>
 
                 <RadioButton
-                    android:layout_width="300dp"
+                    android:id="@+id/rdb_giaohang"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/colorPrimary"
                     android:checked="true"
-                    android:padding="6dp"
-                    android:text="Giao hàng tiêu chuẩn: 15.000đ Ngày giao hàng: Thứ ba - 23/06"
                     android:textColor="#000000"
                     android:textSize="16sp"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDataShip"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_information_ship_1"></RadioButton>
+                    app:layout_constraintTop_toTopOf="@+id/tvShipCost"></RadioButton>
+
+                <TextView
+                    android:id="@+id/tvShipCost"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Giao hàng tiêu chuẩn: "
+                    android:textColor="#000000"
+                    android:layout_marginTop="8dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/rdb_giaohang"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_information_ship_1"></TextView>
+
+                <TextView
+                    android:id="@+id/tvDataShip"
+                    android:layout_width="0dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_height="wrap_content"
+                    android:text="Ngày giao hàng: "
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/rdb_giaohang"
+                    app:layout_constraintTop_toBottomOf="@+id/tvShipCost"></TextView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

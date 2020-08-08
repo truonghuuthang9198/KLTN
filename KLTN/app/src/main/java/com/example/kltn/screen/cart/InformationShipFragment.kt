@@ -46,8 +46,8 @@ class InformationShipFragment : Fragment() {
     lateinit var btn_add_address_other: LinearLayout
     lateinit var chk_box_ghichu: CheckBox
     private var onActionData: OnActionData<ManangerAddressModel>? = null
-    lateinit var manangerAddressModel: ManangerAddressModel
     lateinit var arrayList: ArrayList<ManangerAddressModel>
+    private var diachi:String =""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -88,17 +88,6 @@ class InformationShipFragment : Fragment() {
         //setUpTestRecyclerview()
         setUpRecyclerview()
         return view
-    }
-
-    private fun loadFragmentNotBackStack(fragment: Fragment?, tag: String): Boolean {
-        if (fragment != null) {
-            (context as FragmentActivity).supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.frame_layout, fragment, tag)
-                .commit()
-            return true
-        }
-        return false
     }
 
 
@@ -150,12 +139,24 @@ class InformationShipFragment : Fragment() {
                         )
                     }
                     arrayList.first().chose = true
+                    if(diachi=="")
+                    {
+                        diachi =  arrayList.first().address + ", " + arrayList.first().xa + ", " + arrayList.first().quan + ", " + arrayList.first().tinh + ", Việt Nam"
+                    }
 
                     onActionData = object : OnActionData<ManangerAddressModel> {
                         override fun onAction(data: ManangerAddressModel) {
                             arrayList.forEach {
-                                it.chose = it.id == data.id
+                                if(it.id == data.id) {
+                                    it.chose = true
+                                    diachi =  it.address + ", " + it.xa + ", " + it.quan + ", " + it.tinh + ", Việt Nam"
+                                }
+                                else
+                                {
+                                    it.chose = false
+                                }
                             }
+
                         }
                     }
                     addressAdapter = AddressShipAdapter(context, arrayList, onActionData!!)
@@ -171,7 +172,6 @@ class InformationShipFragment : Fragment() {
         val customView =
             LayoutInflater.from(context).inflate(R.layout.dialog_check_addressship, null, false)
         val dialog = AlertDialog.Builder(context!!).setView(customView).create()
-
         var isChosse: Boolean = false
         arrayList.forEach {
             if (it.chose) {
@@ -182,8 +182,9 @@ class InformationShipFragment : Fragment() {
                 dialog.btn_huy_dialog_login.setOnClickListener {
                     dialog.dismiss()
                 }
+                var tinh = it.tinh
                 dialog.btn_ok_dialog_login.setOnClickListener {
-                    loadFragment(InformationPayFragment(), "InformationPayFragment")
+                    loadFragment(InformationPayFragment(diachi,tinh), "InformationPayFragment")
                     dialog.dismiss()
                 }
             }
@@ -191,7 +192,6 @@ class InformationShipFragment : Fragment() {
         if (!isChosse) {
             Toast.makeText(activity, "Vui lòng chọn địa chỉ thanh toán", Toast.LENGTH_LONG).show()
         }
-
     }
 }
 

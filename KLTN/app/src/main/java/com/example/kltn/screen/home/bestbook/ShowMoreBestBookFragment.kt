@@ -37,6 +37,7 @@ class ShowMoreBestBookFragment(val maCategory: String, val maTL: String) : Fragm
     lateinit var btnFilter: ConstraintLayout
     lateinit var btn_back_showmore: ImageView
     lateinit var btn_back_home_showmore: ImageView
+    private var check=0
     private var onActionData: OnActionData<FilterTheLoaiModel>? = null
 
 
@@ -46,9 +47,9 @@ class ShowMoreBestBookFragment(val maCategory: String, val maTL: String) : Fragm
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_showmore_bestbook, container, false)
-        var check = 0
         setUpView(view)
         setupRecyclerviewFilter()
+
         btn_back_showmore.setOnClickListener {
             if (fragmentManager!!.backStackEntryCount > 0) {
                 fragmentManager!!.popBackStack()
@@ -131,6 +132,9 @@ class ShowMoreBestBookFragment(val maCategory: String, val maTL: String) : Fragm
                             override fun onAction(data: FilterTheLoaiModel) {
                                 titleFilter.text = data.tenTheLoai
                                 selectTheLoai(data.maTheLoai)
+                                constraint.visibility = View.GONE
+                                recyclerViewFilter.visibility = View.GONE
+                                check = 0
                             }
                         }
 

@@ -10,10 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
 import com.example.kltn.screen.cart.model.AddressShipModel
 import com.example.kltn.screen.cart.model.MethodPayModel
+import com.example.kltn.screen.event.EventFireUtil
+import com.example.kltn.screen.event.OnActionData
+import com.example.kltn.screen.profile.model.ManangerAddressModel
 
-class MethodPayAdapter internal constructor(var context: Context?, var methodPayModel: ArrayList<MethodPayModel>) :
+class MethodPayAdapter internal constructor(var context: Context?, var methodPayModel: ArrayList<MethodPayModel>,var onActionData: OnActionData<MethodPayModel>) :
     RecyclerView.Adapter<MethodPayAdapter.MethodPayViewHolder>() {
-    private var lastSelectedPosition = -1
+    private var lastSelectedPosition = 0
     inner class MethodPayViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameSdt: TextView = itemView.findViewById(R.id.tv_name_methodpay)
         val radioButton: RadioButton = itemView.findViewById(R.id.rdbtn_methodpay)
@@ -32,15 +35,15 @@ class MethodPayAdapter internal constructor(var context: Context?, var methodPay
         val current = methodPayModel[position]
         holder.nameSdt.text = current.name
         holder.itemView.setOnClickListener {
+            EventFireUtil.fireEvent(onActionData, current)
             lastSelectedPosition = position
             notifyDataSetChanged()
         }
         holder.radioButton.isChecked = (lastSelectedPosition == position)
         holder.radioButton.setOnClickListener {
+            EventFireUtil.fireEvent(onActionData, current)
             lastSelectedPosition = position
             notifyDataSetChanged()
         }
     }
-
-
 }

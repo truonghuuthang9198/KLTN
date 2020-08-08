@@ -66,6 +66,7 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
     lateinit var pricebook: TextView
     lateinit var btn_showdetail_xemthem: Button
     lateinit var priceOriginBook: TextView
+
     lateinit var tv_showdetail_masach: TextView
     lateinit var tv_showdetail_congtyphathanh: TextView
     lateinit var tv_showdetail_author: TextView
@@ -166,11 +167,7 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         tv_showdetail_congtyphathanh.text = bookModel.maCongTy
         tv_showdetail_author.text = bookModel.maTacGia
         tv_showdetail_nhaxuatban.text = bookModel.maNhaXuatBan
-        tv_showdetail_ngayxuatban.text = convertDateFormat(
-            bookModel.ngayXuatBan,
-            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"),
-            SimpleDateFormat("dd-MM-yyyy")
-        )
+        tv_showdetail_ngayxuatban.text = bookModel.ngayXuatBan.toString()
 
         tv_showdetail_ghichu.text = bookModel.ghiChu
         ratingBar.rating = bookModel.soSao.toFloat()

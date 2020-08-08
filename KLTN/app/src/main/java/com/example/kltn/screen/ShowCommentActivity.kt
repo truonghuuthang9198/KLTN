@@ -41,6 +41,7 @@ class ShowCommentActivity() : AppCompatActivity() {
         setContentView(R.layout.activity_customer_comment)
         setDialogFullScreen()
         val intent = getIntent()
+        btn_back_activity = findViewById(R.id.btn_back_activity)
         progressBar_5star = findViewById(R.id.progressBar_5star)
         progressBar_4star = findViewById(R.id.progressBar_4star)
         progressBar_3star = findViewById(R.id.progressBar_3star)

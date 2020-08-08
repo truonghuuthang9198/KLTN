@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
 import com.example.kltn.screen.FormatData
 import com.example.kltn.screen.FormatData.Companion.convertDateFormat
+import com.example.kltn.screen.home.model.BookModel
 import com.example.kltn.screen.profile.model.HistoryBillModel
 import com.example.kltn.screen.profile.model.HistoryDetailBillModel
 import com.example.kltn.screen.retrofit.reponse.HistoryResponse
@@ -52,10 +53,16 @@ class HistoryBillAdapter internal constructor(
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: HistoryBillViewHolder, position: Int) {
         var check: Int = 1
-        val arrayList = ArrayList<HistoryDetailBillModel>()
+        val arrayList = ArrayList<BookModel>()
         val current = listHistory[position]
         holder.tv_id_donhang.append(current.idHD)
-        holder.tv_ngaydathang.append(convertDateFormat(current.ngayLap,SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"),SimpleDateFormat("dd/MM/yyyy")))
+        holder.tv_ngaydathang.append(
+            convertDateFormat(
+                current.ngayLap,
+                SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"),
+                SimpleDateFormat("dd/MM/yyyy")
+            )
+        )
         holder.tv_thanhtien.append(FormatData.formatMoneyVND(current.thanhTien))
         holder.recyclerview_detail_history_bill.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -64,7 +71,7 @@ class HistoryBillAdapter internal constructor(
             if (it.maHoaDon == current.idHD) {
                 it.chiTietHoaDons.forEach {
                     arrayList.add(
-                        HistoryDetailBillModel(
+                        BookModel(
                             0,
                             0,
                             it.sach.ghiChu,
@@ -77,12 +84,14 @@ class HistoryBillAdapter internal constructor(
                             it.sach.maSach,
                             it.sach.tacGia.tenTacGia,
                             it.sach.theLoai.tenTheLoai,
+                            it.sach.maTheLoai,
                             it.sach.ngayXuatBan,
                             it.sach.nhaXuatBan.tenNhaXuatBan,
+                            it.sach.soLuong,
                             it.sach.soTrang,
                             it.sach.tenSach,
                             it.sach.tinhTrang,
-                            it.sach.soSao, it.donGia, it.soLuong
+                            it.sach.soSao
                         )
                     )
                 }

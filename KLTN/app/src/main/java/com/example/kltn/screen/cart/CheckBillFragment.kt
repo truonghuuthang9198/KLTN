@@ -2,6 +2,7 @@ package com.example.kltn.screen.cart
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -18,7 +19,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kltn.DetailActivity
 import com.example.kltn.R
+import com.example.kltn.payment.PaypalPaymentActivity
 import com.example.kltn.screen.FormatData
 import com.example.kltn.screen.cart.adapter.CheckListBillAdapter
 import com.example.kltn.screen.cart.model.CartModel
@@ -33,14 +36,15 @@ import kotlinx.android.synthetic.main.custom_dialog_login.*
 import kotlin.collections.ArrayList
 
 @Suppress("DEPRECATION")
-class CheckBillFragment : Fragment() {
+class CheckBillFragment(val PTTT: Int,val diachi:String,val tongTienFinal:Double) : Fragment() {
     private lateinit var cartViewModel: CartViewModel
     lateinit var recyclerViewCheckBill: RecyclerView
     lateinit var tv_tongtien: TextView
     lateinit var checkListBillAdapter: CheckListBillAdapter
     lateinit var btnBack: ImageView
     lateinit var btnCheckBill: Button
-    var sendData: SendData? = null
+    var tongtien: Double = 0.0
+
     val arrayListCheckBill = ArrayList<CheckBillModel>()
     @SuppressLint("NewApi")
     override fun onCreateView(
@@ -68,13 +72,13 @@ class CheckBillFragment : Fragment() {
     fun setUpRecyclerView() {
         recyclerViewCheckBill.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        var tongtien: Double = 0.0
+
         cartViewModel = ViewModelProviders.of(this).get(CartViewModel::class.java)
         val arrayListCart = cartViewModel.getList() as ArrayList<CartModel>
         arrayListCart.forEach {
             tongtien += (it.giaTien * it.soLuong)
         }
-        tv_tongtien.text = FormatData.formatMoneyVND(tongtien)
+        tv_tongtien.text = FormatData.formatMoneyVND(tongTienFinal)
 
         arrayListCart.forEach {
             arrayListCheckBill.add(
@@ -110,10 +114,10 @@ class CheckBillFragment : Fragment() {
             makh.toString(),
             java.time.LocalDate.now().toString(),
             tongtienHD,
+            diachi,
             arrayList
         )
         database.child(billId!!).setValue(hoaDon).addOnCompleteListener {
-            Toast.makeText(context,"Đơn hàng của bạn đã được gửi đi !!!",Toast.LENGTH_LONG).show()
         }
     }
 
@@ -127,19 +131,32 @@ class CheckBillFragment : Fragment() {
             dialog.dismiss()
         }
         dialog.btn_ok_dialog_login.setOnClickListener {
-            addBillToFireBase()
-            sendData?.ChangeStateBottomNavigation(3)
+            if (PTTT == 2) {
+                val intent = Intent(context, PaypalPaymentActivity::class.java)
+                intent.putExtra("diachi",diachi)
+                intent.putExtra("money",tongtien)
+                startActivity(intent)
+            }
+            else
+            {
+                addBillToFireBase()
+                loadFragment(ConfirmPayFragment())
+            }
             dialog.dismiss()
         }
     }
 
-    override fun onAttach(activity: Activity) {
-        super.onAttach(activity)
-        try {
-            sendData = activity as SendData
-        } catch (e: ClassCastException) {
-            throw ClassCastException("$activity must implement onSomeEventListener")
+
+    private fun loadFragment(fragment: Fragment?): Boolean {
+        if (fragment != null) {
+            activity!!.supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.frame_layout, fragment)
+                .addToBackStack(null)
+                .commit()
+            return true
         }
+        return false
     }
 
 }

@@ -27,6 +27,7 @@ class TabShowMoreDealFragment(val tabId: Int) : Fragment() {
     lateinit var constraint: ConstraintLayout
     lateinit var btnFilter: ConstraintLayout
     private var onActionData: OnActionData<FilterModel>? = null
+    private var check = 0
 
 //    companion object {
 //
@@ -44,7 +45,6 @@ class TabShowMoreDealFragment(val tabId: Int) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var check = 0
 
         recyclerViewSMDeal = view.findViewById(R.id.recyclerview_show_more_deal)
         constraint = view.findViewById(R.id.constraint_visible)
@@ -174,6 +174,9 @@ class TabShowMoreDealFragment(val tabId: Int) : Fragment() {
         onActionData = object : OnActionData<FilterModel> {
             override fun onAction(data: FilterModel) {
                 titleFilter.text = data.titleFilter
+                recyclerViewFilter.visibility = View.GONE
+                constraint.visibility = View.GONE
+                check =0
             }
         }
         filterAdapter = FilterAdapter(context, arrrayListFilter, onActionData!!, tabId)
