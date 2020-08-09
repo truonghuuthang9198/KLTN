@@ -65,7 +65,7 @@ class SuggestFragment : Fragment() {
         arrayListSuggest = suggestViewModel.getList() as ArrayList<SuggestModel>
         listBook = ArrayList<BookModel>()
 //        val list : List<String> = arrayListSuggest as List<String>
-        if(suggestViewModel.countKeySuggest()==2)
+        if(suggestViewModel.countKeySuggest()<=3)
         {
             tv_null_suggest.visibility = View.GONE
             recyclerviewSuggest.visibility = View.VISIBLE

@@ -1,5 +1,6 @@
 package com.example.kltn.screen.home.adapter
 
+import android.content.Intent
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kltn.DetailActivity
 import com.example.kltn.R
 import com.example.kltn.screen.FormatData
 import com.example.kltn.screen.home.model.BookModel
@@ -28,9 +30,15 @@ class ShowMoreDealAdapter internal constructor(var showMoreBookModel: ArrayList<
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowMoreDealViewHolder {
         val Context = parent.context
         val layoutInflater = LayoutInflater.from(Context)
-
         val cellForRow = layoutInflater.inflate(R.layout.recyclerview_item_show_more_deal,parent,false)
+
         val ShowMoreDealViewHolder = ShowMoreDealViewHolder(cellForRow)
+        ShowMoreDealViewHolder.itemView.setOnClickListener {
+            var dealModel = showMoreBookModel.get(ShowMoreDealViewHolder.adapterPosition)
+            val intent = Intent(Context, DetailActivity::class.java)
+            intent.putExtra("deal",dealModel)
+            Context.startActivity(intent)
+        }
         return ShowMoreDealViewHolder
     }
 

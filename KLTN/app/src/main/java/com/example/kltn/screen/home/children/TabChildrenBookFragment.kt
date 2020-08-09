@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
 import com.example.kltn.screen.home.adapter.ChildrenBookAdapter
 import com.example.kltn.screen.home.adapter.DealAdapter
+import com.example.kltn.screen.home.adapter.EconomicAdapter
 import com.example.kltn.screen.home.model.BookModel
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance
@@ -30,6 +31,7 @@ class TabChildrenBookFragment(val tabId: Int) : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.tab_fragment_childrenbook, container, false)
         recycleviewChildrenBook = view.findViewById(R.id.recyclerview_childrenbook)
+        recycleviewChildrenBook.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
         progressBarHolder = view.findViewById(R.id.progressBarHolder)
         loadListSach()
         return view
@@ -38,7 +40,7 @@ class TabChildrenBookFragment(val tabId: Int) : Fragment() {
     private fun loadListSach() {
         progressBarHolder.visibility = View.VISIBLE
         val service = RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
-        val call = service?.getListSach()
+        val call = service?.getSachTheoTL("TL003")
         call?.enqueue(object : Callback<List<SachResponse>> {
             override fun onFailure(call: Call<List<SachResponse>>, t: Throwable) {
                 Log.d("ThangTruong", t.message)
@@ -86,7 +88,7 @@ class TabChildrenBookFragment(val tabId: Int) : Fragment() {
             )
             id++
             if (id%5 == 0) {
-                if(tabid<2) {
+                if(tabid<3) {
                     tabid++
                 }
             }

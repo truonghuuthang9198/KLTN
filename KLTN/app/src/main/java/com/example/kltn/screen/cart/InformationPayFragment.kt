@@ -40,15 +40,17 @@ class InformationPayFragment(val diachi:String,val tinh:String) : Fragment() {
     private var onActionData: OnActionData<MethodPayModel>? = null
     private lateinit var cartViewModel: CartViewModel
     private var PTTT: Int = 0
-    private var tongtien: Double = 0.0
-    private var phiship:Double = 0.0
-    private var ngaygiao:Int = 0
-    private var tongtienFinal:Double = 0.0
+    private var arrayList = ArrayList<MethodPayModel>()
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        var tongtien: Double = 0.0
+        var phiship:Double = 0.0
+        var ngaygiao:Int = 0
+        var tongtienFinal:Double = 0.0
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_information_pay, container, false)
         backButton = view.findViewById(R.id.btn_back_information_pay)
@@ -91,7 +93,7 @@ class InformationPayFragment(val diachi:String,val tinh:String) : Fragment() {
                 ngaygiao = 3
             }
         }
-        tongtienFinal = tongtien - phiship
+        tongtienFinal = tongtien + phiship
         tvShipCost.append(FormatData.formatMoneyVND(phiship))
         tvDateShip.append(FormatData.convertDateFormat(java.time.LocalDate.now().plusDays(ngaygiao.toLong()).toString(),
             SimpleDateFormat("yyyy-MM-dd"),
@@ -127,17 +129,33 @@ class InformationPayFragment(val diachi:String,val tinh:String) : Fragment() {
     {
         recyclerviewMethodPay.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        val arrayList = ArrayList<MethodPayModel>()
-        arrayList.add(MethodPayModel(0,"Thanh toán bằng tiền mặt khi nhận hàng"))
-        arrayList.add(MethodPayModel(1,"Chuyển khoản ngân hàng"))
-        arrayList.add(MethodPayModel(2,"Thanh toán bằng PayPal"))
-        arrayList[0].selectedState = true
+        if(arrayList.isEmpty()) {
+            arrayList.add(MethodPayModel(0, "Thanh toán bằng tiền mặt khi nhận hàng",true))
+            arrayList.add(MethodPayModel(1, "Chuyển khoản ngân hàng"))
+            arrayList.add(MethodPayModel(2, "Thanh toán bằng PayPal"))
+        }
+//        val size = arrayList.size
+//        var dem:Int =0
+//        arrayList.forEach {
+//            if(it.selectedState == false)
+//            {
+//                dem++
+//                if (dem == size)
+//                {
+//                    arrayList[0].selectedState = true
+//                }
+//            }
+//        }
         onActionData = object : OnActionData<MethodPayModel> {
             override fun onAction(data: MethodPayModel) {
                 arrayList.forEach {
                     if(it.id == data.id) {
                         it.selectedState = true
                         PTTT = it.id
+                    }
+                    else
+                    {
+                        it.selectedState = false
                     }
                 }
             }

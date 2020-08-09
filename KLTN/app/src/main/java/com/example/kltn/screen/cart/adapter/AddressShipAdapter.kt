@@ -19,7 +19,6 @@ import com.example.kltn.screen.profile.model.ManangerAddressModel
 
 class AddressShipAdapter internal constructor(var context: Context?, var addressShipModel: ArrayList<ManangerAddressModel>,var onActionData: OnActionData<ManangerAddressModel>) :
     RecyclerView.Adapter<AddressShipAdapter.AddressShipViewHolder>() {
-    private var lastSelectedPosition = 0
     inner class AddressShipViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameSdt: TextView = itemView.findViewById(R.id.tv_name_sdt_diachigiaohang)
         val address: TextView = itemView.findViewById(R.id.tv_diachi_diachigiaohang)
@@ -46,13 +45,11 @@ class AddressShipAdapter internal constructor(var context: Context?, var address
 //        EventFireUtil.fireEvent(onActionData, addressShipModel[0])
         holder.itemView.setOnClickListener {
             EventFireUtil.fireEvent(onActionData, current)
-            lastSelectedPosition = position
             notifyDataSetChanged()
         }
-        holder.radioButton.isChecked = (lastSelectedPosition == position)
+        holder.radioButton.isChecked = current.chose == true
         holder.radioButton.setOnClickListener {
             EventFireUtil.fireEvent(onActionData, current)
-            lastSelectedPosition = position
             notifyDataSetChanged()
         }
     }

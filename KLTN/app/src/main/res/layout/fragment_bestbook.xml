@@ -4,59 +4,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:scaleType="fitXY"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/poster_bestbook"
+        android:id="@+id/poster_bestbook"></ImageView>
 
-    <TextView
-        android:id="@+id/title_bestbook"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="10dp"
-        android:text="BEST BOOKS OF JULY"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        android:textStyle="bold"
+        android:padding="6dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/poster_bestbook">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_bestbook"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="8dp"
-        android:animateLayoutChanges="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_bestbook"
-        app:tabBackground="@drawable/custom_tablayout"
-        app:tabIndicatorColor="@null"
-        app:tabMode="scrollable"
-        app:tabPaddingStart="10dp"
-        app:tabSelectedTextColor="#FFB90F"
-        app:tabTextColor="#000000">
-    </com.google.android.material.tabs.TabLayout>
+        <TextView
+            android:id="@+id/title_bestbook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="BEST BOOKS OF AUGUST"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></TextView>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewpager_bestbook"
-        android:layout_width="match_parent"
-        android:layout_height="280dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tab_bestbook"></androidx.viewpager.widget.ViewPager>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_bestbook"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="8dp"
+            android:animateLayoutChanges="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_bestbook"
+            app:tabBackground="@drawable/custom_tablayout"
+            app:tabIndicatorColor="@null"
+            app:tabMode="scrollable"
+            app:tabPaddingStart="10dp"
+            app:tabSelectedTextColor="#FFB90F"
+            app:tabTextColor="#000000"></com.google.android.material.tabs.TabLayout>
 
-    <Button
-        android:id="@+id/btn_showmore_bestbook"
-        android:layout_width="180dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:background="@drawable/custom_button_dangnhap"
-        android:text="Xem thêm"
-        android:textSize="16sp"
-        android:layout_marginBottom="8dp"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewpager_bestbook" />
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager_bestbook"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tab_bestbook"></androidx.viewpager.widget.ViewPager>
+
+        <Button
+            android:id="@+id/btn_showmore_bestbook"
+            android:layout_width="180dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/custom_button_dangnhap"
+            android:text="Xem thêm"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewpager_bestbook" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

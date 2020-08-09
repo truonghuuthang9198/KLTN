@@ -20,7 +20,7 @@ import kotlin.collections.ArrayList
 
 class FilterAdapter internal constructor(
     var context: Context?,
-    var FilterModel: ArrayList<FilterModel>, var onActionData: OnActionData<FilterModel>, var tabId: Int
+    var FilterModel: ArrayList<FilterModel>, var onActionData: OnActionData<FilterModel>
 ) : RecyclerView.Adapter<FilterAdapter.FilterViewHolder>() {
     companion object {
         var title:String = "Bán Chạy Tuần"

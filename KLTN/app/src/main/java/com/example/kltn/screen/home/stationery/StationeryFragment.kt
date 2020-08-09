@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.kltn.R
+import com.example.kltn.screen.home.ShowMoreTopicFragment
 import com.google.android.material.tabs.TabLayout
 
 class StationeryFragment() : Fragment() {
@@ -27,7 +28,7 @@ class StationeryFragment() : Fragment() {
         setStatePageAdapter()
         btnShowMore.setOnClickListener()
         {
-//            loadFragment(ShowMoreDealFragment())
+            loadFragment(ShowMoreTopicFragment("TL0015"))
         }
         return view
     }
@@ -61,15 +62,15 @@ class StationeryFragment() : Fragment() {
         viewPager!!.adapter=myViewPageStateAdapter
         tabLayout!!.setupWithViewPager(viewPager,true)
     }
-//    private fun loadFragment(fragment: Fragment?): Boolean {
-//        if (fragment != null) {
-//            activity!!.supportFragmentManager
-//                .beginTransaction()
-//                .replace(R.id.frame_layout, fragment,"ShowMoreDealFragment")
-//                .addToBackStack(null)
-//                .commit()
-//            return true
-//        }
-//        return false
-//    }
+    private fun loadFragment(fragment: Fragment?): Boolean {
+        if (fragment != null) {
+            activity!!.supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.frame_layout, fragment,"ShowMoreDealFragment")
+                .addToBackStack(null)
+                .commit()
+            return true
+        }
+        return false
+    }
 }

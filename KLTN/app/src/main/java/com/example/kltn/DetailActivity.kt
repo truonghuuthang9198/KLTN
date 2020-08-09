@@ -449,7 +449,7 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         var namsao:Float = (response.body()!![0].namSao.toFloat()/demcmt.toFloat()*100)
         var sumStar = (5*response.body()!![0].namSao+4*response.body()!![0].bonSao+3*response.body()!![0].baSao+2*response.body()!![0].haiSao+response.body()!![0].motSao)
         var tbStar: Float = sumStar.toFloat()/demcmt.toFloat()
-        sum_star.text = (Math.round(tbStar*100).toFloat()/100).toString()
+        sum_star.text = (Math.round(tbStar*10).toFloat()/10).toString()
         rating_comment.rating = Math.round(tbStar*100).toFloat()/100
         progressBar_1star.secondaryProgress = motsao.toInt()
         progressBar_2star.secondaryProgress = haisao.toInt()

@@ -179,7 +179,7 @@ class TabShowMoreDealFragment(val tabId: Int) : Fragment() {
                 check =0
             }
         }
-        filterAdapter = FilterAdapter(context, arrrayListFilter, onActionData!!, tabId)
+        filterAdapter = FilterAdapter(context, arrrayListFilter, onActionData!!)
         recyclerViewFilter.adapter = filterAdapter
     }
 

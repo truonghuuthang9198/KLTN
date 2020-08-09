@@ -1,5 +1,6 @@
 package com.example.kltn.screen
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -8,6 +9,7 @@ import android.widget.*
 import android.widget.RatingBar.OnRatingBarChangeListener
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.example.kltn.MainActivity
 import com.example.kltn.R
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance
@@ -48,8 +50,10 @@ class AddCommentActivity() : AppCompatActivity() {
         btn_add_comment = findViewById(R.id.btn_add_comment)
         val masach = intent.getStringExtra("maSach")
         btn_add_comment.setOnClickListener {
-//            val commentRequest = CommentRequest(masach,edt_hoTen.text.toString(),sosao,edt_nhanxet.text.toString(),java.time.LocalDate.now().t
-//            addComment()
+            val commentRequest = CommentRequest(masach,edt_hoTen.text.toString(),sosao,edt_nhanxet.text.toString(),java.time.LocalDate.now().toString())
+            addComment(commentRequest)
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
         }
         setDialogFullScreen()
     }
@@ -71,12 +75,14 @@ class AddCommentActivity() : AppCompatActivity() {
             override fun onFailure(call: Call<CommentResponse>, t: Throwable) {
 
             }
-
             override fun onResponse(
                 call: Call<CommentResponse>,
                 response: Response<CommentResponse>
             ) {
-
+                if(response.isSuccessful) {
+                    Toast.makeText(this@AddCommentActivity, "Cảm ơn bạn đã đóng góp nhận xét", Toast.LENGTH_LONG)
+                        .show()
+                }
             }
         })
     }

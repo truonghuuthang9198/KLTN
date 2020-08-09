@@ -9,11 +9,11 @@
         android:id="@+id/toolbarSearch"
         layout="@layout/custom_toolbar_search"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"></include>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"></include>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/btn_filter_category"
+        android:id="@+id/btn_fillter_book"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
-            android:text="Kinh tế"
+            android:text="Chọn lọc tìm kiếm"
             android:textColor="#000000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView5"
@@ -55,7 +55,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_show_more_book"
+        android:id="@+id/recyclerview_book"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="#F2F2F2"
@@ -64,7 +64,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_filter_category" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_fillter_book" />
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_visible_showmore"
         android:layout_width="match_parent"
@@ -74,14 +74,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_filter_category"></androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toBottomOf="@+id/btn_fillter_book"></androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_filter_category"
+        android:id="@+id/recyclerview_filter_book"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_recycleview_cornerbottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/recyclerview_show_more_book"></androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintTop_toTopOf="@+id/recyclerview_book"></androidx.recyclerview.widget.RecyclerView>
+    <ProgressBar
+        android:id="@+id/progressBarHolder"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:background="#00000000"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/oranges"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

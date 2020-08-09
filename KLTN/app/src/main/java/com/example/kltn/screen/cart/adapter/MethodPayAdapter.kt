@@ -16,7 +16,6 @@ import com.example.kltn.screen.profile.model.ManangerAddressModel
 
 class MethodPayAdapter internal constructor(var context: Context?, var methodPayModel: ArrayList<MethodPayModel>,var onActionData: OnActionData<MethodPayModel>) :
     RecyclerView.Adapter<MethodPayAdapter.MethodPayViewHolder>() {
-    private var lastSelectedPosition = 0
     inner class MethodPayViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameSdt: TextView = itemView.findViewById(R.id.tv_name_methodpay)
         val radioButton: RadioButton = itemView.findViewById(R.id.rdbtn_methodpay)
@@ -36,13 +35,11 @@ class MethodPayAdapter internal constructor(var context: Context?, var methodPay
         holder.nameSdt.text = current.name
         holder.itemView.setOnClickListener {
             EventFireUtil.fireEvent(onActionData, current)
-            lastSelectedPosition = position
             notifyDataSetChanged()
         }
-        holder.radioButton.isChecked = (lastSelectedPosition == position)
+        holder.radioButton.isChecked = current.selectedState == true
         holder.radioButton.setOnClickListener {
             EventFireUtil.fireEvent(onActionData, current)
-            lastSelectedPosition = position
             notifyDataSetChanged()
         }
     }

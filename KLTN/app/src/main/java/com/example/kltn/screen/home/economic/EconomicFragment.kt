@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.kltn.R
+import com.example.kltn.screen.home.ShowMoreTopicFragment
 import com.example.kltn.screen.home.bestbook.ShowMoreBestBookFragment
 import com.google.android.material.tabs.TabLayout
 
@@ -29,7 +30,7 @@ class EconomicFragment() : Fragment() {
         setStatePageAdapter()
         btnShowMore.setOnClickListener()
         {
-            loadFragment(ShowMoreBestBookFragment("DM001", "TL002"))
+            loadFragment(ShowMoreTopicFragment("TL002"))
         }
         return view
     }

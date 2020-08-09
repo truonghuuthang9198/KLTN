@@ -68,4 +68,7 @@ interface GetDataService {
 
     @POST("NhanXet")
     fun addComment(@Body commentRequest: CommentRequest):Call<CommentResponse>
+
+    @POST("ThongKe/{id}")
+    fun getListThongKe(@Path("id") id:String,@Body statisticalRequest: StatisticalRequest):Call<List<StatisticalResponse>>
 }

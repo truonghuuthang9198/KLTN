@@ -5,59 +5,77 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".screen.home.deal.DealFragment">
+    <ImageView
+        android:id="@+id/poster_tlkn"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:scaleType="fitXY"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/poster_tamlykynang"></ImageView>
 
-    <TextView
-        android:id="@+id/title_psychological_skills"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="10dp"
-        android:text="TÂM LÝ - KỸ NĂNG"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        android:textStyle="bold"
+        android:padding="6dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/poster_tlkn">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_psychological_skills"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_psychological_skills"
-        app:tabBackground="@drawable/custom_tablayout"
-        app:tabIndicatorColor="@null"
-        app:tabMode="scrollable"
-        app:tabPaddingStart="10dp"
-        app:tabSelectedTextColor="#FFB90F"
-        app:tabTextColor="#000000">
+        <TextView
+            android:id="@+id/title_psychological_skills"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="10dp"
+            android:text="TÂM LÝ - KỸ NĂNG"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></TextView>
 
-    </com.google.android.material.tabs.TabLayout>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_psychological_skills"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_psychological_skills"
+            app:tabBackground="@drawable/custom_tablayout"
+            app:tabIndicatorColor="@null"
+            app:tabMode="scrollable"
+            app:tabPaddingStart="10dp"
+            app:tabSelectedTextColor="#FFB90F"
+            app:tabTextColor="#000000">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewpager_psychological_skills"
-        android:layout_width="match_parent"
-        android:layout_height="280dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tab_psychological_skills"></androidx.viewpager.widget.ViewPager>
+        </com.google.android.material.tabs.TabLayout>
 
-    <Button
-        android:id="@+id/btn_showmore_psychologicalskills"
-        android:layout_width="180dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:background="@drawable/custom_button_dangnhap"
-        android:text="Xem thêm"
-        android:textAllCaps="false"
-        android:textSize="16sp"
-        android:textColor="#FFFFFF"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewpager_psychological_skills" />
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager_psychological_skills"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tab_psychological_skills"></androidx.viewpager.widget.ViewPager>
+
+        <Button
+            android:id="@+id/btn_showmore_psychologicalskills"
+            android:layout_width="180dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/custom_button_dangnhap"
+            android:text="Xem thêm"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewpager_psychological_skills" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,5 +8,5 @@ data class CommentRequest(
     val HoTen:String,
     val SoSao:Int,
     val NoiDung:String,
-    val NgayDang: Date
+    val NgayDang: String
 )

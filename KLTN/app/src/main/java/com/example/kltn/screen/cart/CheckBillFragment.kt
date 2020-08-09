@@ -134,7 +134,7 @@ class CheckBillFragment(val PTTT: Int,val diachi:String,val tongTienFinal:Double
             if (PTTT == 2) {
                 val intent = Intent(context, PaypalPaymentActivity::class.java)
                 intent.putExtra("diachi",diachi)
-                intent.putExtra("money",tongtien)
+                intent.putExtra("money",tongTienFinal)
                 startActivity(intent)
             }
             else

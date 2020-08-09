@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.kltn.R
+import com.example.kltn.screen.home.ShowMoreTopicFragment
 import com.example.kltn.screen.home.bestbook.ShowMoreBestBookFragment
 import com.example.kltn.screen.home.bestbook.TabBestBookFragment
 import com.google.android.material.tabs.TabLayout
@@ -28,7 +29,7 @@ class ChildrenBookFragment : Fragment() {
         viewPager = view.findViewById<ViewPager>(R.id.viewpager_children_book)
         btn_showmore_children_book = view.findViewById(R.id.btn_showmore_children_book)
         btn_showmore_children_book.setOnClickListener {
-            loadFragment(ShowMoreBestBookFragment("DM001","TL003"))
+            loadFragment(ShowMoreTopicFragment("TL003"))
         }
         setStatePageAdapter()
         return view

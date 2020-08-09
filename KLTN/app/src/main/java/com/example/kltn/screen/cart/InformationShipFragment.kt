@@ -138,7 +138,7 @@ class InformationShipFragment : Fragment() {
                             )
                         )
                     }
-                    arrayList.first().chose = true
+                    arrayList[0].chose = true
                     if(diachi=="")
                     {
                         diachi =  arrayList.first().address + ", " + arrayList.first().xa + ", " + arrayList.first().quan + ", " + arrayList.first().tinh + ", Việt Nam"

@@ -42,7 +42,7 @@ class TabPsychologicalSkillsFragment(val tabId: Int) : Fragment() {
     private fun loadListSach() {
         progressBarHolder.visibility = View.VISIBLE
         val service = RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
-        val call = service?.getSachTheoTL("TL001")
+        val call = service?.getSachTheoTL("TL0016")
         call?.enqueue(object : Callback<List<SachResponse>> {
             override fun onFailure(call: Call<List<SachResponse>>, t: Throwable) {
                 Log.d("ThangTruong", t.message)

@@ -9,9 +9,11 @@
 
     <ImageView
         android:id="@+id/img_book_showmore_deal"
-        android:layout_width="150dp"
+        android:layout_width="0dp"
         android:layout_height="150dp"
         android:src="@drawable/vd3_sach"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></ImageView>
@@ -32,32 +34,36 @@
 
     <TextView
         android:id="@+id/title_book_showmore_deal"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:text="Mary Had A Little Lamb Fin Pup"
         android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="@+id/img_book_showmore_deal"
-        app:layout_constraintStart_toStartOf="@+id/img_book_showmore_deal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_book_showmore_deal"></TextView>
 
     <TextView
         android:id="@+id/priceReduced_book_showmore_deal"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="25.000 đ"
         android:textColor="@color/colorPrimary"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/title_book_showmore_deal"
         app:layout_constraintStart_toStartOf="@+id/title_book_showmore_deal"
         app:layout_constraintTop_toBottomOf="@+id/title_book_showmore_deal"></TextView>
 
     <TextView
         android:id="@+id/price_book_showmore_deal"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="12.000 đ"
+        app:layout_constraintEnd_toEndOf="@+id/priceReduced_book_showmore_deal"
         app:layout_constraintStart_toStartOf="@+id/title_book_showmore_deal"
         app:layout_constraintTop_toBottomOf="@+id/priceReduced_book_showmore_deal"></TextView>
 

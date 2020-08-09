@@ -15,6 +15,7 @@ import com.example.kltn.screen.home.model.MenuModel
 import com.example.kltn.screen.event.EventFireUtil
 import com.example.kltn.screen.event.OnActionNotify
 import com.example.kltn.screen.home.CategoryFragment
+import com.example.kltn.screen.home.ShowMoreTopicFragment
 
 
 class MenuAdapter internal constructor(var context: Context?, var MenuModel: ArrayList<MenuModel>,var onActionNotify: OnActionNotify) :
@@ -41,11 +42,32 @@ class MenuAdapter internal constructor(var context: Context?, var MenuModel: Arr
                 1 -> {
                     loadFragment(CategoryFragment(),"CategoryFragment")
                 }
+                2 -> {
+
+                }
                 3 -> {
                     loadFragment(ShowMoreDealFragment(), "ShowMoreDealFragment")
                 }
                 4 -> {
                     EventFireUtil.fireEvent(onActionNotify)
+                }
+                5->{
+                    loadFragment(ShowMoreTopicFragment("TL0017"),"ShowMoreTopicDC")
+                }
+                6->{
+                    loadFragment(ShowMoreTopicFragment("TL0015"),"ShowMoreTopicVPP")
+                }
+                7->{
+                    loadFragment(ShowMoreTopicFragment("TL001"),"ShowMoreTopicVH")
+                }
+                8->{
+                    loadFragment(ShowMoreTopicFragment("TL003"),"ShowMoreTopicTN")
+                }
+                9->{
+                    loadFragment(ShowMoreTopicFragment("TL0016"),"ShowMoreTopicTLKN")
+                }
+                10->{
+                    loadFragment(ShowMoreTopicFragment("TL002"),"ShowMoreTopicKT")
                 }
             }
         }
