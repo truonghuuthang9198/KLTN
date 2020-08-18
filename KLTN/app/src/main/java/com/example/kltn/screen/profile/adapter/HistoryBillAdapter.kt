@@ -87,7 +87,7 @@ class HistoryBillAdapter internal constructor(
                             it.sach.maTheLoai,
                             it.sach.ngayXuatBan,
                             it.sach.nhaXuatBan.tenNhaXuatBan,
-                            it.sach.soLuong,
+                            it.soLuong,
                             it.sach.soTrang,
                             it.sach.tenSach,
                             it.sach.tinhTrang,

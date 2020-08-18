@@ -95,7 +95,6 @@ class SuggestFragment : Fragment() {
             override fun onFailure(call: Call<List<SuggestResponse>>, t: Throwable) {
 
             }
-
             override fun onResponse(
                 call: Call<List<SuggestResponse>>,
                 response: Response<List<SuggestResponse>>

@@ -47,8 +47,8 @@ class MainActivity : AppCompatActivity(), SendData {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setDialogFullScreen()
-//        suggestViewModel = ViewModelProviders.of(this).get(SuggestViewModel::class.java)
-//        suggestViewModel.delelteAll()
+        suggestViewModel = ViewModelProviders.of(this).get(SuggestViewModel::class.java)
+        suggestViewModel.delelteAll()
         navView = findViewById(R.id.nav_view)
         navView.setOnNavigationItemSelectedListener { menuItem ->
             showFragmentForMenuItem(menuItem.itemId)

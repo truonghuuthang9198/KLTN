@@ -112,8 +112,8 @@ class CheckBillFragment(val PTTT: Int,val diachi:String,val tongTienFinal:Double
         val hoaDon = HoaDonModel(
             "MaHD",
             makh.toString(),
-            java.time.LocalDate.now().toString(),
-            tongtienHD,
+            java.time.LocalDateTime.now().toString(),
+            tongTienFinal,
             diachi,
             arrayList
         )

@@ -1,4 +1,4 @@
-package com.example.kltn.screen.home.bestbook
+package com.example.kltn.screen.home.toys
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import androidx.viewpager.widget.ViewPager
 import com.example.kltn.R
 import com.google.android.material.tabs.TabLayout
 
-class BestBookFragment : Fragment() {
+class ToysFragment : Fragment() {
     private var tabLayout: TabLayout? = null
     private var viewPager: ViewPager? = null
     override fun onCreateView(
@@ -48,12 +48,11 @@ class BestBookFragment : Fragment() {
     }
     private fun setStatePageAdapter(){
         val myViewPageStateAdapter: MyViewPageStateAdapter = MyViewPageStateAdapter(activity!!.supportFragmentManager)
-        myViewPageStateAdapter.addFragment(TabBestBookFragment(0),"Business, Finance & Management")
-        myViewPageStateAdapter.addFragment(TabBestBookFragment(1),"Personal Development")
-        myViewPageStateAdapter.addFragment(TabBestBookFragment(2),"Children's Book")
+        myViewPageStateAdapter.addFragment(TabToysFragment(0),"Duka - Giá Cực Tốt")
+        myViewPageStateAdapter.addFragment(TabToysFragment(1),"Đồ Chơi Giá Sốc")
+        myViewPageStateAdapter.addFragment(TabToysFragment(2),"Đồ Chơi Nổi Bật")
         viewPager!!.adapter=myViewPageStateAdapter
         viewPager!!.offscreenPageLimit = 3
         tabLayout!!.setupWithViewPager(viewPager,true)
-
     }
 }

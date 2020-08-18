@@ -23,13 +23,12 @@ import com.example.kltn.screen.FormatData.Companion.convertDateFormat
 import com.example.kltn.screen.cart.model.CartModel
 import com.example.kltn.screen.cart.roomcart.CartViewModel
 import com.example.kltn.screen.home.model.BookModel
+import com.example.kltn.screen.profile.adapter.HistoryBillAdapter
+import com.example.kltn.screen.profile.model.HistoryBillModel
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance
+import com.example.kltn.screen.retrofit.reponse.*
 import com.example.kltn.screen.retrofit.request.AddFavoriteRequest
-import com.example.kltn.screen.retrofit.reponse.AddFavoriteResponse
-import com.example.kltn.screen.retrofit.reponse.DeleteFavoriteResponse
-import com.example.kltn.screen.retrofit.reponse.FavoriteResponse
-import com.example.kltn.screen.retrofit.reponse.ReviewResponse
 import com.example.kltn.screen.suggest.model.SuggestModel
 import com.example.kltn.screen.suggest.roomsuggest.SuggestViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -66,7 +65,6 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
     lateinit var pricebook: TextView
     lateinit var btn_showdetail_xemthem: Button
     lateinit var priceOriginBook: TextView
-
     lateinit var tv_showdetail_masach: TextView
     lateinit var tv_showdetail_congtyphathanh: TextView
     lateinit var tv_showdetail_author: TextView
@@ -76,12 +74,15 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
     lateinit var tv_showdetail_ghichu: TextView
     lateinit var giamgia: TextView
     lateinit var img_tim: ImageView
+    lateinit var constraint_visible_hethang: ConstraintLayout
     lateinit var btn_addcomment_nonull: Button
+    lateinit var constraint_visible_button: ConstraintLayout
     lateinit var btn_addcomment_null: Button
     lateinit var progressBarHolder: ProgressBar
     lateinit var constraint_comment_null: ConstraintLayout
     lateinit var constraint_comment_nonull: ConstraintLayout
     lateinit var recyclerview_comment: RecyclerView
+    lateinit var check_hethang: TextView
     lateinit var btn_showdetail_more_comment: Button
     private lateinit var cartViewModel: CartViewModel
     private lateinit var suggestViewModel: SuggestViewModel
@@ -97,6 +98,18 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         asView()
         val intent = getIntent()
         bookModel = intent.getParcelableExtra<BookModel>("deal")
+        if (bookModel.soLuong <=0)
+        {
+            constraint_visible_hethang.visibility = View.VISIBLE
+            check_hethang.visibility = View.VISIBLE
+            btnMoveCart.visibility = View.GONE
+            btnAddProductToCart.visibility = View.GONE
+        }
+        else
+        {
+            constraint_visible_hethang.visibility = View.GONE
+            check_hethang.visibility = View.GONE
+        }
         btn_showdetail_more_comment.setOnClickListener {
             val intent = Intent(this, ShowCommentActivity::class.java)
             intent.putExtra("maSach",bookModel.maSach)
@@ -106,21 +119,35 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
             val intent = Intent(this, AddCommentActivity::class.java)
             intent.putExtra("maSach",bookModel.maSach)
             this.startActivity(intent)
-            // Chuyển fragment add comment
         }
         btn_addcomment_null = findViewById(R.id.btn_addcomment_null)
         btn_addcomment_null.setOnClickListener {
-            // Chuyển fragment add comment
             val intent = Intent(this, AddCommentActivity::class.java)
+            intent.putExtra("maSach",bookModel.maSach)
             this.startActivity(intent)
         }
 
 
 
         btnMoveCart.setOnClickListener {
+            val checkItem = cartViewModel.checkExistList(bookModel.maSach)
+            if (checkItem == null) {
+                cartViewModel.insertItemCart(
+                    CartModel(
+                        bookModel.maSach,
+                        bookModel.tenSach,
+                        1,
+                        bookModel.giaGiamDS,
+                        bookModel.hinhAnh
+                    )
+                )
+            } else {
+                cartViewModel.updateSL(bookModel.maSach, checkItem.soLuong + 1)
+            }
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("check", 1)
             this.startActivity(intent)
+
         }
         setDialogFullScreen()
 
@@ -128,21 +155,29 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         suggestViewModel = ViewModelProviders.of(this).get(SuggestViewModel::class.java)
 
         val suggestModel = SuggestModel(bookModel.maTL)
-        if (suggestViewModel.countKeySuggest() <= 3) {
-            if (suggestViewModel.checkSuggestList(bookModel.maTL) == null) {
+        if (suggestViewModel.countKeySuggest() < 3) {
+            if (suggestViewModel.checkSuggestList(bookModel.maTL) != null) {
+                suggestViewModel.deleteItemSuggest(suggestModel)
+                suggestViewModel.insertItemSuggest(suggestModel)
+            }
+            else
+            {
                 suggestViewModel.insertItemSuggest(suggestModel)
             }
         } else {
-            if (suggestViewModel.checkSuggestList(bookModel.maTL) == null) {
+            if (suggestViewModel.checkSuggestList(bookModel.maTL) != null) {
+                suggestViewModel.deleteItemSuggest(suggestModel)
+                suggestViewModel.insertItemSuggest(suggestModel)
+            }
+            else
+            {
                 suggestViewModel.insertItemSuggest(suggestModel)
                 var arrayListSuggest = ArrayList<SuggestModel>()
                 arrayListSuggest = suggestViewModel.getList() as ArrayList<SuggestModel>
-                val suggestModelRemove: SuggestModel = arrayListSuggest[arrayListSuggest.size - 1]
+                val suggestModelRemove: SuggestModel = arrayListSuggest.first()
                 suggestViewModel.deleteItemSuggest(suggestModelRemove)
             }
         }
-
-
 
         titlebook.text = bookModel.tenSach
         //---send data to information product-------------------
@@ -317,11 +352,13 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         progressBarHolder.visibility = View.VISIBLE
         ratingBar = findViewById<RatingBar>(R.id.rating)
         img_tim = findViewById(R.id.img_tim)
+        constraint_visible_button = findViewById(R.id.constraint_visible_button)
         btnMoveCart = findViewById(R.id.btn_move_cart)
         titlebook = findViewById(R.id.title_book)
         priceOriginBook = findViewById(R.id.tv_priceorigin_showdetail)
         pricebook = findViewById(R.id.tv_priceBook_showdetail)
         giamgia = findViewById(R.id.tv_giamgia_showdetail)
+        constraint_visible_hethang = findViewById(R.id.constraint_visible_hethang)
         tv_showdetail_masach = findViewById(R.id.tv_showdetail_masach)
         tv_showdetail_congtyphathanh = findViewById(R.id.tv_showdetail_ctyphathanh)
         tv_showdetail_author = findViewById(R.id.tv_showdetail_author)
@@ -332,7 +369,7 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         btn_showdetail_xemthem = findViewById(R.id.btn_showdetail_xemthem)
         btnAddProductToCart = findViewById(R.id.btn_add_product_to_cart)
         constraint_comment_nonull = findViewById(R.id.constraint_comment_nonull)
-
+        check_hethang = findViewById(R.id.check_hethang)
         btn_showdetail_more_comment = findViewById(R.id.btn_showdetail_more_comment)
         constraint_comment_null = findViewById(R.id.constraint_comment_null)
         btn_addcomment_nonull = findViewById(R.id.btn_addcomment_nonull)
@@ -464,6 +501,7 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         val adapter = CommentAdapter(arrayCmt)
         recyclerview_comment.adapter = adapter
     }
+
 
     private fun loadFragment(fragment: Fragment?): Boolean {
         if (fragment != null) {

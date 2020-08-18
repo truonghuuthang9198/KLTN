@@ -1,4 +1,4 @@
-package com.example.kltn.screen.home.psychological_skills
+package com.example.kltn.screen.home.toys
 
 import android.os.Bundle
 import android.util.Log
@@ -10,9 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
-import com.example.kltn.screen.home.adapter.EconomicAdapter
-import com.example.kltn.screen.home.adapter.LiteraryAdapter
-import com.example.kltn.screen.home.adapter.PsychologicalSkillAdapter
+import com.example.kltn.screen.home.adapter.BestBookAdapter
 import com.example.kltn.screen.home.model.BookModel
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance
@@ -21,28 +19,24 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class TabPsychologicalSkillsFragment(val tabId: Int) : Fragment() {
-    lateinit var recyclerviewPsychologicalSkills: RecyclerView
-    lateinit var psychologicalSkillAdapter: PsychologicalSkillAdapter
+class TabToysFragment(val tabId: Int) : Fragment() {
+    lateinit var recycleviewBestBook: RecyclerView
+    lateinit var bestbookAdapter: BestBookAdapter
     lateinit var progressBarHolder: ProgressBar
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.tab_fragment_psychological_skills, container, false)
-        recyclerviewPsychologicalSkills = view.findViewById<RecyclerView>(R.id.recyclerview_psychological_skills)
+        val view = inflater.inflate(R.layout.tab_fragment_bestbook, container, false)
+        recycleviewBestBook = view!!.findViewById<RecyclerView>(R.id.recyclerview_bestbook)
         progressBarHolder = view.findViewById(R.id.progressBarHolder)
-        recyclerviewPsychologicalSkills.layoutManager = LinearLayoutManager(
-            activity,
-            LinearLayoutManager.HORIZONTAL, false
-        )
         loadListSach()
         return view
     }
     private fun loadListSach() {
         progressBarHolder.visibility = View.VISIBLE
         val service = RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
-        val call = service?.getSachTheoTL("TL0015")
+        val call = service?.getSachTheoTL("TL0017")
         call?.enqueue(object : Callback<List<SachResponse>> {
             override fun onFailure(call: Call<List<SachResponse>>, t: Throwable) {
                 Log.d("ThangTruong", t.message)
@@ -58,8 +52,11 @@ class TabPsychologicalSkillsFragment(val tabId: Int) : Fragment() {
         })
 
     }
-
-    private fun listSach(response: List<SachResponse>) {
+    fun listSach(response: List<SachResponse>) {
+        recycleviewBestBook.layoutManager = LinearLayoutManager(
+            activity,
+            LinearLayoutManager.HORIZONTAL, false
+        )
         var id = 0
         var tabid = 0
         val listSachAdapter = ArrayList<BookModel>()
@@ -101,7 +98,10 @@ class TabPsychologicalSkillsFragment(val tabId: Int) : Fragment() {
                 listAddInTab.add(it)
             }
         }
-        psychologicalSkillAdapter = PsychologicalSkillAdapter(listAddInTab)
-        recyclerviewPsychologicalSkills.adapter = psychologicalSkillAdapter
+        bestbookAdapter = BestBookAdapter(listAddInTab)
+        recycleviewBestBook.adapter = bestbookAdapter
     }
+
+
+
 }

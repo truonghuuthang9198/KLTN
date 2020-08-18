@@ -28,7 +28,7 @@ class StationeryFragment() : Fragment() {
         setStatePageAdapter()
         btnShowMore.setOnClickListener()
         {
-            loadFragment(ShowMoreTopicFragment("TL0015"))
+            loadFragment(ShowMoreTopicFragment("TL0016"))
         }
         return view
     }

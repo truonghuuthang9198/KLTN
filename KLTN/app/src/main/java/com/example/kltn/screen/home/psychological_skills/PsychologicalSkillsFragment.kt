@@ -28,7 +28,7 @@ class PsychologicalSkillsFragment() : Fragment() {
         setStatePageAdapter()
         btnShowMore.setOnClickListener()
         {
-            loadFragment(ShowMoreTopicFragment("TL0016"))
+            loadFragment(ShowMoreTopicFragment("TL0015"))
         }
         return view
     }

@@ -48,6 +48,32 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"></ImageView>
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraint_visible_hethang"
+                    android:visibility="gone"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/custom_background_visible_1"
+                    app:layout_constraintBottom_toBottomOf="@+id/img_detail_book"
+                    app:layout_constraintEnd_toEndOf="@+id/img_detail_book"
+                    app:layout_constraintStart_toStartOf="@+id/img_detail_book"
+                    app:layout_constraintTop_toTopOf="@+id/img_detail_book"></androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/check_hethang"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/custom_background_hethang"
+                    android:gravity="center"
+                    android:text="HẾT HÀNG"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/img_detail_book"
+                    app:layout_constraintEnd_toEndOf="@+id/img_detail_book"
+                    app:layout_constraintStart_toStartOf="@+id/img_detail_book"
+                    app:layout_constraintTop_toTopOf="@+id/img_detail_book"></TextView>
                 <TextView
                     android:id="@+id/title_book"
                     android:layout_width="match_parent"
@@ -593,6 +619,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:orientation="horizontal">
+
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -763,7 +790,6 @@
                     </LinearLayout>
 
                 </LinearLayout>
-
                 <Button
                     android:id="@+id/btn_addcomment_nonull"
                     android:layout_width="match_parent"
@@ -789,6 +815,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/btn_addcomment_nonull"></androidx.recyclerview.widget.RecyclerView>
+
                 <Button
                     android:id="@+id/btn_showdetail_more_comment"
                     android:layout_width="160dp"
@@ -798,10 +825,10 @@
                     android:background="@drawable/custom_button_dangnhap"
                     android:text="Xem thêm"
                     android:textAllCaps="false"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:textColor="#FFFFFF"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/recyclerview_comment"
-                    android:textColor="#FFFFFF"></Button>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recyclerview_comment"></Button>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -814,7 +841,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -853,8 +879,8 @@
         android:layout_gravity="center"
         android:background="#00000000"
         android:indeterminate="true"
-        android:visibility="gone"
         android:indeterminateTint="@color/oranges"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -10,9 +10,11 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
+import com.example.kltn.screen.FormatData
 import com.example.kltn.screen.notification.model.NotificationModel
 
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import java.text.SimpleDateFormat
 
 class NotificationAdapter internal constructor(var context: Context?,var NotificationModel: ArrayList<NotificationModel>)
     : RecyclerView.Adapter<NotificationAdapter.NotificationViewHolder>(){
@@ -38,6 +40,9 @@ class NotificationAdapter internal constructor(var context: Context?,var Notific
         val current = NotificationModel[position]
         holder.titleNotification.text = current.title
         holder.contentNotification.text = current.content
-        holder.dateNotification.text = current.date
+        holder.dateNotification.text = FormatData.convertDateFormat(current.date,
+            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"),
+            SimpleDateFormat("dd/MM/yyyy")
+        )
     }
 }

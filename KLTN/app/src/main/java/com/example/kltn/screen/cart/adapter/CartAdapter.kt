@@ -54,9 +54,6 @@ class CartAdapter internal constructor(var context: Context?,var listCart: Array
         var soluong = current.soLuong
         holder.tensach.text = current.tenSach
         holder.soluong.text = current.soLuong.toString()
-        val localVN = Locale("vi","VN")
-        val numberFormat = NumberFormat.getCurrencyInstance(localVN)
-        val giatienfm =numberFormat.format(current.giaTien)
         holder.giatien.text = formatMoneyVND(current.giaTien)
         holder.btnCong.setOnClickListener {
             soluong+=1

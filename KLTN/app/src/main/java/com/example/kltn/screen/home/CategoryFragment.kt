@@ -1,14 +1,11 @@
 package com.example.kltn.screen.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AlphaAnimation
 import android.widget.ImageView
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,14 +16,10 @@ import com.example.kltn.screen.home.adapter.CategoryDetailAdapter
 import com.example.kltn.screen.home.model.CategoryDetailModel
 import com.example.kltn.screen.home.model.CategoryModel
 import com.example.kltn.screen.event.OnActionData
-import com.example.kltn.screen.home.bestbook.ShowMoreBestBookFragment
-import com.example.kltn.screen.profile.InformationFragment
-import com.example.kltn.screen.profile.ProfileFragment
+import com.example.kltn.screen.home.toys.ShowMoreBestBookFragment
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance
 import com.example.kltn.screen.retrofit.reponse.CategoryResponse
-import com.example.kltn.screen.retrofit.reponse.CheckLoginResponse
-import com.example.kltn.screen.retrofit.reponse.LoginResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

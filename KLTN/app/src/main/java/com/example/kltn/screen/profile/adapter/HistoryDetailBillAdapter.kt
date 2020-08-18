@@ -44,7 +44,7 @@ class HistoryDetailBillAdapter internal constructor(var context: Context?, var l
         val current = listDetailBillHistory[position]
         holder.tv_tensach_detailbill.text = current.tenSach
         holder.tv_soluong_detail_bill.text = current.soLuong.toString()
-        holder.tv_giatien_detailbill.text = FormatData.formatMoneyVND(current.giaGiamDS)
+        holder.tv_giatien_detailbill.text = FormatData.formatMoneyVND(current.giaban)
         Picasso.get().load(current.hinhAnh).into(holder.img_sach_detailBill)
         holder.btn_mualai_detailbill.setOnClickListener {
             val intent = Intent(context, DetailActivity::class.java)

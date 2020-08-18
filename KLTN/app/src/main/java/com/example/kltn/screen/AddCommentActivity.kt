@@ -49,11 +49,11 @@ class AddCommentActivity() : AppCompatActivity() {
         edt_nhanxet = findViewById(R.id.edt_nhanxet)
         btn_add_comment = findViewById(R.id.btn_add_comment)
         val masach = intent.getStringExtra("maSach")
+        Toast.makeText(this,masach,Toast.LENGTH_LONG).show()
         btn_add_comment.setOnClickListener {
             val commentRequest = CommentRequest(masach,edt_hoTen.text.toString(),sosao,edt_nhanxet.text.toString(),java.time.LocalDate.now().toString())
             addComment(commentRequest)
-            val intent = Intent(this,MainActivity::class.java)
-            startActivity(intent)
+            onBackPressed()
         }
         setDialogFullScreen()
     }

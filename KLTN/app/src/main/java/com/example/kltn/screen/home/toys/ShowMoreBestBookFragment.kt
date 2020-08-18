@@ -1,4 +1,4 @@
-package com.example.kltn.screen.home.bestbook
+package com.example.kltn.screen.home.toys
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,12 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
 import com.example.kltn.screen.event.OnActionData
-import com.example.kltn.screen.home.adapter.FilterAdapter
 import com.example.kltn.screen.home.adapter.FilterCategoryAdapter
-import com.example.kltn.screen.home.adapter.ShowMoreBookAdapter
 import com.example.kltn.screen.home.adapter.ShowMoreDealAdapter
 import com.example.kltn.screen.home.model.BookModel
-import com.example.kltn.screen.home.model.FilterModel
 import com.example.kltn.screen.home.model.FilterTheLoaiModel
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance

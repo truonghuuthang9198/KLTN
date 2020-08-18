@@ -71,4 +71,8 @@ interface GetDataService {
 
     @POST("ThongKe/{id}")
     fun getListThongKe(@Path("id") id:String,@Body statisticalRequest: StatisticalRequest):Call<List<StatisticalResponse>>
+
+    @GET("ThongBao")
+    fun getListNotification(@Header("Authorization") token: String):Call<List<NotificationResponse>>
+
 }

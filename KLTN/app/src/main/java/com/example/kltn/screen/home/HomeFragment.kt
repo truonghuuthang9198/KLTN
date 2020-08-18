@@ -25,7 +25,7 @@ import com.example.kltn.R
 import com.example.kltn.SearchActivity
 import com.example.kltn.screen.event.OnActionNotify
 import com.example.kltn.screen.home.adapter.MenuAdapter
-import com.example.kltn.screen.home.bestbook.BestBookFragment
+import com.example.kltn.screen.home.toys.ToysFragment
 import com.example.kltn.screen.home.children.ChildrenBookFragment
 import com.example.kltn.screen.home.deal.DealFragment
 import com.example.kltn.screen.home.economic.EconomicFragment
@@ -83,9 +83,9 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         btnCategory.setOnClickListener {
             loadFragmentCategory(CategoryFragment(), "CategoryFragment")
         }
-        loadFragmentDeal(DealFragment())
+//        loadFragmentDeal(DealFragment())
         loadFragmentLiterary(LiteraryFragment())
-        loadFragmentBestBook(BestBookFragment())
+        loadFragmentBestBook(ToysFragment())
         loadFragmentChildrenBook(ChildrenBookFragment())
         loadFragmentEconomic(EconomicFragment())
         loadFragmentStationery(StationeryFragment())

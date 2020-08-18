@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -59,17 +60,26 @@ class CartFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_cart, container, false)
+        cartViewModel = ViewModelProviders.of(this).get(CartViewModel::class.java)
         recyclerviewcart = view!!.findViewById(R.id.recycleview_cart)
         thanhtien = view!!.findViewById(R.id.tv_thanhtien_cart)
         btnThanhToan = view!!.findViewById(R.id.btn_thanhtoan_cart)
         btnThanhToan.setOnClickListener {
-            val pref = PreferenceManager.getDefaultSharedPreferences(context)
-            var token = pref.getString("TokenLocal", "")
-            if (token == "") {
-                setUpBottomSheetDiaLog()
-            } else {
-                loadFragment(InformationShipFragment(), "InformationShipFragment")
+            if(cartViewModel.getList().isEmpty())
+            {
+                Toast.makeText(context,"Vui lòng chọn vài sản phẩm để tiến hành thanh toán",Toast.LENGTH_LONG).show()
             }
+            else
+            {
+                val pref = PreferenceManager.getDefaultSharedPreferences(context)
+                var token = pref.getString("TokenLocal", "")
+                if (token == "") {
+                    setUpBottomSheetDiaLog()
+                } else {
+                    loadFragment(InformationShipFragment(), "InformationShipFragment")
+                }
+            }
+
         }
         setUpRecyclerView()
         return view
@@ -79,7 +89,7 @@ class CartFragment : Fragment() {
     fun setUpRecyclerView() {
         recyclerviewcart.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        cartViewModel = ViewModelProviders.of(this).get(CartViewModel::class.java)
+
         arrayListCart = cartViewModel.getList() as ArrayList<CartModel>
         val cartAdapter = CartAdapter(context, arrayListCart)
         recyclerviewcart.adapter = cartAdapter

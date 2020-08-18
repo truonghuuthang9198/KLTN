@@ -19,17 +19,17 @@ class LiteraryAdapter internal constructor(var listLiterary: ArrayList<BookModel
     : RecyclerView.Adapter<LiteraryAdapter.LiteraryViewHolder>(){
     inner class LiteraryViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
     {
-        val salebook: TextView = itemView.findViewById(R.id.tv_salebook)
-        val titleBookDeal: TextView = itemView.findViewById(R.id.title_book_deal)
-        val priceReducedBook: TextView = itemView.findViewById(R.id.priceReduced_book_deal)
-        val priceBook: TextView = itemView.findViewById(R.id.price_book_deal)
-        val imgBookDeal: ImageView = itemView.findViewById(R.id.img_book_deal)
+        val titleBook: TextView = itemView.findViewById(R.id.title_bestbook)
+        val priceReducedBook: TextView = itemView.findViewById(R.id.priceReduced_bestbook)
+        val priceBook: TextView = itemView.findViewById(R.id.price_bestbook)
+        val imgBookDeal: ImageView = itemView.findViewById(R.id.img_bestbook)
+        val salebook: TextView = itemView.findViewById(R.id.tv_salebook_bestbook)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LiteraryViewHolder {
         val Context = parent.context
         val layoutInflater = LayoutInflater.from(Context)
 
-        val cellForRow = layoutInflater.inflate(R.layout.recyclerview_item_deal,parent,false)
+        val cellForRow = layoutInflater.inflate(R.layout.recyclerview_item_bestbook,parent,false)
         val LiteraryViewHolder = LiteraryViewHolder(cellForRow)
         LiteraryViewHolder.itemView.setOnClickListener {
             var book = listLiterary.get(LiteraryViewHolder.adapterPosition)
@@ -46,7 +46,7 @@ class LiteraryAdapter internal constructor(var listLiterary: ArrayList<BookModel
         val current = listLiterary[position]
         val giamgiahandle = Math.round(current.giamGia*100)
         holder.salebook.text = giamgiahandle.toString()+"%"
-        holder.titleBookDeal.text = current.tenSach
+        holder.titleBook.text = current.tenSach
         holder.priceReducedBook.text = FormatData.formatMoneyVND(current.giaGiamDS)
         holder.priceBook.text = FormatData.formatMoneyVND(current.giaban)
         holder.priceBook.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
