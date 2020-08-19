@@ -46,7 +46,7 @@ class MenuAdapter internal constructor(var context: Context?, var MenuModel: Arr
 
                 }
                 3 -> {
-                    loadFragment(ShowMoreDealFragment(), "ShowMoreDealFragment")
+                    //loadFragment(ShowMoreDealFragment(), "ShowMoreDealFragment")
                 }
                 4 -> {
                     EventFireUtil.fireEvent(onActionNotify)

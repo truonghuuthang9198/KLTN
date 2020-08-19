@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
 import com.example.kltn.screen.FormatData
+import com.example.kltn.screen.event.OnActionNotify
 import com.example.kltn.screen.profile.adapter.InformationAdapter
 import com.example.kltn.screen.profile.model.HistoryBillModel
 import com.example.kltn.screen.profile.model.InformationModel
@@ -31,11 +32,13 @@ class InformationFragment(val responseUser: LoginResponse) : Fragment() {
     lateinit var recyclerviewIF: RecyclerView
     lateinit var informationAdapter: InformationAdapter
     lateinit var btnDangXuat: Button
+
     lateinit var tv_hoten_infomation: TextView
     lateinit var tv_email_infomation: TextView
     lateinit var tv_capdothanhvien: TextView
     lateinit var tv_sodonhang_infomation: TextView
     lateinit var tv_sotiendathanhtoan_infomation: TextView
+    private var onActionNotify: OnActionNotify? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -129,7 +132,12 @@ class InformationFragment(val responseUser: LoginResponse) : Fragment() {
                 R.drawable.ic_next
             )
         )
-        informationAdapter = InformationAdapter(context, arrayList)
+        onActionNotify = object : OnActionNotify {
+            override fun onActionNotify() {
+                loadFragment(ChangePasswordFragment(responseUser))
+            }
+        }
+        informationAdapter = InformationAdapter(context, arrayList,onActionNotify!!)
         recyclerviewIF.adapter = informationAdapter
     }
 
@@ -138,6 +146,7 @@ class InformationFragment(val responseUser: LoginResponse) : Fragment() {
             activity!!.supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.frame_layout, fragment)
+                .addToBackStack(null)
                 .commit()
             return true
         }

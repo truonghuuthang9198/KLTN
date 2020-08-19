@@ -265,8 +265,6 @@ class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
         arrayList.add(MenuModel(8, "Thiếu Nhi", R.drawable.ic_thieunhi))
         arrayList.add(MenuModel(9, " Tâm Lý Kỹ  Năng", R.drawable.ic_tlkn))
         arrayList.add(MenuModel(10, "Kinh tế", R.drawable.ic_kinhte))
-        val newEvent = SendArrayAddress(arrayList)
-        EventBus.getDefault().post(newEvent)
         onActionNotify = object : OnActionNotify {
             override fun onActionNotify() {
                 sendData?.ChangeStateBottomNavigation(1)

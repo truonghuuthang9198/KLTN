@@ -28,6 +28,7 @@
         app:layout_constraintTop_toTopOf="@+id/btn_back_showmore">
 
         <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view_showmore"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_gravity="center"

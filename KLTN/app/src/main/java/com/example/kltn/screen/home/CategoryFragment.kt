@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,7 +25,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CategoryFragment : Fragment() {
+class CategoryFragment : Fragment(){
     lateinit var recyclerViewTopic: RecyclerView
     lateinit var categoryAdapter: CategoryAdapter
     lateinit var backButtonCategory: ImageView

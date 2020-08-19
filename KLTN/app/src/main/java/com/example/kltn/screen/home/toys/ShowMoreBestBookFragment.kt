@@ -1,17 +1,20 @@
 package com.example.kltn.screen.home.toys
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
+import com.example.kltn.SearchActivity
 import com.example.kltn.screen.event.OnActionData
 import com.example.kltn.screen.home.adapter.FilterCategoryAdapter
 import com.example.kltn.screen.home.adapter.ShowMoreDealAdapter
@@ -25,7 +28,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ShowMoreBestBookFragment(val maCategory: String, val maTL: String) : Fragment() {
+class ShowMoreBestBookFragment(val maCategory: String, val maTL: String) : Fragment(), SearchView.OnQueryTextListener  {
     lateinit var recyclerViewSM: RecyclerView
     lateinit var recyclerViewFilter: RecyclerView
     lateinit var filterAdapter: FilterCategoryAdapter
@@ -34,6 +37,7 @@ class ShowMoreBestBookFragment(val maCategory: String, val maTL: String) : Fragm
     lateinit var btnFilter: ConstraintLayout
     lateinit var btn_back_showmore: ImageView
     lateinit var btn_back_home_showmore: ImageView
+    lateinit var search_view_showmore:SearchView
     private var check=0
     private var onActionData: OnActionData<FilterTheLoaiModel>? = null
 
@@ -77,6 +81,7 @@ class ShowMoreBestBookFragment(val maCategory: String, val maTL: String) : Fragm
     }
 
     fun setUpView(view: View) {
+        search_view_showmore = view.findViewById(R.id.search_view_showmore)
         recyclerViewSM = view.findViewById(R.id.recyclerview_show_more_book)
         constraint = view.findViewById(R.id.constraint_visible_showmore)
         btnFilter = view.findViewById(R.id.btn_filter_category)
@@ -91,8 +96,18 @@ class ShowMoreBestBookFragment(val maCategory: String, val maTL: String) : Fragm
             LinearLayoutManager.HORIZONTAL, false
         )
         recyclerViewSM.layoutManager = GridLayoutManager(activity, 2)
+        search_view_showmore.setOnQueryTextListener(this)
+    }
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        val intent = Intent(context, SearchActivity::class.java)
+        intent.putExtra("keySearch", query)
+        context?.startActivity(intent)
+        return true
     }
 
+    override fun onQueryTextChange(newText: String?): Boolean {
+        return false
+    }
 
     private fun setupRecyclerviewFilter() {
         recyclerViewFilter.layoutManager = LinearLayoutManager(

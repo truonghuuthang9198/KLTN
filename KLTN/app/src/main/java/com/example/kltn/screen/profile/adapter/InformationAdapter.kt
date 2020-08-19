@@ -10,13 +10,21 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
+import com.example.kltn.screen.event.EventFireUtil
+import com.example.kltn.screen.event.OnActionData
+import com.example.kltn.screen.event.OnActionNotify
+import com.example.kltn.screen.home.model.BookModel
 import com.example.kltn.screen.profile.ChangePasswordFragment
 import com.example.kltn.screen.profile.ManangerAddressFragment
 import com.example.kltn.screen.profile.FavoriteFragment
 import com.example.kltn.screen.profile.HistoryFragment
 import com.example.kltn.screen.profile.model.InformationModel
 
-class InformationAdapter internal constructor(var context: Context?, var InformationModel: ArrayList<InformationModel>) :
+class InformationAdapter internal constructor(
+    var context: Context?,
+    var InformationModel: ArrayList<InformationModel>,
+    var onActionNotify: OnActionNotify
+) :
     RecyclerView.Adapter<InformationAdapter.InformationViewHolder>() {
     inner class InformationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val icNameIF: ImageView = itemView.findViewById(R.id.ic_name_infomation)
@@ -27,7 +35,8 @@ class InformationAdapter internal constructor(var context: Context?, var Informa
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InformationViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val cellForRow = layoutInflater.inflate(R.layout.recyclerview_item_infomation_user, parent, false)
+        val cellForRow =
+            layoutInflater.inflate(R.layout.recyclerview_item_infomation_user, parent, false)
         val InformationViewHolder = InformationViewHolder(cellForRow)
         return InformationViewHolder
     }
@@ -39,10 +48,10 @@ class InformationAdapter internal constructor(var context: Context?, var Informa
         holder.itemView.setOnClickListener {
             when (current.id) {
                 1 -> {
-                    loadFragment(ManangerAddressFragment(),"AddAddressFragment")
+                    loadFragment(ManangerAddressFragment(), "AddAddressFragment")
                 }
                 2 -> {
-                    loadFragment(HistoryFragment(),"HistoryFragment")
+                    loadFragment(HistoryFragment(), "HistoryFragment")
                 }
                 3 -> {
                     loadFragment(FavoriteFragment(), "FavoriteFragment")
@@ -51,7 +60,7 @@ class InformationAdapter internal constructor(var context: Context?, var Informa
 
                 }
                 5 -> {
-                    loadFragment(ChangePasswordFragment(),"ChangePasswordFragment")
+                    EventFireUtil.fireEvent(onActionNotify)
                 }
                 6 -> {
 
@@ -75,5 +84,4 @@ class InformationAdapter internal constructor(var context: Context?, var Informa
         }
         return false
     }
-
 }

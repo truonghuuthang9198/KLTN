@@ -138,10 +138,16 @@ class InformationShipFragment : Fragment() {
                             )
                         )
                     }
-                    arrayList[0].chose = true
-                    if(diachi=="")
+                    if (arrayList.isEmpty())
                     {
-                        diachi =  arrayList.first().address + ", " + arrayList.first().xa + ", " + arrayList.first().quan + ", " + arrayList.first().tinh + ", Việt Nam"
+
+                    }
+                    else {
+                        arrayList[0].chose = true
+                        if (diachi == "") {
+                            diachi =
+                                arrayList.first().address + ", " + arrayList.first().xa + ", " + arrayList.first().quan + ", " + arrayList.first().tinh + ", Việt Nam"
+                        }
                     }
 
                     onActionData = object : OnActionData<ManangerAddressModel> {

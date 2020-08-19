@@ -64,7 +64,6 @@ class SuggestFragment : Fragment() {
         suggestViewModel = ViewModelProviders.of(this).get(SuggestViewModel::class.java)
         arrayListSuggest = suggestViewModel.getList() as ArrayList<SuggestModel>
         listBook = ArrayList<BookModel>()
-//        val list : List<String> = arrayListSuggest as List<String>
         if(suggestViewModel.countKeySuggest()<=3)
         {
             tv_null_suggest.visibility = View.GONE
@@ -81,9 +80,6 @@ class SuggestFragment : Fragment() {
             recyclerviewSuggest.visibility = View.GONE
         }
 
-        Toast.makeText(
-            activity!!, arrayListSuggest.toString(), Toast.LENGTH_LONG
-        ).show()
 
         return view
     }

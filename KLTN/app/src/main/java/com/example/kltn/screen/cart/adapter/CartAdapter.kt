@@ -2,11 +2,14 @@ package com.example.kltn.screen.cart.adapter
 
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -18,7 +21,15 @@ import com.example.kltn.screen.FormatData.Companion.formatMoneyVND
 import com.example.kltn.screen.cart.CartFragment
 import com.example.kltn.screen.cart.model.CartModel
 import com.example.kltn.screen.cart.roomcart.CartViewModel
+import com.example.kltn.screen.retrofit.GetDataService
+import com.example.kltn.screen.retrofit.RetrofitClientInstance
+import com.example.kltn.screen.retrofit.reponse.SachResponse
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.custom_dialog_check_soluong_sach.*
+import kotlinx.android.synthetic.main.custom_dialog_login.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -56,11 +67,32 @@ class CartAdapter internal constructor(var context: Context?,var listCart: Array
         holder.soluong.text = current.soLuong.toString()
         holder.giatien.text = formatMoneyVND(current.giaTien)
         holder.btnCong.setOnClickListener {
-            soluong+=1
-            current.soLuong = soluong
-            cartViewModel.updateSL(current.maSach,soluong)
-            reLoadFragment()
-            holder.soluong.text = soluong.toString()
+            val service = RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
+            val call = service?.checkSoLuongSach(current.maSach)
+            call?.enqueue(object : Callback<List<SachResponse>> {
+                override fun onFailure(call: Call<List<SachResponse>>, t: Throwable) {
+                    Log.d("ThangTruong", t.message)
+                }
+
+                override fun onResponse(
+                    call: Call<List<SachResponse>>,
+                    response: Response<List<SachResponse>>
+                ) {
+                    if(response.body()!![0].soLuong > soluong)
+                    {
+                        soluong+=1
+                        current.soLuong = soluong
+                        cartViewModel.updateSL(current.maSach,soluong)
+                        reLoadFragment()
+                        holder.soluong.text = soluong.toString()
+                    }
+                    else
+                    {
+                        setUpBottomSheetDiaLog()
+                    }
+                }
+            })
+
         }
         holder.btnTru.setOnClickListener{
             if(current.soLuong<=1)
@@ -103,5 +135,15 @@ class CartAdapter internal constructor(var context: Context?,var listCart: Array
         ft.detach(frg!!)
         ft.attach(frg!!)
         ft.commit()
+    }
+    private fun setUpBottomSheetDiaLog() {
+        val customView =
+            LayoutInflater.from(context).inflate(R.layout.custom_dialog_check_soluong_sach, null, false)
+        val dialog = AlertDialog.Builder(context!!).setView(customView).create()
+        dialog.show()
+        dialog.btn_ok_dialog_cart.setOnClickListener {
+            dialog.dismiss()
+        }
+
     }
 }

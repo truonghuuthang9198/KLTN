@@ -1,5 +1,6 @@
 package com.example.kltn.screen.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,12 +8,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kltn.R
+import com.example.kltn.SearchActivity
 import com.example.kltn.screen.event.OnActionData
 import com.example.kltn.screen.home.adapter.FilterAdapter
 import com.example.kltn.screen.home.adapter.FilterCategoryAdapter
@@ -30,7 +33,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ShowMoreTopicFragment(val maTL: String) : Fragment() {
+class ShowMoreTopicFragment(val maTL: String) : Fragment(), SearchView.OnQueryTextListener {
     lateinit var recyclerViewSM: RecyclerView
     lateinit var recyclerViewFilter: RecyclerView
     lateinit var filterAdapter: FilterAdapter
@@ -40,6 +43,7 @@ class ShowMoreTopicFragment(val maTL: String) : Fragment() {
     lateinit var btn_back_showmore: ImageView
     lateinit var btn_back_home_showmore: ImageView
     lateinit var progressBarHolder:ProgressBar
+    lateinit var search_view_showmore:SearchView
     private var check=0
     private var onActionData: OnActionData<FilterModel>? = null
 
@@ -81,8 +85,18 @@ class ShowMoreTopicFragment(val maTL: String) : Fragment() {
         selectTheLoai(maTL)
         return view
     }
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        val intent = Intent(context, SearchActivity::class.java)
+        intent.putExtra("keySearch", query)
+        context?.startActivity(intent)
+        return true
+    }
+    override fun onQueryTextChange(newText: String?): Boolean {
+        return false
+    }
 
     fun setUpView(view: View) {
+        search_view_showmore = view.findViewById(R.id.search_view_showmore)
         progressBarHolder = view.findViewById(R.id.progressBarHolder)
         recyclerViewSM = view.findViewById(R.id.recyclerview_book)
         constraint = view.findViewById(R.id.constraint_visible_showmore)

@@ -22,11 +22,14 @@ import com.example.kltn.screen.profile.InformationFragment
 import com.example.kltn.screen.profile.ProfileFragment
 import com.example.kltn.screen.retrofit.GetDataService
 import com.example.kltn.screen.retrofit.RetrofitClientInstance
+import com.example.kltn.screen.retrofit.reponse.AddIdDeviceResponse
 import com.example.kltn.screen.retrofit.reponse.CheckLoginResponse
 import com.example.kltn.screen.retrofit.reponse.LoginResponse
+import com.example.kltn.screen.retrofit.request.AddIdDeviceRequest
 import com.example.kltn.screen.suggest.SuggestFragment
 import com.example.kltn.screen.suggest.roomsuggest.SuggestViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.onesignal.OneSignal
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -40,15 +43,13 @@ class MainActivity : AppCompatActivity(), SendData {
     private var cartFragment: CartFragment? = null
     private var suggestFragment: SuggestFragment? = null
     private var informationFragment: InformationFragment? = null
-    lateinit var suggestViewModel: SuggestViewModel
     lateinit var navView: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setDialogFullScreen()
-        suggestViewModel = ViewModelProviders.of(this).get(SuggestViewModel::class.java)
-        suggestViewModel.delelteAll()
+        addIdDevice()
         navView = findViewById(R.id.nav_view)
         navView.setOnNavigationItemSelectedListener { menuItem ->
             showFragmentForMenuItem(menuItem.itemId)
@@ -130,6 +131,30 @@ class MainActivity : AppCompatActivity(), SendData {
         hideOtherFragment(ft, menuItem)
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
         ft.commit()
+    }
+    fun addIdDevice()
+    {
+        //Gửi id thiết bị lên sever
+        val status = OneSignal.getPermissionSubscriptionState()
+        Log.d("Thang",status.subscriptionStatus.userId)
+        val id = status.subscriptionStatus.userId
+        val addIdDeviceRequest = AddIdDeviceRequest(id,id)
+        val service = RetrofitClientInstance().getClientSach()?.create(GetDataService::class.java)
+        val call = service?.addIdDevice(addIdDeviceRequest)
+        call?.enqueue(object : Callback<AddIdDeviceResponse> {
+            override fun onFailure(call: Call<AddIdDeviceResponse>, t: Throwable) {
+                loadFragment(ProfileFragment())
+                Toast.makeText(this@MainActivity, t.message, Toast.LENGTH_LONG).show()
+            }
+            override fun onResponse(
+                call: Call<AddIdDeviceResponse>,
+                response: Response<AddIdDeviceResponse>
+            ) {
+                if(response.isSuccessful) {
+                    Log.d("ThangDevice", response.body()!!.message)
+                }
+            }
+        })
     }
 
 //    private fun checkFragmentExist() {

@@ -352,7 +352,6 @@ class DetailActivity() : AppCompatActivity(), Parcelable {
         progressBarHolder.visibility = View.VISIBLE
         ratingBar = findViewById<RatingBar>(R.id.rating)
         img_tim = findViewById(R.id.img_tim)
-        constraint_visible_button = findViewById(R.id.constraint_visible_button)
         btnMoveCart = findViewById(R.id.btn_move_cart)
         titlebook = findViewById(R.id.title_book)
         priceOriginBook = findViewById(R.id.tv_priceorigin_showdetail)

@@ -75,4 +75,13 @@ interface GetDataService {
     @GET("ThongBao")
     fun getListNotification(@Header("Authorization") token: String):Call<List<NotificationResponse>>
 
+    @POST("Sach/{id}")
+    fun checkSoLuongSach(@Path("id") id:String):Call<List<SachResponse>>
+
+    @PUT("KhachHang/{id}")
+    fun updatePassword(@Path("id") id:String,@Body registerRequest: RegisterRequest):Call<UpdatePasswordResponse>
+
+    @POST("ThietBi")
+    fun addIdDevice(@Body addIdDeviceRequest: AddIdDeviceRequest):Call<AddIdDeviceResponse>
+
 }

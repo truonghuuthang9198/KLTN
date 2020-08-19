@@ -96,9 +96,4 @@ class RegisterFragment : Fragment() {
         }
         return false
     }
-    fun newInstance(): RegisterFragment {
-        val recipeTabFragment =
-            RegisterFragment()
-        return recipeTabFragment
-    }
 }

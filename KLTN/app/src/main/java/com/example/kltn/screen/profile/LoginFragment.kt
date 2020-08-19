@@ -90,9 +90,7 @@ class LoginFragment : Fragment() {
                         edit.putString("TokenLocal",response.body()!!.token)
                         edit.putString("MaKH",response.body()!!.maKhachHang)
                         edit.apply()
-                       //Gửi id thiết bị lên sever
-                        val status = OneSignal.getPermissionSubscriptionState()
-                        Log.d("Thang",status.subscriptionStatus.userId)
+
                         loadFragment(InformationFragment(response.body()!!))
                     }
                     else
@@ -101,30 +99,28 @@ class LoginFragment : Fragment() {
                     }
                 }
             })
-//            val loginResponse = LoginResponse(null,null,null,null,null,null)
-//            loadFragment(InformationFragment(loginResponse))
         }
 
         tvDangKiTaiKhoan.setOnClickListener {
             mOnInputSelected!!.sendInput(2)
         }
-        btnDangNhapFB.setOnClickListener {
-            LoginManager.getInstance().logInWithReadPermissions(activity!!,Arrays.asList("public_profile","email"))
-            LoginManager.getInstance().registerCallback(callBackManager,object : FacebookCallback<LoginResult>{
-                override fun onSuccess(result: LoginResult?) {
-                    handleFacebookAccessToken(result?.accessToken)
-                    Toast.makeText(activity!!,result!!.toString(),Toast.LENGTH_LONG).show()
-                }
-                override fun onCancel() {
-                }
-                override fun onError(error: FacebookException?) {
-                }
-            })
-//            val pref = PreferenceManager.getDefaultSharedPreferences(activity!!)
-//            val edit = pref.edit()
-//            edit.putBoolean("CheckLogin",true)
-//            edit.apply()
-        }
+//        btnDangNhapFB.setOnClickListener {
+//            LoginManager.getInstance().logInWithReadPermissions(activity!!,Arrays.asList("public_profile","email"))
+//            LoginManager.getInstance().registerCallback(callBackManager,object : FacebookCallback<LoginResult>{
+//                override fun onSuccess(result: LoginResult?) {
+//                    handleFacebookAccessToken(result?.accessToken)
+//                    Toast.makeText(activity!!,result!!.toString(),Toast.LENGTH_LONG).show()
+//                }
+//                override fun onCancel() {
+//                }
+//                override fun onError(error: FacebookException?) {
+//                }
+//            })
+////            val pref = PreferenceManager.getDefaultSharedPreferences(activity!!)
+////            val edit = pref.edit()
+////            edit.putBoolean("CheckLogin",true)
+////            edit.apply()
+//        }
         return view
 
     }
